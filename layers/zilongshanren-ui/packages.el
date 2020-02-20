@@ -2,7 +2,7 @@
 ;;
 ;; Copyright (c) 2014-2016 zilongshanren
 ;;
-;; Author: guanghui <guanghui8827@gmail.com>
+;; Author: liuyan <lyjdwh@gmail.com>
 ;; URL: https://github.com/zilongshanren/spacemacs-private
 ;;
 ;; This file is not part of GNU Emacs.
@@ -295,7 +295,7 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
 
 (defun zilongshanren-ui/post-init-popwin ()
   (progn
-    ;FIXME: 
+    ;FIXME:
     ;; (push "*zilongshanren/run-current-file output*" popwin:special-display-config)
     (delete "*Async Shell Command*" popwin:special-display-config)))
 

@@ -1,8 +1,8 @@
 ;;; funcs.el --- zilongshanren Layer packages File for Spacemacs
 ;;
-;; Copyright (c) 2015-2016 zilongshanren 
+;; Copyright (c) 2015-2016 zilongshanren
 ;;
-;; Author: zilongshanren <guanghui8827@gmail.com>
+;; Author: zilongshanren <lyjdwh@gmail.com>
 ;; URL: https://github.com/zilongshanren/spacemacs-private
 ;;
 ;; This file is not part of GNU Emacs.
@@ -234,7 +234,7 @@ comment box."
 
 (defun my-setup-develop-environment ()
   (interactive)
-  (when (my-project-name-contains-substring "guanghui")
+  (when (my-project-name-contains-substring "liuyan")
     (cond
      ((my-project-name-contains-substring "cocos2d-x")
       ;; C++ project don't need html tags

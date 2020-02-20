@@ -2,7 +2,7 @@
 ;;
 ;; Copyright (c) 2014-2016 zilongshanren
 ;;
-;; Author: guanghui <guanghui8827@gmail.com>
+;; Author: liuyan <lyjdwh@gmail.com>
 ;; URL: https://github.com/zilongshanren/spacemacs-private
 ;;
 ;; This file is not part of GNU Emacs.
@@ -81,7 +81,7 @@
 	  ;;                                   (equal last-command-event (elt (this-command-keys-vector) 0))
 	  ;;                                   (TeX-current-macro))
 	  ;;                          #'th/TeX-goto-macro-end)))
-      
+
       (spacemacs|disable-company org-mode)
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
         "," 'org-priority)
@@ -254,14 +254,14 @@
                 (org-check-agenda-file file)
                 (setq rtn (org-agenda-get-day-entries file date :todo))
                 (setq rtnall (append rtnall rtn))))
-        
+
             (when rtnall
               (setq lucky-entry
                     (nth (random
                           (safe-length
                            (setq entries rtnall)))
                          entries))
-          
+
               (setq marker (or (get-text-property 0 'org-marker lucky-entry)
                                (org-agenda-error)))
               (setq buffer (marker-buffer marker))
@@ -428,7 +428,7 @@ See `org-capture-templates' for more information."
                :section-numbers nil
                :html-preamble ,zilongshanren-website-html-preamble
                :author "zilongshanren"
-               :email "guanghui8827@gmail.com"
+               :email "lyjdwh@gmail.com"
                :auto-sitemap t          ; Generate sitemap.org automagically...
                :sitemap-filename "index.org" ; ... call it sitemap.org (it's the default)...
                :sitemap-title "我的wiki"     ; ... with title 'Sitemap'.
@@ -544,7 +544,7 @@ holding contextual information."
     :defer t))
 
 (defun zilongshanren-org/post-init-ox-reveal ()
-  (setq org-reveal-root "file:///Users/guanghui/.emacs.d/reveal-js"))
+  (setq org-reveal-root "file:///Users/liuyan/.emacs.d/reveal-js"))
 
 
 (defun zilongshanren-org/init-org-tree-slide ()

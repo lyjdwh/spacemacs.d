@@ -43,8 +43,8 @@ This function should only modify configuration layer settings."
      ;; github
      search-engine
      graphviz
-     (haskell :variables haskell-enable-hindent t
-              haskell-completion-backend 'intero)
+     ;;  (haskell :variables haskell-enable-hindent t
+     ;;           haskell-completion-backend 'intero)
      (syntax-checking :variables syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
      (spell-checking :variables spell-checking-enable-by-default nil)
@@ -63,9 +63,9 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'cycle
                       :disabled-for org markdown)
-     (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
-          osx-command-as 'super)
-     restclient
+     ;;  (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
+     ;; osx-command-as 'super)
+     ;;  restclient
      (gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
      (shell :variables shell-default-shell 'ansi-term
             shell-default-term-shell "/bin/zsh")
@@ -77,31 +77,34 @@ This function should only modify configuration layer settings."
           org-enable-hugo-support t)
      gpu
      yaml
-     react
+     ;;  react
      (python :variables
              python-test-runner '(nose pytest)
              python-backend 'lsp
              python-lsp-server 'mspyls
-             python-lsp-git-root "~/Github/python-language-server")
+             python-lsp-git-root "~/apps/python-language-server")
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
-     lua
+     ;;  lua
      html
      (javascript :variables javascript-backend 'lsp)
      (typescript :variables
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'typescript-formatter
-                typescript-backend 'lsp)
+                 typescript-backend 'lsp)
      emacs-lisp
-     (clojure :variables clojure-enable-fancify-symbols t)
-     racket
+     ;;  (clojure :variables clojure-enable-fancify-symbols t)
+     ;;  racket
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-backend 'lsp-ccls
-            c-c++-lsp-executable (file-truename "/usr/local/bin/ccls"))
+            c-c++-lsp-executable (file-truename "/usr/bin/ccls"))
      zilongshanren
      (chinese :variables chinese-default-input-method 'pinyin
               chinese-enable-youdao-dict t)
+     fasd
+     dash
+     shell-scripts
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -256,7 +259,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 16
                                :weight normal
                                :width normal)
 
@@ -398,7 +401,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -498,7 +501,7 @@ dump."
                   ("org-cn"   . "http://elpa.emacs-china.org/org/")
                   ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
 
-  
+
   (setq term-char-mode-point-at-process-mark nil)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
@@ -519,10 +522,10 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
-   
-  ;;解决org表格里面中英文对齐的问题 
+
+  ;;解决org表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)
-    (when (and (spacemacs/system-is-mac) window-system)
+    (when (and (spacemacs/system-is-linux) window-system)
       (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
 
   ;; enable org-protocol
@@ -637,8 +640,8 @@ dump."
 
            (add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))))
 
-  (setq exec-path (cons "/Users/lionqu/.nvm/versions/node/v10.16.0/bin/" exec-path))
-  (setenv "PATH" (concat "/Users/lionqu/.nvm/versions/node/v10.16.0/bin:" (getenv "PATH")))
+  ;; (setq exec-path (cons "/Users/lionqu/.nvm/versions/node/v10.16.0/bin/" exec-path))
+  ;; (setenv "PATH" (concat "/Users/lionqu/.nvm/versions/node/v10.16.0/bin:" (getenv "PATH")))
 
   (defun counsel-locate-cmd-es (input)
     "Return a shell command based on INPUT."

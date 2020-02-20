@@ -2,7 +2,7 @@
 ;;
 ;; Copyright (c) 2014-2016 zilongshanren
 ;;
-;; Author: zilongshanren <guanghui8827@gmail.com>
+;; Author: zilongshanren <lyjdwh@gmail.com>
 ;; URL: https://github.com/zilongshanren/spacemacs-private
 ;;
 ;; This file is not part of GNU Emacs.
@@ -11,8 +11,8 @@
 
 ;; List of all packages to install and/or initialize. Built-in packages
 ;; which require an initialization must be listed explicitly in the list.
-
 (setq zilongshanren-programming-packages
+
       '(
         css-mode
         paredit
@@ -55,7 +55,7 @@
   (progn
 
     (setq lsp-ui-doc-enable nil)
-    
+
     (defun lsp--auto-configure ()
       "Autoconfigure `lsp-ui', `company-lsp' if they are installed."
 
@@ -81,26 +81,26 @@
 
           (when (functionp 'yas-minor-mode)
             (yas-minor-mode t)))))
-    
+
     (add-hook 'lsp-after-open-hook 'zilongshanren-refresh-imenu-index)
 
     (defun hidden-lsp-ui-sideline ()
       (interactive)
       (if (< (window-width) 180)
           (progn
-            
+
             (setq lsp-ui-sideline-show-code-actions nil)
             (setq lsp-ui-sideline-show-diagnostics nil)
             (setq lsp-ui-sideline-show-hover nil)
             (setq lsp-ui-sideline-show-symbol nil))
         (progn
-            
+
           (setq lsp-ui-sideline-show-code-actions nil)
           ;; (setq lsp-ui-sideline-show-diagnostics t)
           (setq lsp-ui-sideline-show-hover t)
           ;; (setq lsp-ui-sideline-show-symbol t)
           )))
-    
+
     (advice-add 'lsp-ui-sideline--run :after 'hidden-lsp-ui-sideline)
 
     (setq lsp-auto-configure t)
@@ -201,8 +201,8 @@
   (setq python-shell-interpreter "python"))
 
 (defun zilongshanren-programming/post-init-js-doc ()
-  (setq js-doc-mail-address "guanghui8827@gmail.com"
-        js-doc-author (format "Guanghui Qu <%s>" js-doc-mail-address)
+  (setq js-doc-mail-address "lyjdwh@gmail.com"
+        js-doc-author (format "liuyan Qu <%s>" js-doc-mail-address)
         js-doc-url "http://www.zilongshanren.com"
         js-doc-license "MIT")
 
@@ -247,7 +247,7 @@
 (defun zilongshanren-programming/post-init-yasnippet ()
   (progn
     (set-face-background 'secondary-selection "gray")
-    
+
     (with-eval-after-load 'yasnippet
       (progn
         (define-key yas-keymap [(tab)]       (yas-filtered-definition 'yas-next-field))
@@ -350,7 +350,7 @@
 
 (defun zilongshanren-programming/post-init-js2-refactor ()
   (progn
-    
+
 (defun js2r-toggle-object-property-access-style ()
   "Toggle js object property access style."
   (interactive)
@@ -623,13 +623,13 @@
     ;; enable dabbrev-expand in company completion https://emacs-china.org/t/topic/6381
     (setq company-dabbrev-char-regexp "[\\.0-9a-z-_'/]")
 
-    
+
     (setq company-minimum-prefix-length 1
           company-idle-delay 0.08)
 
     (when (configuration-layer/package-usedp 'company)
-      (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode))
-    ))
+      (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode
+    ))))
 (defun zilongshanren-programming/post-init-company-c-headers ()
   (progn
     (setq company-c-headers-path-system
@@ -637,4 +637,4 @@
            ("/usr/include/" "/usr/local/include/" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")))
     (setq company-c-headers-path-user
           (quote
-           ("/Users/guanghui/cocos2d-x/cocos/platform" "/Users/guanghui/cocos2d-x/cocos" "." "/Users/guanghui/cocos2d-x/cocos/audio/include/")))))
+           ()))))

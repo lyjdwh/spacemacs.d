@@ -2,7 +2,7 @@
 ;;
 ;; Copyright (c) 2014-2016 zilongshanren
 ;;
-;; Author: zilongshanren <guanghui8827@gmail.com>
+;; Author: zilongshanren <lyjdwh@gmail.com>
 ;; URL: https://github.com/zilongshanren/spacemacs-private
 ;;
 ;; This file is not part of GNU Emacs.
@@ -42,7 +42,8 @@
         wrap-region
         ranger
         golden-ratio
-        (highlight-global :location (recipe :fetcher github :repo "glen-dai/highlight-global"))
+        ;; (highlight-global :location (recipe :fetcher github :repo "gle-dai/highlight-global"))
+        (highlight-global :location local)
         symbol-overlay
         ;; browse-at-remote
         chinese-conv
@@ -110,7 +111,6 @@
   (use-package browse-at-remote
     :defer t
     :init (spacemacs/set-leader-keys "gho" 'browse-at-remote)))
-
 (defun zilongshanren-misc/init-highlight-global ()
   (use-package highlight-global
     :init
@@ -967,12 +967,11 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       :body
       (find-file "~/zilongshanren.com/config.toml")))
   )
-
 (defun zilongshanren-misc/post-init-pyim ()
   (progn
     ;; use librime as wubi input
-    ;; 参考这个设置 pyim 使用 liberime 库 https://emacs-china.org/t/mac-emacs-rime/ 需要emacs 26的dynamic module功能 
-    ;; 设置极点五笔可以参考https://github.com/zilongshanren/rime-wubi86-jidian  
+    ;; 参考这个设置 pyim 使用 liberime 库 https://emacs-china.org/t/mac-emacs-rime/ 需要emacs 26的dynamic module功能
+    ;; 设置极点五笔可以参考https://github.com/zilongshanren/rime-wubi86-jidian
     (eval-and-compile
       (if (fboundp 'window-inside-edges)
           ;; Emacs devel.
@@ -1004,37 +1003,36 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
     (advice-add 'evil-insert :after 'display-current-input-method-title)
 
-    (when (spacemacs/system-is-mac)
-      (when (functionp 'module-load)
-        (progn
-          (setq load-path (cons (file-truename "~/.spacemacs.d/") load-path))
-          (require 'liberime)
-          (require 'posframe)
+    (when (functionp 'module-load)
+      (progn
+        (setq load-path (cons (file-truename "~/.spacemacs.d/") load-path))
+        (require 'liberime)
+        (require 'posframe)
 
-          (setq default-input-method "pyim")
-          (setq pyim-page-tooltip 'posframe)
-          (setq pyim-page-length 9)
+        (setq default-input-method "pyim")
+        (setq pyim-page-tooltip 'posframe)
+        (setq pyim-page-length 9)
 
-          (setq-default pyim-english-input-switch-functions
-                        '(pyim-probe-program-mode
-                          ;; pyim-probe-auto-english
-                          pyim-probe-org-structure-template))
+        (setq-default pyim-english-input-switch-functions
+                      '(pyim-probe-program-mode
+                        ;; pyim-probe-auto-english
+                        pyim-probe-org-structure-template))
 
 
-          ;; 不用频率切换输入法了。这个东西太好使了
-          (bind-key* "s-j" 'pyim-convert-code-at-point)
+        ;; 不用频率切换输入法了。这个东西太好使了
+        (bind-key* "s-j" 'pyim-convert-code-at-point)
 
-          (liberime-start "/Library/Input Methods/Squirrel.app/Contents/SharedSupport" (file-truename "~/Library/Rime"))
-          ;; 使用这个来查看当前输入法有哪些，不错
-          ;; (liberime-get-schema-list)
+        (liberime-start "/usr/share/rime-data/" (file-truename "~/.emacs.d/pyim/rime/"))
+        ;; 使用这个来查看当前输入法有哪些，不错
+        ;; (liberime-get-schema-list)
 
-          (liberime-select-schema "wubi_pinyin")
-          (setq pyim-default-scheme 'rime))))))
+        (liberime-select-schema "luna_pinyin_simp")
+        (setq pyim-default-scheme 'rime-quanpin)))))
 
 ;; deprecated
 (defun zilongshanren-misc/post-init-chinese-wbim ()
   (progn
-    
+
     ;; (bind-key* ";" 'chinese-wbim-insert-ascii)
     ;; (setq chinese-wbim-punc-translate-p nil)
 
@@ -1045,7 +1043,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (setq chinese-wbim-wb-use-gbk t)
 
     (setq chinese-wbim-use-tooltip t)
-    
+
     (add-hook 'chinese-wbim-wb-load-hook
               (lambda ()
                 (let ((map (chinese-wbim-mode-map)))
@@ -1112,7 +1110,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       :env '(("LANG" "en_US.UTF-8")
              ("LC_ALL" "en_US.UTF-8")))
     ;; define service
-    
+
 
     (prodigy-define-service
       :name "Hugo Server"
@@ -1279,7 +1277,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
                                 'magit-insert-skip-worktree-files nil t)
 
         (define-key magit-status-mode-map "ga" 'magit-jump-to-assume-unchanged)
-        
+
         (define-key magit-status-mode-map "gw" 'magit-jump-to-skip-worktree)
         ))
 
