@@ -81,8 +81,12 @@ This function should only modify configuration layer settings."
      (python :variables
              python-test-runner '(nose pytest)
              python-backend 'lsp
+             python-formatter 'black
+             python-format-on-save t
+             python-sort-imports-on-save t
              python-lsp-server 'mspyls
-             python-lsp-git-root "~/apps/python-language-server")
+             python-lsp-git-root "/home/liuyan/apps/python-language-server"
+             )
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
      ;;  lua
@@ -423,7 +427,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
-   dotspacemacs-enable-server nil
+   dotspacemacs-enable-server t
 
    ;; Set the emacs server socket location.
    ;; If nil, uses whatever the Emacs default is, otherwise a directory path
@@ -434,7 +438,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
 
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
@@ -497,10 +501,13 @@ dump."
 
 (defun dotspacemacs/user-init ()
   (setq-default configuration-layer-elpa-archives
-                '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-                  ("org-cn"   . "http://elpa.emacs-china.org/org/")
-                  ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
-
+                ;; '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+                  ;; ("org-cn"   . "http://elpa.emacs-china.org/org/")
+                  ;; ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/"))
+                '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+                  ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+                  ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))
+                )
 
   (setq term-char-mode-point-at-process-mark nil)
 
@@ -516,13 +523,14 @@ dump."
   (setq warning-minimum-level :error)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/8901
-  (setq-default quelpa-build-tar-executable "/usr/local/bin/gtar")
+  ;; (setq-default quelpa-build-tar-executable "/usr/local/bin/gtar")
   ;; hack for remove purpose mode
   ;; (setq purpose-mode nil)
   )
 
 (defun dotspacemacs/user-config ()
 
+  (setenv "WORKON_HOME" "/home/liuyan/.conda/envs")
   ;;解决org表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-linux) window-system)

@@ -348,9 +348,9 @@
                "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
 	          ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Inbox")
                "* %? [[%:link][%:description]] \nCaptured On: %U")
-              ("c" "Chrome" entry (file+headline org-agenda-file-note "Quick notes")
-               "* TODO [#C] %?\n %(zilongshanren/retrieve-chrome-current-tab-url)\n %i\n %U"
-               :empty-lines 1)
+              ;; ("c" "Chrome" entry (file+headline org-agenda-file-note "Quick notes")
+              ;;  "* TODO [#C] %?\n %(zilongshanren/retrieve-chrome-current-tab-url)\n %i\n %U"
+              ;;  :empty-lines 1)
               ("l" "links" entry (file+headline org-agenda-file-note "Quick notes")
                "* TODO [#C] %?\n  %i\n %a \n %U"
                :empty-lines 1)

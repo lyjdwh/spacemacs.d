@@ -280,3 +280,6 @@ with options to run in the shell.")
 ;; (advice-add 'helm-ag--edit :after #'zilong-after-ag-edit)
 
 (setq counsel-git-cmd "git ls-files -z --full-name -- ':!:*.js.meta' ':!:*.meta'")
+
+(add-hook 'text-mode-hook 'spacemacs/toggle-centered-point)
+(add-hook 'progkmode-hook 'spacemacs/toggle-centered-point)

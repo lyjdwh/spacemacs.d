@@ -92,6 +92,8 @@
   (while bindings
     (define-key keymap (pop bindings) (pop bindings))))
 
+(define-key evil-normal-state-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
+(define-key evil-normal-state-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
 (define-key evil-normal-state-map (kbd "-") nil)
 
 (bb/define-key evil-normal-state-map
