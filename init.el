@@ -84,8 +84,10 @@ This function should only modify configuration layer settings."
              python-formatter 'black
              python-format-on-save t
              python-sort-imports-on-save t
-             python-lsp-server 'mspyls
-             python-lsp-git-root "/home/liuyan/apps/python-language-server"
+             python-lsp-server 'pyls
+             python-pipenv-activate  t
+             ;; python-lsp-server 'mspyls
+             ;; python-lsp-git-root "/home/liuyan/apps/python-language-server"
              )
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
@@ -117,7 +119,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor)
+   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor company-tabnine)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
