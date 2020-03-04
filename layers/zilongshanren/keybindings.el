@@ -189,6 +189,11 @@
 (spacemacs/set-leader-keys "hh" 'zilongshanren/highlight-dwim)
 (spacemacs/set-leader-keys "hc" 'zilongshanren/clearn-highlight)
 
+;; emacs daemon
+(spacemacs/set-leader-keys "qD" 'spacemacs/restart-emacs-debug-init)
+(spacemacs/set-leader-keys "qd" 'liuyan/server-shutdown)
+(spacemacs/set-leader-keys "Th" 'liuyan/toggle-terminal-transparency)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)

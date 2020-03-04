@@ -15,8 +15,20 @@
     (dired-mode :location built-in)
     (profiler :location built-in)
     (recentf :location built-in)
+    (eaf :location local)
     )
 )
+(defun zilongshanren-better-defaults/init-eaf ()
+(use-package eaf
+  :load-path "/home/liuyan/apps/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
+  :custom
+  (eaf-find-alternate-file-in-dired t)
+  (eaf-python-command "/usr/bin/python3")
+  :config
+  (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key take_photo "p" eaf-camera-keybinding))
+  )
 
 (defun zilongshanren-better-defaults/post-init-recentf ()
   (progn

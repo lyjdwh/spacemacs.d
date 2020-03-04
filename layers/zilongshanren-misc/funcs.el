@@ -691,3 +691,16 @@ Error out if this isn't a GitHub repo."
 (define-global-minor-mode
   global-shadowsocks-proxy-mode shadowsocks-proxy-mode shadowsocks-proxy-mode
   :group 'shadowsocks-proxy)
+
+;; define function to shutdown emacs server instance
+(defun liuyan/server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+;; terminal transparency
+(defun liuyan/toggle-terminal-transparency ()
+  (interactive)
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
