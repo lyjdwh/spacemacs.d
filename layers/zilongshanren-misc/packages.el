@@ -51,8 +51,15 @@
         pyim
         lispyville
         popup
+        keyfreq
         ))
-
+(defun zilongshanren-misc/init-keyfreq ()
+  (use-package keyfreq
+    :init
+    (progn
+      (keyfreq-mode 1)
+      (keyfreq-autosave-mode 1)
+      )))
 (defun zilongshanren-misc/post-init-popup ()
   (use-package popup
     :config

@@ -14,7 +14,7 @@
      blog-admin-dir "f:/zilongshanren.com")
   (setq
    org-agenda-dir "~/org-notes"
-   deft-dir "~/org-notes"
+   deft-dir "~/org-notes/notes"
    blog-admin-dir ""))
 
 

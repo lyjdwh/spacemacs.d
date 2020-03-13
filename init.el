@@ -123,7 +123,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor company-tabnine)
+   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor company-tabnine org-preview-html keyfreq)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

@@ -25,9 +25,15 @@
     ;; worf
     ;; org-download
     ;; plain-org-wiki
+    org-preview-html
     )
   )
-
+(defun zilongshanren-org/init-org-preview-html ()
+  (use-package org-preview-html
+    :defer t
+    :init
+    (add-hook 'org-mode-hook 'org-preview-html-mode)
+    ))
 (defun zilongshanren-org/post-init-evil-org ()
   (defun evil-org--populate-navigation-bindings ()
     "Configures gj/gk/gh/gl for navigation."

@@ -11,7 +11,8 @@
 
 
 (define-abbrev-table 'global-abbrev-table '(
-
+                                            ;; path
+                                            ("8df" "/home/liuyan/org-notes/notes/imgs/")
                                             ;; math/unicode symbols
                                             ("8in" "∈")
                                             ("8nin" "∉")
