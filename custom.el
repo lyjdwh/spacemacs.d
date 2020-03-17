@@ -12,9 +12,6 @@
  '(company-show-numbers t)
  '(company-statistics-auto-restore nil)
  '(ctags-update-delay-seconds 1024)
- '(custom-safe-themes
-   (quote
-    ("c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" default)))
  '(erc-nick "liuyan")
  '(erc-port 6666)
  '(evil-want-C-i-jump t)
@@ -86,23 +83,5 @@
  '(web-mode-markup-indent-offset 2)
  '(ycmd-extra-conf-handler (quote load))
  '(ycmd-extra-conf-whitelist (quote ("~/cocos2d-x/*"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((((class color) (min-colors 89)) (:foreground "#657b83" :background "#fdf6e3"))))
- '(ahs-definition-face ((t (:foreground "#d33682" :slant normal :weight bold))))
- '(ahs-face ((t (:foreground "#d33682" :weight bold))))
- '(command-log-command ((t (:foreground "dark magenta"))))
- '(command-log-key ((t (:foreground "dark cyan"))))
- '(git-gutter-fr:added ((t (:foreground "#859900" :weight bold :width extra-expanded))))
- '(iedit-occurrence ((t (:inherit cursor))))
- '(ivy-virtual ((t (:background "skyblue"))))
- '(js2-external-variable ((t (:foreground "plum3"))))
- '(mc/cursor-bar-face ((t (:background "chartreuse3"))))
- '(show-paren-match ((t (:background "dark gray" :foreground "#d33682" :weight bold))))
- '(sp-show-pair-match-face ((t (:background "#272822" :foreground "gray" :inverse-video t :weight normal))))
- '(web-mode-current-element-highlight-face ((t (:background "dark gray")))))
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

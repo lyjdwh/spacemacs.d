@@ -46,8 +46,14 @@
         lsp-mode
         typescript-mode
         company-tabnine
+        lsp-python-ms
         ))
-
+(defun zilongshanren-programming/post-init-lsp-python-ms ()
+  (progn
+    (setq lsp-python-ms-dir
+        (expand-file-name "~/.vscode/extensions/ms-python.python-2020.2.64397/languageServer.0.5.31"))
+    (setq lsp-python-ms-executable "~/.vscode/extensions/ms-python.python-2020.2.64397/languageServer.0.5.31/Microsoft.Python.LanguageServer")
+  ))
 (defun zilongshanren-programming/init-company-tabnine ()
 (use-package company-tabnine
   :defer 1
