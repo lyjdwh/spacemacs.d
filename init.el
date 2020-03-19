@@ -62,7 +62,8 @@ This function should only modify configuration layer settings."
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'cycle
-                      :disabled-for org markdown)
+                      ;; :disabled-for org markdown
+                      )
      ;;  (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
      ;; osx-command-as 'super)
      ;;  restclient
@@ -72,7 +73,7 @@ This function should only modify configuration layer settings."
      ;; docker
      latex
      deft
-     markdown
+     (markdown :variables markdown-live-preview-engine 'vmd)
      (org :variables org-want-todo-bindings t
           org-enable-hugo-support t)
      gpu
@@ -123,7 +124,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor company-tabnine org-preview-html keyfreq)
+   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor company-tabnine org-preview-html keyfreq grip-mode)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

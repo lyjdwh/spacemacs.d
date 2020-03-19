@@ -1320,7 +1320,17 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
           "p" 'zilongshanren/markdown-to-html)
         (spacemacs/set-leader-keys-for-major-mode 'markdown-mode
           "p" 'zilongshanren/markdown-to-html)
+        (spacemacs/set-leader-keys-for-major-mode 'markdown-mode
+          "it" 'markdown-insert-table)
+        (spacemacs/set-leader-keys-for-major-mode 'markdown-mode
+          "Tp" 'markdown-live-preview-mode)
 
         (evil-define-key 'normal markdown-mode-map (kbd "TAB") 'markdown-cycle)
+
+        (add-hook 'markdown-mode-hook 'flycheck-mode)
+        (setq markdown-asymmetric-header t
+              markdown-enable-wiki-links t
+              markdown-fontify-code-blocks-natively t
+              )
         ))
     ))
