@@ -47,7 +47,34 @@
         typescript-mode
         company-tabnine
         lsp-python-ms
+        auctex
         ))
+(defun zilongshanren-programming/post-init-auctex ()
+  (add-hook 'LaTeX-mode-hook
+        (lambda ()
+          (setq TeX-auto-untabify t     ; remove all tabs before saving
+                TeX-engine 'xetex     ; use xelatex default
+                ;; TeX-view-program-selection '((output-pdf "Okular"))
+                ;; TeX-view-program-selection '((output-pdf "Emacs")) 
+                ;; TeX-view-program-list '(("Emacs" "emacsclient -n %o")) 
+                TeX-view-program-selection '((output-pdf "PDF Tools"))
+                TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+                TeX-source-correlate-mode t
+                TeX-source-correlate-start-server t
+                TeX-source-correlate-method 'synctex
+                ;; TeX-view-program-list
+                ;; '(("Okular" "okular --unique %o#src:%n`pwd`/./%b")
+                ;;   ("Skim" "displayline -b -g %n %o %b")
+                ;;   ("Zathura"
+                ;;    ("zathura %o"
+                ;;     (mode-io-correlate
+                ;;      " --synctex-forward %n:0:%b -x \"emacsclient +%{line} %{input}\""))))
+                )
+          (TeX-global-PDF-mode t)       ; PDF mode enable, not plain
+          (setq TeX-save-query nil)
+          (imenu-add-menubar-index)
+          (define-key LaTeX-mode-map (kbd "TAB") 'TeX-complete-symbol)
+          )))
 (defun zilongshanren-programming/post-init-lsp-python-ms ()
   (progn
     (setq lsp-python-ms-dir

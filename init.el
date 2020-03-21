@@ -71,7 +71,10 @@ This function should only modify configuration layer settings."
      (shell :variables shell-default-shell 'ansi-term
             shell-default-term-shell "/bin/zsh")
      ;; docker
-     latex
+     (latex :variables latex-build-command "LaTeX"
+            latex-enable-auto-fill t
+            latex-enable-folding t)
+     pdf
      deft
      (markdown :variables markdown-live-preview-engine 'vmd)
      (org :variables org-want-todo-bindings t
