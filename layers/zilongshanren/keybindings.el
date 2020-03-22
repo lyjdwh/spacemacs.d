@@ -194,6 +194,9 @@
 (spacemacs/set-leader-keys "qd" 'liuyan/server-shutdown)
 (spacemacs/set-leader-keys "Th" 'liuyan/toggle-terminal-transparency)
 
+;;ivy-yasnippet
+(spacemacs/set-leader-keys "oi" 'ivy-yasnippet)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)
