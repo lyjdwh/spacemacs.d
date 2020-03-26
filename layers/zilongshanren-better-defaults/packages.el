@@ -18,9 +18,14 @@
     (eaf :location local)
     (snails :location local)
     (auto-save :location local)
+    (company-english-helper :location local)
     )
 )
 
+(defun zilongshanren-better-defaults/init-company-english-helper ()
+  (use-package company-english-helper
+    :load-path "/home/liuyan/bin/company-english-helper"
+    ))
 (defun zilongshanren-better-defaults/init-auto-save ()
   (use-package auto-save
     :config

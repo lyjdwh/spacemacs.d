@@ -220,7 +220,8 @@
 ;; snails
 (spacemacs/set-leader-keys "aS" 'snails)
 
-
+;; company-english-helper
+(spacemacs/set-leader-keys "ote" 'toggle-company-english-helper)
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
