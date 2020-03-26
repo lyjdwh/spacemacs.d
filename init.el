@@ -127,7 +127,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor company-tabnine org-preview-html keyfreq grip-mode)
+   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor company-tabnine org-preview-html keyfreq grip-mode snails benchmark-init)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -332,7 +332,7 @@ It should only modify the values of Spacemacs settings."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'cache
+   dotspacemacs-auto-save-file-location 'nil
 
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5

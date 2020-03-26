@@ -203,19 +203,22 @@
 (spacemacs/set-leader-keys "aei" 'eaf-open-ipython)
 (spacemacs/set-leader-keys "aec" 'eaf-open-camera)
 (spacemacs/set-leader-keys "aed" 'eaf-open-demo)
-(spacemacs/set-leader-keys "aebb" 'eaf-open-browser)
+(spacemacs/set-leader-keys "aeb" 'eaf-open-browser)
 (spacemacs/set-leader-keys "aee" 'eaf-open-external)
-(spacemacs/set-leader-keys "aett" 'eaf-open-terminal)
-(spacemacs/set-leader-keys "aets" 'eaf-toggle-fullscreen)
+(spacemacs/set-leader-keys "aet" 'eaf-open-terminal)
+(spacemacs/set-leader-keys "aeT" 'eaf-toggle-fullscreen)
 (spacemacs/set-leader-keys "aeo" 'eaf-open)
 (spacemacs/set-leader-keys "aeu" 'eaf-open-url)
 (spacemacs/set-leader-keys "aef" 'eaf-open-office)
 (spacemacs/set-leader-keys "aem" 'eaf-open-mindmap)
 (spacemacs/set-leader-keys "aea" 'eaf-open-airshare)
-(spacemacs/set-leader-keys "aebm" 'eaf-open-bookmark)
+(spacemacs/set-leader-keys "aeB" 'eaf-open-bookmark)
 (spacemacs/set-leader-keys "aer" 'eaf-open-rss-reader)
 (spacemacs/set-leader-keys "aeq" 'eaf-kill-process)
 (spacemacs/set-leader-keys "aes" 'eaf-search-it)
+
+;; snails
+(spacemacs/set-leader-keys "aS" 'snails)
 
 
 

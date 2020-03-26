@@ -16,8 +16,25 @@
     (profiler :location built-in)
     (recentf :location built-in)
     (eaf :location local)
+    (snails :location local)
+    (auto-save :location local)
     )
 )
+
+(defun zilongshanren-better-defaults/init-auto-save ()
+  (use-package auto-save
+    :config
+    (progn
+      (auto-save-enable)
+      (setq auto-save-slient t)
+      (setq auto-save-delete-trailing-whitespace t)
+      ))
+  )
+(defun zilongshanren-better-defaults/init-snails ()
+  (use-package snails
+    :load-path "/home/liuyan/bin/snails"
+    ))
+
 (defun zilongshanren-better-defaults/init-eaf ()
   (use-package eaf
     :load-path "/home/liuyan/bin/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
@@ -29,6 +46,8 @@
     (setq eaf-proxy-type "socks5")
     (setq eaf-proxy-host "127.0.0.1")
     (setq eaf-proxy-port "1080")
+    (eaf-setq eaf-browser-aria2-proxy-host "127.0.0.1")
+    (eaf-setq eaf-browser-aria2-proxy-port "8188")
     )
   )
 
