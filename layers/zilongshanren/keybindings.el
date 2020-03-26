@@ -121,7 +121,7 @@
 
 
 (global-set-key (kbd "<f1>") 'zilongshanren/helm-hotspots)
-(spacemacs/set-leader-keys "oo" 'zilongshanren/helm-hotspots)
+(spacemacs/set-leader-keys "ou" 'zilongshanren/helm-hotspots)
 
 (spacemacs/set-leader-keys "oc" 'my-auto-update-tags-when-save)
 ;; (spacemacs/set-leader-keys "op" 'zilongshanren/org-save-and-export)
@@ -196,6 +196,28 @@
 
 ;;ivy-yasnippet
 (spacemacs/set-leader-keys "oi" 'ivy-yasnippet)
+
+;;eaf
+(spacemacs/set-leader-keys "oo" 'eaf-open-this-from-dired)
+(spacemacs/declare-prefix "ae" "eaf")
+(spacemacs/set-leader-keys "aei" 'eaf-open-ipython)
+(spacemacs/set-leader-keys "aec" 'eaf-open-camera)
+(spacemacs/set-leader-keys "aed" 'eaf-open-demo)
+(spacemacs/set-leader-keys "aeb" 'eaf-open-browser)
+(spacemacs/set-leader-keys "aee" 'eaf-open-external)
+(spacemacs/set-leader-keys "aett" 'eaf-open-terminal)
+(spacemacs/set-leader-keys "aets" 'eaf-toggle-fullscreen)
+(spacemacs/set-leader-keys "aeo" 'eaf-open)
+(spacemacs/set-leader-keys "aeu" 'eaf-open-url)
+(spacemacs/set-leader-keys "aef" 'eaf-open-office)
+(spacemacs/set-leader-keys "aem" 'eaf-open-mindmap)
+(spacemacs/set-leader-keys "aea" 'eaf-open-airshare)
+(spacemacs/set-leader-keys "aeb" 'eaf-open-bookmark)
+(spacemacs/set-leader-keys "aer" 'eaf-open-rss-reader)
+(spacemacs/set-leader-keys "aeq" 'eaf-kill-process)
+(spacemacs/set-leader-keys "aes" 'eaf-search-it)
+
+
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)

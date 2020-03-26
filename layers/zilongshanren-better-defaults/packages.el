@@ -19,15 +19,17 @@
     )
 )
 (defun zilongshanren-better-defaults/init-eaf ()
-(use-package eaf
-  :load-path "/home/liuyan/bin/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
-  :custom
-  (eaf-find-alternate-file-in-dired t)
-  (eaf-python-command "/usr/bin/python3")
-  :config
-  (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key take_photo "p" eaf-camera-keybinding))
+  (use-package eaf
+    :load-path "/home/liuyan/bin/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
+    :custom
+    (eaf-find-alternate-file-in-dired t)
+    (eaf-python-command "/usr/bin/python3")
+    :config
+    (setq eaf-grip-token "d95425cda9aa8c58779a312be6fe4662b965a441")
+    (setq eaf-proxy-type "socks5")
+    (setq eaf-proxy-host "127.0.0.1")
+    (setq eaf-proxy-port "1080")
+    )
   )
 
 (defun zilongshanren-better-defaults/post-init-recentf ()
