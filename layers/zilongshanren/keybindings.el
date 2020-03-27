@@ -139,7 +139,7 @@
 (spacemacs/set-leader-keys "od" 'occur-dwim)
 (spacemacs/set-leader-keys "ok" 'zilongshanren-kill-other-persp-buffers)
 (spacemacs/set-leader-keys "ox" 'org-open-at-point-global)
-(spacemacs/set-leader-keys "or" 'zilongshanren/browser-refresh--chrome-applescript)
+;; (spacemacs/set-leader-keys "or" 'zilongshanren/browser-refresh--chrome-applescript)
 
 (spacemacs/set-leader-keys "rh" 'helm-resume)
 (spacemacs/set-leader-keys "sj" 'counsel-imenu)
@@ -222,6 +222,9 @@
 
 ;; company-english-helper
 (spacemacs/set-leader-keys "ote" 'toggle-company-english-helper)
+
+;; rotate-text
+(spacemacs/set-leader-keys "or" 'rotate-text)
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)

@@ -19,9 +19,15 @@
     (snails :location local)
     (auto-save :location local)
     (company-english-helper :location local)
+    (rotate-text :location local)
     )
 )
 
+(defun zilongshanren-better-defaults/init-rotate-text ()
+  (progn
+    (autoload 'rotate-text "rotate-text" nil t)
+    (autoload 'rotate-text-backward "rotate-text" nil t)
+    ))
 (defun zilongshanren-better-defaults/init-company-english-helper ()
   (use-package company-english-helper
     :load-path "/home/liuyan/bin/company-english-helper"
