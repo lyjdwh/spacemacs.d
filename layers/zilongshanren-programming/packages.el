@@ -77,10 +77,14 @@
           )))
 (defun zilongshanren-programming/post-init-lsp-python-ms ()
   (progn
+    ;; for executable of language server, if it's not symlinked on your PATH
+    (setq lsp-python-ms-executable
+        (string-trim (shell-command-to-string
+         "fd -a ^Microsoft.Python.LanguageServer$ $HOME/.vscode/extensions | tail -1")))
+    ;; for dev build of language server
     (setq lsp-python-ms-dir
-        (expand-file-name "~/.vscode/extensions/ms-python.python-2020.2.64397/languageServer.0.5.31"))
-    (setq lsp-python-ms-executable "~/.vscode/extensions/ms-python.python-2020.2.64397/languageServer.0.5.31/Microsoft.Python.LanguageServer")
-  ))
+        (file-name-directory lsp-python-ms-executable))
+    ))
 (defun zilongshanren-programming/init-company-tabnine ()
 (use-package company-tabnine
   :defer 1
