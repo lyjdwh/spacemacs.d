@@ -53,13 +53,23 @@
     (eaf-python-command "/usr/bin/python3")
     :config
     (setq eaf-grip-token "d95425cda9aa8c58779a312be6fe4662b965a441")
+    ;; set proxy
     (setq eaf-proxy-type "socks5")
     (setq eaf-proxy-host "127.0.0.1")
     (setq eaf-proxy-port "1080")
     (eaf-setq eaf-browser-aria2-proxy-host "127.0.0.1")
     (eaf-setq eaf-browser-aria2-proxy-port "8188")
-    )
-  )
+    ;; set dark mode
+    (eaf-setq eaf-browser-dark-mode "false")
+    (eaf-setq eaf-pdf-dark-mode "false")
+    (eaf-setq eaf-mindmap-dark-mode "false")
+    ;; set eaf as default browse
+    (setq browse-url-browser-function 'eaf-open-browser)
+    (defalias 'browse-web #'eaf-open-browser)
+    (eaf-setq eaf-browser-default-zoom "1.25")
+    ;; camera
+    (eaf-setq eaf-camera-save-path "~/Pictures")
+    ))
 
 (defun zilongshanren-better-defaults/post-init-recentf ()
   (progn

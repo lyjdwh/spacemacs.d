@@ -13,6 +13,10 @@
 (define-abbrev-table 'global-abbrev-table '(
                                             ;; path
                                             ("8df" "/home/liuyan/org-notes/notes/imgs/")
+
+                                            ;; url
+                                            ("8go" "https://www.google.com")
+
                                             ;; math/unicode symbols
                                             ("8in" "∈")
                                             ("8nin" "∉")
@@ -28,7 +32,7 @@
                                             ;; computing tech
                                             ("8wp" "Wikipedia")
                                             ("8ms" "Microsoft")
-                                            ("8g" "Google")
+                                            ;; ("8g" "Google")
                                             ("8it" "IntelliType")
                                             ("8msw" "Microsoft Windows")
                                             ("8win" "Windows")

@@ -449,7 +449,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
-   dotspacemacs-enable-server t
+   dotspacemacs-enable-server nil
 
    ;; Set the emacs server socket location.
    ;; If nil, uses whatever the Emacs default is, otherwise a directory path
@@ -559,7 +559,7 @@ dump."
       (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
 
   ;; enable org-protocol
-  (server-start)
+  ;; (server-start)
   (require 'org-protocol)
 
   ;; Setting Chinese Font
