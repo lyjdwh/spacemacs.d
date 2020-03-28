@@ -33,13 +33,14 @@ This function should only modify configuration layer settings."
    '(
      (ivy :variables ivy-enable-advanced-buffer-information nil)
      better-defaults
+     helpful
      ranger
      emoji
      (plantuml :variables plantuml-jar-path "~/.spacemacs.d/plantuml.jar")
      ;; lsp
      ;; dap
-     colors
-     prodigy
+     ;; colors
+     ;; prodigy
      ;; github
      search-engine
      graphviz
@@ -47,7 +48,7 @@ This function should only modify configuration layer settings."
      ;;           haskell-completion-backend 'intero)
      (syntax-checking :variables syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
-     (spell-checking :variables spell-checking-enable-by-default nil)
+     (spell-checking :variables spell-checking-enable-by-default t)
      ;; (vinegar :variables vinegar-reuse-dired-buffer t)
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
@@ -58,6 +59,11 @@ This function should only modify configuration layer settings."
           magit-revert-buffers 'silent
           magit-refs-show-commit-count 'all
           magit-revision-show-gravatars nil)
+     (version-control :variables
+                       version-control-diff-tool 'git-gutter
+                       version-control-diff-side 'left
+                       version-control-global-margin t
+                       )
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
@@ -69,17 +75,17 @@ This function should only modify configuration layer settings."
      ;;  restclient
      (gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
      (shell :variables shell-default-shell 'ansi-term
-            shell-default-term-shell "/bin/zsh")
+            shell-default-term-shell "/usr/bin/zsh")
      ;; docker
      (latex :variables latex-build-command "LaTeX"
             latex-enable-auto-fill t
             latex-enable-folding t)
      pdf
-     deft
+     (deft :variables deft-zetteldeft t)
      (markdown :variables markdown-live-preview-engine 'vmd)
      (org :variables org-want-todo-bindings t
           org-enable-hugo-support t)
-     gpu
+     ;; gpu
      yaml
      ;;  react
      (python :variables
@@ -119,6 +125,11 @@ This function should only modify configuration layer settings."
                  leetcode-prefer-language "python3"
                  leetcode--domain "leetcode-cn.com"
                  leetcode--base-url  "https://leetcode-cn.com")
+     xkcd
+     (wakatime :variables
+               wakatime-api-key "93d7f5b0-8719-470e-b5ab-6d763b828bcc"
+               wakatime-cli-path "/usr/bin/wakatime")
+     pandoc
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -138,7 +149,7 @@ This function should only modify configuration layer settings."
                     spaceline holy-mode skewer-mode rainbow-delimiters
                     highlight-indentation vi-tilde-fringe eyebrowse ws-butler
                     org-bullets smooth-scrolling org-repo-todo org-download org-timer
-                    livid-mode git-gutter git-gutter-fringe  evil-escape
+                    livid-mode evil-escape
                     leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
                     ac-ispell ace-jump-mode auto-complete auto-dictionary
                     clang-format define-word google-translate disaster epic

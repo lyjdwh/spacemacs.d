@@ -95,6 +95,8 @@
 (define-key evil-normal-state-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
 (define-key evil-normal-state-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
 (define-key evil-normal-state-map (kbd "-") nil)
+(define-key evil-visual-state-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
+(define-key evil-visual-state-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
 
 (bb/define-key evil-normal-state-map
   "+" 'evil-numbers/inc-at-pt
@@ -225,6 +227,9 @@
 
 ;; rotate-text
 (spacemacs/set-leader-keys "or" 'rotate-text)
+
+;; pandoc
+(spacemacs/set-leader-keys "op" 'spacemacs/run-pandoc)
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)

@@ -52,7 +52,19 @@
         lispyville
         popup
         keyfreq
+        terminal-here
+        git-gutter
         ))
+
+(defun zilongshanren-misc/post-init-git-gutter ()
+  (setq git-gutter:modified-sign "=")
+  )
+
+(defun zilongshanren-misc/post-init-terminal-here ()
+  (progn
+    (setq terminal-here-terminal-command (list "alacritty"))
+    ))
+
 (defun zilongshanren-misc/init-keyfreq ()
   (use-package keyfreq
     :init
@@ -60,6 +72,7 @@
       (keyfreq-mode 1)
       (keyfreq-autosave-mode 1)
       )))
+
 (defun zilongshanren-misc/post-init-popup ()
   (use-package popup
     :config
