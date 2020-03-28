@@ -25,15 +25,17 @@
     ;; worf
     ;; org-download
     ;; plain-org-wiki
-    org-preview-html
+    ;; org-preview-html
     )
   )
-(defun zilongshanren-org/init-org-preview-html ()
-  (use-package org-preview-html
-    :defer t
-    :init
-    (add-hook 'org-mode-hook 'org-preview-html-mode)
-    ))
+
+;; (defun zilongshanren-org/init-org-preview-html ()
+;;   (use-package org-preview-html
+;;     :defer t
+;;     :init
+;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
+;;     ))
+
 (defun zilongshanren-org/post-init-evil-org ()
   (defun evil-org--populate-navigation-bindings ()
     "Configures gj/gk/gh/gl for navigation."
@@ -100,7 +102,7 @@
         "il" 'zilongshanren/list-all-tabs)
 
       (setq org-complete-tags-always-offer-all-agenda-tags t)
-      
+
       (require 'org-compat)
       (require 'org)
       ;; (add-to-list 'org-modules "org-habit")

@@ -18,7 +18,7 @@
     (eaf :location local)
     (snails :location local)
     (auto-save :location local)
-    (company-english-helper :location local)
+    (company-english-helper :location (recipe :fetcher github :repo "manateelazycat/company-english-helper"))
     (rotate-text :location local)
     )
 )
@@ -29,9 +29,8 @@
     (autoload 'rotate-text-backward "rotate-text" nil t)
     ))
 (defun zilongshanren-better-defaults/init-company-english-helper ()
-  (use-package company-english-helper
-    :load-path "/home/liuyan/bin/company-english-helper"
-    ))
+  (use-package company-english-helper))
+
 (defun zilongshanren-better-defaults/init-auto-save ()
   (use-package auto-save
     :config
@@ -39,8 +38,8 @@
       (auto-save-enable)
       (setq auto-save-slient t)
       (setq auto-save-delete-trailing-whitespace t)
-      ))
-  )
+      )))
+
 (defun zilongshanren-better-defaults/init-snails ()
   (use-package snails
     :load-path "/home/liuyan/bin/snails"
