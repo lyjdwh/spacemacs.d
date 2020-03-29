@@ -48,7 +48,19 @@
         company-tabnine
         lsp-python-ms
         auctex
+        highlight-indent-guides
         ))
+(defun zilongshanren-programming/init-highlight-indent-guides ()
+  (use-package highlight-indent-guides
+    :diminish
+    :hook ((prog-mode web-mode nxml-mode) . highlight-indent-guides-mode)
+    :custom
+    (highlight-indent-guides-method 'character)
+    (highlight-indent-guides-responsive 'top)
+    (highlight-indent-guides-delay 0)
+    (highlight-indent-guides-auto-character-face-perc 7)
+    ))
+
 (defun zilongshanren-programming/post-init-auctex ()
   (add-hook 'LaTeX-mode-hook
         (lambda ()
