@@ -85,41 +85,44 @@
     (setq lsp-python-ms-dir
         (file-name-directory lsp-python-ms-executable))
     ))
-(defun zilongshanren-programming/init-company-tabnine ()
-(use-package company-tabnine
-  :defer 1
-  :custom
-  (company-tabnine-max-num-results 9)
-  :hook
-  (lsp-after-open . (lambda ()
-                      (setq company-tabnine-max-num-results 3)
-                      (add-to-list 'company-transformers 'company//sort-by-tabnine t)
-                      (add-to-list 'company-backends '(company-lsp :with company-tabnine :separate ))))
-  (kill-emacs . company-tabnine-kill-process)
-  :config
-  ;; Enable TabNine on default
-  (add-to-list 'company-backends #'company-tabnine)
 
-  ;; Integrate company-tabnine with lsp-mode
-  (defun company//sort-by-tabnine (candidates)
-    (if (or (functionp company-backend)
-            (not (and (listp company-backend) (memq 'company-tabnine company-backend))))
-        candidates
-      (let ((candidates-table (make-hash-table :test #'equal))
-            candidates-lsp
-            candidates-tabnine)
-        (dolist (candidate candidates)
-          (if (eq (get-text-property 0 'company-backend candidate)
-                  'company-tabnine)
-              (unless (gethash candidate candidates-table)
-                (push candidate candidates-tabnine))
-            (push candidate candidates-lsp)
-            (puthash candidate t candidates-table)))
-        (setq candidates-lsp (nreverse candidates-lsp))
-        (setq candidates-tabnine (nreverse candidates-tabnine))
-        (nconc (seq-take candidates-tabnine 3)
-               (seq-take candidates-lsp 6))))))
-  )
+(defun zilongshanren-programming/init-company-tabnine ()
+  (use-package company-tabnine
+    :defer 1
+    :custom
+    (company-tabnine-max-num-results 9)
+    ;; :bind
+    ;; (("M-q" . company-other-backend)
+    ;;  ("C-z t" . company-tabnine))
+    :hook
+    (lsp-after-open . (lambda ()
+                        (setq company-tabnine-max-num-results 4)
+                        (add-to-list 'company-transformers 'company//sort-by-tabnine t)
+                        (add-to-list 'company-backends '(company-lsp :with company-tabnine :separate))))
+    (kill-emacs . company-tabnine-kill-process)
+    :config
+    ;; Enable TabNine on default
+    (add-to-list 'company-backends #'company-tabnine)
+
+    ;; Integrate company-tabnine with lsp-mode
+    (defun company//sort-by-tabnine (candidates)
+      (if (or (functionp company-backend)
+              (not (and (listp company-backend) (memq 'company-tabnine company-backend))))
+          candidates
+        (let ((candidates-table (make-hash-table :test #'equal))
+              candidates-lsp
+              candidates-tabnine)
+          (dolist (candidate candidates)
+            (if (eq (get-text-property 0 'company-backend candidate)
+                    'company-tabnine)
+                (unless (gethash candidate candidates-table)
+                  (push candidate candidates-tabnine))
+              (push candidate candidates-lsp)
+              (puthash candidate t candidates-table)))
+          (setq candidates-lsp (nreverse candidates-lsp))
+          (setq candidates-tabnine (nreverse candidates-tabnine))
+          (nconc (seq-take candidates-tabnine 4)
+                 (seq-take candidates-lsp 16)))))))
 
 (defun zilongshanren-programming/post-init-typescript-mode ()
   (add-hook 'typescript-mode-hook 'my-ts-mode-hook))
@@ -128,6 +131,8 @@
   (progn
 
     (setq lsp-ui-doc-enable nil)
+    (setq read-process-output-max (* 1024 1024)) ;; 1mb
+    (setq lsp-file-watch-threshold 2000)
 
     (defun lsp--auto-configure ()
       "Autoconfigure `lsp-ui', `company-lsp' if they are installed."
@@ -151,6 +156,7 @@
           ;; make sure that company-capf is disabled since it is not indented to be
           ;; used in combination with lsp-mode (see #884)
           (setq-local company-backends (remove 'company-capf company-backends))
+          (setq company-lsp-cache-candidates auto)
 
           (when (functionp 'yas-minor-mode)
             (yas-minor-mode t)))))
