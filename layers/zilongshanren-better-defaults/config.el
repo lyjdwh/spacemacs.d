@@ -283,3 +283,6 @@ with options to run in the shell.")
 
 (add-hook 'text-mode-hook 'spacemacs/toggle-centered-point)
 (add-hook 'progkmode-hook 'spacemacs/toggle-centered-point)
+
+;; Remove useless whitespace before saving a fil
+(add-hook 'before-save-hook #'delete-trailing-whitespace-except-current-line)

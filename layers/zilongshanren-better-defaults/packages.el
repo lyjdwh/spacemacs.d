@@ -17,28 +17,30 @@
     (recentf :location built-in)
     (eaf :location local)
     (snails :location local)
-    (auto-save :location local)
     (company-english-helper :location (recipe :fetcher github :repo "manateelazycat/company-english-helper"))
     (rotate-text :location local)
+    super-save
     )
 )
+
+(defun zilongshanren-better-defaults/init-super-save ()
+  (use-package super-save
+  :diminish
+  :custom
+  (super-save-auto-save-when-idle t)
+  (auto-save-default nil)
+  (make-backup-files nil)
+  :config
+  (super-save-mode 1)))
 
 (defun zilongshanren-better-defaults/init-rotate-text ()
   (progn
     (autoload 'rotate-text "rotate-text" nil t)
     (autoload 'rotate-text-backward "rotate-text" nil t)
     ))
+
 (defun zilongshanren-better-defaults/init-company-english-helper ()
   (use-package company-english-helper))
-
-(defun zilongshanren-better-defaults/init-auto-save ()
-  (use-package auto-save
-    :config
-    (progn
-      (auto-save-enable)
-      (setq auto-save-slient t)
-      (setq auto-save-delete-trailing-whitespace t)
-      )))
 
 (defun zilongshanren-better-defaults/init-snails ()
   (use-package snails
