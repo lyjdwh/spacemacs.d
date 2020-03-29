@@ -57,12 +57,12 @@
 (when (spacemacs/system-is-mac)
  (spacemacs/set-leader-keys "o!" 'zilongshanren/iterm-shell-command))
 
-(spacemacs|add-toggle toggle-shadowsocks-proxy-mode
-  :status shadowsocks-proxy-mode
-  :on (global-shadowsocks-proxy-mode)
-  :off (global-shadowsocks-proxy-mode -1)
-  :documentation "Toggle shadowsocks proxy mode."
-  :evil-leader "ots")
+;; (spacemacs|add-toggle toggle-shadowsocks-proxy-mode
+;;   :status shadowsocks-proxy-mode
+;;   :on (global-shadowsocks-proxy-mode)
+;;   :off (global-shadowsocks-proxy-mode -1)
+;;   :documentation "Toggle shadowsocks proxy mode."
+;;   :evil-leader "ots")
 
 (global-set-key (kbd "s-s") 'save-buffer)
 ;; (bind-key* "s-k" 'scroll-other-window-down)
