@@ -43,6 +43,24 @@
 (defun zilongshanren-better-defaults/init-snails ()
   (use-package snails
     :load-path "/home/liuyan/bin/snails"
+    :if (display-graphic-p)
+    :custom-face
+    (snails-content-buffer-face ((t (:background "#111" :height 120))))
+    (snails-input-buffer-face ((t (:background "#222" :foreground "gold" :height 120))))
+    (snails-header-line-face ((t (:inherit font-lock-function-name-face :underline t :height 1.2))))
+    :init
+    (use-package exec-path-from-shell :if (featurep 'cocoa) :defer t)
+    :config
+    ;; Functions for specific backends
+    (defun snails-current-project ()
+      (interactive)
+      (snails '(snails-backend-projectile snails-backend-rg snails-backend-fd)))
+    (defun snails-active-recent-buffers ()
+      (interactive)
+      (snails '(snails-backend-buffer snails-backend-recentf)))
+    (defun snails-everywhere ()
+      (interactive)
+      (snails '(snails-backend-everything snails-backend-mdfind)))
     ))
 
 (defun zilongshanren-better-defaults/init-eaf ()
