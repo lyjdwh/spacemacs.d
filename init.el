@@ -427,7 +427,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers 'relative
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -731,6 +731,15 @@ unwanted space when exporting org-mode to hugo markdown."
       (setq interprogram-cut-function 'xsel-cut-function)
       (setq interprogram-paste-function 'xsel-paste-function)
       ))
+
+  ;; Better Compilation
+  (setq-default compilation-always-kill t) ; kill compilation process before starting another
+
+  ;; So Long mitigates slowness due to extremely long lines.
+  ;; Currently available in Emacs master branch *only*!
+  (when (fboundp 'global-so-long-mode)
+    (global-so-long-mode))
+
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
