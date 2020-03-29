@@ -49,7 +49,13 @@
         lsp-python-ms
         auctex
         highlight-indent-guides
+        ein
         ))
+(defun zilongshanren-programming/init-ein ()
+  (use-package ein
+  :disabled
+  :defer t))
+
 (defun zilongshanren-programming/init-highlight-indent-guides ()
   (use-package highlight-indent-guides
     :diminish

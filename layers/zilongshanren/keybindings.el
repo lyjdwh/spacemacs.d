@@ -231,6 +231,9 @@
 ;; pandoc
 (spacemacs/set-leader-keys "op" 'spacemacs/run-pandoc)
 
+;; speed type
+(spacemacs/set-leader-keys "at" 'speed-type-text)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)

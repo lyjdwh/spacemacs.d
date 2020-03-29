@@ -54,7 +54,27 @@
         keyfreq
         terminal-here
         git-gutter
+        speed-type
+        zone
         ))
+
+(defun zilongshanren-misc/post-init-zone ()
+  (use-package zone
+  :config
+  (zone-when-idle 600) ; in seconds
+  (defun zone-choose (pgm)
+    "Choose a PGM to run for `zone'."
+    (interactive
+     (list
+      (completing-read
+       "Program: "
+       (mapcar 'symbol-name zone-programs))))
+    (let ((zone-programs (list (intern pgm))))
+      (zone)))))
+
+(defun zilongshanren-misc/init-speed-type ()
+  (use-package speed-type
+    :commands (speed-type-text)))
 
 (defun zilongshanren-misc/post-init-git-gutter ()
   (setq git-gutter:modified-sign "=")
