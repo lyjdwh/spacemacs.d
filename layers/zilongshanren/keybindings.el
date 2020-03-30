@@ -247,6 +247,13 @@
 ;; take screenshot
 (spacemacs/set-leader-keys "of" 'screenshot-frame)
 
+;; highlight todo and similar keywords
+(spacemacs/declare-prefix "oh" "hl-todo")
+(spacemacs/set-leader-keys "ohp" 'hl-todo-previous)
+(spacemacs/set-leader-keys "ohn" 'hl-todo-next)
+(spacemacs/set-leader-keys "oho" 'hl-todo-occur)
+(spacemacs/set-leader-keys "ohi" 'hl-todo-insert)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)

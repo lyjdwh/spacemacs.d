@@ -51,7 +51,19 @@
         highlight-indent-guides
         ein
         (color-rg :location local)
+        hl-todo
         ))
+
+(defun zilongshanren-programming/post-init-hl-todo ()
+  ;; Highlight TODO and similar keywords in comments and strings
+  ;; PROG OKAY DONE THEM NOTE KLUDGE TEMP TRICK HACK TODO NEXT FIXME XXX
+  ;; ISSUE BUG  DONT FAIL
+  (progn
+    (dolist (keyword '("BUG" "ISSUE"))
+      (cl-pushnew `(,keyword . ,(face-foreground 'error)) hl-todo-keyword-faces))
+    (dolist (keyword '("HACK" "TRICK"))
+      (cl-pushnew `(,keyword . ,(face-foreground 'warning)) hl-todo-keyword-faces))))
+
 (defun zilongshanren-programming/init-color-rg ()
   (use-package color-rg
     :load-path "/home/liuyan/bin/color-rg"

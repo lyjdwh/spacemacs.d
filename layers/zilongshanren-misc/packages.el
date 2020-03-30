@@ -569,7 +569,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key global-map (kbd "<f1>") 'hydra-hotspots/body)
     (spacemacs/set-leader-keys "oo" 'hydra-hotspots/body)
     ;; (bind-key*  "<f4>" 'hydra-apropos/body)
-    (spacemacs/set-leader-keys "oh" 'hydra-apropos/body)
+    (spacemacs/set-leader-keys "oH" 'hydra-apropos/body)
 
     ))
 
