@@ -99,6 +99,7 @@ This function should only modify configuration layer settings."
              python-lsp-server 'mspyls
              ;; python-lsp-git-root "/home/liuyan/apps/python-language-server"
              )
+     ipython-notebook
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
      ;;  lua
@@ -121,10 +122,6 @@ This function should only modify configuration layer settings."
      fasd
      dash
      shell-scripts
-     (myleetcode :variables
-                 leetcode-prefer-language "python3"
-                 leetcode--domain "leetcode-cn.com"
-                 leetcode--base-url  "https://leetcode-cn.com")
      xkcd
      (wakatime :variables
                wakatime-api-key "93d7f5b0-8719-470e-b5ab-6d763b828bcc"
@@ -742,8 +739,8 @@ unwanted space when exporting org-mode to hugo markdown."
 
   ;; Smooth Scroll
   (setq scroll-step 1)
-  (setq scroll-margin 1)
-  (setq scroll-conservatively 101)
+  (setq scroll-margin 10)
+  (setq scroll-conservatively 10000)
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))

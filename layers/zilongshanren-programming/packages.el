@@ -49,7 +49,6 @@
         lsp-python-ms
         auctex
         highlight-indent-guides
-        ein
         (color-rg :location local)
         hl-todo
         ))
@@ -68,11 +67,6 @@
   (use-package color-rg
     :load-path "/home/liuyan/bin/color-rg"
     ))
-
-(defun zilongshanren-programming/init-ein ()
-  (use-package ein
-    :disabled
-    :defer t))
 
 (defun zilongshanren-programming/init-highlight-indent-guides ()
   (use-package highlight-indent-guides
@@ -122,6 +116,7 @@
     ;; for dev build of language server
     (setq lsp-python-ms-dir
         (file-name-directory lsp-python-ms-executable))
+    (setq lsp-python-ms-python-executable-cmd "/home/liuyan/.conda/envs/torch/bin/python")
     ))
 
 (defun zilongshanren-programming/init-company-tabnine ()

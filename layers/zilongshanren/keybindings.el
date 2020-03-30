@@ -254,6 +254,16 @@
 (spacemacs/set-leader-keys "oho" 'hl-todo-occur)
 (spacemacs/set-leader-keys "ohi" 'hl-todo-insert)
 
+;; leetcode
+(spacemacs/declare-prefix "a L" "Leetcode")
+(spacemacs/set-leader-keys
+  "a L l" 'leetcode
+  "a L d" 'leetcode-show-current-problem
+  "a L r" 'leetcode-refresh
+  "a L t" 'leetcode-try
+  "a L u" 'leetcode-submit
+  )
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)

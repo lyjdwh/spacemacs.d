@@ -56,25 +56,36 @@
         git-gutter
         speed-type
         zone
+        leetcode
         ))
 
-(defun zilongshanren-misc/post-init-zone ()
-  (use-package zone
-  :config
-  (zone-when-idle 600) ; in seconds
-  (defun zone-choose (pgm)
-    "Choose a PGM to run for `zone'."
-    (interactive
-     (list
-      (completing-read
-       "Program: "
-       (mapcar 'symbol-name zone-programs))))
-    (let ((zone-programs (list (intern pgm))))
-      (zone)))))
+(defun zilongshanren-misc/init-leetcode ()
+  (use-package leetcode
+    :defer t
+    :config
+    (define-key leetcode--problems-mode-map (kbd "TAB") 'leetcode-show-current-problem)
+    (define-key leetcode--problems-mode-map (kbd "<return>") 'leetcode-show-current-problem)
+    (setq leetcode-prefer-language "python3")
+    (setq leetcode--domain "leetcode-cn.com")
+    (setq leetcode--base-url "https://leetcode-cn.com")))
 
 (defun zilongshanren-misc/init-speed-type ()
   (use-package speed-type
     :commands (speed-type-text)))
+
+(defun zilongshanren-misc/post-init-zone ()
+  (use-package zone
+    :config
+    (zone-when-idle 600)                ; in seconds
+    (defun zone-choose (pgm)
+      "Choose a PGM to run for `zone'."
+      (interactive
+       (list
+        (completing-read
+         "Program: "
+         (mapcar 'symbol-name zone-programs))))
+      (let ((zone-programs (list (intern pgm))))
+        (zone)))))
 
 (defun zilongshanren-misc/post-init-git-gutter ()
   (setq git-gutter:modified-sign "=")
