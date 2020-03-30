@@ -704,3 +704,24 @@ Error out if this isn't a GitHub repo."
   (interactive)
   (unless (display-graphic-p (selected-frame))
     (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(defun screenshot-frame ()
+  "Take screenshot.
+Default image ~/Pictures/TIMESTAMP.png
+Usage:
+M-x screenshot-frame
+Enter custom-name or RET to save image with timestamp"
+  (interactive)
+  (let* ((insert-default-directory t)
+         (screenshots-dir "~/Pictures/")
+         (sframe-name (concat (format-time-string "%d-%b-%Y-%T") ".png"))
+         (sframe-full-path
+          (read-file-name "Screenshot name: " screenshots-dir
+                          (concat screenshots-dir sframe-name))))
+
+    (if (not (file-accessible-directory-p screenshots-dir))
+        (make-directory-internal screenshots-dir))
+
+    (shell-command-to-string
+     (concat "import " sframe-full-path))
+    (message "Screenshot saved as %s" sframe-full-path)))

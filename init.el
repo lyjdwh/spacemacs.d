@@ -39,7 +39,7 @@ This function should only modify configuration layer settings."
      (plantuml :variables plantuml-jar-path "~/.spacemacs.d/plantuml.jar")
      ;; lsp
      ;; dap
-     ;; colors
+     colors
      ;; prodigy
      ;; github
      search-engine

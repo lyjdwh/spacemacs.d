@@ -244,6 +244,9 @@
 (spacemacs/set-leader-keys "slt" 'color-rg-search-symbol-with-type)
 (spacemacs/set-leader-keys "slT" 'color-rg-search-project-with-type)
 
+;; take screenshot
+(spacemacs/set-leader-keys "of" 'screenshot-frame)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)
