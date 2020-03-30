@@ -50,11 +50,17 @@
         auctex
         highlight-indent-guides
         ein
+        (color-rg :location local)
         ))
+(defun zilongshanren-programming/init-color-rg ()
+  (use-package color-rg
+    :load-path "/home/liuyan/bin/color-rg"
+    ))
+
 (defun zilongshanren-programming/init-ein ()
   (use-package ein
-  :disabled
-  :defer t))
+    :disabled
+    :defer t))
 
 (defun zilongshanren-programming/init-highlight-indent-guides ()
   (use-package highlight-indent-guides

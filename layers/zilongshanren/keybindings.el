@@ -234,6 +234,16 @@
 ;; speed type
 (spacemacs/set-leader-keys "at" 'speed-type-text)
 
+;; color rg
+(spacemacs/set-leader-keys "sld" 'color-rg-search-input)
+(spacemacs/set-leader-keys "slD" 'color-rg-search-symbol)
+(spacemacs/set-leader-keys "slp" 'color-rg-search-input-in-project)
+(spacemacs/set-leader-keys "slP" 'color-rg-search-symbol-in-project)
+(spacemacs/set-leader-keys "slf" 'color-rg-search-input-in-current-file)
+(spacemacs/set-leader-keys "slF" 'color-rg-search-symbol-in-current-file)
+(spacemacs/set-leader-keys "slt" 'color-rg-search-symbol-with-type)
+(spacemacs/set-leader-keys "slT" 'color-rg-search-project-with-type)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)
