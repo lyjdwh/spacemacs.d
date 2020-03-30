@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Dataset
+# key: pytorch:dataset
+# --
+class ${1:MyDataset}(torch.utils.data.Dataset):
+	"""Some Information about $1"""
+	def __init__(self):
+		super($1, self).__init__()
+
+	def __getitem__(self, index):
+		return $2
+
+	def __len__(self):
+		return $3

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Unfreeze Layers
+# key: pytorch:unfreeze
+# --
+for params in ${1:net}.parameters():
+	params.require_grad = True

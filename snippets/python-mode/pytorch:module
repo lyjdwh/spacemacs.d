@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: PyTorch Module
+# key: pytorch:module
+# --
+class ${1:MyModule}(nn.Module):
+	"""Some Information about $1"""
+	def __init__(self):
+		super($1, self).__init__()
+
+	def forward(self, x):
+
+		return x

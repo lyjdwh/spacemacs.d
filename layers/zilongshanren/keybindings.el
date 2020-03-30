@@ -245,7 +245,10 @@
 (spacemacs/set-leader-keys "slT" 'color-rg-search-project-with-type)
 
 ;; take screenshot
-(spacemacs/set-leader-keys "of" 'screenshot-frame)
+(spacemacs/set-leader-keys "oF" 'screenshot-frame)
+
+;; fzf
+(spacemacs/set-leader-keys "of" 'counsel-fzf)
 
 ;; highlight todo and similar keywords
 (spacemacs/declare-prefix "oh" "hl-todo")

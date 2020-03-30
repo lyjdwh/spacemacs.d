@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Freeze Layers
+# key: pytorch:freeze
+# --
+for params in ${1:net}.parameters():
+	params.require_grad = False
