@@ -27,7 +27,7 @@
   (use-package super-save
   :diminish
   :custom
-  (super-save-auto-save-when-idle t)
+  (super-save-auto-save-when-idle nil)
   (auto-save-default nil)
   (make-backup-files nil)
   :config

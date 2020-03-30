@@ -205,7 +205,7 @@ comment box."
     (when (or FORCE (not (file-exists-p file)))
       (message "Creating TAGS in %s ..." dir)
       (shell-command
-       (format "ctags -f %s -e -R %s" file dir)))
+       (format "gtags --gtagslabel=pygments -q -i --single-update %s -O %s" file dir)))
     file))
 
 (defun my-update-tags ()
@@ -231,7 +231,7 @@ comment box."
         (my-update-tags)
         (message "updated tags after %d seconds." (- (float-time (current-time)) (float-time my-tags-updated-time))))))
 
-
+;; TODO config my develop environment
 (defun my-setup-develop-environment ()
   (interactive)
   (when (my-project-name-contains-substring "liuyan")
