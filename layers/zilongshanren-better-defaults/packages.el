@@ -25,13 +25,15 @@
 
 (defun zilongshanren-better-defaults/init-super-save ()
   (use-package super-save
-  :diminish
-  :custom
-  (super-save-auto-save-when-idle nil)
-  (auto-save-default nil)
-  (make-backup-files nil)
-  :config
-  (super-save-mode 1)))
+    :diminish
+    :custom
+    (super-save-auto-save-when-idle t)
+    (auto-save-default nil)
+    (make-backup-files nil)
+    :config
+    (super-save-mode 1)
+    (setq super-save-idle-duration 60)
+    ))
 
 (defun zilongshanren-better-defaults/init-rotate-text ()
   (progn

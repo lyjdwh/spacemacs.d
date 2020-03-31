@@ -166,6 +166,13 @@
     (setq lsp-ui-doc-enable nil)
     (setq read-process-output-max (* 1024 1024)) ;; 1mb
     (setq lsp-file-watch-threshold 2000)
+    (setq lsp-enable-folding nil)
+    ;;handle yasnippet by myself
+    (setq lsp-enable-snippet nil)
+    ;; use ffip instead
+    (setq lsp-enable-links nil)
+    ;; auto restart lsp
+     (setq lsp-restart 'auto-restart)
 
     (defun lsp--auto-configure ()
       "Autoconfigure `lsp-ui', `company-lsp' if they are installed."

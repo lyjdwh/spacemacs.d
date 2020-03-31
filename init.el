@@ -73,7 +73,9 @@ This function should only modify configuration layer settings."
      ;;  (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
      ;; osx-command-as 'super)
      ;;  restclient
-     (gtags :disabled-for clojure emacs-lisp javascript latex shell-scripts)
+     (gtags :disabled-for clojure emacs-lisp javascript latex shell-scripts org markdown
+            :variables counsel-gtags-auto-update t
+            )
      (shell :variables shell-default-shell 'ansi-term
             shell-default-term-shell "/usr/bin/zsh")
      ;; docker
