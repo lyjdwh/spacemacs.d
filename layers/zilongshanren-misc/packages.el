@@ -58,7 +58,18 @@
         zone
         leetcode
         youdao-dictionary
+        (posframe :location (recipe :fetcher github :repo "tumashu/posframe") )
         ))
+
+(defun zilongshanren-misc/init-posframe ()
+  (use-package posframe
+    :config
+    	(setq posframe-arghandler #'my-posframe-arghandler)
+        (defun my-posframe-arghandler (buffer-or-name arg-name value)
+          (let ((info '(:internal-border-width 2 :background-color "#5e5079" :foreground-color "#b2b2b2")))
+            (or (plist-get info arg-name) value)))
+        (setq hight nil)
+    ))
 
 (defun zilongshanren-misc/init-youdao-dictionary ()
   (use-package youdao-dictionary
