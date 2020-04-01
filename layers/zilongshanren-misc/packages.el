@@ -68,7 +68,7 @@
         (defun my-posframe-arghandler (buffer-or-name arg-name value)
           (let ((info '(:internal-border-width 2 :background-color "#5e5079" :foreground-color "#b2b2b2")))
             (or (plist-get info arg-name) value)))
-        (setq hight nil)
+        (setq posframe-mouse-banish nil)
     ))
 
 (defun zilongshanren-misc/init-youdao-dictionary ()
