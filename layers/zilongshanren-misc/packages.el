@@ -48,7 +48,7 @@
         ;; browse-at-remote
         chinese-conv
         ;; chinese-wbim
-        pyim
+        ;; pyim
         lispyville
         popup
         keyfreq
@@ -57,14 +57,21 @@
         speed-type
         zone
         leetcode
-        (insert-translated-name :location (recipe :fetcher github :repo "manateelazycat/insert-translated-name"))
+        youdao-dictionary
         ))
 
-(defun zilongshanren-misc/init-insert-translated-name ()
-  (use-package insert-translated-name
-    :commands (insert-translated-name-insert )
-    )
-  )
+(defun zilongshanren-misc/init-youdao-dictionary ()
+  (use-package youdao-dictionary
+    :defer
+    :config
+    (progn
+      ;; Enable Cache
+      (setq url-automatic-caching t
+            ;; Set file path for saving search history
+            youdao-dictionary-search-history-file
+            (concat spacemacs-cache-directory ".youdao")
+            ;; Enable Chinese word segmentation support
+            youdao-dictionary-use-chinese-word-segmentation t))))
 
 (defun zilongshanren-misc/init-leetcode ()
   (use-package leetcode

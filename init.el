@@ -119,8 +119,8 @@ This function should only modify configuration layer settings."
             c-c++-backend 'lsp-ccls
             c-c++-lsp-executable (file-truename "/usr/bin/ccls"))
      zilongshanren
-     (chinese :variables chinese-default-input-method 'pinyin
-              chinese-enable-youdao-dict t)
+     ;; (chinese :variables chinese-default-input-method 'pinyin
+     ;;          chinese-enable-youdao-dict t)
      fasd
      dash
      shell-scripts

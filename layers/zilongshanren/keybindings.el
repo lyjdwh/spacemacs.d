@@ -168,7 +168,8 @@
 (spacemacs/set-leader-keys "oll" 'zilongshanren/load-my-layout)
 (spacemacs/set-leader-keys "ols" 'zilongshanren/save-my-layout)
 (spacemacs/set-leader-keys "ob" 'popwin:display-last-buffer)
-(spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
+(spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point-tooltip)
+(spacemacs/set-leader-keys "oY" 'youdao-dictionary-search-from-input)
 (spacemacs/set-leader-keys "bM" 'spacemacs/switch-to-messages-buffer)
 (spacemacs/set-leader-keys "sS" 'spacemacs/swiper-region-or-symbol)
 
@@ -260,14 +261,14 @@
   "aLu" 'leetcode-submit
   )
 
-;; auto insert translated English
-(spacemacs/set-leader-keys "otE" 'insert-translated-name-insert)
-
 ;; proxy
 (spacemacs/set-leader-keys
   "otp" 'set-proxy
   "otP" 'unset-proxy
   )
+
+;; google
+(spacemacs/set-leader-keys "ag" 'engine/search-google)
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)

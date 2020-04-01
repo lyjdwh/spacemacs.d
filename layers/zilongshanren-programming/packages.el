@@ -204,8 +204,7 @@
           (lsp--flymake-setup))
          ((and (functionp 'lsp-ui-mode) (featurep 'flycheck))
           (require 'lsp-ui-flycheck)
-          (lsp-ui-flycheck-enable t)
-          (flycheck-mode -1)))
+          (lsp-flycheck-enable t)))
 
         (when (functionp 'company-lsp)
           (company-mode 1)
