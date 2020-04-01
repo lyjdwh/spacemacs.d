@@ -57,7 +57,14 @@
         speed-type
         zone
         leetcode
+        (insert-translated-name :location (recipe :fetcher github :repo "manateelazycat/insert-translated-name"))
         ))
+
+(defun zilongshanren-misc/init-insert-translated-name ()
+  (use-package insert-translated-name
+    :commands (insert-translated-name-insert )
+    )
+  )
 
 (defun zilongshanren-misc/init-leetcode ()
   (use-package leetcode

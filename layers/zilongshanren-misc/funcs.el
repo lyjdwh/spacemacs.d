@@ -679,19 +679,6 @@ Error out if this isn't a GitHub repo."
   (counsel-imenu)
   (evil-set-jump))
 
-;; (define-minor-mode
-;;   shadowsocks-proxy-mode
-;;   :global t
-;;   :init-value -1
-;;   :lighter "SS"
-;;   (if shadowsocks-proxy-mode
-;;       (setq url-gateway-method 'socks)
-;;     (setq url-gateway-method 'native)))
-
-;; (define-global-minor-mode
-;;   global-shadowsocks-proxy-mode
-;;   :group 'shadowsocks-proxy)
-
 ;; define function to shutdown emacs server instance
 (defun liuyan/server-shutdown ()
   "Save buffers, Quit, and Shutdown (kill) server"
@@ -725,3 +712,15 @@ Enter custom-name or RET to save image with timestamp"
     (shell-command-to-string
      (concat "import " sframe-full-path))
     (message "Screenshot saved as %s" sframe-full-path)))
+
+(defun set-proxy ()
+  (interactive)
+  (setq url-gateway-method 'socks)
+  (message "set proxy")
+  )
+
+(defun unset-proxy ()
+  (interactive)
+  (setq url-gateway-method 'native)
+  (message "unset proxy")
+  )
