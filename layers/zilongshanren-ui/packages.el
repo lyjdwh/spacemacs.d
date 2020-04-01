@@ -314,7 +314,7 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
     (setq whitespace-style '(face tabs trailing tab-mark ))
     ;; (setq whitespace-style '(face lines-tail))
     ;; show tab;  use untabify to convert tab to whitespace
-    (setq spacemacs-show-trailing-whitespace nil)
+    (setq spacemacs-show-trailing-whitespace t)
 
     (setq-default tab-width 4)
     ;; set-buffer-file-coding-system -> utf8 to convert dos to utf8

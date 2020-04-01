@@ -51,7 +51,18 @@
         highlight-indent-guides
         (color-rg :location local)
         hl-todo
+        counsel-dash
         ))
+
+(defun zilongshanren-programming/post-init-counsel-dash ()
+  (progn
+    (add-hook 'sh-mode-hook (lambda () (setq-local counsel-dash-docsets '("Bash"))))
+    (add-hook 'LaTeX-mode-hook (lambda () (setq-local counsel-dash-docsets '("LaTeX"))))
+    (add-hook 'emacs-lisp-mode-hook (lambda () (setq-local counsel-dash-docsets '("Emacs Lisp"))))
+    (add-hook 'c++-mode-hook (lambda () (setq-local counsel-dash-docsets '("C++"))))
+    (add-hook 'python-mode-hook (lambda () (setq-local counsel-dash-docsets '("Python 3" "PyTorch" "NumPy" "Matplotlib" "Pandas" "torchvision" "torchtext"))))
+    (setq counsel-dash-enable-debugging nil)
+    ))
 
 (defun zilongshanren-programming/post-init-hl-todo ()
   ;; Highlight TODO and similar keywords in comments and strings
@@ -110,12 +121,12 @@
 (defun zilongshanren-programming/post-init-lsp-python-ms ()
   (progn
     ;; for executable of language server, if it's not symlinked on your PATH
-    (setq lsp-python-ms-executable
-        (string-trim (shell-command-to-string
-         "fd -a ^Microsoft.Python.LanguageServer$ $HOME/.vscode/extensions | tail -1")))
-    ;; for dev build of language server
-    (setq lsp-python-ms-dir
-        (file-name-directory lsp-python-ms-executable))
+    ;; (setq lsp-python-ms-executable
+    ;;     (string-trim (shell-command-to-string
+    ;;      "fd -a ^Microsoft.Python.LanguageServer$ $HOME/.vscode/extensions | tail -1")))
+    ;; ;; for dev build of language server
+    ;; (setq lsp-python-ms-dir
+    ;;     (file-name-directory lsp-python-ms-executable))
     (setq lsp-python-ms-python-executable-cmd "/home/liuyan/.conda/envs/torch/bin/python")
     ))
 
@@ -162,17 +173,23 @@
 
 (defun zilongshanren-programming/post-init-lsp-mode ()
   (progn
-
-    (setq lsp-ui-doc-enable nil)
-    (setq read-process-output-max (* 1024 1024)) ;; 1mb
     (setq lsp-file-watch-threshold 2000)
+    (setq read-process-output-max (* 1024 1024)) ;; 1mb
+    (setq lsp-ui-doc-enable nil)
+    (setq lsp-ui-peek-enable nil)
+    (setq lsp-ui-imenu-enable nil)
+    (setq lsp-ui-sideline-show-code-actions nil)
+    (setq lsp-ui-sideline-show-hover t)
     (setq lsp-enable-folding nil)
     ;;handle yasnippet by myself
     (setq lsp-enable-snippet nil)
     ;; use ffip instead
     (setq lsp-enable-links nil)
     ;; auto restart lsp
-     (setq lsp-restart 'auto-restart)
+    (setq lsp-restart 'auto-restart)
+    (setq lsp-log-io nil)
+    (setq lsp-enable-semantic-highlighting 1)
+    (lsp-treemacs-sync-mode 1)
 
     (defun lsp--auto-configure ()
       "Autoconfigure `lsp-ui', `company-lsp' if they are installed."
@@ -201,26 +218,26 @@
           (when (functionp 'yas-minor-mode)
             (yas-minor-mode t)))))
 
-    (add-hook 'lsp-after-open-hook 'zilongshanren-refresh-imenu-index)
+    ;; (add-hook 'lsp-after-open-hook 'zilongshanren-refresh-imenu-index)
 
-    (defun hidden-lsp-ui-sideline ()
-      (interactive)
-      (if (< (window-width) 180)
-          (progn
+    ;; (defun hidden-lsp-ui-sideline ()
+    ;;   (interactive)
+    ;;   (if (< (window-width) 180)
+    ;;       (progn
 
-            (setq lsp-ui-sideline-show-code-actions nil)
-            (setq lsp-ui-sideline-show-diagnostics nil)
-            (setq lsp-ui-sideline-show-hover nil)
-            (setq lsp-ui-sideline-show-symbol nil))
-        (progn
+    ;;         (setq lsp-ui-sideline-show-code-actions nil)
+    ;;         (setq lsp-ui-sideline-show-diagnostics nil)
+    ;;         (setq lsp-ui-sideline-show-hover nil)
+    ;;         (setq lsp-ui-sideline-show-symbol nil))
+    ;;     (progn
 
-          (setq lsp-ui-sideline-show-code-actions nil)
-          ;; (setq lsp-ui-sideline-show-diagnostics t)
-          (setq lsp-ui-sideline-show-hover t)
-          ;; (setq lsp-ui-sideline-show-symbol t)
-          )))
+    ;;       (setq lsp-ui-sideline-show-code-actions nil)
+    ;;       ;; (setq lsp-ui-sideline-show-diagnostics t)
+    ;;       (setq lsp-ui-sideline-show-hover t)
+    ;;       ;; (setq lsp-ui-sideline-show-symbol t)
+    ;;       )))
 
-    (advice-add 'lsp-ui-sideline--run :after 'hidden-lsp-ui-sideline)
+    ;; (advice-add 'lsp-ui-sideline--run :after 'hidden-lsp-ui-sideline)
 
     (setq lsp-auto-configure t)
     (setq lsp-prefer-flymake nil)))

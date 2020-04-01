@@ -123,7 +123,7 @@
 
 
 (global-set-key (kbd "<f1>") 'zilongshanren/helm-hotspots)
-(spacemacs/set-leader-keys "ou" 'zilongshanren/helm-hotspots)
+(spacemacs/set-leader-keys "oS" 'zilongshanren/helm-hotspots)
 
 (spacemacs/set-leader-keys "oc" 'my-auto-update-tags-when-save)
 ;; (spacemacs/set-leader-keys "op" 'zilongshanren/org-save-and-export)
@@ -258,13 +258,13 @@
 (spacemacs/set-leader-keys "ohi" 'hl-todo-insert)
 
 ;; leetcode
-(spacemacs/declare-prefix "a L" "Leetcode")
+(spacemacs/declare-prefix "aL" "Leetcode")
 (spacemacs/set-leader-keys
-  "a L l" 'leetcode
-  "a L d" 'leetcode-show-current-problem
-  "a L r" 'leetcode-refresh
-  "a L t" 'leetcode-try
-  "a L u" 'leetcode-submit
+  "aLl" 'leetcode
+  "aLd" 'leetcode-show-current-problem
+  "aLr" 'leetcode-refresh
+  "aLt" 'leetcode-try
+  "aLu" 'leetcode-submit
   )
 
 (when (spacemacs/system-is-mswindows)
