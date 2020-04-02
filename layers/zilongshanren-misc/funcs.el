@@ -683,13 +683,13 @@ Error out if this isn't a GitHub repo."
   (unless (display-graphic-p (selected-frame))
     (set-face-background 'default "unspecified-bg" (selected-frame))))
 
-(defun screenshot-frame ()
+(defun screenshot-frame (is-clip)
   "Take screenshot.
 Default image ~/Pictures/TIMESTAMP.png
 Usage:
 M-x screenshot-frame
 Enter custom-name or RET to save image with timestamp"
-  (interactive)
+  ;; (interactive)
   (let* ((insert-default-directory t)
          (screenshots-dir "~/Pictures/")
          (sframe-name (concat (format-time-string "%d-%b-%Y-%T") ".png"))
@@ -702,7 +702,19 @@ Enter custom-name or RET to save image with timestamp"
 
     (shell-command-to-string
      (concat "import " sframe-full-path))
+    (if is-clip
+        (call-process-shell-command (concat "xclip -sel clip -t image/png " sframe-full-path)))
     (message "Screenshot saved as %s" sframe-full-path)))
+
+(defun screenshot ()
+  (interactive)
+  (screenshot-frame nil)
+  )
+
+(defun screenshot-clip ()
+  (interactive)
+  (screenshot-frame t)
+  )
 
 (defun set-proxy ()
   (interactive)

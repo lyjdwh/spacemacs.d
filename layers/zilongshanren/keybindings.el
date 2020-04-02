@@ -239,7 +239,8 @@
 (spacemacs/set-leader-keys "slT" 'color-rg-search-project-with-type)
 
 ;; take screenshot
-(spacemacs/set-leader-keys "oF" 'screenshot-frame)
+(spacemacs/set-leader-keys "af" 'screenshot)
+(spacemacs/set-leader-keys "aF" 'screenshot-clip)
 
 ;; fzf
 (spacemacs/set-leader-keys "of" 'counsel-fzf)

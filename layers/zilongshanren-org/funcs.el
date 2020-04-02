@@ -31,7 +31,9 @@
       (setq basename (format-time-string "%Y%m%d_%H%M%S")))
   (progn
     (setq final-image-full-path (concat basename ".png"))
-    (call-process "screencapture" nil nil nil "-s" final-image-full-path)
+    ;; (call-process "screencapture" nil nil nil "-s" final-image-full-path)
+    (shell-command-to-string
+     (concat "import " final-image-full-path))
     (if (executable-find "convert")
         (progn
           (setq resize-command-str (format "convert %s -resize 800x600 %s" final-image-full-path final-image-full-path))
