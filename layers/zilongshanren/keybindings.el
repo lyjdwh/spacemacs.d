@@ -274,6 +274,9 @@
 ;; rime，default: ctrl + \
 (spacemacs/set-leader-keys "otr" 'toggle-input-method)
 
+;; lsp
+(define-key spacemacs-lsp-mode-map (kbd "hg") 'lsp-ui-doc-glance)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)

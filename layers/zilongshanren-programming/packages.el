@@ -166,7 +166,7 @@
           (setq candidates-lsp (nreverse candidates-lsp))
           (setq candidates-tabnine (nreverse candidates-tabnine))
           (nconc (seq-take candidates-tabnine 4)
-                 (seq-take candidates-lsp 16)))))))
+                 (seq-take candidates-lsp 20)))))))
 
 (defun zilongshanren-programming/post-init-typescript-mode ()
   (add-hook 'typescript-mode-hook 'my-ts-mode-hook))
@@ -174,12 +174,16 @@
 (defun zilongshanren-programming/post-init-lsp-mode ()
   (progn
     (setq lsp-file-watch-threshold 2000)
-    (setq read-process-output-max (* 1024 1024)) ;; 1mb
+    (setq read-process-output-max (* 1024 1024 8)) ;; 8mb
+
     (setq lsp-ui-doc-enable nil)
-    (setq lsp-ui-peek-enable nil)
+    (setq lsp-ui-doc-use-webkit t)
+
     (setq lsp-ui-imenu-enable nil)
+
     (setq lsp-ui-sideline-show-code-actions nil)
     (setq lsp-ui-sideline-show-hover t)
+
     (setq lsp-enable-folding nil)
     ;;handle yasnippet by myself
     (setq lsp-enable-snippet nil)
@@ -190,6 +194,9 @@
     (setq lsp-log-io nil)
     (setq lsp-enable-semantic-highlighting 1)
     (lsp-treemacs-sync-mode 1)
+
+    (require 'dap-python)
+    (setq dap-auto-show-output nil)
 
     (defun lsp--auto-configure ()
       "Autoconfigure `lsp-ui', `company-lsp' if they are installed."
