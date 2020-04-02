@@ -48,7 +48,6 @@
         ;; browse-at-remote
         chinese-conv
         ;; chinese-wbim
-        ;; pyim
         lispyville
         popup
         keyfreq
@@ -59,16 +58,32 @@
         leetcode
         youdao-dictionary
         (posframe :location (recipe :fetcher github :repo "tumashu/posframe") )
+        rime
         ))
+
+(defun zilongshanren-misc/init-rime ()
+  (use-package rime
+    :config
+    (setq rime-user-data-dir "~/.config/fcitx/rime")
+
+    (setq rime-posframe-properties
+      (list :background-color "#333333"
+            :foreground-color "#dcdccc"
+            :font "WenQuanYi Micro Hei Mono-14"
+            :internal-border-width 10))
+
+    (setq default-input-method "rime"
+      rime-show-candidate 'posframe)
+    ))
 
 (defun zilongshanren-misc/init-posframe ()
   (use-package posframe
     :config
-    	(setq posframe-arghandler #'my-posframe-arghandler)
-        (defun my-posframe-arghandler (buffer-or-name arg-name value)
-          (let ((info '(:internal-border-width 2 :background-color "#5e5079" :foreground-color "#b2b2b2")))
-            (or (plist-get info arg-name) value)))
-        (setq posframe-mouse-banish nil)
+    (setq posframe-arghandler #'my-posframe-arghandler)
+    (defun my-posframe-arghandler (buffer-or-name arg-name value)
+      (let ((info '(:internal-border-width 2 :background-color "#5e5079" :foreground-color "#b2b2b2")))
+        (or (plist-get info arg-name) value)))
+    (setq posframe-mouse-banish nil)
     ))
 
 (defun zilongshanren-misc/init-youdao-dictionary ()
@@ -1043,67 +1058,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       :body
       (find-file "~/zilongshanren.com/config.toml")))
   )
-(defun zilongshanren-misc/post-init-pyim ()
-  (progn
-    ;; use librime as wubi input
-    ;; 参考这个设置 pyim 使用 liberime 库 https://emacs-china.org/t/mac-emacs-rime/ 需要emacs 26的dynamic module功能
-    ;; 设置极点五笔可以参考https://github.com/zilongshanren/rime-wubi86-jidian
-    (eval-and-compile
-      (if (fboundp 'window-inside-edges)
-          ;; Emacs devel.
-          (defalias 'th-window-edges
-            'window-inside-edges)
-        ;; Emacs 21
-        (defalias 'th-window-edges
-          'window-edges)
-        ))
-
-    (defun th-point-position ()
-      "Return the location of POINT as positioned on the selected frame.
-  Return a cons cell (X . Y)"
-      (let* ((w (selected-window))
-             (f (selected-frame))
-             (edges (th-window-edges w))
-             (col (current-column))
-             (row (count-lines (window-start w) (point)))
-             (x (+ (car edges) col))
-             (y (+ (car (cdr edges)) row)))
-        (cons x y)))
-
-
-    (defun display-current-input-method-title (arg1 &optional arg2 arg3)
-      "display current input method name"
-      (when current-input-method-title
-        (set-mouse-position (selected-frame) (car (th-point-position)) (cdr (th-point-position)))
-        (x-show-tip current-input-method-title (selected-frame) nil 1  20 -30)))
-
-    (advice-add 'evil-insert :after 'display-current-input-method-title)
-
-    (when (functionp 'module-load)
-      (progn
-        (setq load-path (cons (file-truename "~/.spacemacs.d/") load-path))
-        (require 'liberime)
-        (require 'posframe)
-
-        (setq default-input-method "pyim")
-        (setq pyim-page-tooltip 'posframe)
-        (setq pyim-page-length 9)
-
-        (setq-default pyim-english-input-switch-functions
-                      '(pyim-probe-program-mode
-                        ;; pyim-probe-auto-english
-                        pyim-probe-org-structure-template))
-
-
-        ;; 不用频率切换输入法了。这个东西太好使了
-        (bind-key* "s-j" 'pyim-convert-code-at-point)
-
-        (liberime-start "/usr/share/rime-data/" (file-truename "~/.emacs.d/pyim/rime/"))
-        ;; 使用这个来查看当前输入法有哪些，不错
-        ;; (liberime-get-schema-list)
-
-        (liberime-select-schema "luna_pinyin_simp")
-        (setq pyim-default-scheme 'rime-quanpin)))))
 
 ;; deprecated
 (defun zilongshanren-misc/post-init-chinese-wbim ()
