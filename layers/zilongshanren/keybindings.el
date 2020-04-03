@@ -214,7 +214,7 @@
 (spacemacs/set-leader-keys "aes" 'eaf-search-it)
 
 ;; snails
-(spacemacs/set-leader-keys "aS" 'snails)
+(spacemacs/set-leader-keys "aa" 'snails)
 
 ;; company-english-helper
 (spacemacs/set-leader-keys "ote" 'toggle-company-english-helper)

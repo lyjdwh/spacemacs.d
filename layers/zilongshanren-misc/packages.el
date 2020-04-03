@@ -59,7 +59,14 @@
         youdao-dictionary
         (posframe :location (recipe :fetcher github :repo "tumashu/posframe") )
         rime
+        try
         ))
+
+(defun zilongshanren-misc/init-try ()
+  (use-package try
+    :ensure t
+    :defer t
+    ))
 
 (defun zilongshanren-misc/init-rime ()
   (use-package rime
@@ -895,7 +902,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key evil-emacs-state-map (kbd "s-b") 'backward-word)
     (define-key evil-insert-state-map (kbd "s-b") 'backward-word)
 
-    (spacemacs/set-leader-keys "bi" 'ibuffer)
+    (spacemacs/set-leader-keys "bi" 'ibuffer-other-window)
     (define-key evil-ex-completion-map "\C-a" 'move-beginning-of-line)
     (define-key evil-ex-completion-map "\C-b" 'backward-char)
     (define-key evil-ex-completion-map "\C-k" 'kill-line)
