@@ -20,21 +20,53 @@
     sound-wav
     ob-typescript
     evil-org
+    (org-roam :location local)
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
     ;; org-download
     ;; plain-org-wiki
     ;; org-preview-html
-    )
-  )
-
+    ))
 ;; (defun zilongshanren-org/init-org-preview-html ()
 ;;   (use-package org-preview-html
 ;;     :defer t
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+
+(defun zilongshanren-org/init-org-roam ()
+  (use-package org-roam
+    :load-path "/home/liuyan/bin/org-roam"
+    :hook
+    (after-init . org-roam-mode)
+    :custom
+    (org-roam-directory deft-dir)
+    (org-roam-buffer-position 'left)
+    (org-roam-link-title-format "R:%s")
+    (org-roam-completion-system 'ivy)
+    (org-roam-buffer-width 0.2)
+    :init
+    (progn
+      (spacemacs/declare-prefix "am" "org-roam")
+      (spacemacs/set-leader-keys
+        "aml" 'org-roam
+        "amt" 'org-roam-today
+        "amf" 'org-roam-find-file
+        "amg" 'org-roam-graph-show
+        "amc" 'org-roam-capture)
+
+      (spacemacs/declare-prefix-for-mode 'org-mode "mm" "org-roam")
+      (spacemacs/set-leader-keys-for-major-mode 'org-mode
+        "ml" 'org-roam
+        "mt" 'org-roam-today
+        "mb" 'org-roam-switch-to-buffer
+        "mf" 'org-roam-find-file
+        "mi" 'org-roam-insert
+        "mc" 'org-roam-capture))
+    :config
+    (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)
+    ))
 
 (defun zilongshanren-org/post-init-evil-org ()
   (defun evil-org--populate-navigation-bindings ()

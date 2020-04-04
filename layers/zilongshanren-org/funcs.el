@@ -170,3 +170,19 @@
     (unless noinsert
       (insert output-string))
     output-string))
+
+(defun my/org-roam--backlinks-list (file)
+  (if (org-roam--org-roam-file-p file)
+      (--reduce-from
+       (concat acc (format "- [[file:%s][%s]]\n"
+                           (file-relative-name (car it) org-roam-directory)
+                                 (org-roam--get-title-or-slug (car it))))
+       "" (org-roam-sql [:select [file-from] :from file-links :where (= file-to $s1)] file))
+    ""))
+
+(defun my/org-export-preprocessor (backend)
+  (let ((links (my/org-roam--backlinks-list (buffer-file-name))))
+    (unless (string= links "")
+      (save-excursion
+        (goto-char (point-max))
+        (insert (concat "\n* Backlinks\n") links)))))
