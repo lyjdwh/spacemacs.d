@@ -52,7 +52,14 @@
         (color-rg :location local)
         hl-todo
         counsel-dash
+        (webkit-katex-render :location local)
         ))
+
+(defun zilongshanren-programming/init-webkit-katex-render ()
+  (use-package webkit-katex-render
+    :load-path "/home/liuyan/bin/emacs-webkit-katex-render"
+    :commands webkit-katex-render-mode
+    ))
 
 (defun zilongshanren-programming/post-init-counsel-dash ()
   (progn
@@ -146,7 +153,7 @@
     (kill-emacs . company-tabnine-kill-process)
     :config
     ;; Enable TabNine on default
-    (add-to-list 'company-backends #'company-tabnine)
+    ;; (add-to-list 'company-backends #'company-tabnine)
 
     ;; Integrate company-tabnine with lsp-mode
     (defun company//sort-by-tabnine (candidates)
