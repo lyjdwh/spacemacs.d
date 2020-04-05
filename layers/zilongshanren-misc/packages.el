@@ -258,7 +258,10 @@
 
   (with-eval-after-load 'ranger
     (progn
-      (define-key ranger-normal-mode-map (kbd "q") 'my-quit-ranger)))
+      (setq golden-ratio-previous-enable nil)
+      (define-key ranger-normal-mode-map (kbd "q") 'my-quit-ranger)
+      (setq ranger-show-literal nil)
+      ))
 
   (spacemacs/set-leader-keys "ar" 'my-ranger))
 
