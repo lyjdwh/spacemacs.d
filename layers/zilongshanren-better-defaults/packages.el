@@ -59,6 +59,8 @@
             ("@" '(snails-backend-imenu))
             ("#" '(snails-backend-current-buffer))
             ("!" '(snails-backend-rg))
+            (":" '(snails-backend-fasd))
+            ("'" '(snails-backend-searchablepdf))
             ("?" '(snails-backend-eaf-browser-search snails-backend-eaf-github-search snails-backend-google-suggestion snails-backend-eaf-browser-history))))
     (define-key snails-mode-map (kbd "C-j") 'snails-select-next-item)
     (define-key snails-mode-map (kbd "C-k") 'snails-select-prev-item)
@@ -69,6 +71,7 @@
 (defun zilongshanren-better-defaults/init-eaf ()
   (use-package eaf
     :load-path "/home/liuyan/bin/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
+    :diminish eaf-mode
     :custom
     (eaf-find-alternate-file-in-dired t)
     (eaf-python-command "/usr/bin/python3")
@@ -90,6 +93,32 @@
     (eaf-setq eaf-browser-default-zoom "1.25")
     ;; camera
     (eaf-setq eaf-camera-save-path "~/Pictures")
+    ;; interleave
+    (setq eaf-interleave-org-notes-dir-list '("~/org-notes/interleave/"))
+    (setq eaf-interleave-split-direction 'vertical)
+    (setq eaf-interleave-disable-narrowing t)
+    (setq eaf-interleave-split-lines 20)
+    (add-hook 'eaf-pdf-viewer-hook 'eaf-interleave-app-mode)
+    (add-hook 'eaf-browser-hook 'eaf-interleave-app-mode)
+    (add-hook 'org-mode-hook 'eaf-interleave-mode)
+
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      "m." 'eaf-interleave-sync-current-note
+      "mj" 'eaf-interleave-sync-next-note
+      "mk" 'eaf-interleave-sync-previous-note)
+
+    (spacemacs/set-leader-keys
+      "ami" 'eaf-interleave-add-note
+      "amo" 'eaf-interleave-open-notes-file
+      "amq" 'eaf-interleave-quit)
+    ;; :bind (:map eaf-interleave-mode-map
+    ;;             ("C-." . 'eaf-interleave-sync-current-note)
+    ;;             ("C-k" . 'eaf-interleave-sync-previous-note)
+    ;;             ("C-j" . 'eaf-interleave-sync-next-note)
+    ;;             :map eaf-interleave-app-mode-map
+    ;;             ("C-c M-i" . 'eaf-interleave-add-note)
+    ;;             ("C-c M-o" . 'eaf-interleave-open-notes-file)
+    ;;             ("C-c M-q" . 'eaf-interleave-quit))
     ))
 
 (defun zilongshanren-better-defaults/post-init-recentf ()
