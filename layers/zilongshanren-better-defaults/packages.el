@@ -76,6 +76,7 @@
     (eaf-find-alternate-file-in-dired t)
     (eaf-python-command "/usr/bin/python3")
     :config
+    (setq eaf-buffer-title-format "EAF/%s")
     (setq eaf-grip-token "d95425cda9aa8c58779a312be6fe4662b965a441")
     ;; set proxy
     (setq eaf-proxy-type "socks5")

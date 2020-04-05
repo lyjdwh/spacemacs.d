@@ -15,6 +15,7 @@
     diminish
     popwin
     (whitespace :location built-in)
+    ivy-posframe
     ;; hl-anything performance is very slow...
     ;; hl-anything
     ;; if you wnat to use spaceline, please comment out zilong-mode-line
@@ -25,7 +26,12 @@
     )
   )
 
-
+(defun zilongshanren-ui/init-ivy-posframe ()
+  (use-package ivy-posframe
+    :config
+    (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+    (ivy-posframe-mode 1)
+    ))
 
 (defun zilongshanren-ui/init-zilong-mode-line ()
   (defun zilongshanren/display-mode-indent-width ()
