@@ -229,18 +229,20 @@
 (spacemacs/set-leader-keys "at" 'speed-type-text)
 
 ;; color rg
-(spacemacs/set-leader-keys "sld" 'color-rg-search-input)
-(spacemacs/set-leader-keys "slD" 'color-rg-search-symbol)
-(spacemacs/set-leader-keys "slp" 'color-rg-search-input-in-project)
-(spacemacs/set-leader-keys "slP" 'color-rg-search-symbol-in-project)
-(spacemacs/set-leader-keys "slf" 'color-rg-search-input-in-current-file)
-(spacemacs/set-leader-keys "slF" 'color-rg-search-symbol-in-current-file)
-(spacemacs/set-leader-keys "slt" 'color-rg-search-symbol-with-type)
-(spacemacs/set-leader-keys "slT" 'color-rg-search-project-with-type)
+(spacemacs/declare-prefix "sr" "color-rg")
+(spacemacs/set-leader-keys "srd" 'color-rg-search-input)
+(spacemacs/set-leader-keys "srD" 'color-rg-search-symbol)
+(spacemacs/set-leader-keys "srp" 'color-rg-search-input-in-project)
+(spacemacs/set-leader-keys "srP" 'color-rg-search-symbol-in-project)
+(spacemacs/set-leader-keys "srf" 'color-rg-search-input-in-current-file)
+(spacemacs/set-leader-keys "srF" 'color-rg-search-symbol-in-current-file)
+(spacemacs/set-leader-keys "srt" 'color-rg-search-symbol-with-type)
+(spacemacs/set-leader-keys "srT" 'color-rg-search-project-with-type)
 
 ;; take screenshot
-(spacemacs/set-leader-keys "af" 'screenshot)
-(spacemacs/set-leader-keys "aF" 'screenshot-clip)
+(spacemacs/declare-prefix "as" "shot")
+(spacemacs/set-leader-keys "asf" 'screenshot)
+(spacemacs/set-leader-keys "asF" 'screenshot-clip)
 
 ;; fzf
 (spacemacs/set-leader-keys "of" 'counsel-fzf)
@@ -276,6 +278,10 @@
 
 ;; lsp
 (define-key spacemacs-lsp-mode-map (kbd "hg") 'lsp-ui-doc-glance)
+
+;; helm ag to overhide ivy ag
+(spacemacs/set-leader-keys "sad" 'spacemacs/helm-dir-do-ag)
+(spacemacs/set-leader-keys "saD" 'spacemacs/helm-dir-do-ag-region-or-symbol)
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)

@@ -60,12 +60,12 @@
             ("#" '(snails-backend-current-buffer))
             ("!" '(snails-backend-rg))
             (":" '(snails-backend-fasd))
-            ("'" '(snails-backend-searchablepdf))
             ("?" '(snails-backend-eaf-browser-search snails-backend-eaf-github-search snails-backend-google-suggestion snails-backend-eaf-browser-history))))
     (define-key snails-mode-map (kbd "C-j") 'snails-select-next-item)
     (define-key snails-mode-map (kbd "C-k") 'snails-select-prev-item)
     (define-key snails-mode-map (kbd "C-h") 'snails-select-prev-backend)
     (define-key snails-mode-map (kbd "C-l") 'snails-select-next-backend)
+    (define-key snails-mode-map (kbd "C-o") 'snails-candiate-alternate-do)
     ))
 
 (defun zilongshanren-better-defaults/init-eaf ()
