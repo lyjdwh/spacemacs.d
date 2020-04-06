@@ -82,6 +82,7 @@ This function should only modify configuration layer settings."
      (latex :variables latex-build-command "LaTeX"
             latex-enable-auto-fill t
             latex-enable-folding t)
+     ;; bibex
      pdf
      (deft :variables deft-zetteldeft t)
      (markdown :variables markdown-live-preview-engine 'vmd)

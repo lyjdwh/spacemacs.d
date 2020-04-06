@@ -123,13 +123,15 @@
 (spacemacs/set-leader-keys "fR" 'zilongshanren/rename-file-and-buffer)
 
 ;;Must set key to nil to prevent error: Key sequence b m s starts with non-prefix key b m
-(spacemacs/set-leader-keys "bm" nil)
 (spacemacs/set-leader-keys "bD" 'spacemacs/kill-other-buffers)
-(spacemacs/declare-prefix "bm" "Bookmark")
-(spacemacs/set-leader-keys "bms" 'bookmark-set)
-(spacemacs/set-leader-keys "bmr" 'bookmark-rename)
-(spacemacs/set-leader-keys "bmd" 'bookmark-delete)
-(spacemacs/set-leader-keys "bmj" 'counsel-bookmark)
+(spacemacs/declare-prefix "ob" "Bookmark")
+(spacemacs/set-leader-keys "obs" 'bookmark-set)
+(spacemacs/set-leader-keys "obr" 'bookmark-rename)
+(spacemacs/set-leader-keys "obd" 'bookmark-delete)
+(spacemacs/set-leader-keys "obj" 'counsel-bookmark)
+(spacemacs/set-leader-keys "obJ" 'bookmark-jump-other-window)
+(spacemacs/set-leader-keys "obe" 'edit-bookmarks)
+(spacemacs/set-leader-keys "obi" 'bookmark-insert)
 
 (spacemacs/set-leader-keys "od" 'occur-dwim)
 (spacemacs/set-leader-keys "ok" 'zilongshanren-kill-other-persp-buffers)
@@ -167,7 +169,7 @@
 (spacemacs/set-leader-keys "nl" 'spacemacs/evil-search-clear-highlight)
 (spacemacs/set-leader-keys "oll" 'zilongshanren/load-my-layout)
 (spacemacs/set-leader-keys "ols" 'zilongshanren/save-my-layout)
-(spacemacs/set-leader-keys "ob" 'popwin:display-last-buffer)
+;; (spacemacs/set-leader-keys "ob" 'popwin:display-last-buffer)
 (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point-posframe)
 (spacemacs/set-leader-keys "oY" 'youdao-dictionary-search-from-input)
 (spacemacs/set-leader-keys "bM" 'spacemacs/switch-to-messages-buffer)
@@ -296,6 +298,23 @@
 
 ;; org
 (spacemacs/set-leader-keys "ao." 'spacemacs/org-agenda-transient-state/org-agenda-set-tags)
+
+;; ivy-bibex
+;; (global-set-key (kbd "C-x p") 'ivy-bibtex-my-publications)
+;; press M-o list actions in ivy-bibex
+(spacemacs/set-leader-keys "ab" 'ivy-bibtex)
+
+;; org noter
+(spacemacs/set-leader-keys-for-major-mode 'pdf-view-mode
+  "i" 'org-noter-insert-precise-note
+  "c" 'org-noter-create-skeleton
+  )
+(spacemacs/declare-prefix-for-mode 'org-mode  "mn" "org-noter")
+(spacemacs/set-leader-keys-for-major-mode 'org-mode
+  "nc" 'org-noter-sync-current-note
+  "nj" 'org-noter-sync-next-note
+  "nk" 'org-noter-sync-prev-note)
+(spacemacs/set-leader-keys "aon" 'org-noter)
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)

@@ -21,6 +21,8 @@
     ob-typescript
     evil-org
     (org-roam :location local)
+    ivy-bibtex
+    org-noter
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -34,6 +36,55 @@
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+
+(defun zilongshanren-org/init-org-noter ()
+  (use-package org-noter
+    :commands org-noter
+    :config
+    (setq org-noter-default-notes-file-names '("notes.org")
+          org-noter-notes-search-path '("~/org-notes/notes"))
+    (setq org-noter-separate-notes-from-heading t)
+    (setq org-noter-property-doc-file "INTERLEAVE_PDF"
+          org-noter-property-note-location "INTERLEAVE_PAGE_NOTE")
+    (setq org-noter-always-create-frame nil)
+    (setq org-noter-default-heading-title "Org noters")
+    ))
+
+(defun zilongshanren-org/init-ivy-bibtex ()
+  (use-package ivy-bibtex
+    :commands ivy-bibtex
+    :config
+    (setq bibtex-completion-bibliography '("~/Documents/papers/bib/protein_design.bib"))
+    (setq bibtex-completion-library-path '("~/Documents/papers"))
+    (setq bibtex-completion-pdf-field "File")
+    (setq bibtex-completion-notes-path "~/org-notes/notes")
+	(setq bibtex-completion-display-formats
+          '((article       . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${tags:6} ${year:4} ${author:36} ${title:*}")
+            (inbook        . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${tags:6} ${year:4} ${author:36} ${title:*}")
+            (incollection  . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${tags:6} ${year:4} ${author:36} ${title:*}")
+            (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${tags:6} ${year:4} ${author:36} ${title:*}")
+            (t             . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${tags:6} ${year:4} ${author:36} ${title:*}")))
+    (setq bibtex-completion-additional-search-fields '(tags))
+    (setq bibtex-completion-pdf-symbol "⌘")
+    (setq bibtex-completion-notes-symbol "✎")
+    (setq bibtex-completion-find-additional-pdfs t)
+
+    (ivy-bibtex-ivify-action bibtex-completion-open-pdf-external ivy-bibtex-open-pdf-external)
+
+    (ivy-add-actions
+     'ivy-bibtex
+     '(("P" ivy-bibtex-open-pdf-external "Open PDF file in external viewer (if present)")
+       ("n" ivy-bibtex-open-annotated-pdf "Open annotated PDF (if present)")
+       ))
+    (setq bibtex-completion-format-citation-functions
+          '((org-mode      . bibtex-completion-format-citation-org-link-to-PDF)
+            (latex-mode    . bibtex-completion-format-citation-cite)
+            (markdown-mode . bibtex-completion-format-citation-pandoc-citeproc)
+            (default       . bibtex-completion-format-citation-default)))
+
+    (advice-add 'bibtex-completion-candidates
+                :filter-return 'reverse)
+    ))
 
 (defun zilongshanren-org/init-org-roam ()
   (use-package org-roam

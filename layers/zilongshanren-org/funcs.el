@@ -186,3 +186,31 @@
       (save-excursion
         (goto-char (point-max))
         (insert (concat "\n* Backlinks\n") links)))))
+
+(defun ivy-bibtex-my-publications (&optional arg)
+  "Search BibTeX entries authored by “Jane Doe”.
+
+With a prefix ARG, the cache is invalidated and the bibliography reread."
+  (interactive "P")
+  (when arg
+    (bibtex-completion-clear-cache))
+  (bibtex-completion-init)
+  (ivy-read "BibTeX Items: "
+            (bibtex-completion-candidates)
+            :initial-input "protein design"
+            :caller 'ivy-bibtex
+            :action ivy-bibtex-default-action))
+
+(defun bibtex-completion-open-pdf-external (keys &optional fallback-action)
+  (let ((bibtex-completion-pdf-open-function
+         (lambda (fpath) (start-process "okular" "*ivy-bibtex-okular*" "/usr/bin/okular" fpath))))
+    (bibtex-completion-open-pdf keys fallback-action)))
+
+(defun bibtex-completion-open-annotated-pdf (keys)
+  (--if-let
+	  (-flatten
+	   (-map (lambda (key)
+		       (bibtex-completion-find-pdf (s-concat key "-annotated")))
+	         keys))
+	  (-each it bibtex-completion-pdf-open-function)
+    (message "No PDF(s) found.")))

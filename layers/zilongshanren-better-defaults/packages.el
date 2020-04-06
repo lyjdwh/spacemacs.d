@@ -95,7 +95,7 @@
     ;; camera
     (eaf-setq eaf-camera-save-path "~/Pictures")
     ;; interleave
-    (setq eaf-interleave-org-notes-dir-list '("~/org-notes/interleave/"))
+    (setq eaf-interleave-org-notes-dir-list '("~/org-notes/notes/"))
     (setq eaf-interleave-split-direction 'vertical)
     (setq eaf-interleave-disable-narrowing t)
     (setq eaf-interleave-split-lines 20)
