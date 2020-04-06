@@ -102,24 +102,9 @@
     (add-hook 'eaf-pdf-viewer-hook 'eaf-interleave-app-mode)
     (add-hook 'eaf-browser-hook 'eaf-interleave-app-mode)
     (add-hook 'org-mode-hook 'eaf-interleave-mode)
-
-    (spacemacs/set-leader-keys-for-major-mode 'org-mode
-      "m." 'eaf-interleave-sync-current-note
-      "mj" 'eaf-interleave-sync-next-note
-      "mk" 'eaf-interleave-sync-previous-note)
-
-    (spacemacs/set-leader-keys
-      "ami" 'eaf-interleave-add-note
-      "amo" 'eaf-interleave-open-notes-file
-      "amq" 'eaf-interleave-quit)
-    ;; :bind (:map eaf-interleave-mode-map
-    ;;             ("C-." . 'eaf-interleave-sync-current-note)
-    ;;             ("C-k" . 'eaf-interleave-sync-previous-note)
-    ;;             ("C-j" . 'eaf-interleave-sync-next-note)
-    ;;             :map eaf-interleave-app-mode-map
-    ;;             ("C-c M-i" . 'eaf-interleave-add-note)
-    ;;             ("C-c M-o" . 'eaf-interleave-open-notes-file)
-    ;;             ("C-c M-q" . 'eaf-interleave-quit))
+    ;; key customize
+    (add-to-list 'eaf-terminal-keybinding '("C-'" . "eaf-send-ctrl-esc-sequence"))
+    (add-to-list 'eaf-terminal-keybinding '("C-j" . "eaf-send-key-sequence"))
     ))
 
 (defun zilongshanren-better-defaults/post-init-recentf ()

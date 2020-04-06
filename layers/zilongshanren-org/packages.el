@@ -38,6 +38,7 @@
 (defun zilongshanren-org/init-org-roam ()
   (use-package org-roam
     :load-path "/home/liuyan/bin/org-roam"
+    :diminish
     :hook
     (after-init . org-roam-mode)
     :custom
@@ -89,7 +90,7 @@
   (add-hook 'org-mode-hook (lambda () (spacemacs/toggle-line-numbers-off)) 'append)
   (with-eval-after-load 'org
     (progn
-
+      (setq org-confirm-babel-evaluate nil)
       ;; disable < auto pair for org mode
       ;; disable {} auto pairing in electric-pair-mode for web-mode
       (add-hook

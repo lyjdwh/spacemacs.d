@@ -188,3 +188,8 @@ The original function deletes trailing whitespace of the current line."
           (narrow-to-region (+ end 2) (point-max))
           (delete-trailing-whitespace)
           (widen))))))
+
+(defun eaf-send-ctrl-esc-sequence ()
+  "used when vi-mode in terminal"
+  (interactive)
+  (eaf-call "send_key_sequence" eaf--buffer-id "C-["))

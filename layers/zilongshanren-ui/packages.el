@@ -28,6 +28,7 @@
 
 (defun zilongshanren-ui/init-ivy-posframe ()
   (use-package ivy-posframe
+    :diminish
     :config
     (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
     (ivy-posframe-mode 1)

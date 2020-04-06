@@ -205,13 +205,24 @@
 (spacemacs/set-leader-keys "aeT" 'eaf-toggle-fullscreen)
 (spacemacs/set-leader-keys "aeo" 'eaf-open)
 (spacemacs/set-leader-keys "aeu" 'eaf-open-url)
-(spacemacs/set-leader-keys "aef" 'eaf-open-office)
+(spacemacs/set-leader-keys "aeF" 'eaf-open-office)
 (spacemacs/set-leader-keys "aem" 'eaf-open-mindmap)
 (spacemacs/set-leader-keys "aea" 'eaf-open-airshare)
 (spacemacs/set-leader-keys "aeB" 'eaf-open-bookmark)
 (spacemacs/set-leader-keys "aer" 'eaf-open-rss-reader)
 (spacemacs/set-leader-keys "aeq" 'eaf-kill-process)
 (spacemacs/set-leader-keys "aes" 'eaf-search-it)
+(spacemacs/set-leader-keys "aef" 'eaf-file-browser-qrcode)
+
+(spacemacs/set-leader-keys-for-major-mode 'org-mode
+  "m." 'eaf-interleave-sync-current-note
+  "mj" 'eaf-interleave-sync-next-note
+  "mk" 'eaf-interleave-sync-previous-note)
+
+(spacemacs/set-leader-keys
+  "ami" 'eaf-interleave-add-note
+  "amo" 'eaf-interleave-open-notes-file
+  "amq" 'eaf-interleave-quit)
 
 ;; snails
 (spacemacs/set-leader-keys "aa" 'snails)
@@ -282,6 +293,9 @@
 ;; helm ag to overhide ivy ag
 (spacemacs/set-leader-keys "sad" 'spacemacs/helm-dir-do-ag)
 (spacemacs/set-leader-keys "saD" 'spacemacs/helm-dir-do-ag-region-or-symbol)
+
+;; org
+(spacemacs/set-leader-keys "ao." 'spacemacs/org-agenda-transient-state/org-agenda-set-tags)
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
