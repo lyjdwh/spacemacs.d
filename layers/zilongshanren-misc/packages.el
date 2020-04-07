@@ -60,7 +60,11 @@
         (posframe :location (recipe :fetcher github :repo "tumashu/posframe") )
         rime
         try
+        figlet
         ))
+
+(defun zilongshanren-misc/init-figlet ()
+  (use-package figlet))
 
 (defun zilongshanren-misc/init-try ()
   (use-package try
