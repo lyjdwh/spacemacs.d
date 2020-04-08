@@ -316,6 +316,14 @@
   "nk" 'org-noter-sync-prev-note)
 (spacemacs/set-leader-keys "aon" 'org-noter)
 
+;; org ref
+;; how to add new bibtex entry
+;; 1. drag a pdf into bib file
+;; 2. ....
+(spacemacs/declare-prefix-for-mode 'bibtex-mode "ml" "add-entry")
+(spacemacs/set-leader-keys-for-major-mode 'bibtex-mode
+  "lr" 'crossref-add-bibtex-entry)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)

@@ -23,6 +23,7 @@
     (org-roam :location local)
     ivy-bibtex
     org-noter
+    org-ref
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -36,6 +37,15 @@
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+
+(defun zilongshanren-org/post-init-org-ref ()
+  (progn
+    ;; see org-ref for use of these variables
+    (setq org-ref-bibliography-notes "~/org-notes/notes/bib-notes.org"
+          org-ref-default-bibliography '("~/Documents/papers/bib/protein_design.bib")
+          org-ref-pdf-directory "~/Documents/papers")
+    (setq org-ref-completion-library 'org-ref-ivy-bibtex)
+    ))
 
 (defun zilongshanren-org/init-org-noter ()
   (use-package org-noter
