@@ -65,15 +65,25 @@
         (one-key :location local)
         (grep-dired :location (recipe :fetcher github :repo "manateelazycat/grep-dired"))
         (delete-block :location (recipe :fetcher github :repo "manateelazycat/delete-block"))
+        browse-kill-ring
+        bbyac
         ))
+
+(defun zilongshanren-misc/init-bbyac ()
+  (use-package bbyac
+    :config
+    (bbyac-global-mode 1)))
+
+(defun zilongshanren-misc/init-browse-kill-ring ()
+  (use-package browse-kill-ring))
 
 (defun zilongshanren-misc/init-delete-block ()
   (use-package delete-block
     :commands (delete-block-forward delete-block-backward)
     :init
     ;; bind-key* ensure the keybinding not be overrided by other minor modes
-    (bind-key* "C-k" 'delete-block-forward)
-    (bind-key* "C-j" 'delete-block-backward)
+    (bind-key* "M-m" 'delete-block-forward)
+    (bind-key* "M-n" 'delete-block-backward)
     ))
 
 (defun zilongshanren-misc/init-grep-dired ()

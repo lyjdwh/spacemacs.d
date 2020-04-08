@@ -337,6 +337,11 @@
 ;; re-builder, a nice interactive tool for building regular expressions
 (spacemacs/set-leader-keys "oR" 're-builder)
 
+;;bbyac
+(spacemacs/declare-prefix "oe" "expand")
+(spacemacs/set-leader-keys "oee" 'bbyac-expand-symbols)
+(spacemacs/set-leader-keys "oes" 'bbyac-expand-substring)
+(spacemacs/set-leader-keys "oel" 'bbyac-expand-lines)
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
