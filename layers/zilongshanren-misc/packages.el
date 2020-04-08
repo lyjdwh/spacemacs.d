@@ -164,13 +164,30 @@
     (setq rime-user-data-dir "~/.config/fcitx/rime")
 
     (setq rime-posframe-properties
-      (list :background-color "#333333"
-            :foreground-color "#dcdccc"
-            :font "WenQuanYi Micro Hei Mono-14"
-            :internal-border-width 10))
+          (list :background-color "#333333"
+                :foreground-color "#dcdccc"
+                :font "WenQuanYi Micro Hei Mono-14"
+                :internal-border-width 10))
 
     (setq default-input-method "rime"
-      rime-show-candidate 'posframe)
+          rime-show-candidate 'posframe)
+
+    (setq rime-disable-predicates
+          '(rime-predicate-evil-mode-p
+            rime-predicate-after-alphabet-char-p
+            rime-predicate-prog-in-code-p
+            rime-predicate-punctuation-after-ascii-p
+            rime-predicate-punctuation-after-space-cc-p
+            rime-predicate-current-input-punctuation-p))
+
+    ;; 使用 return 推出 inline ascii english
+    (setq rime-inline-predicates
+          '(rime-predicate-space-after-cc-p
+            rime-predicate-current-uppercase-letter-p))
+
+    (setq rime-inline-ascii-trigger 'shift-l)
+
+    ;; (setq rime-show-candidate nil)
     ))
 
 (defun zilongshanren-misc/init-posframe ()
