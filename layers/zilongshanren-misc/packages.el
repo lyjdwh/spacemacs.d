@@ -63,7 +63,13 @@
         figlet
         (thing-edit :location (recipe :fetcher github :repo "manateelazycat/thing-edit"))
         (one-key :location local)
+        (grep-dired :location (recipe :fetcher github :repo "manateelazycat/grep-dired"))
         ))
+
+(defun zilongshanren-misc/init-grep-dired ()
+  (use-package grep-dired
+    :commands (grep-dired-dwim grep-dired)
+    ))
 
 (defun zilongshanren-misc/init-one-key ()
   (use-package one-key
@@ -92,6 +98,8 @@
                 (("l" . "Copy Line") . thing-copy-line)
                 (("a" . "Copy To Line Begin") . thing-copy-to-line-beginning)
                 (("e" . "Copy To Line End") . thing-copy-to-line-end)
+                (("b" . "Copy Paragraph") . thing-copy-paragraph)
+                (("n" . "Copy number") . thing-copy-number)
                 ;; Cut.
                 (("W" . "Cut Word") . thing-cut-word)
                 (("S" . "Cut Symbol") . thing-cut-symbol)
@@ -109,6 +117,8 @@
                 (("L" . "Cut Line") . thing-cut-line)
                 (("A" . "Cut To Line Begin") . thing-cut-to-line-beginning)
                 (("E" . "Cut To Line End") . thing-cut-to-line-end)
+                (("B" . "Cut Paragraph") . thing-cut-paragraph)
+                (("N" . "Cut number") . thing-cut-number)
                 ))
 
         (defun one-key-menu-thing-edit ()

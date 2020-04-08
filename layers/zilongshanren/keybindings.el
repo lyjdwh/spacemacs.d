@@ -228,6 +228,8 @@
 
 ;; snails
 (spacemacs/set-leader-keys "aa" 'snails)
+(spacemacs/set-leader-keys "sn" 'snails-search-point)
+
 
 ;; company-english-helper
 (spacemacs/set-leader-keys "ote" 'toggle-company-english-helper)
@@ -251,6 +253,11 @@
 (spacemacs/set-leader-keys "srF" 'color-rg-search-symbol-in-current-file)
 (spacemacs/set-leader-keys "srt" 'color-rg-search-symbol-with-type)
 (spacemacs/set-leader-keys "srT" 'color-rg-search-project-with-type)
+
+;; grep dired
+(spacemacs/set-leader-keys "srg" 'grep-dired-dwim)
+(spacemacs/set-leader-keys "srG" 'grep-dired)
+
 
 ;; take screenshot
 (spacemacs/declare-prefix "as" "shot")
@@ -325,7 +332,11 @@
   "lr" 'crossref-add-bibtex-entry)
 
 ;; thing edit
-(spacemacs/set-leader-keys "oe" 'one-key-menu-thing-edit)
+(spacemacs/set-leader-keys "k" 'one-key-menu-thing-edit)
+
+;; re-builder, a nice interactive tool for building regular expressions
+(spacemacs/set-leader-keys "oR" 're-builder)
+
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
