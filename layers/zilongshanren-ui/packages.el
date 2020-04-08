@@ -93,37 +93,47 @@
                  '(:eval (propertize "%b " 'face 'font-lock-keyword-face
                                      'help-echo (buffer-file-name)))
 
+                 ;; git info
+                 '(:eval (when (> (window-width) 90)
+                           `(vc-mode vc-mode)))
+                 " "
 
-                 " [" ;; insert vs overwrite mode, input-method in a tooltip
-                 '(:eval (propertize (if overwrite-mode "Ovr" "Ins")
-                                     'face 'font-lock-preprocessor-face
-                                     'help-echo (concat "Buffer is in "
-                                                        (if overwrite-mode
-                                                            "overwrite"
-                                                          "insert") " mode")))
-
-                 ;; was this buffer modified since the last save?
-                 '(:eval (when (buffer-modified-p)
-                           (concat "," (propertize "Mod"
-                                                   'face 'font-lock-warning-face
-                                                   'help-echo "Buffer has been modified"))))
-
-                 ;; is this buffer read-only?
-                 '(:eval (when buffer-read-only
-                           (concat "," (propertize "RO"
-                                                   'face 'font-lock-type-face
-                                                   'help-echo "Buffer is read-only"))))
-                 "] "
-
-                 ;; anzu
-                 anzu--mode-line-format
+                 ;; line and column
+                 "(" ;; '%02' to set to 2 chars at least; prevents flickering
+                 (propertize "%02l" 'face 'font-lock-type-face) ","
+                 (propertize "%02c" 'face 'font-lock-type-face)
+                 ")"
 
                  ;; relative position, size of file
-                 "["
+                 " ["
                  (propertize "%p" 'face 'font-lock-constant-face) ;; % above top
                  "/"
                  (propertize "%I" 'face 'font-lock-constant-face) ;; size
                  "] "
+
+                 ;; " [" ;; insert vs overwrite mode, input-method in a tooltip
+                 ;; '(:eval (propertize (if overwrite-mode "Ovr" "Ins")
+                 ;;                     'face 'font-lock-preprocessor-face
+                 ;;                     'help-echo (concat "Buffer is in "
+                 ;;                                        (if overwrite-mode
+                 ;;                                            "overwrite"
+                 ;;                                          "insert") " mode")))
+
+                 ;; ;; was this buffer modified since the last save?
+                 ;; '(:eval (when (buffer-modified-p)
+                 ;;           (concat "," (propertize "Mod"
+                 ;;                                   'face 'font-lock-warning-face
+                 ;;                                   'help-echo "Buffer has been modified"))))
+
+                 ;; ;; is this buffer read-only?
+                 ;; '(:eval (when buffer-read-only
+                 ;;           (concat "," (propertize "RO"
+                 ;;                                   'face 'font-lock-type-face
+                 ;;                                   'help-echo "Buffer is read-only"))))
+                 ;; "] "
+
+                 ;; anzu
+                 anzu--mode-line-format
 
                  ;; the current major mode for the buffer.
                  '(:eval (propertize "%m" 'face 'font-lock-string-face
@@ -134,15 +144,6 @@
                  "%1 "
                  ;; evil state
                  '(:eval evil-mode-line-tag)
-
-                 ;; minor modes
-                 '(:eval (when (> (window-width) 90)
-                           minor-mode-alist))
-                 " "
-                 ;; git info
-                 '(:eval (when (> (window-width) 90)
-                           `(vc-mode vc-mode)))
-
                  " "
 
                  ;; global-mode-string goes in mode-line-misc-info
@@ -151,12 +152,13 @@
 
                  (mode-line-fill 'mode-line 25)
 
+                 ;; ;; minor modes
+                 ;; '(:eval (when (> (window-width) 90)
+                 ;;           minor-mode-alist))
+
                  '(:eval (zilongshanren/display-mode-indent-width))
-                 ;; line and column
-                 " (" ;; '%02' to set to 2 chars at least; prevents flickering
-                 (propertize "%02l" 'face 'font-lock-type-face) ","
-                 (propertize "%02c" 'face 'font-lock-type-face)
-                 ") "
+
+                 " "
 
                  '(:eval (when (> (window-width) 80)
                            (buffer-encoding-abbrev)))

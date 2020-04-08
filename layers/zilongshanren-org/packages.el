@@ -44,7 +44,6 @@
     (setq org-ref-bibliography-notes "~/org-notes/notes/bib-notes.org"
           org-ref-default-bibliography '("~/Documents/papers/bib/protein_design.bib")
           org-ref-pdf-directory "~/Documents/papers")
-    (setq org-ref-completion-library 'org-ref-ivy-bibtex)
     ))
 
 (defun zilongshanren-org/init-org-noter ()
