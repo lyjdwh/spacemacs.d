@@ -324,6 +324,9 @@
 (spacemacs/set-leader-keys-for-major-mode 'bibtex-mode
   "lr" 'crossref-add-bibtex-entry)
 
+;; thing edit
+(spacemacs/set-leader-keys "oe" 'one-key-menu-thing-edit)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)
