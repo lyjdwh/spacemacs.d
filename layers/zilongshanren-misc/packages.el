@@ -64,7 +64,17 @@
         (thing-edit :location (recipe :fetcher github :repo "manateelazycat/thing-edit"))
         (one-key :location local)
         (grep-dired :location (recipe :fetcher github :repo "manateelazycat/grep-dired"))
+        (delete-block :location (recipe :fetcher github :repo "manateelazycat/delete-block"))
         ))
+
+(defun zilongshanren-misc/init-delete-block ()
+  (use-package delete-block
+    :commands (delete-block-forward delete-block-backward)
+    :init
+    ;; bind-key* ensure the keybinding not be overrided by other minor modes
+    (bind-key* "C-k" 'delete-block-forward)
+    (bind-key* "C-j" 'delete-block-backward)
+    ))
 
 (defun zilongshanren-misc/init-grep-dired ()
   (use-package grep-dired
