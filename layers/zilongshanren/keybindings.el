@@ -290,7 +290,7 @@
 (spacemacs/set-leader-keys "otr" 'toggle-input-method)
 
 ;; lsp
-(define-key spacemacs-lsp-mode-map (kbd "hg") 'lsp-ui-doc-glance)
+;; (define-key spacemacs-lsp-mode-map (kbd "hg") 'lsp-ui-doc-glance)
 
 ;; helm ag to overhide ivy ag
 (spacemacs/set-leader-keys "sad" 'spacemacs/helm-dir-do-ag)

@@ -149,7 +149,8 @@
     (lsp-after-open . (lambda ()
                         (setq company-tabnine-max-num-results 4)
                         (add-to-list 'company-transformers 'company//sort-by-tabnine t)
-                        (add-to-list 'company-backends '(company-lsp :with company-tabnine :separate))))
+                        (add-to-list 'company-backends '(company-lsp :with company-yasnippet :with company-tabnine :separate))
+                        ))
     (kill-emacs . company-tabnine-kill-process)
     :config
     ;; Enable TabNine on default
@@ -410,6 +411,25 @@
     (spacemacs/add-to-hooks 'zilongshanren/load-yasnippet '(prog-mode-hook
                                                             markdown-mode-hook
                                                             org-mode-hook))
+    (with-no-warnings
+    (with-eval-after-load 'yasnippet
+      (defun my-company-yasnippet-disable-inline (fun command &optional arg &rest _ignore)
+        "Enable yasnippet but disable it inline."
+        (if (eq command 'prefix)
+            (when-let ((prefix (funcall fun 'prefix)))
+              (unless (memq (char-before (- (point) (length prefix)))
+                            '(?. ?< ?> ?\( ?\) ?\[ ?{ ?} ?\" ?' ?`))
+                prefix))
+          (progn
+            (when (and (bound-and-true-p lsp-mode)
+                       arg (not (get-text-property 0 'yas-annotation-patch arg)))
+              (let* ((name (get-text-property 0 'yas-annotation arg))
+                     (snip (format "%s (Snippet)" name))
+                     (len (length arg)))
+                (put-text-property 0 len 'yas-annotation snip arg)
+                (put-text-property 0 len 'yas-annotation-patch t arg)))
+            (funcall fun command arg))))
+      (advice-add #'company-yasnippet :around #'my-company-yasnippet-disable-inline)))
     ))
 
 (defun zilongshanren-programming/post-init-racket-mode ()
@@ -779,6 +799,7 @@
     (when (configuration-layer/package-usedp 'company)
       (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode
     ))))
+
 (defun zilongshanren-programming/post-init-company-c-headers ()
   (progn
     (setq company-c-headers-path-system
