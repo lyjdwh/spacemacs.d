@@ -727,3 +727,21 @@ Enter custom-name or RET to save image with timestamp"
   (setq url-gateway-method 'native)
   (message "unset proxy")
   )
+
+(defun liuyan/change-mode ()
+  "change between evil-mode and meow-mode"
+  (interactive)
+  (if liuyan/mode-now
+      (progn
+        (setq liuyan/mode-now nil)
+        (if (eq evil-mode t)
+              (evil-mode -1))
+        (if (eq meow-mode nil)
+            (meow-global-mode 1)))
+    (progn
+      (setq liuyan/mode-now t)
+      (if (eq evil-mode nil)
+            (evil-mode 1))
+      (if (eq meow-mode t)
+          (meow-global-mode -1)))
+    ))
