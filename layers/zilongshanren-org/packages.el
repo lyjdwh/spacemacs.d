@@ -141,7 +141,17 @@
         (kbd (concat "g" (capitalize .left))) 'evil-org-top))))
 
 (defun zilongshanren-org/post-init-org-pomodoro ()
-  (zilongshanren/pomodoro-notification))
+  (progn
+    (zilongshanren/pomodoro-notification)
+    ;; auto restart after break
+    (add-hook 'org-pomodoro-break-finished-hook
+              (lambda ()
+                (interactive)
+                (point-to-register 1)
+                (org-clock-goto)
+                (org-pomodoro '(25))
+                (register-to-point 1)
+))))
 
 ;;In order to export pdf to support Chinese, I should install Latex at here: https://www.tug.org/mactex/
 ;; http://freizl.github.io/posts/2012-04-06-export-orgmode-file-in-Chinese.html
