@@ -20,7 +20,7 @@
     sound-wav
     ob-typescript
     evil-org
-    (org-roam :location local)
+    (org-roam :location (recipe :fetcher github :repo "jethrokuan/org-roam"))
     ivy-bibtex
     org-noter
     org-ref
@@ -97,7 +97,6 @@
 
 (defun zilongshanren-org/init-org-roam ()
   (use-package org-roam
-    :load-path "/home/liuyan/bin/org-roam"
     :diminish
     :hook
     (after-init . org-roam-mode)

@@ -79,8 +79,8 @@
 
 (defun zilongshanren-misc/init-bbyac ()
   (use-package bbyac
-    :config
-    (bbyac-global-mode 1)))
+    :commands ( bbyac-expand-symbols bbyac-expand-substring  bbyac-expand-lines)
+    ))
 
 (defun zilongshanren-misc/init-browse-kill-ring ()
   (use-package browse-kill-ring))
@@ -158,7 +158,8 @@
   (use-package thing-edit))
 
 (defun zilongshanren-misc/init-figlet ()
-  (use-package figlet))
+  (use-package figlet
+    :defer t))
 
 (defun zilongshanren-misc/init-try ()
   (use-package try
@@ -210,7 +211,7 @@
 
 (defun zilongshanren-misc/init-youdao-dictionary ()
   (use-package youdao-dictionary
-    :defer
+    :defer t
     :config
     (progn
       ;; Enable Cache
@@ -324,11 +325,11 @@
   (use-package browse-at-remote
     :defer t
     :init (spacemacs/set-leader-keys "gho" 'browse-at-remote)))
+
 (defun zilongshanren-misc/init-highlight-global ()
   (use-package highlight-global
     :init
     (progn
-
       (setq-default highlight-faces
         '(('hi-red-b . 0)
           ('hi-yellow . 0)

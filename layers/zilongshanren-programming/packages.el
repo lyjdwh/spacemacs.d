@@ -1,5 +1,4 @@
-;;; packages.el --- zilongshanren Layer packages File for Spacemacs
-;;
+;;; packages.el --- zilongshanren Layer packages File for Spacemacs;;
 ;; Copyright (c) 2014-2016 zilongshanren
 ;;
 ;; Author: zilongshanren <lyjdwh@gmail.com>
@@ -49,15 +48,14 @@
         lsp-python-ms
         auctex
         highlight-indent-guides
-        (color-rg :location local)
+        (color-rg :location (recipe :fetcher github :repo "manateelazycat/color-rg"))
         hl-todo
         counsel-dash
-        (webkit-katex-render :location local)
+        (webkit-katex-render :location (recipe :fetcher github :repo "fuxialexander/emacs-webkit-katex-render"))
         ))
 
 (defun zilongshanren-programming/init-webkit-katex-render ()
   (use-package webkit-katex-render
-    :load-path "/home/liuyan/bin/emacs-webkit-katex-render"
     :commands webkit-katex-render-mode
     ))
 
@@ -83,7 +81,10 @@
 
 (defun zilongshanren-programming/init-color-rg ()
   (use-package color-rg
-    :load-path "/home/liuyan/bin/color-rg"
+    :commands (color-rg-search-input color-rg-search-symbol color-rg-search-input-in-project
+               color-rg-search-symbol-in-project color-rg-search-input-in-current-file
+               color-rg-search-symbol-in-current-file  color-rg-search-symbol-with-type
+               color-rg-search-project-with-type)
     ))
 
 (defun zilongshanren-programming/init-highlight-indent-guides ()

@@ -42,11 +42,13 @@
     ))
 
 (defun zilongshanren-better-defaults/init-company-english-helper ()
-  (use-package company-english-helper))
+  (use-package company-english-helper
+    :commands (toggle-company-english-helper)))
 
 (defun zilongshanren-better-defaults/init-snails ()
   (use-package snails
     :load-path "/home/liuyan/bin/snails"
+    :commands (snails snails-search-point)
     :if (display-graphic-p)
     :custom-face
     (snails-content-buffer-face ((t (:background "#111" :height 130))))
@@ -71,6 +73,13 @@
 (defun zilongshanren-better-defaults/init-eaf ()
   (use-package eaf
     :load-path "/home/liuyan/bin/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
+    :commands (eaf-open-this-from-dired eaf-open-ipython eaf-open-camera eaf-open-demo
+               eaf-open-browser eaf-open-external eaf-open-terminal eaf-toggle-fullscreen
+               eaf-open eaf-open-url eaf-open-office eaf-open-mindmap eaf-open-airshare
+               eaf-open-bookmark eaf-open-rss-reader eaf-kill-process eaf-search-it
+               eaf-file-browser-qrcode eaf-interleave-sync-current-note eaf-interleave-sync-next-note
+               eaf-interleave-sync-previous-note eaf-interleave-add-note eaf-interleave-open-notes-file eaf-interleave-quit)
+
     :diminish eaf-mode
     :custom
     (eaf-find-alternate-file-in-dired t)
