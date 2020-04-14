@@ -73,9 +73,9 @@ This function should only modify configuration layer settings."
      ;;  (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
      ;; osx-command-as 'super)
      ;;  restclient
-     (gtags :disabled-for clojure emacs-lisp javascript latex shell-scripts org markdown python
-            :variables counsel-gtags-auto-update t
-            )
+     ;; (gtags :disabled-for clojure emacs-lisp javascript latex shell-scripts org markdown python
+     ;;        :variables counsel-gtags-auto-update t
+     ;;        )
      (shell :variables shell-default-shell 'ansi-term
             shell-default-term-shell "/usr/bin/zsh")
      ;; docker
@@ -106,12 +106,12 @@ This function should only modify configuration layer settings."
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
      ;;  lua
-     html
-     (javascript :variables javascript-backend 'lsp)
-     (typescript :variables
-                 typescript-fmt-on-save nil
-                 typescript-fmt-tool 'typescript-formatter
-                 typescript-backend 'lsp)
+     ;; html
+     ;; (javascript :variables javascript-backend 'lsp)
+     ;; (typescript :variables
+     ;;             typescript-fmt-on-save nil
+     ;;             typescript-fmt-tool 'typescript-formatter
+     ;;             typescript-backend 'lsp)
      emacs-lisp
      ;;  (clojure :variables clojure-enable-fancify-symbols t)
      ;;  racket
