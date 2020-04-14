@@ -68,7 +68,12 @@
         bbyac
         (meow :location (recipe :fetcher github :repo "DogLooksGood/meow") )
         evil-snipe
+        forge
         ))
+
+(defun zilongshanren-misc/init-forge ()
+  (use-package forge
+    :after magit))
 
 (defun zilongshanren-misc/init-evil-snipe ()
   (use-package evil-snipe
