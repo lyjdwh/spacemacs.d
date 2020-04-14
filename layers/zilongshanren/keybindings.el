@@ -166,6 +166,7 @@
 (spacemacs/set-leader-keys "fh" 'ffap-hexl-mode)
 (spacemacs/set-leader-keys "fd" 'projectile-find-file-dwim-other-window)
 (spacemacs/set-leader-keys "nl" 'spacemacs/evil-search-clear-highlight)
+(spacemacs/declare-prefix "ol" "layout")
 (spacemacs/set-leader-keys "oll" 'zilongshanren/load-my-layout)
 (spacemacs/set-leader-keys "ols" 'zilongshanren/save-my-layout)
 ;; (spacemacs/set-leader-keys "ob" 'popwin:display-last-buffer)
@@ -175,7 +176,7 @@
 (spacemacs/set-leader-keys "sS" 'spacemacs/swiper-region-or-symbol)
 
 (bind-key* "s-p" 'find-file-in-project)
-(spacemacs/set-leader-keys "os" 'counsel-ag-thing-at-point)
+(spacemacs/set-leader-keys "os" 'spacemacs/helm-project-do-ag-region-or-symbol)
 
 (spacemacs/set-leader-keys "pa" 'projectile-find-other-file)
 (spacemacs/set-leader-keys "pA" 'projectile-find-other-file-other-window)
@@ -263,9 +264,6 @@
 (spacemacs/set-leader-keys "asf" 'screenshot)
 (spacemacs/set-leader-keys "asF" 'screenshot-clip)
 
-;; fzf
-(spacemacs/set-leader-keys "of" 'counsel-fzf)
-
 ;; highlight todo and similar keywords
 (spacemacs/declare-prefix "oh" "hl-todo")
 (spacemacs/set-leader-keys "ohp" 'hl-todo-previous)
@@ -337,11 +335,13 @@
 (spacemacs/set-leader-keys "oR" 're-builder)
 
 ;;bbyac
-(spacemacs/declare-prefix "oe" "expand")
+(spacemacs/declare-prefix "oe" "expand/english")
 (spacemacs/set-leader-keys "oee" 'bbyac-expand-symbols)
 (spacemacs/set-leader-keys "oes" 'bbyac-expand-substring)
 (spacemacs/set-leader-keys "oel" 'bbyac-expand-lines)
 (spacemacs/set-leader-keys "oeh" 'hippie-expand)
+(spacemacs/set-leader-keys "oew" 'powerthesaurus-lookup-word-at-point)
+(spacemacs/set-leader-keys "oeW" 'powerthesaurus-lookup-word)
 
 ;; evil avy
 (spacemacs/set-leader-keys "jj" 'evil-avy-goto-char-2)
