@@ -20,7 +20,6 @@
 ;; (define-key 'ivy-occur-grep-mode-map (kbd "C-d") 'evil-scroll-down)
 
 (global-set-key [(shift return)] 'zilongshanren/smart-open-line)
-(global-set-key (kbd "s-/") 'hippie-expand)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point-posframe)
 (define-key global-map (kbd "<f9>") 'org-capture)
@@ -342,6 +341,10 @@
 (spacemacs/set-leader-keys "oee" 'bbyac-expand-symbols)
 (spacemacs/set-leader-keys "oes" 'bbyac-expand-substring)
 (spacemacs/set-leader-keys "oel" 'bbyac-expand-lines)
+(spacemacs/set-leader-keys "oeh" 'hippie-expand)
+
+;; evil avy
+(spacemacs/set-leader-keys "jj" 'evil-avy-goto-char-2)
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)

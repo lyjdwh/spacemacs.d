@@ -25,7 +25,6 @@
         fcitx
         discover-my-major
         ace-window
-        avy
         4clojure
         persp-mode
         tiny
@@ -68,7 +67,16 @@
         browse-kill-ring
         bbyac
         (meow :location (recipe :fetcher github :repo "DogLooksGood/meow") )
+        evil-snipe
         ))
+
+(defun zilongshanren-misc/init-evil-snipe ()
+  (use-package evil-snipe
+    :config
+    (evil-snipe-mode +1)
+    (evil-snipe-override-mode +1)
+    (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+    ))
 
 (defun zilongshanren-misc/init-meow ()
   (use-package meow
@@ -884,14 +892,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       (spacemacs/set-leader-keys "o4p" '4clojure-previous-question)
       (spacemacs/set-leader-keys "o4c" '4clojure-check-answers)
       )))
-
-
-
-
-(defun zilongshanren-misc/post-init-avy ()
-  (progn
-    (global-set-key (kbd "C-s-'") 'avy-goto-char-2)
-    (global-set-key (kbd "M-'") 'avy-goto-char-2)))
 
 (defun zilongshanren-misc/post-init-ace-window ()
   (global-set-key (kbd "C-x C-o") #'ace-window))
