@@ -24,6 +24,7 @@
     ivy-bibtex
     org-noter
     org-ref
+    (org-protocol-capture-html :location (recipe :fetcher github :repo "alphapapa/org-protocol-capture-html") )
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -37,6 +38,9 @@
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+(defun zilongshanren-org/init-org-protocol-capture-html ()
+  (use-package org-protocol-capture-html
+    :after org-capture))
 
 (defun zilongshanren-org/post-init-org-ref ()
   (progn
@@ -451,16 +455,13 @@
               ("w" "work" entry (file+headline org-agenda-file-gtd "Work")
                "* TODO [#A] %?\n  %i\n %U"
                :empty-lines 1)
-              ("x" "Web Collections" entry
+              ("x" "Web site" entry
                (file+headline org-agenda-file-note "Web")
-               "* %U %:annotation\n\n%:initial\n\n%?")
-              ("p" "Protocol" entry (file+headline org-agenda-file-note "Inbox")
+               "* %a :website:\n\n%U %?\n\n%:initial")
+              ("p" "Protocol" entry (file+headline org-agenda-file-note "Web")
                "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-	          ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Inbox")
+	          ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Web")
                "* %? [[%:link][%:description]] \nCaptured On: %U")
-              ;; ("c" "Chrome" entry (file+headline org-agenda-file-note "Quick notes")
-              ;;  "* TODO [#C] %?\n %(zilongshanren/retrieve-chrome-current-tab-url)\n %i\n %U"
-              ;;  :empty-lines 1)
               ("l" "links" entry (file+headline org-agenda-file-note "Quick notes")
                "* TODO [#C] %?\n  %i\n %a \n %U"
                :empty-lines 1)
