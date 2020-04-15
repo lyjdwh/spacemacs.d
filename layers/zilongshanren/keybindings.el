@@ -342,6 +342,8 @@
 (spacemacs/set-leader-keys "oeh" 'hippie-expand)
 (spacemacs/set-leader-keys "oew" 'powerthesaurus-lookup-word-at-point)
 (spacemacs/set-leader-keys "oeW" 'powerthesaurus-lookup-word)
+(spacemacs/set-leader-keys "oem" 'mw-thesaurus-lookup-at-point)
+(define-key mw-thesaurus-mode-map [remap evil-record-macro] #'mw-thesaurus--quit)
 
 ;; evil avy
 (spacemacs/set-leader-keys "jj" 'evil-avy-goto-char-2)

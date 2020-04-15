@@ -70,7 +70,17 @@
         evil-snipe
         forge
         (powerthesaurus :location local)
+        mw-thesaurus
         ))
+
+(defun zilongshanren-misc/init-mw-thesaurus ()
+  (use-package mw-thesaurus
+    :demand t
+    :commands  mw-thesaurus-lookup-at-point
+    :config
+    (add-hook 'mw-thesaurus-mode-hook 'variable-pitch-mode)
+    (setq mw-thesaurus--api-key "69fe3e22-45d0-4e53-8b6f-a3ace4b2ce3a")
+    ))
 
 (defun zilongshanren-misc/init-powerthesaurus ()
   (use-package powerthesaurus
@@ -89,6 +99,7 @@
     (evil-snipe-mode +1)
     (evil-snipe-override-mode +1)
     (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+    (setq evil-snipe-smart-case t)
     ))
 
 (defun zilongshanren-misc/init-meow ()

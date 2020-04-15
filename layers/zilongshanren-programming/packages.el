@@ -52,7 +52,13 @@
         hl-todo
         counsel-dash
         (webkit-katex-render :location (recipe :fetcher github :repo "fuxialexander/emacs-webkit-katex-render"))
+        (lpy :location (recipe :fetcher github :repo "abo-abo/lpy"))
         ))
+
+(defun zilongshanren-programming/init-lpy ()
+  (use-package lpy
+    :defer t
+    ))
 
 (defun zilongshanren-programming/init-webkit-katex-render ()
   (use-package webkit-katex-render
@@ -349,7 +355,9 @@
 (defun zilongshanren-programming/post-init-python ()
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   ;; if you use pyton3, then you could comment the following line
-  (setq python-shell-interpreter "python"))
+  (setq python-shell-interpreter "ipython")
+  (add-hook 'python-mode-hook #'lpy-mode)
+  )
 
 (defun zilongshanren-programming/post-init-js-doc ()
   (setq js-doc-mail-address "lyjdwh@gmail.com"
