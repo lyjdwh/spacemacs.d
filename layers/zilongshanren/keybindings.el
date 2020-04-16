@@ -348,6 +348,10 @@
 ;; evil avy
 (spacemacs/set-leader-keys "jj" 'evil-avy-goto-char-2)
 
+;; multi-cursor
+;; space v 选中，m/e
+(spacemacs/set-leader-keys "om" 'multiple-cursors-hydra/body)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)

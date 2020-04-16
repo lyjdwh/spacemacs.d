@@ -100,6 +100,8 @@
     (evil-snipe-override-mode +1)
     (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
     (setq evil-snipe-smart-case t)
+    (setq evil-snipe-scope 'whole-visible)
+    (setq evil-snipe-repeat-scope 'whole-visible)
     ))
 
 (defun zilongshanren-misc/init-meow ()
