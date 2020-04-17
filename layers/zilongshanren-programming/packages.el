@@ -226,7 +226,9 @@
           (lsp--flymake-setup))
          ((and (functionp 'lsp-ui-mode) (featurep 'flycheck))
           (require 'lsp-ui-flycheck)
-          (lsp-flycheck-enable t)))
+          (lsp-flycheck-enable t)
+          (flycheck-add-next-checker 'lsp 'python-mypy)
+          ))
 
         (when (functionp 'company-lsp)
           (company-mode 1)
