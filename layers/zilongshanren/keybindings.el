@@ -352,6 +352,12 @@
 ;; space v 选中，m/e
 (spacemacs/set-leader-keys "om" 'multiple-cursors-hydra/body)
 
+;; langtool
+(spacemacs/set-leader-keys
+  "oen" 'langtool-goto-next-error
+  "oep" 'langtool-goto-previous-error
+  "oec" 'langtool-correct-buffer)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)

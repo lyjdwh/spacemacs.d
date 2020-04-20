@@ -71,7 +71,18 @@
         forge
         (powerthesaurus :location local)
         mw-thesaurus
+        langtool
         ))
+
+(defun zilongshanren-misc/init-langtool ()
+  (use-package langtool
+    :config
+    (setq langtool-language-tool-server-jar "/home/liuyan/bin/LanguageTool-4.9/languagetool-server.jar")
+    (setq langtool-server-user-arguments '("-p" "8082"))
+    (setq langtool-default-language "en")
+    (add-hook 'text-mode-hook  (lambda ()
+                                 (add-hook 'after-save-hook 'langtool-check nil 'make-it-local)))
+    ))
 
 (defun zilongshanren-misc/init-mw-thesaurus ()
   (use-package mw-thesaurus
