@@ -236,13 +236,10 @@ comment box."
   (interactive)
   (when (my-project-name-contains-substring "liuyan")
     (cond
-     ((my-project-name-contains-substring "cocos2d-x")
+     ((my-project-name-contains-substring "")
       ;; C++ project don't need html tags
-      (setq tags-table-list (list (my-create-tags-if-needed "~/cocos2d-x/cocos"))))
-     ((my-project-name-contains-substring "Github/fireball")
-      (message "load tags for fireball engine repo...")
-      ;; html project donot need C++ tags
-      (setq tags-table-list (list (my-create-tags-if-needed "~/Github/fireball/engine/cocos2d")))))))
+      (setq tags-table-list (list (my-create-tags-if-needed ""))))
+)))
 
 (defun zilongshanren-refresh-imenu-index ()
   (interactive)

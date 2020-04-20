@@ -1039,14 +1039,8 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
     (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
     (define-key evil-normal-state-map (kbd "M-y") 'counsel-yank-pop)
-
-    ;; (define-key evil-insert-state-map "\C-e" 'end-of-line)
-    ;; (define-key evil-insert-state-map "\C-n" 'next-line)
-    ;; (define-key evil-insert-state-map "\C-k" 'kill-line)
-    (define-key evil-emacs-state-map (kbd "s-f") 'forward-word)
-    (define-key evil-insert-state-map (kbd "s-f") 'forward-word)
-    (define-key evil-emacs-state-map (kbd "s-b") 'backward-word)
-    (define-key evil-insert-state-map (kbd "s-b") 'backward-word)
+    (define-key evil-normal-state-map (kbd "g f") 'find-file-in-project-at-point)
+    (define-key evil-normal-state-map (kbd "g F") 'find-file-at-point)
 
     (spacemacs/set-leader-keys "bi" 'ibuffer-other-window)
     (define-key evil-ex-completion-map "\C-a" 'move-beginning-of-line)
@@ -1467,7 +1461,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     ;; prefer two way ediff
     (setq magit-ediff-dwim-show-on-hunks t)
 
-    (setq magit-repository-directories '("~/cocos2d-x/"))
     (setq magit-push-always-verify nil)
 
     (eval-after-load 'magit
