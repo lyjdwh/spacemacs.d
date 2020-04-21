@@ -72,7 +72,21 @@
         (powerthesaurus :location local)
         mw-thesaurus
         langtool
+        (inherit-org :location local)
         ))
+
+(defun zilongshanren-misc/init-inherit-org ()
+  ;; use imenu or counsel-outline to jump outline
+  (use-package inherit-org
+    :load-path "~/bin/inherit-org"
+    :after org
+    :config
+    (with-eval-after-load 'info
+      (add-hook 'Info-mode-hook 'inherit-org-mode))
+
+    (with-eval-after-load 'helpful
+      (add-hook 'helpful-mode-hook 'inherit-org-mode))
+    ))
 
 (defun zilongshanren-misc/init-langtool ()
   (use-package langtool
