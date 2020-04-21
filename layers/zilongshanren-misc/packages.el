@@ -91,7 +91,7 @@
 (defun zilongshanren-misc/init-langtool ()
   (use-package langtool
     :config
-    (setq langtool-language-tool-server-jar "/home/liuyan/bin/LanguageTool-4.9/languagetool-server.jar")
+    (setq langtool-language-tool-server-jar "~/bin/LanguageTool-4.9/languagetool-server.jar")
     (setq langtool-server-user-arguments '("-p" "8082"))
     (setq langtool-default-language "en")
     (add-hook 'text-mode-hook  (lambda ()
@@ -315,7 +315,7 @@
 
 (defun zilongshanren-misc/post-init-terminal-here ()
   (progn
-    (setq terminal-here-terminal-command (list "alacritty"))
+    (setq terminal-here-terminal-command (list "st"))
     ))
 
 (defun zilongshanren-misc/init-keyfreq ()

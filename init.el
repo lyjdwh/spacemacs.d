@@ -76,7 +76,7 @@ This function should only modify configuration layer settings."
      ;; (gtags :disabled-for clojure emacs-lisp javascript latex shell-scripts org markdown python
      ;;        :variables counsel-gtags-auto-update t
      ;;        )
-     (shell :variables shell-default-shell 'ansi-term
+     (shell :variables shell-default-shell 'vterm
             shell-default-term-shell "/usr/bin/zsh")
      ;; docker
      (latex :variables latex-build-command "LaTeX"
@@ -748,6 +748,10 @@ unwanted space when exporting org-mode to hugo markdown."
   (setq scroll-step 1)
   (setq scroll-margin 10)
   (setq scroll-conservatively 10000)
+
+  ;; key chord
+  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+  (key-chord-mode 1)
 
   (spacemacs/toggle-maximize-frame)
   )

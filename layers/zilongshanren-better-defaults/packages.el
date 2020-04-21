@@ -81,6 +81,10 @@
                eaf-interleave-sync-previous-note eaf-interleave-add-note eaf-interleave-open-notes-file eaf-interleave-quit)
 
     :diminish eaf-mode
+    :init
+    ;; set eaf as default browse
+    (setq browse-url-browser-function 'eaf-open-browser)
+    (defalias 'browse-web #'eaf-open-browser)
     :custom
     (eaf-find-alternate-file-in-dired t)
     (eaf-python-command "/usr/bin/python3")
@@ -97,9 +101,7 @@
     (eaf-setq eaf-browser-dark-mode "false")
     (eaf-setq eaf-pdf-dark-mode "false")
     (eaf-setq eaf-mindmap-dark-mode "false")
-    ;; set eaf as default browse
-    (setq browse-url-browser-function 'eaf-open-browser)
-    (defalias 'browse-web #'eaf-open-browser)
+    ;; web
     (eaf-setq eaf-browser-default-zoom "1.25")
     ;; camera
     (eaf-setq eaf-camera-save-path "~/Pictures")
