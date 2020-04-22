@@ -58,6 +58,9 @@
 (defun zilongshanren-programming/init-lpy ()
   (use-package lpy
     :defer t
+    :config
+    ;; fix key conflict between lpy and lsp
+    (define-key lpy-mode-map "(" nil)
     ))
 
 (defun zilongshanren-programming/init-webkit-katex-render ()
