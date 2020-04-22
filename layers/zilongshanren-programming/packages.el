@@ -192,7 +192,8 @@
     (setq read-process-output-max (* 1024 1024 8)) ;; 8mb
 
     (setq lsp-ui-doc-enable nil)
-    (setq lsp-ui-doc-use-webkit t)
+    ;; (setq lsp-ui-doc-use-webkit t)
+    ;; (setq lsp-eldoc-render-all t)
 
     (setq lsp-ui-imenu-enable nil)
 
@@ -202,6 +203,8 @@
     (setq lsp-enable-folding nil)
     ;;handle yasnippet by myself
     (setq lsp-enable-snippet nil)
+
+    (setq company-lsp-cache-candidates 'auto)
     ;; use ffip instead
     (setq lsp-enable-links nil)
     ;; auto restart lsp
@@ -213,57 +216,10 @@
     (require 'dap-python)
     (setq dap-auto-show-output nil)
 
-    (defun lsp--auto-configure ()
-      "Autoconfigure `lsp-ui', `company-lsp' if they are installed."
-
-      (with-no-warnings
-        (when (functionp 'lsp-ui-mode)
-          (lsp-ui-mode))
-
-        (cond
-         ((eq :none lsp-prefer-flymake))
-         ((and (not (version< emacs-version "26.1")) lsp-prefer-flymake)
-          (lsp--flymake-setup))
-         ((and (functionp 'lsp-ui-mode) (featurep 'flycheck))
-          (require 'lsp-ui-flycheck)
-          (lsp-flycheck-enable t)
-          (flycheck-add-next-checker 'lsp 'python-mypy)
-          ))
-
-        (when (functionp 'company-lsp)
-          (company-mode 1)
-
-          ;; make sure that company-capf is disabled since it is not indented to be
-          ;; used in combination with lsp-mode (see #884)
-          (setq-local company-backends (remove 'company-capf company-backends))
-          (setq company-lsp-cache-candidates auto)
-
-          (when (functionp 'yas-minor-mode)
-            (yas-minor-mode t)))))
-
-    ;; (add-hook 'lsp-after-open-hook 'zilongshanren-refresh-imenu-index)
-
-    ;; (defun hidden-lsp-ui-sideline ()
-    ;;   (interactive)
-    ;;   (if (< (window-width) 180)
-    ;;       (progn
-
-    ;;         (setq lsp-ui-sideline-show-code-actions nil)
-    ;;         (setq lsp-ui-sideline-show-diagnostics nil)
-    ;;         (setq lsp-ui-sideline-show-hover nil)
-    ;;         (setq lsp-ui-sideline-show-symbol nil))
-    ;;     (progn
-
-    ;;       (setq lsp-ui-sideline-show-code-actions nil)
-    ;;       ;; (setq lsp-ui-sideline-show-diagnostics t)
-    ;;       (setq lsp-ui-sideline-show-hover t)
-    ;;       ;; (setq lsp-ui-sideline-show-symbol t)
-    ;;       )))
-
-    ;; (advice-add 'lsp-ui-sideline--run :after 'hidden-lsp-ui-sideline)
-
-    (setq lsp-auto-configure t)
-    (setq lsp-prefer-flymake nil)))
+    (setq lsp-diagnostic-package :flycheck)
+    (lsp-flycheck-enable t)
+    (flycheck-add-next-checker 'lsp 'python-mypy)
+    ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
   (use-package compile-dwim
