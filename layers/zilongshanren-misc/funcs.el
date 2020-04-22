@@ -745,3 +745,46 @@ Enter custom-name or RET to save image with timestamp"
       (if (eq meow-mode t)
           (meow-global-mode -1)))
     ))
+
+;; winum users can use `winum-select-window-by-number' directly.
+(defun my-select-window-by-number (win-id)
+  "Use `ace-window' to select the window by using window index.
+WIN-ID : Window index."
+  (let ((wnd (nth (- win-id 1) (aw-window-list))))
+    (if wnd
+        (aw-switch-to-window wnd)
+      (message "No such window."))))
+
+(defun my-select-window ()
+  (interactive)
+  (let* ((event last-input-event)
+         (key (make-vector 1 event))
+         (key-desc (key-description key)))
+    (my-select-window-by-number
+     (string-to-number (car (nreverse (split-string key-desc "-")))))))
+
+(defun awesome-tab-hide-tab-tab (x)
+  "hide some tabs with regular expression"
+  (let ((name (format "%s" x)))
+    (or
+     ;; Current window is not dedicated window.
+     (window-dedicated-p (selected-window))
+
+     ;; Buffer name not match below blacklist.
+     (string-prefix-p "*epc" name)
+     (string-prefix-p "*helm" name)
+     (string-prefix-p "*Compile-Log*" name)
+     (string-prefix-p "*lsp" name)
+     (string-prefix-p "*flycheck" name)
+     (string-prefix-p "*Messages" name)
+     (string-prefix-p "*spacemacs" name)
+     (string-prefix-p "*Help" name)
+     (string-prefix-p "*helpful" name)
+     (string-prefix-p "*Warnings" name)
+     (string-prefix-p "*scratch" name)
+     (string-prefix-p "*Agenda" name)
+
+     ;; Is not magit buffer.
+     (and (string-prefix-p "magit" name)
+          (not (file-name-extension name)))
+     )))

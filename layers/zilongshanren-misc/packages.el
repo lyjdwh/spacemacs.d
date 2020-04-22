@@ -73,7 +73,16 @@
         mw-thesaurus
         langtool
         (inherit-org :location local)
+        (awesome-tab :location (recipe :fetcher github :repo "manateelazycat/awesome-tab"))
         ))
+
+(defun zilongshanren-misc/init-awesome-tab ()
+  (use-package awesome-tab
+    :config
+    (setq awesome-tab-height 100)
+    (setq awesome-tab-hide-tab-function 'awesome-tab-hide-tab-tab)
+    (awesome-tab-mode t)
+    ))
 
 (defun zilongshanren-misc/init-inherit-org ()
   ;; use imenu or counsel-outline to jump outline
