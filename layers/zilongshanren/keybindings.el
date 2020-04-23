@@ -123,14 +123,26 @@
 
 ;;Must set key to nil to prevent error: Key sequence b m s starts with non-prefix key b m
 (spacemacs/set-leader-keys "bD" 'spacemacs/kill-other-buffers)
+
+;; emacs bookmark can work in any buffer, but only one bookmark for one buffer
+;; bm only work in file buffer, can set multi bookmarks for one buffer
+;; other bookmark
+;; 1. m: evil-set-marker, `: evil-goto-mark
+;; 2. register: point-to-register, jump to register
 (spacemacs/declare-prefix "ob" "Bookmark")
 (spacemacs/set-leader-keys "obs" 'bookmark-set)
 (spacemacs/set-leader-keys "obr" 'bookmark-rename)
 (spacemacs/set-leader-keys "obd" 'bookmark-delete)
-(spacemacs/set-leader-keys "obj" 'counsel-bookmark)
-(spacemacs/set-leader-keys "obJ" 'bookmark-jump-other-window)
+(spacemacs/set-leader-keys "obk" 'counsel-bookmark)
+(spacemacs/set-leader-keys "obK" 'bookmark-jump-other-window)
 (spacemacs/set-leader-keys "obe" 'edit-bookmarks)
 (spacemacs/set-leader-keys "obi" 'bookmark-insert)
+(spacemacs/set-leader-keys
+  "obb" 'bm-toggle
+  "obB" 'bm-show-all
+  "obj" 'bm-next
+  "obJ" 'bm-previous
+  )
 
 (spacemacs/set-leader-keys "od" 'occur-dwim)
 (spacemacs/set-leader-keys "ok" 'zilongshanren-kill-other-persp-buffers)

@@ -74,7 +74,43 @@
         langtool
         (inherit-org :location local)
         (awesome-tab :location (recipe :fetcher github :repo "manateelazycat/awesome-tab"))
+        bm
         ))
+
+(defun zilongshanren-misc/init-bm ()
+  (use-package bm
+    :ensure t
+    :demand t
+    :init
+    ;; restore on load (even before you require bm)
+    (setq bm-restore-repository-on-load t)
+
+    :config
+    (setq bm-annotate-on-create t)
+    (setq bm-cycle-all-buffers t)
+    (setq bm-repository-file "~/.emacs.d/bm-repository")
+
+    ;; save bookmarks
+    (setq-default bm-buffer-persistence t)
+
+    ;; Loading the repository from file when on start up.
+    (add-hook 'after-init-hook 'bm-repository-load)
+
+    ;; Saving bookmarks
+    (add-hook 'kill-buffer-hook #'bm-buffer-save)
+
+    ;; Saving the repository to file when on exit.
+    ;; kill-buffer-hook is not called when Emacs is killed, so we
+    ;; must save all bookmarks first.
+    (add-hook 'kill-emacs-hook #'(lambda nil
+                                   (bm-buffer-save-all)
+                                   (bm-repository-save)))
+
+    ;; Restoring bookmarks
+    (add-hook 'find-file-hooks   #'bm-buffer-restore)
+    (add-hook 'after-revert-hook #'bm-buffer-restore)
+    (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
+  ))
 
 (defun zilongshanren-misc/init-awesome-tab ()
   (use-package awesome-tab
