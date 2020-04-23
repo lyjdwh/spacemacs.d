@@ -335,7 +335,7 @@
 (spacemacs/set-leader-keys "oR" 're-builder)
 
 ;;bbyac
-(spacemacs/declare-prefix "oe" "expand/english")
+(spacemacs/declare-prefix "oe" "expand/english/duplicate")
 (spacemacs/set-leader-keys "oee" 'bbyac-expand-symbols)
 (spacemacs/set-leader-keys "oes" 'bbyac-expand-substring)
 (spacemacs/set-leader-keys "oel" 'bbyac-expand-lines)
@@ -343,6 +343,8 @@
 (spacemacs/set-leader-keys "oew" 'powerthesaurus-lookup-word-at-point)
 (spacemacs/set-leader-keys "oeW" 'powerthesaurus-lookup-word)
 (spacemacs/set-leader-keys "oem" 'mw-thesaurus-lookup-at-point)
+(spacemacs/set-leader-keys "oed" 'crux-duplicate-current-line-or-region)
+(spacemacs/set-leader-keys "oeD" 'crux-duplicate-and-comment-current-line-or-region)
 (define-key mw-thesaurus-mode-map [remap evil-record-macro] #'mw-thesaurus--quit)
 
 ;; evil avy
