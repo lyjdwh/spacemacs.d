@@ -130,7 +130,11 @@
       (add-hook 'Info-mode-hook 'inherit-org-mode))
 
     (with-eval-after-load 'helpful
-      (add-hook 'helpful-mode-hook 'inherit-org-mode))
+      (add-hook 'helpful-mode-hook 'inherit-org-mode)
+      (evil-define-key '(evilified normal) helpful-mode-map
+        (kbd "<tab>") 'org-cycle
+        (kbd "gj") 'outline-next-visible-heading
+        (kbd "gk") 'outline-previous-visible-heading))
     ))
 
 (defun zilongshanren-misc/init-langtool ()
