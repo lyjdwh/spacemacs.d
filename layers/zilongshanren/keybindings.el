@@ -342,6 +342,7 @@
 
 ;; thing edit
 (spacemacs/set-leader-keys "k" 'one-key-menu-thing-edit)
+(spacemacs/set-leader-keys "R" 'one-key-menu-thing-edit-replace)
 
 ;; re-builder, a nice interactive tool for building regular expressions
 (spacemacs/set-leader-keys "oR" 're-builder)

@@ -257,10 +257,40 @@
                 (("N" . "Cut number") . thing-cut-number)
                 ))
 
+        (setq one-key-menu-thing-edit-replace-alist
+              '(
+                ;; Copy.
+                (("w" . "Replace Word") . thing-replace-word)
+                (("s" . "Replace Symbol") . thing-replace-symbol)
+                (("m" . "Replace Email") . thing-replace-email)
+                (("f" . "Replace Filename") . thing-replace-filename)
+                (("u" . "Replace URL") . thing-replace-url)
+                (("x" . "Replace Sexp") . thing-replace-sexp)
+                (("g" . "Replace Page") . thing-replace-page)
+                (("t" . "Replace Sentence") . thing-replace-sentence)
+                (("o" . "Replace Whitespace") . thing-replace-whitespace)
+                (("i" . "Replace List") . thing-replace-list)
+                (("c" . "Replace comment") . thing-replace-comment)
+                (("h" . "Replace Function") . thing-replace-defun)
+                (("p" . "Replace Parentheses") . thing-replace-parentheses)
+                (("l" . "Replace Line") . thing-replace-line)
+                (("a" . "Replace To Line Begin") . thing-replace-to-line-beginning)
+                (("e" . "Replace To Line End") . thing-replace-to-line-end)
+                (("b" . "Replace Paragraph") . thing-replace-paragraph)
+                (("n" . "Replace number") . thing-replace-number)
+                ))
+
         (defun one-key-menu-thing-edit ()
           "The `one-key' menu for THING-EDIT."
           (interactive)
-          (one-key-menu "THING-EDIT" one-key-menu-thing-edit-alist t))))))
+          (one-key-menu "THING-EDIT" one-key-menu-thing-edit-alist t))
+
+        (defun one-key-menu-thing-edit-replace ()
+          "The `one-key' menu for THING-EDIT."
+          (interactive)
+          (one-key-menu "THING-EDIT" one-key-menu-thing-edit-replace-alist t))
+
+        ))))
 
 (defun zilongshanren-misc/init-thing-edit ()
   (use-package thing-edit))
