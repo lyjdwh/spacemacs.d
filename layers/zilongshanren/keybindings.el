@@ -139,7 +139,7 @@
 (spacemacs/set-leader-keys "obi" 'bookmark-insert)
 (spacemacs/set-leader-keys
   "obb" 'bm-toggle
-  "obB" 'bm-show-all
+  "obB" 'counsel-bm
   "obj" 'bm-next
   "obJ" 'bm-previous
   )
