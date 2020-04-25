@@ -76,7 +76,15 @@
         (awesome-tab :location (recipe :fetcher github :repo "manateelazycat/awesome-tab"))
         bm
         counsel
+        pdfgrep
         ))
+
+(defun zilongshanren-misc/init-pdfgrep ()
+  (use-package pdfgrep
+    :after pdf-tools
+    :config
+    (pdfgrep-mode)
+    ))
 
 (defun zilongshanren-misc/post-init-counsel ()
   (let ((command

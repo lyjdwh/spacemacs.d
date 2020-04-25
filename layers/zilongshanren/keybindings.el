@@ -324,6 +324,7 @@
 (spacemacs/set-leader-keys-for-major-mode 'pdf-view-mode
   "i" 'org-noter-insert-precise-note
   "c" 'org-noter-create-skeleton
+  "g" 'pdfgrep
   )
 (spacemacs/declare-prefix-for-mode 'org-mode  "mn" "org-noter")
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
