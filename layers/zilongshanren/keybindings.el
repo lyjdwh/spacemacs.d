@@ -416,6 +416,9 @@
 ;; counsel
 (spacemacs/set-leader-keys "ss" 'counsel-grep-or-swiper)
 
+;; separedit
+(spacemacs/set-leader-keys "oE" 'separedit)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)

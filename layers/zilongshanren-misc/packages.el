@@ -77,7 +77,16 @@
         bm
         counsel
         pdfgrep
+        separedit
         ))
+
+(defun zilongshanren-misc/init-separedit ()
+  "if there are nested string or code block, just continue to enter a new edit buffer"
+  (use-package separedit
+    :commands separedit
+    ;; :config
+    ;; (setq separedit-default-mode 'markdown-mode)
+    ))
 
 (defun zilongshanren-misc/init-pdfgrep ()
   (use-package pdfgrep
@@ -200,8 +209,6 @@
 
 (defun zilongshanren-misc/init-meow ()
   (use-package meow
-    :init
-    (meow-global-mode 1)
     :custom
     ;; layout options: qwerty, dvorak, dvp, colemak
     (meow-layout 'qwerty)
