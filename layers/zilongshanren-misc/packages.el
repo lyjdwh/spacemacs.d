@@ -200,6 +200,11 @@
 
 (defun zilongshanren-misc/init-meow ()
   (use-package meow
+    :init
+    (meow-global-mode 1)
+    :custom
+    ;; layout options: qwerty, dvorak, dvp, colemak
+    (meow-layout 'qwerty)
     :config
     (defvar liuyan/mode-now t  "when t, evil-mode is on, when nil, meow mode is on")
     (define-key global-map (kbd "<f7>") 'liuyan/change-mode)
