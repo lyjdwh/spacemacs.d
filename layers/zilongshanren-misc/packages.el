@@ -75,7 +75,19 @@
         (inherit-org :location local)
         (awesome-tab :location (recipe :fetcher github :repo "manateelazycat/awesome-tab"))
         bm
+        counsel
         ))
+
+(defun zilongshanren-misc/post-init-counsel ()
+  (let ((command
+         (cond
+          ((executable-find "rg")
+           "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
+          ((executable-find "pt")
+           "pt -zS --nocolor --nogroup -e %s")
+          (t counsel-grep-base-command))))
+    (setq counsel-grep-base-command command))
+  )
 
 (defun zilongshanren-misc/init-bm ()
   (use-package bm

@@ -412,6 +412,9 @@
 (spacemacs/set-leader-keys "bj" 'awesome-tab-ace-jump)
 (spacemacs/set-leader-keys "bJ" 'awesome-fast-switch/body)
 
+;; counsel
+(spacemacs/set-leader-keys "ss" 'counsel-grep-or-swiper)
+
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)
