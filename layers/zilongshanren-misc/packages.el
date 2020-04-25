@@ -60,7 +60,7 @@
         rime
         try
         figlet
-        (thing-edit :location (recipe :fetcher github :repo "manateelazycat/thing-edit"))
+        (thing-edit :location (recipe :fetcher github :repo "lyjdwh/thing-edit"))
         (one-key :location local)
         (grep-dired :location (recipe :fetcher github :repo "manateelazycat/grep-dired"))
         (delete-block :location (recipe :fetcher github :repo "manateelazycat/delete-block"))
@@ -290,14 +290,12 @@
                 (("t" . "Replace Sentence") . thing-replace-sentence)
                 (("o" . "Replace Whitespace") . thing-replace-whitespace)
                 (("i" . "Replace List") . thing-replace-list)
-                (("c" . "Replace comment") . thing-replace-comment)
                 (("h" . "Replace Function") . thing-replace-defun)
                 (("p" . "Replace Parentheses") . thing-replace-parentheses)
                 (("l" . "Replace Line") . thing-replace-line)
-                (("a" . "Replace To Line Begin") . thing-replace-to-line-beginning)
-                (("e" . "Replace To Line End") . thing-replace-to-line-end)
                 (("b" . "Replace Paragraph") . thing-replace-paragraph)
                 (("n" . "Replace number") . thing-replace-number)
+                (("r" . "Replace region/line") . thing-replace-region-or-line)
                 ))
 
         (defun one-key-menu-thing-edit ()
