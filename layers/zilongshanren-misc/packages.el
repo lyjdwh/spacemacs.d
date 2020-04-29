@@ -78,7 +78,31 @@
         counsel
         pdfgrep
         separedit
+        pyim
         ))
+
+(defun zilongshanren-misc/init-pyim ()
+  (use-package pyim
+    :after ivy
+    :config
+    (defun eh-ivy-cregexp (str)
+      (let ((x (ivy--regex-ignore-order str))
+            (case-fold-search nil))
+        (if (listp x)
+            (mapcar (lambda (y)
+                      (if (cdr y)
+                          (list (if (equal (car y) "")
+                                    ""
+                                  (pyim-cregexp-build (car y)))
+                                (cdr y))
+                        (list (pyim-cregexp-build (car y)))))
+                    x)
+          (pyim-cregexp-build x))))
+
+    (setq ivy-re-builders-alist
+          '((t . eh-ivy-cregexp)
+            (spacemacs/counsel-search . spacemacs/ivy--regex-plus)))
+    ))
 
 (defun zilongshanren-misc/init-separedit ()
   "if there are nested string or code block, just continue to enter a new edit buffer"
