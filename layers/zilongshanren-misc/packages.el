@@ -429,6 +429,7 @@
 
 (defun zilongshanren-misc/post-init-zone ()
   (use-package zone
+    :if (display-graphic-p)
     :config
     (zone-when-idle 600)                ; in seconds
     (defun zone-choose (pgm)
