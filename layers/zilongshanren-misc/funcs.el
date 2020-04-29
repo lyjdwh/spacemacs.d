@@ -886,3 +886,10 @@ It has the ability to preview the bookmarks like `swiper-all'."
                   :caller 'counsel-bm
                   )
       (message "%s" "No bookmark now."))))
+
+(defun lisp-state-eval-sexp-end-of-line ()
+  "Evaluate the last sexp at the end of the current line."
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (eval-last-sexp nil)))

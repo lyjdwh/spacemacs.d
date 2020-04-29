@@ -44,7 +44,6 @@
         ;; (highlight-global :location (recipe :fetcher github :repo "gle-dai/highlight-global"))
         (highlight-global :location local)
         symbol-overlay
-        ;; browse-at-remote
         chinese-conv
         ;; chinese-wbim
         lispyville
@@ -512,11 +511,6 @@
                     'spacemacs/helm-buffers-smart-do-search-region-or-symbol)))
            new-bindings)
           (setq ad-return-value (cons new-msg new-bindings)))))))
-
-(defun zilongshanren-misc/init-browse-at-remote ()
-  (use-package browse-at-remote
-    :defer t
-    :init (spacemacs/set-leader-keys "gho" 'browse-at-remote)))
 
 (defun zilongshanren-misc/init-highlight-global ()
   (use-package highlight-global
@@ -1199,6 +1193,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key evil-normal-state-map (kbd "M-y") 'counsel-yank-pop)
     (define-key evil-normal-state-map (kbd "g f") 'find-file-in-project-at-point)
     (define-key evil-normal-state-map (kbd "g F") 'find-file-at-point)
+    (define-key evil-normal-state-map (kbd "g r") 'xref-find-references)
 
     (spacemacs/set-leader-keys "bi" 'ibuffer-other-window)
     (define-key evil-ex-completion-map "\C-a" 'move-beginning-of-line)
