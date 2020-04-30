@@ -943,3 +943,10 @@ It has the ability to preview the bookmarks like `swiper-all'."
   (save-excursion
     (end-of-line)
     (eval-last-sexp nil)))
+
+(defun my-youdao-search-at-point ()
+  "Search word at point and display result with `posframe', `pos-tip', or buffer."
+  (interactive)
+  (if (display-graphic-p)
+      (youdao-dictionary-search-at-point-posframe)
+    (youdao-dictionary-search-at-point)))

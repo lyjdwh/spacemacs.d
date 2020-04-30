@@ -182,7 +182,7 @@
 (spacemacs/set-leader-keys "oll" 'zilongshanren/load-my-layout)
 (spacemacs/set-leader-keys "ols" 'zilongshanren/save-my-layout)
 ;; (spacemacs/set-leader-keys "ob" 'popwin:display-last-buffer)
-(spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point-posframe)
+(spacemacs/set-leader-keys "oy" 'my-youdao-search-at-point)
 (spacemacs/set-leader-keys "oY" 'youdao-dictionary-search-from-input)
 (spacemacs/set-leader-keys "bM" 'spacemacs/switch-to-messages-buffer)
 (spacemacs/set-leader-keys "sS" 'spacemacs/swiper-region-or-symbol)
