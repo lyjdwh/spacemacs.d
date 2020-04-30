@@ -295,8 +295,8 @@
 
 ;; proxy
 (spacemacs/set-leader-keys
-  "otp" 'set-proxy
-  "otP" 'unset-proxy
+  "otp" 'proxy-socks-toggle
+  "otP" 'proxy-http-toggle
   )
 
 ;; google

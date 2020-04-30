@@ -48,3 +48,6 @@
 
 
 (setq user-mail-address "lyjdwh@gmail.com")
+
+(setq http-proxy "127.0.0.1:12333")
+(setq socks-noproxy nil)
