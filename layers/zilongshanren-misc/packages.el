@@ -78,7 +78,17 @@
         pdfgrep
         separedit
         pyim
+        key-chord
         ))
+
+(defun zilongshanren-misc/init-key-chord ()
+  (use-package key-chord
+    :config
+    (setq key-chord-two-keys-delay 0.2)
+    (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+    (key-chord-define evil-insert-state-map "js" 'hydra-dvp-symbols/body)
+    (key-chord-mode 1)
+    ))
 
 (defun zilongshanren-misc/init-pyim ()
   (use-package pyim

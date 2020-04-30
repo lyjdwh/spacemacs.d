@@ -747,10 +747,6 @@ unwanted space when exporting org-mode to hugo markdown."
   (setq scroll-margin 10)
   (setq scroll-conservatively 10000)
 
-  ;; key chord
-  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-  (key-chord-mode 1)
-
   (spacemacs/toggle-maximize-frame)
   )
 

@@ -89,6 +89,8 @@
 (define-key evil-normal-state-map (kbd "-") nil)
 (define-key evil-visual-state-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
 (define-key evil-visual-state-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
+(evil-define-key 'normal emacs-lisp-mode-map (kbd "gh") 'helpful-at-point)
+(evil-define-key 'normal spacemacs-python-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
 
 (bb/define-key evil-normal-state-map
   "+" 'evil-numbers/inc-at-pt
@@ -418,6 +420,42 @@
 
 ;; separedit
 (spacemacs/set-leader-keys "oE" 'separedit)
+
+;; shiftless
+(defun dvp-number-0 () (interactive) (insert ")"))
+(defun dvp-number-1 () (interactive) (insert "!"))
+(defun dvp-number-2 () (interactive) (insert "@"))
+(defun dvp-number-3 () (interactive) (insert "#"))
+(defun dvp-number-4 () (interactive) (insert "$"))
+(defun dvp-number-5 () (interactive) (insert "%"))
+(defun dvp-number-6 () (interactive) (insert "^"))
+(defun dvp-number-7 () (interactive) (insert "&"))
+(defun dvp-number-8 () (interactive) (insert "*"))
+(defun dvp-number-9 () (interactive) (insert "("))
+(defun dvp-number-slash () (interactive) (insert "?"))
+(defun dvp-number-colon () (interactive) (insert ":"))
+(defun dvp-number-plus () (interactive) (insert "+"))
+(defun dvp-number-close-curly-1 () (interactive) (insert "{"))
+(defun dvp-number-close-curly-2 () (interactive) (insert "}"))
+
+(defhydra hydra-dvp-symbols (global-map ";")
+  "DVP symbols"
+  ("1" dvp-number-1 "!")
+  ("2" dvp-number-2 "@")
+  ("3" dvp-number-3 "#")
+  ("4" dvp-number-4 "$")
+  ("5" dvp-number-5 "5")
+  ("6" dvp-number-6 "^")
+  ("7" dvp-number-7 "&")
+  ("8" dvp-number-8 "*")
+  ("9" dvp-number-9 "(")
+  ("0" dvp-number-0 ")")
+  ("-" dvp-number-minus "+")
+  ("/" dvp-number-slash "?")
+  (";" dvp-number-colon ":")
+  ("[" dvp-number-close-curly-1 "{")
+  ("]" dvp-number-close-curly-2 "}")
+  ("q" nil "quit"))
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
