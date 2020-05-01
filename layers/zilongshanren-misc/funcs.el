@@ -54,23 +54,6 @@
         ;; force update evil keymaps after git-timemachine-mode loaded
         (add-hook (quote ,(intern (concat m "-mode-hook"))) #'evil-normalize-keymaps))))
 
-(defun locate-current-file-in-explorer ()
-  (interactive)
-  (cond
-   ;; In buffers with file name
-   ((buffer-file-name)
-    (shell-command (concat "start explorer /e,/select,\"" (replace-regexp-in-string "/" "\\\\" (buffer-file-name)) "\"")))
-   ;; In dired mode
-   ((eq major-mode 'dired-mode)
-    (shell-command (concat "start explorer /e,\"" (replace-regexp-in-string "/" "\\\\" (dired-current-directory)) "\"")))
-   ;; In eshell mode
-   ((eq major-mode 'eshell-mode)
-    (shell-command (concat "start explorer /e,\"" (replace-regexp-in-string "/" "\\\\" (eshell/pwd)) "\"")))
-   ;; Use default-directory as last resource
-   (t
-    (shell-command (concat "start explorer /e,\"" (replace-regexp-in-string "/" "\\\\" default-directory) "\"")))))
-
-
 ;; insert ; at the end of current line
 (defun zilongshanren/insert-semicolon-at-the-end-of-this-line ()
   (interactive)
@@ -105,11 +88,11 @@
 
 (defun zilongshanren/load-my-layout ()
   (interactive)
-  (persp-load-state-from-file (concat persp-save-dir "zilong")))
+  (persp-load-state-from-file (concat persp-save-dir "liuyan")))
 
 (defun zilongshanren/save-my-layout ()
   (interactive)
-  (persp-save-state-to-file (concat persp-save-dir "zilong")))
+  (persp-save-state-to-file (concat persp-save-dir "liuyan")))
 
 ;; http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
 ;; ;FIXME: make it work with zsh
@@ -231,7 +214,7 @@ org-files and bookmarks"
                    ("Search" . (lambda () (call-interactively #'engine/search-google)))
                    ("Calculator" . (lambda () (helm-calcul-expression)))
                    ("Run current flie" . (lambda () (zilongshanren/run-current-file)))
-                   ;; ("Blog" . browse-hugo-maybe)
+                   ("Blog" . browse-hugo-maybe)
                    ))
     (candidate-number-limit)
     (action . (("Open" . (lambda (x) (funcall x)))))))
@@ -248,21 +231,6 @@ e.g. Sunday, September 17, 2000."
   (interactive)                 ; permit invocation in minibuffer
   (insert (format-time-string "%A, %B %e, %Y")))
 
-;; https://github.com/syohex/emacs-browser-refresh/blob/master/browser-refresh.el
-(defun zilongshanren/browser-refresh--chrome-applescript ()
-  (interactive)
-  (do-applescript
-   (format
-    "
-  tell application \"Google Chrome\"
-    set winref to a reference to (first window whose title does not start with \"Developer Tools - \")
-    set winref's index to 1
-    reload active tab of winref
-  end tell
-" )))
-
-
-
 (defun zilongshanren/open-file-with-projectile-or-counsel-git ()
   (interactive)
   (if (zilongshanren/git-project-root)
@@ -273,39 +241,13 @@ e.g. Sunday, September 17, 2000."
 
 (defun zilongshanren/pomodoro-notification ()
   "show notifications when pomodoro end"
-  (if (spacemacs/system-is-mswindows)
-      (progn (add-hook 'org-pomodoro-finished-hook '(lambda () (sound-wav-play (expand-file-name "~/.spacemacs.d/game_win.wav"))))
-             (add-hook 'org-pomodoro-short-break-finished-hook '(lambda () (sound-wav-play (expand-file-name "~/.spacemacs.d/game_win.wav"))))
-             (add-hook 'org-pomodoro-long-break-finished-hook '(lambda () (sound-wav-play (expand-file-name "~/.spacemacs.d/game_win.wav")))))
-    (progn (add-hook 'org-pomodoro-finished-hook '(lambda () (zilongshanren/notify-send "'Pomodoro Finished, Have a break!'")))
+  (progn (add-hook 'org-pomodoro-finished-hook '(lambda () (zilongshanren/notify-send "'Pomodoro Finished, Have a break!'")))
            (add-hook 'org-pomodoro-short-break-finished-hook '(lambda () (zilongshanren/notify-send "'Short Break, Ready to Go?'")))
-             (add-hook 'org-pomodoro-long-break-finished-hook '(lambda () (zilongshanren/notify-send "'Long Break, Ready to Go?'" ))))))
+           (add-hook 'org-pomodoro-long-break-finished-hook '(lambda () (zilongshanren/notify-send "'Long Break, Ready to Go?'" )))))
 
 (defun zilongshanren/notify-send (message)
   (shell-command (format "notify-send %s -i emacs -a Pomodoro" message))
   )
-
-(defun zilongshanren/growl-timer (minutes message)
-  "Issue a Growl notification after specified minutes"
-  (interactive (list (read-from-minibuffer "Minutes: " "10")
-                     (read-from-minibuffer "Message: " "Reminder") ))
-  (run-at-time (* (string-to-number minutes) 60)
-               nil
-               (lambda (minute message)
-                 (zilongshanren/growl-notification "Emacs Reminder" message t))
-               minutes
-               message))
-
-(defun zilongshanren/goto-match-paren (arg)
-  "Go to the matching  if on (){}[], similar to vi style of % "
-  (interactive "p")
-  ;; first, check for "outside of bracket" positions expected by forward-sexp, etc
-  (cond ((looking-at "[\[\(\{]") (evil-jump-item))
-        ((looking-back "[\]\)\}]" 1) (evil-jump-item))
-        ;; now, try to succeed from inside of a bracket
-        ((looking-at "[\]\)\}]") (forward-char) (evil-jump-item))
-        ((looking-back "[\[\(\{]" 1) (backward-char) (evil-jump-item))
-        (t nil)))
 
 (defun zilongshanren/hidden-dos-eol ()
   "Do not show ^M in files containing mixed UNIX and DOS line endings."
@@ -318,48 +260,6 @@ e.g. Sunday, September 17, 2000."
   (interactive)
   (goto-char (point-min))
   (while (search-forward "\r" nil t) (replace-match "")))
-
-(defun zilongshanren/insert-chrome-current-tab-url()
-  "Get the URL of the active tab of the first window"
-  (interactive)
-  (insert (zilongshanren/retrieve-chrome-current-tab-url)))
-
-(defun zilongshanren/list-all-tabs ()
-  (interactive)
-  (ivy-read
-   "links:" (split-string (do-applescript "set titleString to \"\"
-tell application \"$1\"
-	set window_list to every window # get the windows
-	repeat with the_window in window_list # for every window
-		set tab_list to every tab in the_window # get the tabs
-		repeat with the_tab in tab_list # for every tab
-			set the_url to the URL of the_tab # grab the URL
-			set titleString to titleString & the_url & \"
-\"
-		end repeat
-	end repeat
-	return titleString
-end tell
-") "\n")
-   :action 'insert
-   :initial-input (ivy-thing-at-point)))
-
-(defun zilongshanren/retrieve-chrome-current-tab-url()
-  "Get the URL of the active tab of the first window"
-  (interactive)
-  (let ((result (do-applescript
-                 (concat
-                  "set frontmostApplication to path to frontmost application\n"
-                  "tell application \"$1\"\n"
-                  "	set theUrl to get URL of active tab of first window\n"
-                  "	set theResult to (get theUrl) \n"
-                  "end tell\n"
-                  "activate application (frontmostApplication as text)\n"
-                  "set links to {}\n"
-                  "copy theResult to the end of links\n"
-                  "return links as string\n"))))
-    (format "%s" (s-chop-suffix "\"" (s-chop-prefix "\"" result)))))
-
 
 ;; remove all the duplicated emplies in current buffer
 (defun zilongshanren/single-lines-only ()
@@ -475,41 +375,8 @@ end tell
   (let ((directory default-directory))
     (locate-dominating-file directory ".git")))
 
-
-;; "http://xuchunyang.me/Opening-iTerm-From-an-Emacs-Buffer/"
-(defun zilongshanren/iterm-shell-command (command &optional prefix)
-  "cd to `default-directory' then run COMMAND in iTerm.
-With PREFIX, cd to project root."
-  (interactive (list (read-shell-command
-                      "iTerm Shell Command: ")
-                     current-prefix-arg))
-  (let* ((dir (if prefix (zilongshanren/git-project-root)
-                default-directory))
-         ;; if COMMAND is empty, just change directory
-         (cmd (format "cd %s ;%s" dir command)))
-    (do-applescript
-     (format
-      "
-  tell application \"iTerm2\"
-       activate
-       set _session to current session of current window
-       tell _session
-            set command to get the clipboard
-            write text \"%s\"
-       end tell
-  end tell
-  " cmd))))
-
-
 (defadvice persp-switch (after my-quit-helm-perspectives activate)
   (setq hydra-deactivate t))
-
-(defun zilongshanren/my-mc-mark-next-like-this ()
-  (interactive)
-  (if (region-active-p)
-      (mc/mark-next-like-this 1)
-    (er/expand-region 1)))
-
 
 (defun wrap-sexp-with-new-round-parens ()
   (interactive)
@@ -655,11 +522,6 @@ Error out if this isn't a GitHub repo."
                       commit)))
     (browse-url url)
     (git-messenger:popup-close)))
-
-(defun zilongshanren/search-in-fireball ()
-  (interactive)
-  (helm-do-ag (expand-file-name "~/Github/fireball/")))
-
 
 (defun zilongshanren/show-current-buffer-major-mode ()
   (interactive)

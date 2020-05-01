@@ -46,9 +46,6 @@
   (let ((ffap-file-finder 'hexl-find-file))
     (call-interactively 'ffap)))
 
-(when (spacemacs/window-system-is-mac)
-  (setq ns-pop-up-frames nil))
-
 (global-prettify-symbols-mode 1)
 (setq-default fill-column 80)
 
@@ -233,13 +230,6 @@ Single Capitals as you type."
     ("grep" . "grep -nrP %s %S ."))
   "An alist of search commands and their corresponding commands
 with options to run in the shell.")
-
-;; search chinse must add this line
-;; https://emacs-china.org/t/emacs-helm-ag/6764
-(if (spacemacs/system-is-mswindows)
-    (modify-coding-system-alist 'process "rg" '(utf-8 . chinese-gbk-dos))
-  (modify-coding-system-alist 'process "rg" '(utf-8 . utf-8)))
-
 
 ;; https://emacs-china.org/t/advice/7566
 (defun chunyang-advice-remove-button (function)

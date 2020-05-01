@@ -25,7 +25,6 @@
         fcitx
         discover-my-major
         ace-window
-        4clojure
         persp-mode
         tiny
         expand-region
@@ -486,8 +485,8 @@
     ))
 
 (defun zilongshanren-misc/post-init-chinese-conv ()
-  (setq chinese-conv-opencc-program "/usr/local/bin/opencc")
-  (setq chinese-conv-opencc-data "/usr/local/share/opencc/"))
+  (setq chinese-conv-opencc-program "/usr/bin/opencc")
+  (setq chinese-conv-opencc-data "/usr/share/opencc/"))
 
 (defun zilongshanren-misc/post-init-expand-region ()
   (with-eval-after-load 'expand-region
@@ -1061,27 +1060,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     :init
     :defer t))
 
-(defun zilongshanren-misc/init-osx-dictionary ()
-  (use-package osx-dictionary
-    :init
-    (progn
-      (evilified-state-evilify osx-dictionary-mode osx-dictionary-mode-map)
-      (setq osx-dictionary-use-chinese-text-segmentation t)
-      (global-set-key (kbd "C-c d") 'osx-dictionary-search-pointer)
-      )))
-
-
-(defun zilongshanren-misc/init-4clojure ()
-  (use-package 4clojure
-    :init
-    (progn
-      (spacemacs/declare-prefix "o4" "4clojure")
-      (spacemacs/set-leader-keys "o4q" '4clojure-open-question)
-      (spacemacs/set-leader-keys "o4n" '4clojure-next-question)
-      (spacemacs/set-leader-keys "o4p" '4clojure-previous-question)
-      (spacemacs/set-leader-keys "o4c" '4clojure-check-answers)
-      )))
-
 (defun zilongshanren-misc/post-init-ace-window ()
   (global-set-key (kbd "C-x C-o") #'ace-window))
 
@@ -1182,9 +1160,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       (backward-char))
 
     (define-key evil-visual-state-map (kbd "y") 'my-evil-yank)
-
-    (define-key evil-normal-state-map
-      (kbd "Y") 'zilongshanren/yank-to-end-of-line)
 
     ;; rebind g,k to gj and gk
     ;; (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
@@ -1470,12 +1445,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       :tags '(hugo deploy)
       :kill-signal 'sigkill
       :kill-process-buffer-on-stop t)
-
-    ;; (defun refresh-chrome-current-tab (beg end length-before)
-    ;;   (call-interactively 'zilongshanren/browser-refresh--chrome-applescript))
-    ;; ;; add watch for prodigy-view-mode buffer change event
-    ;; (add-hook 'prodigy-view-mode-hook
-    ;;           #'(lambda() (set (make-local-variable 'after-change-functions) #'refresh-chrome-current-tab)))
 
     ))
 

@@ -26,22 +26,14 @@
                                             ("8en" "@~english")
                                             ("8zh" "@~chinese")
                                             ("8sp" "spacemacs")
+
                                             ;; email
                                             ("8me" "lyjdwh@gmail.com")
 
                                             ;; computing tech
                                             ("8wp" "Wikipedia")
                                             ("8ms" "Microsoft")
-                                            ;; ("8g" "Google")
-                                            ("8it" "IntelliType")
-                                            ("8msw" "Microsoft Windows")
-                                            ("8win" "Windows")
-                                            ("8ie" "Internet Explorer")
-                                            ("8ahk" "AutoHotkey")
-                                            ("82dx" "Cocos2D-X")
 
-                                            ;; signature
-                                            ("8zl" "zilongshanren")
                                             ;; emacs regex
                                             ("8d" "\\([0-9]+?\\)")
                                             ("8str" "\\([^\"]+?\\)\"")))
