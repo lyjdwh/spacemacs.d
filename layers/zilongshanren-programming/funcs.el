@@ -254,3 +254,9 @@ comment box."
       (setq-local company-backends (remove 'company-lsp company-backends))
       (setq-local company-backends '((company-dabbrev-code :with company-keywords company-etags)
                                      company-files company-dabbrev)))))
+
+(defun python-set-checker (fn)
+  (funcall fn)
+  (setq flycheck-checker 'python-flake8))
+
+(advice-add 'spacemacs//python-setup-backend :around 'python-set-checker)

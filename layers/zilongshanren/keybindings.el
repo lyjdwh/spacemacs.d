@@ -209,7 +209,7 @@
 (spacemacs/set-leader-keys "ohn" 'hl-todo-next)
 (spacemacs/set-leader-keys "oho" 'hl-todo-occur)
 (spacemacs/set-leader-keys "ohi" 'hl-todo-insert)
-(spacemacs/set-leader-keys "ohh" 'zilongshajren/highlight-dwim)
+(spacemacs/set-leader-keys "ohh" 'zilongshanren/highlight-dwim)
 
 ;; leetcode
 (spacemacs/declare-prefix "aL" "Leetcode")

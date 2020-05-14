@@ -221,7 +221,6 @@
 
     (setq lsp-diagnostic-package :flycheck)
     (lsp-flycheck-enable t)
-    (flycheck-add-next-checker 'lsp 'python-mypy)
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
@@ -481,6 +480,8 @@
     (progn
       (setq flycheck-display-errors-delay 0.9)
       (setq flycheck-idle-change-delay 2.0)
+
+      (flycheck-add-next-checker 'python-flake8 'python-mypy)
       )))
 
 (defun zilongshanren-programming/post-init-eldoc ()
