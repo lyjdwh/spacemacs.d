@@ -33,7 +33,8 @@
 (define-key evil-visual-state-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
 (define-key evil-visual-state-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
 (evil-define-key 'normal emacs-lisp-mode-map (kbd "gh") 'helpful-at-point)
-(evil-define-key 'normal spacemacs-python-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
+;; (evil-define-key 'normal spacemacs-python-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
+(evil-define-key 'normal python-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
 
 (bb/define-key evil-normal-state-map
   "+" 'evil-numbers/inc-at-pt

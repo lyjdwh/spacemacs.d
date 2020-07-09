@@ -176,7 +176,7 @@
 (defun zilongshanren-misc/init-awesome-tab ()
   (use-package awesome-tab
     :config
-    (setq awesome-tab-height 100)
+    (setq awesome-tab-height 140)
     (setq awesome-tab-hide-tab-function 'awesome-tab-hide-tab-tab)
     (awesome-tab-mode t)
     ))

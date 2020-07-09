@@ -74,7 +74,7 @@
     (add-hook 'LaTeX-mode-hook (lambda () (setq-local counsel-dash-docsets '("LaTeX"))))
     (add-hook 'emacs-lisp-mode-hook (lambda () (setq-local counsel-dash-docsets '("Emacs Lisp"))))
     (add-hook 'c++-mode-hook (lambda () (setq-local counsel-dash-docsets '("C++"))))
-    (add-hook 'python-mode-hook (lambda () (setq-local counsel-dash-docsets '("Python 3" "PyTorch" "NumPy" "Matplotlib" "Pandas" "torchvision" "torchtext"))))
+    (add-hook 'python-mode-hook (lambda () (setq-local counsel-dash-docsets '("Python 3" "PyTorch" "NumPy" "Matplotlib" "Pandas" "scikit-learn" "torchvision" "torchtext"))))
     (setq counsel-dash-enable-debugging nil)
     ))
 

@@ -107,7 +107,7 @@
     :custom
     (org-roam-directory deft-dir)
     (org-roam-buffer-position 'left)
-    (org-roam-link-title-format "R:%s")
+    (org-roam-link-title-format "%s")
     (org-roam-completion-system 'ivy)
     (org-roam-buffer-width 0.2)
     :init
@@ -117,7 +117,7 @@
         "aml" 'org-roam
         "amt" 'org-roam-today
         "amf" 'org-roam-find-file
-        "amg" 'org-roam-graph-show
+        "amg" 'org-roam-graph
         "amc" 'org-roam-capture)
 
       (spacemacs/declare-prefix-for-mode 'org-mode "mm" "org-roam")
