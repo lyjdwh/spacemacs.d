@@ -78,7 +78,14 @@
         separedit
         pyim
         key-chord
+        (evil-pinyin :location (recipe :fetcher github :repo "laishulu/evil-pinyin"))
         ))
+
+(defun zilongshanren-misc/init-evil-pinyin ()
+  (use-package evil-pinyin
+    :config
+    (global-evil-pinyin-mode)
+    ))
 
 (defun zilongshanren-misc/init-key-chord ()
   (use-package key-chord
