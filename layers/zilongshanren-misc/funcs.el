@@ -85,6 +85,21 @@
           (backward-char)
           (delete-char 1)))))
 
+(defun zilongshanren/insert-bracket-at-the-end-of-this-line ()
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (insert ")")))
+
+(defun zilongshanren/delete-bracket-at-the-end-of-this-line ()
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (if (looking-back ")")
+        (progn
+          (backward-char)
+          (delete-char 1)))))
+
 
 (defun zilongshanren/load-my-layout ()
   (interactive)

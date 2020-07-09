@@ -381,6 +381,8 @@
   (";" dvp-number-colon ":")
   ("[" dvp-number-close-curly-1 "{")
   ("]" dvp-number-close-curly-2 "}")
+  ("DEL" hungry-delete-backward "delete")
+  ("RET" newline-and-indent "enter" )
   ("q" nil "quit"))
 
 ;; insert
@@ -390,4 +392,6 @@
   "oI:" 'zilongshanren/delete-semicolon-at-the-end-of-this-line
   "oI," 'zilongshanren/insert-comma-at-the-end-of-this-line
   "oI<" 'zilongshanren/delete-comma-at-the-end-of-this-line
+  "oI0" 'zilongshanren/insert-bracket-at-the-end-of-this-line
+  "oI)" 'zilongshanren/delete-bracket-at-the-end-of-this-line
   )
