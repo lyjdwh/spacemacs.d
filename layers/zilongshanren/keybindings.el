@@ -33,8 +33,8 @@
 (define-key evil-visual-state-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
 (define-key evil-visual-state-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
 (evil-define-key 'normal emacs-lisp-mode-map (kbd "gh") 'helpful-at-point)
-;; (evil-define-key 'normal spacemacs-python-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
 (evil-define-key 'normal python-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
+(evil-define-key 'normal c++-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
 
 (bb/define-key evil-normal-state-map
   "+" 'evil-numbers/inc-at-pt
@@ -181,7 +181,7 @@
 (spacemacs/set-leader-keys "op" 'spacemacs/run-pandoc)
 
 ;; speed type
-(spacemacs/set-leader-keys "at" 'speed-type-text)
+(spacemacs/set-leader-keys "att" 'speed-type-text)
 
 ;; color rg
 (spacemacs/declare-prefix "sr" "color-rg")
@@ -243,6 +243,7 @@
 
 ;; org
 (spacemacs/set-leader-keys "ao." 'spacemacs/org-agenda-transient-state/org-agenda-set-tags)
+(spacemacs/set-leader-keys "aoi" 'org-insert-last-stored-link)
 
 ;; ivy-bibex
 ;; (global-set-key (kbd "C-x p") 'ivy-bibtex-my-publications)
@@ -396,3 +397,6 @@
   "oI0" 'zilongshanren/insert-bracket-at-the-end-of-this-line
   "oI)" 'zilongshanren/delete-bracket-at-the-end-of-this-line
   )
+
+;; Frame
+(spacemacs/declare-prefix "F" "frame")

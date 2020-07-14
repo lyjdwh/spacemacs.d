@@ -95,8 +95,8 @@ This function should only modify configuration layer settings."
              python-test-runner '(nose pytest)
              python-backend 'lsp
              python-formatter 'black
-             python-format-on-save t
-             python-sort-imports-on-save t
+             python-format-on-save nil
+             python-sort-imports-on-save nil
              ;; python-lsp-server 'pyls
              python-pipenv-activate  t
              python-lsp-server 'mspyls
@@ -561,7 +561,8 @@ dump."
       (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
 
   ;; enable org-protocol
-  ;; (server-start)
+  (server-start)
+
   (require 'org-protocol)
 
   ;; Setting Chinese Font

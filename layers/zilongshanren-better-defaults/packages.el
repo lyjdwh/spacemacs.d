@@ -89,6 +89,8 @@
     (eaf-find-alternate-file-in-dired t)
     (eaf-python-command "/usr/bin/python3")
     :config
+    (require 'eaf-evil)
+    (require 'eaf-org)
     (setq eaf-buffer-title-format "EAF/%s")
     (setq eaf-grip-token "d95425cda9aa8c58779a312be6fe4662b965a441")
     ;; set proxy
@@ -103,6 +105,7 @@
     (eaf-setq eaf-mindmap-dark-mode "false")
     ;; web
     (eaf-setq eaf-browser-default-zoom "1.25")
+    (eaf-setq eaf-browser-enable-adblocker "true")
     ;; camera
     (eaf-setq eaf-camera-save-path "~/Pictures")
     ;; interleave

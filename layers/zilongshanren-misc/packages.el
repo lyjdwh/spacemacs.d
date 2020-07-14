@@ -283,9 +283,6 @@
     :config
     (with-eval-after-load 'thing-edit
       (progn
-        (defvar one-key-menu-thing-edit-alist nil
-          "The `one-key' menu alist for THING-EDIT.")
-
         (setq one-key-menu-thing-edit-alist
               '(
                 ;; Copy.
@@ -406,9 +403,8 @@
     ;; (setq rime-show-candidate nil)
     ))
 
-(defun zilongshanren-misc/init-posframe ()
-  (use-package posframe
-    :config
+(defun zilongshanren-misc/post-init-posframe ()
+  (progn
     (setq posframe-arghandler #'my-posframe-arghandler)
     (defun my-posframe-arghandler (buffer-or-name arg-name value)
       (let ((info '(:internal-border-width 2 :background-color "#5e5079" :foreground-color "#b2b2b2")))
@@ -582,7 +578,8 @@
       (setq ranger-show-literal nil)
       ))
 
-  (spacemacs/set-leader-keys "ar" 'my-ranger))
+  (spacemacs/set-leader-keys "atrr" 'my-ranger)
+  )
 
 ;; copy from spacemacs helm layer
 (defun zilongshanren-misc/init-helm-ag ()
