@@ -404,3 +404,9 @@
 
 ;; Frame
 (spacemacs/declare-prefix "F" "frame")
+
+;; compile
+(spacemacs/set-leader-keys
+  "cc" 'ivy-taskrunner
+  "cr" 'ivy-taskrunner-rerun-last-command
+  "cR" 'recompile)

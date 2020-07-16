@@ -53,7 +53,19 @@
         counsel-dash
         (webkit-katex-render :location (recipe :fetcher github :repo "fuxialexander/emacs-webkit-katex-render"))
         (lpy :location (recipe :fetcher github :repo "abo-abo/lpy"))
+        taskrunner
+        (ivy-taskrunner :location (recipe :fetcher github :repo "emacs-taskrunner/ivy-taskrunner"))
         ))
+
+(defun zilongshanren-programming/init-taskrunner ()
+  (use-package taskrunner
+    :after ivy-taskrunner
+    ))
+
+(defun zilongshanren-programming/init-ivy-taskrunner ()
+  (use-package ivy-taskrunner
+    :commands ivy-taskrunner ivy-taskrunner-rerun-last-command
+    ))
 
 (defun zilongshanren-programming/init-lpy ()
   (use-package lpy
