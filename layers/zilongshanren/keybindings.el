@@ -302,7 +302,11 @@
 (spacemacs/set-leader-keys
   "oen" 'langtool-goto-next-error
   "oep" 'langtool-goto-previous-error
-  "oec" 'langtool-correct-buffer)
+  "oec" 'langtool-correct-buffer
+  "oet" 'langtool-check
+  "oeT" 'langtool-check-done
+  "oei" 'langtool-show-message-at-point
+  )
 
 ;; awesome tabs
 (defhydra awesome-fast-switch (:hint nil)

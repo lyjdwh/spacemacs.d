@@ -211,8 +211,8 @@
     (setq langtool-language-tool-server-jar "~/bin/LanguageTool-4.9/languagetool-server.jar")
     (setq langtool-server-user-arguments '("-p" "8082"))
     (setq langtool-default-language "en")
-    (add-hook 'text-mode-hook  (lambda ()
-                                 (add-hook 'after-save-hook 'langtool-check nil 'make-it-local)))
+    ;; (add-hook 'text-mode-hook  (lambda ()
+    ;;                              (add-hook 'after-save-hook 'langtool-check nil 'make-it-local)))
     ))
 
 (defun zilongshanren-misc/init-mw-thesaurus ()
