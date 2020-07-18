@@ -18,6 +18,7 @@
     (eaf :location local)
     (snails :location local)
     (company-english-helper :location (recipe :fetcher github :repo "manateelazycat/company-english-helper"))
+    (insert-translated-name :location (recipe :fetcher github :repo "manateelazycat/insert-translated-name"))
     (rotate-text :location local)
     super-save
     )
@@ -44,6 +45,11 @@
 (defun zilongshanren-better-defaults/init-company-english-helper ()
   (use-package company-english-helper
     :commands (toggle-company-english-helper)))
+
+(defun zilongshanren-better-defaults/init-insert-translated-name ()
+  (use-package insert-translated-name
+    :commands insert-translated-name-insert
+    ))
 
 (defun zilongshanren-better-defaults/init-snails ()
   (use-package snails

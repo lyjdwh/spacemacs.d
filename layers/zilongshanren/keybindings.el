@@ -173,6 +173,9 @@
 
 ;; company-english-helper
 (spacemacs/set-leader-keys "ote" 'toggle-company-english-helper)
+;; insert-translated-name
+(spacemacs/set-leader-keys "it" 'insert-translated-name-insert)
+(spacemacs/set-leader-keys "iT" 'insert-translated-name-insert-original-translation	)
 
 ;; rotate-text
 (spacemacs/set-leader-keys "or" 'rotate-text)
