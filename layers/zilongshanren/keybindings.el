@@ -236,6 +236,7 @@
 
 ;; rime，default: ctrl + \
 (spacemacs/set-leader-keys "otr" 'toggle-input-method)
+(define-key rime-mode-map (kbd "M-]") 'rime-force-enable)
 
 ;; lsp
 ;; (define-key spacemacs-lsp-mode-map (kbd "hg") 'lsp-ui-doc-glance)
@@ -413,3 +414,6 @@
   "cc" 'ivy-taskrunner
   "cr" 'ivy-taskrunner-rerun-last-command
   "cR" 'recompile)
+
+;; dash
+(spacemacs/set-leader-keys "oz" 'counsel-dash-at-point)

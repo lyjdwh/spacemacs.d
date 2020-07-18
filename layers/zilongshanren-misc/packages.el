@@ -391,7 +391,11 @@
             rime-predicate-prog-in-code-p
             rime-predicate-punctuation-after-ascii-p
             rime-predicate-punctuation-after-space-cc-p
-            rime-predicate-current-input-punctuation-p))
+            rime-predicate-current-input-punctuation-p
+            rime-predicate-ace-window-p
+            rime-predicate-hydra-p
+            rime-predicate-tex-math-or-command-p
+            ))
 
     ;; 使用 return 推出 inline ascii english
     (setq rime-inline-predicates
