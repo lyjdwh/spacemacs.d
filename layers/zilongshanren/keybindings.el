@@ -417,3 +417,9 @@
 
 ;; dash
 (spacemacs/set-leader-keys "oz" 'counsel-dash-at-point)
+
+;; kaomoji
+(defalias 'insert-kaomoji 'kaomoji)
+(spacemacs/set-leader-keys
+  "im" 'insert-kaomoji-into-kill-ring
+  "iM" 'insert-kaomoji)

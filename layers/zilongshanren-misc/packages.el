@@ -79,7 +79,33 @@
         pyim
         key-chord
         (evil-pinyin :location (recipe :fetcher github :repo "laishulu/evil-pinyin"))
+        kaomoji
         ))
+
+(defun zilongshanren-misc/init-kaomoji ()
+  (use-package kaomoji
+    :commands kaomoji insert-kaomoji-into-kill-ring
+    :config
+    (defun insert-kaomoji-into-kill-ring ()
+      "Insert a kaomoji directly into `kill-ring'."
+      (interactive)
+      (helm :sources (helm-build-sync-source "Please input pattern to search Kaomoji: "
+                       :candidates (lambda () (kaomoji-get-candidates helm-pattern))
+                       :volatile t
+                       :action (lambda (str) (kill-new (kaomoji-process-the-string-to-insert helm-pattern str)))
+                       :candidate-number-limit kaomoji-candidates-limit)
+            :buffer kaomoji-buffer-name
+            :prompt kaomoji-prompt))
+
+    (setq kaomoji-table
+          (append '(
+                    (("shy") . "⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄")
+                    (("smile") . "ヽ( ^∀^)ﾉ")
+                    (("smile") . "( ´∀`)")
+                    (("angry") . "(ﾉ｀⊿´)ﾉ")
+                    )
+                    kaomoji-table))
+    ))
 
 (defun zilongshanren-misc/init-evil-pinyin ()
   (use-package evil-pinyin
