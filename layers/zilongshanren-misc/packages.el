@@ -80,7 +80,15 @@
         key-chord
         (evil-pinyin :location (recipe :fetcher github :repo "laishulu/evil-pinyin"))
         kaomoji
+        magit-delta
         ))
+
+(defun zilongshanren-misc/init-magit-delta ()
+  (use-package magit-delta
+    :after magit
+    :config
+    (magit-delta-mode 1)
+    ))
 
 (defun zilongshanren-misc/init-kaomoji ()
   (use-package kaomoji
