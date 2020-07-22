@@ -112,8 +112,13 @@
 (spacemacs/declare-prefix "ol" "layout")
 (spacemacs/set-leader-keys "oll" 'zilongshanren/load-my-layout)
 (spacemacs/set-leader-keys "ols" 'zilongshanren/save-my-layout)
+
+;; youdao
 (spacemacs/set-leader-keys "oy" 'my-youdao-search-at-point)
 (spacemacs/set-leader-keys "oY" 'youdao-dictionary-search-from-input)
+(spacemacs/set-leader-keys "ow" 'youdao-dictionary-play-voice-at-point)
+(spacemacs/set-leader-keys "oW" 'youdao-dictionary-play-voice-from-input)
+
 (spacemacs/set-leader-keys "bM" 'spacemacs/switch-to-messages-buffer)
 (spacemacs/set-leader-keys "sS" 'spacemacs/swiper-region-or-symbol)
 
@@ -176,6 +181,7 @@
 ;; insert-translated-name
 (spacemacs/set-leader-keys "it" 'insert-translated-name-insert)
 (spacemacs/set-leader-keys "iT" 'insert-translated-name-insert-original-translation	)
+(spacemacs/set-leader-keys "ir" 'insert-translated-region-replace)
 
 ;; rotate-text
 (spacemacs/set-leader-keys "or" 'rotate-text)

@@ -48,7 +48,12 @@
 
 (defun zilongshanren-better-defaults/init-insert-translated-name ()
   (use-package insert-translated-name
-    :commands insert-translated-name-insert
+    :commands insert-translated-name-insert insert-translated-region-replace insert-translated-name-insert-original-translation
+    :config
+    (defun insert-translated-region-replace ()
+      "translate Chinese to English and replace it "
+      (interactive)
+      (insert-translated-name-replace-symbol "comment"))
     ))
 
 (defun zilongshanren-better-defaults/init-snails ()

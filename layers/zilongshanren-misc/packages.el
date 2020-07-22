@@ -460,7 +460,11 @@
             youdao-dictionary-search-history-file
             (concat spacemacs-cache-directory ".youdao")
             ;; Enable Chinese word segmentation support
-            youdao-dictionary-use-chinese-word-segmentation t))))
+            youdao-dictionary-use-chinese-word-segmentation t)
+
+      (define-key youdao-dictionary-mode-map
+        (kbd "s") #'youdao-dictionary-search-from-input)
+      )))
 
 (defun zilongshanren-misc/init-leetcode ()
   (use-package leetcode
