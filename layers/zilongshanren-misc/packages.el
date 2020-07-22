@@ -67,7 +67,7 @@
         (meow :location (recipe :fetcher github :repo "DogLooksGood/meow") )
         evil-snipe
         forge
-        (powerthesaurus :location local)
+        (powerthesaurus :location (recipe :fetcher github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
         mw-thesaurus
         langtool
         (inherit-org :location local)
@@ -260,7 +260,6 @@
 
 (defun zilongshanren-misc/init-powerthesaurus ()
   (use-package powerthesaurus
-    :load-path "/home/liuyan/bin/emacs-powerthesaurus"
     :commands (powerthesaurus-lookup-word powerthesaurus-lookup-word-at-point
                                           powerthesaurus-lookup-word-dwim)
     ))

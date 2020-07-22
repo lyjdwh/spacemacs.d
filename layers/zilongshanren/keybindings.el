@@ -265,7 +265,20 @@
   "nc" 'org-noter-sync-current-note
   "nj" 'org-noter-sync-next-note
   "nk" 'org-noter-sync-prev-note)
-(spacemacs/set-leader-keys "aon" 'org-noter)
+
+(defalias 'org-insert-src-block 'zilongshanren/org-insert-src-block)
+(defalias 'org-archive-done-tasks 'zilongshanren/org-archive-done-tasks)
+(defalias 'capture-screenshot 'zilongshanren/capture-screenshot)
+
+(spacemacs/set-leader-keys-for-major-mode 'org-mode
+  "ia" 'org-insert-src-block
+  "iS" 'capture-screenshot
+  )
+
+(spacemacs/set-leader-keys
+  "aon" 'org-noter
+  "aod" 'org-archive-done-tasks
+  )
 
 ;; org ref
 ;; how to add new bibtex entry
@@ -413,7 +426,9 @@
 (spacemacs/set-leader-keys
   "cc" 'ivy-taskrunner
   "cr" 'ivy-taskrunner-rerun-last-command
-  "cR" 'recompile)
+  "cR" 'recompile
+  "ca" 'ivy-taskrunner-config-files
+  )
 
 ;; dash
 (spacemacs/set-leader-keys "oz" 'counsel-dash-at-point)
