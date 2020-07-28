@@ -56,6 +56,7 @@
         youdao-dictionary
         (posframe :location (recipe :fetcher github :repo "tumashu/posframe") )
         rime
+        sis
         try
         figlet
         (thing-edit :location (recipe :fetcher github :repo "lyjdwh/thing-edit"))
@@ -402,6 +403,25 @@
   (use-package try
     :ensure t
     :defer t
+    ))
+
+(defun zilongshanren-misc/init-sis ()
+  (use-package sis
+    ;; :hook
+    ;; enable the /follow context/ and /inline region/ mode for specific buffers
+    ;; (((text-mode prog-mode) . sis-follow-context-mode)
+    ;;  ((text-mode prog-mode) . sis-inline-mode))
+
+    :config
+    (sis-ism-lazyman-config nil nil 'fcitx5)
+
+    ;; enable the /respect/ mode
+    (sis-global-respect-mode t)
+    ;; enable the /follow context/ mode for all buffers
+    (sis-global-follow-context-mode t)
+    ;; enable the /inline english/ mode for all buffers
+    (sis-global-inline-mode t)
+    (setq sis-inline-with-other	t)
     ))
 
 (defun zilongshanren-misc/init-rime ()
