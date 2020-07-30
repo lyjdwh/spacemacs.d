@@ -82,7 +82,20 @@
         (evil-pinyin :location (recipe :fetcher github :repo "laishulu/evil-pinyin"))
         kaomoji
         magit-delta
+        (english-teacher :location (recipe :fetcher github :repo "loyalpartner/english-teacher.el"))
         ))
+
+(defun zilongshanren-misc/init-english-teacher ()
+  (use-package english-teacher
+    :commands english-teacher-follow-mode
+    ;; :hook ((Info-mode
+    ;;         elfeed-show-mode
+    ;;         eww-mode
+    ;;         Man-mode
+    ;;         Woman-Mode) . english-teacher-follow-mode)
+    :config
+    (setq english-teacher-show-result-function 'english-teacher-posframe-show-result-function)
+    ))
 
 (defun zilongshanren-misc/init-magit-delta ()
   (use-package magit-delta

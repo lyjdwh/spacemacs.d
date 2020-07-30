@@ -902,3 +902,16 @@ You can use \\&, \\N to refer matched text."
         (setq inline-or-region-replace-overlay (make-overlay (match-beginning 0) (match-end 0)))
         (overlay-put inline-or-region-replace-overlay 'face '(:strike-through t :background "#75000F" :foreground "red"))
         (overlay-put inline-or-region-replace-overlay 'after-string (propertize replace 'face '(:background "#078A00")))))))
+
+(defun english-teacher-posframe-show-result-function (origin translation)
+  (require 'posframe)
+  (when (posframe-workable-p)
+    (posframe-show
+     "*english-teacher*"
+     :string (concat (symbol-name english-teacher-backend) "\n" origin "\n" translation)
+     :timeout 100
+     :poshandler 'posframe-poshandler-point-bottom-left-corner
+     :internal-border-width 10)
+    (unwind-protect
+        (push (read-event) unread-command-events)
+      (posframe-delete "*english-teacher*"))))

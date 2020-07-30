@@ -447,3 +447,6 @@
 
 ;; inline-replace
 (spacemacs/set-leader-keys "srr" 'inline-or-region-replace)
+
+;; english teacher
+(spacemacs/set-leader-keys "ott" 'english-teacher-follow-mode)
