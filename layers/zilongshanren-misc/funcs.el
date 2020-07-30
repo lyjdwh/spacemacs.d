@@ -8,6 +8,20 @@
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
+
+(defvar inline-or-region-replace-last-input "")
+(defvar inline-or-region-replace-history nil)
+(defvar inline-or-region-replace-count 1)
+(defvar inline-or-region-replace-original-buffer nil)
+(defvar inline-or-region-replace-overlay nil)
+(defvar inline-or-region-replace-beg nil)
+(defvar inline-or-region-replace-end nil)
+
+(defvar inline-or-region-replace-minibuffer-map (let ((map minibuffer-local-map))
+                                        (define-key map (kbd "C-p") #'inline-or-region-replace-previous)
+                                        (define-key map (kbd "C-n") #'inline-or-region-replace-next)
+                                        map))
+
 (defun browse-hugo-maybe ()
   (interactive)
   (let ((hugo-service-name "Hugo Server")
@@ -827,3 +841,64 @@ It has the ability to preview the bookmarks like `swiper-all'."
   (if (display-graphic-p)
       (youdao-dictionary-search-at-point-posframe)
     (youdao-dictionary-search-at-point)))
+
+(defun inline-or-region-replace-previous ()
+  "Previous match."
+  (interactive)
+  (when (> inline-or-region-replace-count 1)
+    (decf inline-or-region-replace-count)))
+
+(defun inline-or-region-replace-next ()
+  "Next match."
+  (interactive)
+  (incf inline-or-region-replace-count))
+
+(defun inline-or-region-replace ()
+  "Search for the matching REGEXP COUNT times before END.
+You can use \\&, \\N to refer matched text."
+  (interactive)
+  (condition-case nil
+      (save-excursion
+        (setq inline-or-region-replace-beg (car (crux-get-positions-of-line-or-region)))
+        (setq inline-or-region-replace-end (cdr (crux-get-positions-of-line-or-region)))
+
+        (setq inline-or-region-replace-original-buffer (current-buffer))
+        (add-hook 'post-command-hook #'inline-or-region-replace-highlight)
+
+        (let* ((minibuffer-local-map inline-or-region-replace-minibuffer-map)
+               (input (read-string "regexp/replacement: " nil 'inline-or-region-replace-history))
+               (replace (or (nth 1 (split-string input "/")) "")))
+
+          (goto-char inline-or-region-replace-beg)
+          (re-search-forward (car (split-string input "/")) inline-or-region-replace-end t inline-or-region-replace-count)
+
+          (unless (equal input inline-or-region-replace-last-input)
+            (push input inline-or-region-replace-history)
+            (setq inline-or-region-replace-last-input input))
+          (remove-hook 'post-command-hook #'inline-or-region-replace-highlight)
+          (delete-overlay inline-or-region-replace-overlay)
+          (replace-match replace)
+          (setq inline-or-region-replace-count 1)))
+    ((quit error)
+     (delete-overlay inline-or-region-replace-overlay)
+     (remove-hook 'post-command-hook #'inline-or-region-replace-highlight)
+     (setq inline-or-region-replace-count 1))))
+
+(defun inline-or-region-replace-highlight ()
+  "Highlight matched text and replacement."
+  (when inline-or-region-replace-overlay
+    (delete-overlay inline-or-region-replace-overlay))
+  (when (>= (point-max) (length "regexp/replacement: "))
+    (let* ((input (buffer-substring-no-properties (1+ (length "regexp/replacement: ")) (point-max)))
+           (replace (or (nth 1 (split-string input "/")) "")))
+      (with-current-buffer inline-or-region-replace-original-buffer
+
+        (goto-char inline-or-region-replace-beg)
+        ;; if no match and count is greater than 1, try to decrease count
+        ;; this way if there are only 2 match, you can't increase count to anything greater than 2
+        (while (and (not (re-search-forward (car (split-string input "/")) inline-or-region-replace-end t inline-or-region-replace-count))
+                    (> inline-or-region-replace-count 1))
+          (decf inline-or-region-replace-count))
+        (setq inline-or-region-replace-overlay (make-overlay (match-beginning 0) (match-end 0)))
+        (overlay-put inline-or-region-replace-overlay 'face '(:strike-through t :background "#75000F" :foreground "red"))
+        (overlay-put inline-or-region-replace-overlay 'after-string (propertize replace 'face '(:background "#078A00")))))))

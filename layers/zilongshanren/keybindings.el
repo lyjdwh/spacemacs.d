@@ -296,7 +296,7 @@
 
 ;; thing edit
 (spacemacs/set-leader-keys "k" 'one-key-menu-thing-edit)
-(spacemacs/set-leader-keys "R" 'one-key-menu-thing-edit-replace)
+(spacemacs/set-leader-keys "rr" 'one-key-menu-thing-edit-replace)
 
 ;; re-builder, a nice interactive tool for building regular expressions
 (spacemacs/set-leader-keys "oR" 're-builder)
@@ -444,3 +444,6 @@
 (spacemacs/set-leader-keys
   "im" 'insert-kaomoji-into-kill-ring
   "iM" 'insert-kaomoji)
+
+;; inline-replace
+(spacemacs/set-leader-keys "srr" 'inline-or-region-replace)
