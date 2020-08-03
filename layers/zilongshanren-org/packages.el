@@ -22,6 +22,7 @@
     evil-org
     (org-roam :location (recipe :fetcher github :repo "jethrokuan/org-roam"))
     org-roam-server
+    org-roam-bibtex
     ivy-bibtex
     org-noter
     org-ref
@@ -127,7 +128,7 @@
       (spacemacs/set-leader-keys
         "aml" 'org-roam
         "amt" 'org-roam-today
-        "amf" 'org-roam-find-file
+        "amf" 'orb-find-non-ref-file ;; org-roam-find-file
         "amg" 'org-roam-graph
         "amc" 'org-roam-capture)
 
@@ -136,8 +137,8 @@
         "ml" 'org-roam
         "mt" 'org-roam-today
         "mb" 'org-roam-switch-to-buffer
-        "mf" 'org-roam-find-file
-        "mi" 'org-roam-insert
+        "mf" 'orb-find-non-ref-file ;; org-roam-find-file
+        "mi" 'orb-insert-non-ref ;; org-roam-insert
         "mc" 'org-roam-capture))
     :config
     (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)
@@ -153,6 +154,8 @@
 (defun zilongshanren-org/init-org-roam-server ()
   (use-package org-roam-server
     :after org-roam
+    :init
+    (spacemacs/set-leader-keys "ams" 'open-org-roam-server-other-window)
     :config
     (setq org-roam-server-host "127.0.0.1"
           org-roam-server-port 8080
@@ -164,6 +167,21 @@
           org-roam-server-network-label-truncate-length 60
           org-roam-server-network-label-wrap-length 20)
     (org-roam-server-mode 1)
+    ))
+
+(defun zilongshanren-org/init-org-roam-bibtex ()
+  (use-package org-roam-bibtex
+    :after org-roam
+    :hook (org-roam-mode . org-roam-bibtex-mode)
+    :init
+    (spacemacs/set-leader-keys
+      "ama" 'orb-note-actions)
+    :config
+    (setq orb-templates
+          '(("r" "ref" plain (function org-roam-capture--get-point) ""
+             :file-name "papers/${title}"
+             :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n" ; <--
+             :unnarrowed t)))
     ))
 
 (defun zilongshanren-org/post-init-evil-org ()
