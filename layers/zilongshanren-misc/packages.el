@@ -87,7 +87,7 @@
 
 (defun zilongshanren-misc/init-english-teacher ()
   (use-package english-teacher
-    :commands english-teacher-follow-mode
+    :commands english-teacher-follow-mode english-teacher-smart-translate
     ;; :hook ((Info-mode
     ;;         elfeed-show-mode
     ;;         eww-mode

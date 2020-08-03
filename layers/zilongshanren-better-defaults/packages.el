@@ -72,7 +72,7 @@
             ("@" '(snails-backend-imenu))
             ("#" '(snails-backend-current-buffer))
             ("!" '(snails-backend-rg))
-            (":" '(snails-backend-fasd))
+            (":" '(snails-backend-search-pdf))
             ("?" '(snails-backend-eaf-browser-search snails-backend-eaf-github-search snails-backend-google-suggestion snails-backend-eaf-browser-history))))
     (define-key snails-mode-map (kbd "C-j") 'snails-select-next-item)
     (define-key snails-mode-map (kbd "C-k") 'snails-select-prev-item)

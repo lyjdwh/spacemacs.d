@@ -171,7 +171,7 @@
     (lsp-after-open . (lambda ()
                         (setq company-tabnine-max-num-results 4)
                         (add-to-list 'company-transformers 'company//sort-by-tabnine t)
-                        (add-to-list 'company-backends '(company-lsp :with company-yasnippet :with company-tabnine :separate))
+                        (add-to-list 'company-backends '(company-capf :with company-yasnippet :with company-tabnine :separate))
                         ))
     (kill-emacs . company-tabnine-kill-process)
     :config

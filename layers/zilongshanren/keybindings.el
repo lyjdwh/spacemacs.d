@@ -34,7 +34,9 @@
 (define-key evil-visual-state-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
 (evil-define-key 'normal emacs-lisp-mode-map (kbd "gh") 'helpful-at-point)
 (evil-define-key 'normal python-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
+(evil-define-key 'normal python-mode-map (kbd "gH") 'lsp-ui-doc-glance)
 (evil-define-key 'normal c++-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
+(evil-define-key 'normal c++-mode-map (kbd "gH") 'lsp-ui-doc-glance)
 
 (bb/define-key evil-normal-state-map
   "+" 'evil-numbers/inc-at-pt
@@ -178,6 +180,7 @@
 
 ;; company-english-helper
 (spacemacs/set-leader-keys "ote" 'toggle-company-english-helper)
+(spacemacs/set-leader-keys "oey" 'english-teacher-smart-translate)
 ;; insert-translated-name
 (spacemacs/set-leader-keys "it" 'insert-translated-name-insert)
 (spacemacs/set-leader-keys "iT" 'insert-translated-name-insert-original-translation	)
@@ -450,5 +453,6 @@
 
 ;; english teacher
 (spacemacs/set-leader-keys "ott" 'english-teacher-follow-mode)
+
 ;; org roam server
 (spacemacs/set-leader-keys "ams" 'open-org-roam-server-other-window)
