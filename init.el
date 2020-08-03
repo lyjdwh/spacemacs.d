@@ -564,6 +564,7 @@ dump."
   (server-start)
 
   (require 'org-protocol)
+  (require 'org-roam-protocol)
 
   ;; Setting Chinese Font
   (when (and (spacemacs/system-is-mswindows) window-system)

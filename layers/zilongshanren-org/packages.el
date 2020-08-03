@@ -21,6 +21,7 @@
     ob-typescript
     evil-org
     (org-roam :location (recipe :fetcher github :repo "jethrokuan/org-roam"))
+    org-roam-server
     ivy-bibtex
     org-noter
     org-ref
@@ -119,6 +120,7 @@
     (org-roam-link-title-format "%s")
     (org-roam-completion-system 'ivy)
     (org-roam-buffer-width 0.2)
+    (org-roam-tag-sources '(prop all-directories))
     :init
     (progn
       (spacemacs/declare-prefix "am" "org-roam")
@@ -139,6 +141,29 @@
         "mc" 'org-roam-capture))
     :config
     (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)
+    (setq org-roam-capture-templates
+          '(("d" "org-roam" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "%(format-time-string \"%Y-%m-%d--%H-%M-%SZ--${slug}\" (current-time) t)"
+           :head "#+title: ${title}\n"
+           :unnarrowed t))
+          )
+    ))
+
+(defun zilongshanren-org/init-org-roam-server ()
+  (use-package org-roam-server
+    :after org-roam
+    :config
+    (setq org-roam-server-host "127.0.0.1"
+          org-roam-server-port 8080
+          org-roam-server-export-inline-images t
+          org-roam-server-authenticate nil
+          org-roam-server-network-poll t
+          org-roam-server-network-arrows nil
+          org-roam-server-network-label-truncate t
+          org-roam-server-network-label-truncate-length 60
+          org-roam-server-network-label-wrap-length 20)
+    (org-roam-server-mode 1)
     ))
 
 (defun zilongshanren-org/post-init-evil-org ()
@@ -470,6 +495,7 @@
               ("p" "Protocol" entry (file+headline org-agenda-file-note "Web")
                "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
 	          ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Web")
+
                "* %? [[%:link][%:description]] \nCaptured On: %U")
               ("l" "links" entry (file+headline org-agenda-file-note "Quick notes")
                "* TODO [#C] %?\n  %i\n %a \n %U"
