@@ -56,7 +56,26 @@
         (lpy :location (recipe :fetcher github :repo "abo-abo/lpy"))
         taskrunner
         (ivy-taskrunner :location (recipe :fetcher github :repo "emacs-taskrunner/ivy-taskrunner"))
+        counsel-etags
         ))
+
+(defun zilongshanren-programming/init-counsel-etags ()
+  (use-package counsel-etags
+    :ensure t
+    :commands counsel-etags-find-tag counsel-etags-find-tag-at-point counsel-etags-list-tag
+    :config
+    (setq counsel-etags-update-interval 60)
+    (push "build" counsel-etags-ignore-directories)
+    ;; Don't ask before rereading the TAGS files if they have changed
+    (setq tags-revert-without-query t)
+    ;; Don't warn when TAGS files are large
+    (setq large-file-warning-threshold nil)
+    (setq counsel-etags-ctags-program "/usr/local/bin/ctags")
+    (add-hook 'prog-mode-hook
+              (lambda ()
+                (add-hook 'after-save-hook
+                          'counsel-etags-virtual-update-tags 'append 'local)))
+    ))
 
 (defun zilongshanren-programming/init-taskrunner ()
   (use-package taskrunner

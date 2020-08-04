@@ -453,3 +453,10 @@
 
 ;; english teacher
 (spacemacs/set-leader-keys "ott" 'english-teacher-follow-mode)
+
+;; counsel etags
+(spacemacs/set-leader-keys
+  "sac" 'counsel-etags-find-tag-at-point
+  "saC" 'counsel-etags-find-tag
+  "sal" 'counsel-etags-list-tag
+  )
