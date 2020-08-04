@@ -46,6 +46,7 @@
         typescript-mode
         company-tabnine
         lsp-python-ms
+        (lsp-pyright :location (recipe :fetcher github :repo "emacs-lsp/lsp-pyright"))
         auctex
         highlight-indent-guides
         (color-rg :location (recipe :fetcher github :repo "manateelazycat/color-rg"))
@@ -159,6 +160,20 @@
     (setq lsp-python-ms-python-executable-cmd "/home/liuyan/.conda/envs/torch/bin/python")
     ))
 
+(defun zilongshanren-programming/init-lsp-pyright ()
+  (use-package lsp-pyright
+    :ensure t
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-pyright)
+                           (lsp)))      ; or lsp-deferred
+    :config
+    (lsp-register-custom-settings
+     `(("python.pythonPath" "/home/liuyan/.conda/envs/torch/bin/python")
+       ))
+    (setq lsp-pyright-diagnostic-mode "workspace")
+    (setq lsp-pyright-use-library-code-for-types t)
+    ))
+
 (defun zilongshanren-programming/init-company-tabnine ()
   (use-package company-tabnine
     :defer 1
@@ -233,6 +248,10 @@
 
     (setq lsp-diagnostic-package :flycheck)
     (lsp-flycheck-enable t)
+
+    ;; (lsp-register-custom-settings
+    ;;  '(("python.pythonPath" "/home/liuyan/.conda/envs/torch/bin/python")
+    ;;    ("python.venvPath" "/home/liuyan/.conda/envs/torch")))
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()

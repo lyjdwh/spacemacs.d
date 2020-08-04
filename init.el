@@ -97,9 +97,9 @@ This function should only modify configuration layer settings."
              python-formatter 'black
              python-format-on-save nil
              python-sort-imports-on-save nil
-             ;; python-lsp-server 'pyls
+             python-lsp-server 'pyright
              python-pipenv-activate  t
-             python-lsp-server 'mspyls
+             ;; python-lsp-server 'mspyls
              ;; python-lsp-git-root "/home/liuyan/apps/python-language-server"
              )
      ipython-notebook
