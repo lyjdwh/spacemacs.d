@@ -83,7 +83,11 @@
         kaomoji
         magit-delta
         (english-teacher :location (recipe :fetcher github :repo "loyalpartner/english-teacher.el"))
+        pos-tip
         ))
+
+(defun zilongshanren-misc/init-pos-tip ()
+  (use-package pos-tip))
 
 (defun zilongshanren-misc/init-english-teacher ()
   (use-package english-teacher
