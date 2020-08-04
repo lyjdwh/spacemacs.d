@@ -1258,6 +1258,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key evil-normal-state-map (kbd "g f") 'find-file-in-project-at-point)
     (define-key evil-normal-state-map (kbd "g F") 'find-file-at-point)
     (define-key evil-normal-state-map (kbd "g r") 'xref-find-references)
+    (define-key evil-normal-state-map (kbd "g R") 'lsp-ui-peek-find-references)
 
     (spacemacs/set-leader-keys "bi" 'ibuffer-other-window)
     (define-key evil-ex-completion-map "\C-a" 'move-beginning-of-line)

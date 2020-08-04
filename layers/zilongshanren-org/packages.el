@@ -132,7 +132,7 @@
         "amf" 'orb-find-non-ref-file ;; org-roam-find-file
         "amg" 'org-roam-graph
         "amc" 'org-roam-capture
-        "amr" 'org-ref-insert-cite-with-completion)
+        "amr" 'org-ref-helm-insert-cite-link)
 
       (spacemacs/declare-prefix-for-mode 'org-mode "mm" "org-roam")
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
@@ -142,7 +142,7 @@
         "mf" 'orb-find-non-ref-file ;; org-roam-find-file
         "mi" 'orb-insert-non-ref    ;; org-roam-insert
         "mc" 'org-roam-capture
-        "mr" 'org-ref-insert-cite-with-completion
+        "mr" 'org-ref-helm-insert-cite-link
         ))
     :config
     (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)

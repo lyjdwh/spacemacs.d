@@ -34,9 +34,7 @@
 (define-key evil-visual-state-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
 (evil-define-key 'normal emacs-lisp-mode-map (kbd "gh") 'helpful-at-point)
 (evil-define-key 'normal python-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
-(evil-define-key 'normal python-mode-map (kbd "gH") 'lsp-ui-doc-glance)
 (evil-define-key 'normal c++-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
-(evil-define-key 'normal c++-mode-map (kbd "gH") 'lsp-ui-doc-glance)
 (define-key evil-normal-state-map (kbd "gH") 'mouse-hover-tooltip)
 
 (bb/define-key evil-normal-state-map
