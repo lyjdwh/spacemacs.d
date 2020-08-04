@@ -37,6 +37,7 @@
 (evil-define-key 'normal python-mode-map (kbd "gH") 'lsp-ui-doc-glance)
 (evil-define-key 'normal c++-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
 (evil-define-key 'normal c++-mode-map (kbd "gH") 'lsp-ui-doc-glance)
+(define-key evil-normal-state-map (kbd "gH") 'mouse-hover-tooltip)
 
 (bb/define-key evil-normal-state-map
   "+" 'evil-numbers/inc-at-pt

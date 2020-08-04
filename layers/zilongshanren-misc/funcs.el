@@ -927,3 +927,15 @@ You can use \\&, \\N to refer matched text."
   (ivy-posframe-mode -1)
   (helm-posframe-disable)
   )
+(help-at-pt-kbd-string)
+
+(defun mouse-hover-tooltip (&optional arg)
+  "Show mouse hover help info using pos-tip-show."
+  (interactive)
+  (let ((help (help-at-pt-kbd-string)))
+    (if help
+        (pos-tip-show help nil nil nil 0)
+      (if (not arg) (message "No local help at point"))))
+  (unwind-protect
+      (push (read-event) unread-command-events)
+    (pos-tip-hide)))
