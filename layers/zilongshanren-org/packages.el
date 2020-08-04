@@ -66,10 +66,10 @@
     :commands org-noter
     :config
     (setq org-noter-default-notes-file-names '("notes.org")
-          org-noter-notes-search-path '("~/org-notes/notes"))
+          org-noter-notes-search-path '("~/org-notes/notes/papers"))
     (setq org-noter-separate-notes-from-heading t)
-    (setq org-noter-property-doc-file "INTERLEAVE_PDF"
-          org-noter-property-note-location "INTERLEAVE_PAGE_NOTE")
+    ;; (setq org-noter-property-doc-file "INTERLEAVE_PDF"
+    ;;       org-noter-property-note-location "INTERLEAVE_PAGE_NOTE")
     (setq org-noter-always-create-frame nil)
     (setq org-noter-default-heading-title "Org noters")
     ))
@@ -128,9 +128,11 @@
       (spacemacs/set-leader-keys
         "aml" 'org-roam
         "amt" 'org-roam-today
+        "amb" 'org-roam-switch-to-buffer
         "amf" 'orb-find-non-ref-file ;; org-roam-find-file
         "amg" 'org-roam-graph
-        "amc" 'org-roam-capture)
+        "amc" 'org-roam-capture
+        "amr" 'org-ref-insert-cite-with-completion)
 
       (spacemacs/declare-prefix-for-mode 'org-mode "mm" "org-roam")
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
@@ -138,8 +140,10 @@
         "mt" 'org-roam-today
         "mb" 'org-roam-switch-to-buffer
         "mf" 'orb-find-non-ref-file ;; org-roam-find-file
-        "mi" 'orb-insert-non-ref ;; org-roam-insert
-        "mc" 'org-roam-capture))
+        "mi" 'orb-insert-non-ref    ;; org-roam-insert
+        "mc" 'org-roam-capture
+        "mr" 'org-ref-insert-cite-with-completion
+        ))
     :config
     (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)
     (setq org-roam-capture-templates
@@ -177,11 +181,32 @@
     (spacemacs/set-leader-keys
       "ama" 'orb-note-actions)
     :config
+    (setq orb-preformat-keywords
+          '(("citekey" . "=key=") "title" "url" "file" "author-or-editor" "keywords"))
+
+    (setq orb-templates
+          '())
     (setq orb-templates
           '(("r" "ref" plain (function org-roam-capture--get-point) ""
              :file-name "papers/${title}"
-             :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n" ; <--
-             :unnarrowed t)))
+             :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n"
+             :unnarrowed t)
+            ("n" "ref + noter" plain (function org-roam-capture--get-point)
+             ""
+             :file-name "papers/${title}"
+             :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}
+
+- tags ::
+- keywords :: ${keywords}
+
+* ${title}
+:PROPERTIES:
+:Custom_ID: ${citekey}
+:URL: ${url}
+:AUTHOR: ${author-or-editor}
+:NOTER_DOCUMENT: %(orb-process-file-field \"${citekey}\")
+:NOTER_PAGE:
+:END:")))
     ))
 
 (defun zilongshanren-org/post-init-evil-org ()

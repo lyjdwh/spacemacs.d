@@ -453,6 +453,3 @@
 
 ;; english teacher
 (spacemacs/set-leader-keys "ott" 'english-teacher-follow-mode)
-
-;; org roam server
-(spacemacs/set-leader-keys "ams" 'open-org-roam-server-other-window)
