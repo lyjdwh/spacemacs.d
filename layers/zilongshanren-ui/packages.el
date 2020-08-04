@@ -30,17 +30,17 @@
 (defun zilongshanren-ui/init-ivy-posframe ()
   (use-package ivy-posframe
     :diminish
+    :commands ivy-posframe-mode
     :config
     (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-    (ivy-posframe-mode 1)
     ))
 
 (defun zilongshanren-ui/init-helm-posframe ()
   (use-package helm-posframe
     :diminish
+    :commands helm-posframe-enable helm-posframe-disable
     :config
     (setq helm-posframe-poshandler 'posframe-poshandler-frame-center)
-    (helm-posframe-enable)
     ))
 
 (defun zilongshanren-ui/init-zilong-mode-line ()

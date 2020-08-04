@@ -915,3 +915,15 @@ You can use \\&, \\N to refer matched text."
     (unwind-protect
         (push (read-event) unread-command-events)
       (posframe-delete "*english-teacher*"))))
+
+(defun enable-ivy/helm-posframe ()
+  (interactive)
+  (ivy-posframe-mode 1)
+  (helm-posframe-enable)
+  )
+
+(defun disable-ivy/helm-posframe ()
+  (interactive)
+  (ivy-posframe-mode -1)
+  (helm-posframe-disable)
+  )

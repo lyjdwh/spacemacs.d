@@ -460,3 +460,9 @@
   "saC" 'counsel-etags-find-tag
   "sal" 'counsel-etags-list-tag
   )
+
+;; ivy/helm-posframe
+(spacemacs/set-leader-keys
+  "otf" 'enable-ivy/helm-posframe
+  "otF" 'disable-ivy/helm-posframe
+  )
