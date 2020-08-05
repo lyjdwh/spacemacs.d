@@ -21,14 +21,6 @@
     (insert-translated-name :location (recipe :fetcher github :repo "manateelazycat/insert-translated-name"))
     (rotate-text :location local)
     super-save
-    (flywrap :location (recipe :fetcher github :repo "casouri/lunarymacs" :files ("site-lisp/flywrap.el")))
-    ))
-
-(defun zilongshanren-better-defaults/init-flywrap ()
-  (use-package flywrap
-    ;; 中英文折行, ctrl-a/e 跳到显示的行首行尾，而不是跳到实际上的行首行尾。
-    :hook
-    ('text-mode . #'flywrap-mode)
     ))
 
 (defun zilongshanren-better-defaults/init-super-save ()
