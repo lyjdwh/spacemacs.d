@@ -91,6 +91,21 @@
   (use-package maple-header
     :hook (prog-mode . maple-header-mode)
     :config
+    (defun maple-header:template(&optional prefix)
+      "Template with PREFIX."
+      (replace-regexp-in-string
+       "^" (or prefix comment-start)
+       (concat
+        (make-string 70 ?*) "\n"
+        "Copyright © " (substring (current-time-string) -4) " " (user-full-name) "\n"
+        "File Name: " (file-name-nondirectory buffer-file-name) "\n"
+        "Author: " (user-full-name)"\n"
+        "Email: " user-mail-address "\n"
+        "Created: " (format-time-string "%Y-%m-%d %T (%Z)" (current-time)) "\n"
+        "Last Update: \n"
+        "         By: \n"
+        "Description: \n"
+        (make-string 70 ?*))))
     (maple-header-define modify-by
       :find ".*\\(By:\\)\\(.*\\)"
       :replace user-mail-address)
