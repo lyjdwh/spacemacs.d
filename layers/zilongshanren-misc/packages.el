@@ -84,7 +84,34 @@
         magit-delta
         (english-teacher :location (recipe :fetcher github :repo "loyalpartner/english-teacher.el"))
         pos-tip
+        (maple-header :location (recipe :fetcher github :repo "honmaple/maple-emacs" :files ("site-lisp/maple/maple-header.el")))
         ))
+
+(defun zilongshanren-misc/init-maple-header ()
+  (use-package maple-header
+    :hook (prog-mode . maple-header-mode)
+    :config
+    (maple-header-define modify-by
+      :find ".*\\(By:\\)\\(.*\\)"
+      :replace user-mail-address)
+
+    (add-to-list 'maple-header:auto-insert-alist
+                 '((sh-mode . "Shell script") nil
+                    "#!/usr/bin/env bash\n"
+                    (maple-header:template) "\n"))
+
+    (add-to-list 'maple-header:auto-insert-alist
+                 '((c++-mode . "C++ program") nil
+                   "/*"
+                   (string-trim-left
+                    (maple-header:template " "))
+                   "*/\n"))
+
+    (setq maple-header-filename-p t
+          maple-header-email-p nil
+          maple-header-modify-p t
+          maple-header-modify-by-p t)
+    ))
 
 (defun zilongshanren-misc/init-pos-tip ()
   (use-package pos-tip))
