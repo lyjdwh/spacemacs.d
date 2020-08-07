@@ -57,7 +57,15 @@
         taskrunner
         (ivy-taskrunner :location (recipe :fetcher github :repo "emacs-taskrunner/ivy-taskrunner"))
         counsel-etags
+        magit-todos
         ))
+
+(defun zilongshanren-programming/init-magit-todos ()
+  (use-package magit-todos
+    :after magit
+    :config
+    (magit-todos-mode 1)
+    ))
 
 (defun zilongshanren-programming/init-counsel-etags ()
   (use-package counsel-etags
