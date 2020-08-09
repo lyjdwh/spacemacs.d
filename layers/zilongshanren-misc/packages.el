@@ -85,7 +85,15 @@
         (english-teacher :location (recipe :fetcher github :repo "loyalpartner/english-teacher.el"))
         pos-tip
         (maple-header :location (recipe :fetcher github :repo "honmaple/maple-emacs" :files ("site-lisp/maple/maple-header.el")))
+        ace-pinyin
         ))
+
+(defun zilongshanren-misc/init-ace-pinyin ()
+  (use-package ace-pinyin
+    :config
+    (ace-pinyin-global-mode 1)
+    (setq ace-pinyin-enable-punctuation-translation nil)
+    ))
 
 (defun zilongshanren-misc/init-maple-header ()
   (use-package maple-header
