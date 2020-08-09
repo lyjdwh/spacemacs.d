@@ -480,7 +480,7 @@
     ;;  ((text-mode prog-mode) . sis-inline-mode))
 
     :config
-    (sis-ism-lazyman-config nil nil 'fcitx5)
+    (sis-ism-lazyman-config "1" "2" 'fcitx5)
 
     ;; enable the /respect/ mode
     (sis-global-respect-mode t)
@@ -489,6 +489,7 @@
     ;; enable the /inline english/ mode for all buffers
     (sis-global-inline-mode t)
     (setq sis-inline-with-other	t)
+    (setq sis-english-pattern "[a-zA-Z!@#$%^&*()-=_+,./<>?;':\"|\\]")
     ))
 
 (defun zilongshanren-misc/init-rime ()
