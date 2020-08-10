@@ -160,6 +160,8 @@
     :after org-roam
     :init
     (spacemacs/set-leader-keys "ams" 'open-org-roam-server-other-window)
+    :hook
+    (kill-emacs . (lambda () (interactive) (org-roam-server-mode -1)))
     :config
     (setq org-roam-server-host "127.0.0.1"
           org-roam-server-port 8080
