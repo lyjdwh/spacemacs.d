@@ -98,6 +98,8 @@
     :custom
     (eaf-find-alternate-file-in-dired t)
     (eaf-python-command "/usr/bin/python3")
+    (eaf-evil-leader-keymap  spacemacs-cmds)
+    (eaf-evil-leader-key "M-SPC")
     :config
     (require 'eaf-evil)
     (require 'eaf-org)
