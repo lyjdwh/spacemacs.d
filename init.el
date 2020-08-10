@@ -749,6 +749,7 @@ unwanted space when exporting org-mode to hugo markdown."
   (setq scroll-margin 10)
   (setq scroll-conservatively 10000)
 
+  (setq python-spacemacs-indent-guess nil)
   (spacemacs/toggle-maximize-frame)
   )
 

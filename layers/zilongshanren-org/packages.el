@@ -28,6 +28,7 @@
     org-ref
     (org-protocol-capture-html :location (recipe :fetcher github :repo "alphapapa/org-protocol-capture-html") )
     (valign :location (recipe :fetcher github :repo "casouri/valign"))
+    grip-mode
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -41,6 +42,14 @@
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+
+(defun zilongshanren-org/init-grip-mode ()
+  (use-package grip-mode
+    :ensure t
+    :commands grip-mode
+    :config
+    (setq grip-preview-use-webkit nil)
+    ))
 
 (defun zilongshanren-org/init-valign ()
   (use-package valign
