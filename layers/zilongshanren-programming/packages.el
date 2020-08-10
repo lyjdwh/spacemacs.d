@@ -268,6 +268,13 @@
     (setq dap-auto-show-output nil)
 
     (setq lsp-diagnostics-provider :flycheck)
+
+    ;; support lsp-mode in org babel
+    ;; :file "test.py"
+    (defvar org-babel-lang-list
+      '("go" "python" "ipython" "ruby" "js" "css" "sass" "C" "C++" "rust" "java" "sh"))
+    (dolist (lang org-babel-lang-list)
+      (eval `(lsp-org-babel-enable ,lang)))
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
@@ -695,6 +702,7 @@
     (setq c-default-style "linux") ;; set style to "linux"
     (setq c-basic-offset 4)
     (c-set-offset 'substatement-open 0)
+    (add-hook 'c++-mode-hook 'flycheck-mode)
     ))
 
 (defun zilongshanren-programming/init-flycheck-clojure ()
