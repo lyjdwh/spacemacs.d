@@ -15,8 +15,6 @@
         css-mode
         paredit
         lispy
-        caps-lock
-        cmake-font-lock
         cmake-mode
         flycheck
         (nodejs-repl-eval :location local)
@@ -311,12 +309,6 @@
         "sL" 'zilongshanren/ruby-send-current-line-and-go
         "sI" 'zilongshanren/start-inf-ruby-and-robe))))
 
-(defun zilongshanren-programming/init-caps-lock ()
-  (use-package caps-lock
-    :init
-    (progn
-      (bind-key* "s-e" 'caps-lock-mode))))
-
 (defun zilongshanren-programming/init-editorconfig ()
   (use-package editorconfig
     :init
@@ -509,23 +501,22 @@
       (define-key lispy-mode-map (kbd "s-1") 'lispy-describe-inline)
       (define-key lispy-mode-map (kbd "s-2") 'lispy-arglist-inline))))
 
+;; (defun zilongshanren-programming/init-google-c-style ()
+;;   (use-package google-c-style
+;;     :init (add-hook 'c-mode-common-hook 'google-set-c-style)))
 
-(defun zilongshanren-programming/init-cmake-font-lock ()
-  (use-package cmake-font-lock
-    :defer t))
 
-(defun zilongshanren-programming/init-google-c-style ()
-  (use-package google-c-style
-    :init (add-hook 'c-mode-common-hook 'google-set-c-style)))
-
-(defun zilongshanren-programming/post-init-cmake-mode ()
-  (progn
-    (spacemacs/declare-prefix-for-mode 'cmake-mode
-                                       "mh" "docs")
-    (spacemacs/set-leader-keys-for-major-mode 'cmake-mode
-      "hd" 'cmake-help)
-    (add-hook 'cmake-mode-hook (function cmake-rename-buffer))))
-
+(defun zilongshanren-programming/init-cmake-mode ()
+  (use-package cmake-mode
+      :defer t
+      :mode (("CMakeLists\\.txt\\'" . cmake-mode) ("\\.cmake\\'" . cmake-mode))
+      :config
+      (spacemacs/declare-prefix-for-mode 'cmake-mode
+          "mh" "docs")
+      (spacemacs/set-leader-keys-for-major-mode 'cmake-mode
+          "hd" 'cmake-help)
+      (add-hook 'cmake-mode-hook (function cmake-rename-buffer))
+      ))
 
 (defun zilongshanren-programming/post-init-flycheck ()
   (with-eval-after-load 'flycheck
@@ -704,33 +695,10 @@
 
 (defun zilongshanren-programming/post-init-cc-mode ()
   (progn
-    (setq company-backends-c-mode-common '((company-dabbrev-code :with company-keywords company-gtags company-etags)
-                                           company-files company-dabbrev))
-    (spacemacs/set-leader-keys-for-major-mode 'c++-mode
-      "gd" 'etags-select-find-tag-at-point)
-
-    ;; http://stackoverflow.com/questions/23553881/emacs-indenting-of-c11-lambda-functions-cc-mode
-    (defadvice c-lineup-arglist (around my activate)
-      "Improve indentation of continued C++11 lambda function opened as argument."
-      (setq ad-return-value
-            (if (and (equal major-mode 'c++-mode)
-                     (ignore-errors
-                       (save-excursion
-                         (goto-char (c-langelem-pos langelem))
-                         ;; Detect "[...](" or "[...]{". preceded by "," or "(",
-                         ;;   and with unclosed brace.
-                         (looking-at ".*[(,][ \t]*\\[[^]]*\\][ \t]*[({][^}]*$"))))
-                0                       ; no additional indent
-              ad-do-it)))               ; default behavior
-
-
     (setq c-default-style "linux") ;; set style to "linux"
     (setq c-basic-offset 4)
     (c-set-offset 'substatement-open 0)
-    (with-eval-after-load 'c++-mode
-      (define-key c++-mode-map (kbd "s-.") 'company-ycmd)))
-
-  )
+    ))
 
 (defun zilongshanren-programming/init-flycheck-clojure ()
   (use-package flycheck-clojure
@@ -813,14 +781,6 @@
           company-idle-delay 0.08)
 
     (when (configuration-layer/package-usedp 'company)
-      (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode
-    ))))
-
-(defun zilongshanren-programming/post-init-company-c-headers ()
-  (progn
-    (setq company-c-headers-path-system
-          (quote
-           ("/usr/include/" "/usr/local/include/" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")))
-    (setq company-c-headers-path-user
-          (quote
-           ()))))
+      (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode)
+      (spacemacs|add-company-backends :backends company-cmake :modes cmake-mode)
+      )))

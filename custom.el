@@ -283,7 +283,8 @@
  '(pos-tip-foreground-color "#93a1a1")
  '(ring-bell-function 'ignore)
  '(safe-local-variable-values
-   '((git-commit-major-mode . git-commit-elisp-text-mode)
+   '((lsp-diagnostics-provider . none)
+     (git-commit-major-mode . git-commit-elisp-text-mode)
      (typescript-backend . tide)
      (javascript-backend . tern)
      (eval progn
