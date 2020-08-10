@@ -261,7 +261,6 @@
     ;;handle yasnippet by myself
     (setq lsp-enable-snippet nil)
 
-    (setq company-lsp-cache-candidates 'auto)
     ;; use ffip instead
     (setq lsp-enable-links nil)
     ;; auto restart lsp
@@ -273,12 +272,7 @@
     (require 'dap-python)
     (setq dap-auto-show-output nil)
 
-    (setq lsp-diagnostic-package :flycheck)
-    (lsp-flycheck-enable t)
-
-    ;; (lsp-register-custom-settings
-    ;;  '(("python.pythonPath" "/home/liuyan/.conda/envs/torch/bin/python")
-    ;;    ("python.venvPath" "/home/liuyan/.conda/envs/torch")))
+    (setq lsp-diagnostics-provider :flycheck)
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
