@@ -192,11 +192,8 @@
                            (require 'lsp-pyright)
                            (lsp)))      ; or lsp-deferred
     :config
-    (lsp-register-custom-settings
-     `(("python.pythonPath" "/home/liuyan/.conda/envs/torch/bin/python")
-       ))
     (setq lsp-pyright-diagnostic-mode "workspace")
-    (setq lsp-pyright-use-library-code-for-types t)
+    (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch")
     ))
 
 (defun zilongshanren-programming/init-company-tabnine ()
