@@ -16,7 +16,7 @@
     (org :location built-in)
     ;; org-mac-link
     org-pomodoro
-    deft
+    (notdeft :location local)
     sound-wav
     ob-typescript
     evil-org
@@ -42,6 +42,17 @@
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+
+(defun zilongshanren-org/init-notdeft ()
+  (use-package notdeft
+    :load-path "~/bin/notdeft"
+    :config
+    (setq notdeft-directories '("~/org-notes/notes"))
+    (setq notdeft-secondary-extensions '("md" "txt"))
+    (setq notdeft-xapian-max-results 0)
+    (add-to-list 'load-path "~/bin/notdeft/extras")
+    (load "notdeft-example")
+    ))
 
 (defun zilongshanren-org/init-grip-mode ()
   (use-package grip-mode
@@ -773,13 +784,6 @@ holding contextual information."
     :defer t
     :init
     (add-hook 'org-mode-hook 'worf-mode)))
-
-(defun zilongshanren-org/post-init-deft ()
-  (progn
-    (setq deft-use-filter-string-for-filename t)
-    (setq deft-recursive t)
-    (setq deft-extension "org")
-    (setq deft-directory deft-dir)))
 
 (defun zilongshanren-org/init-sound-wav ()
   (use-package sound-wav

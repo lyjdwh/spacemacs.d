@@ -466,3 +466,14 @@
   "otf" 'enable-ivy/helm-posframe
   "otF" 'disable-ivy/helm-posframe
   )
+
+;; notdeft
+;; Press TAB to enter a search query
+;; for more doc: https://tero.hasu.is/notdeft/
+(spacemacs/declare-prefix "an" "deft")
+(spacemacs/set-leader-keys
+  "ann" 'notdeft
+  "anh" 'notdeft-mode-hydra/body
+  "anf" 'notdeft-open-query
+  "ani" 'notdeft-insert-org-link
+  "anI" 'notdeft-org-link-new-file)

@@ -86,7 +86,6 @@ This function should only modify configuration layer settings."
             latex-enable-folding t)
      bibtex
      pdf
-     (deft :variables deft-zetteldeft t)
      (markdown :variables markdown-live-preview-engine 'vmd)
      (org :variables org-want-todo-bindings t
           org-enable-hugo-support t)
@@ -154,7 +153,7 @@ This function should only modify configuration layer settings."
                     spaceline holy-mode skewer-mode rainbow-delimiters
                     highlight-indentation vi-tilde-fringe eyebrowse ws-butler
                     smooth-scrolling org-repo-todo org-download org-timer
-                    livid-mode evil-escape
+                    livid-mode evil-escape company-quickhelp
                     leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
                     ac-ispell ace-jump-mode auto-complete auto-dictionary
                     clang-format define-word google-translate disaster epic
