@@ -21,7 +21,12 @@
     (insert-translated-name :location (recipe :fetcher github :repo "manateelazycat/insert-translated-name"))
     (rotate-text :location local)
     super-save
+    company-box
     ))
+
+(defun zilongshanren-better-defaults/post-init-company-box ()
+  (setq company-box-doc-delay 0.2)
+)
 
 (defun zilongshanren-better-defaults/init-super-save ()
   (use-package super-save

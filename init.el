@@ -68,6 +68,8 @@ This function should only modify configuration layer settings."
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'cycle
+                      auto-completion-use-company-box t
+                      auto-completion-enable-help-tooltip t
                       ;; :disabled-for org markdown
                       )
      ;;  (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
@@ -160,7 +162,7 @@ This function should only modify configuration layer settings."
                     helm-flyspell flyspell-correct-helm clean-aindent-mode
                     helm-c-yasnippet ace-jump-helm-line helm-make magithub
                     helm-themes helm-swoop helm-spacemacs-help smeargle
-                    ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose
+                    ido-vertical-mode flx-ido ivy-rich helm-purpose
                     )
    dotspacemacs-install-packages 'used-only
    dotspacemacs-delete-orphan-packages t))
