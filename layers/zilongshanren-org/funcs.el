@@ -225,6 +225,8 @@ With a prefix ARG, the cache is invalidated and the bibliography reread."
          (next-buffer (and (> win-num 1)
                            (window-buffer (next-window)))))
     (switch-to-buffer-other-window next-buffer)
+    (if (eq org-roam-server-mode nil)
+        (org-roam-server-mode 1))
     (eaf-open-browser "127.0.0.1:8080")
     (cond
      ;; if window was added, delete

@@ -561,7 +561,7 @@ dump."
       (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
 
   ;; enable org-protocol
-  (server-start)
+  ;; (server-start)
 
   (require 'org-protocol)
   (require 'org-roam-protocol)

@@ -166,9 +166,9 @@
 
 (defun zilongshanren-org/init-org-roam-server ()
   (use-package org-roam-server
-    :after org-roam
     :init
     (spacemacs/set-leader-keys "ams" 'open-org-roam-server-other-window)
+    :commands open-org-roam-server-other-window org-roam-server-mode
     :hook
     (kill-emacs . (lambda () (interactive) (org-roam-server-mode -1)))
     :config

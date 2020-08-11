@@ -44,7 +44,7 @@
         typescript-mode
         company-tabnine
         lsp-python-ms
-        (lsp-pyright :location (recipe :fetcher github :repo "emacs-lsp/lsp-pyright"))
+        lsp-pyright
         auctex
         highlight-indent-guides
         (color-rg :location (recipe :fetcher github :repo "manateelazycat/color-rg"))
@@ -267,6 +267,7 @@
     (require 'dap-python)
     (setq dap-auto-show-output nil)
 
+    (lsp-modeline-diagnostics-mode -1)
     (setq lsp-diagnostics-provider :flycheck)
 
     ;; support lsp-mode in org babel
