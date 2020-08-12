@@ -86,7 +86,16 @@
         pos-tip
         (maple-header :location (recipe :fetcher github :repo "honmaple/maple-emacs" :files ("site-lisp/maple/maple-header.el")))
         ace-pinyin
+        tmux-pane
         ))
+
+(defun zilongshanren-misc/init-tmux-pane ()
+  (use-package tmux-pane
+    :config
+    (setq tmux-pane--override-map-enable nil)
+    (setq tmux-pane-vertical-percent 30)
+    (tmux-pane-mode)
+    ))
 
 (defun zilongshanren-misc/init-ace-pinyin ()
   (use-package ace-pinyin

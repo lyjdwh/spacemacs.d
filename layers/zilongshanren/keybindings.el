@@ -477,3 +477,11 @@
   "anf" 'notdeft-open-query
   "ani" 'notdeft-insert-org-link
   "anI" 'notdeft-org-link-new-file)
+
+;; tmux-pane
+(spacemacs/set-leader-keys
+  "wpv" 'tmux-pane-open-vertical
+  "wph" 'tmux-pane-open-horizontal
+  "wpl" 'tmux-pane-toggle-vertical
+  "wpj" 'tmux-pane-toggle-horizontal
+  "wpq" 'tmux-pane-close)
