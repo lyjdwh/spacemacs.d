@@ -325,7 +325,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-distinguish-gui-tab nil
 
    ;; Name of the default layout (default "Default")
-   dotspacemacs-default-layout-name "Default"
+   dotspacemacs-default-layout-name "liuyan"
 
    ;; If non-nil the default layout name is displayed in the mode-line.
    ;; (default nil)

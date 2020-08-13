@@ -91,10 +91,11 @@
 
 (defun zilongshanren-misc/init-tmux-pane ()
   (use-package tmux-pane
+    :commands tmux-pane-open-vertical tmux-pane-open-horizontal
     :config
+    (tmux-pane-mode)
     (setq tmux-pane--override-map-enable nil)
     (setq tmux-pane-vertical-percent 30)
-    (tmux-pane-mode)
     ))
 
 (defun zilongshanren-misc/init-ace-pinyin ()
