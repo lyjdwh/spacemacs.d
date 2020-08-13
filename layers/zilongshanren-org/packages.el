@@ -142,6 +142,7 @@
     (org-roam-completion-system 'ivy)
     (org-roam-buffer-width 0.2)
     (org-roam-tag-sources '(prop all-directories))
+    (org-roam-file-extensions '("org" "md"))
     :init
     (progn
       (spacemacs/declare-prefix "am" "org-roam")
@@ -262,6 +263,9 @@
   (add-hook 'org-mode-hook (lambda () (spacemacs/toggle-line-numbers-off)) 'append)
   (with-eval-after-load 'org
     (progn
+      ;; 让org-agenda从归档文件中抽取数据
+      (setq org-agenda-file-regexp "\\`[^.].*\\.org\\(_archive\\)?\\'")
+
       (setq org-confirm-babel-evaluate nil)
       ;; disable < auto pair for org mode
       ;; disable {} auto pairing in electric-pair-mode for web-mode
@@ -607,6 +611,12 @@ See `org-capture-templates' for more information."
               ("p" . "项目安排")
               ("pw" tags-todo "PROJECT+WORK+CATEGORY=\"work\"")
               ("pl" tags-todo "PROJECT+DREAM+CATEGORY=\"liuyan\"")
+              ("r" . "回顾")
+              ("rm" "月度回顾" ((agenda "" ((org-agenda-span 30)
+                                           (org-agenda-start-day "-30d")))))
+
+              ("rw" "周度回顾" ((agenda "" ((org-agenda-span 7)
+                                            (org-agenda-start-day "-7d")))))
               ("W" "Weekly Review"
                ((stuck "") ;; review stuck projects as designated by org-stuck-projects
                 (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)

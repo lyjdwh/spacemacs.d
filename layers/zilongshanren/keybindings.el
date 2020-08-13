@@ -474,7 +474,7 @@
 (spacemacs/set-leader-keys
   "ann" 'notdeft
   "anh" 'notdeft-mode-hydra/body
-  "anf" 'notdeft-open-query
+  "ans" 'notdeft-open-query
   "ani" 'notdeft-insert-org-link
   "anI" 'notdeft-org-link-new-file)
 
