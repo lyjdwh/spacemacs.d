@@ -719,6 +719,7 @@ WIN-ID : Window index."
      (string-prefix-p "*flycheck" name)
      (string-prefix-p "*Messages" name)
      (string-prefix-p "*spacemacs" name)
+     (string-prefix-p "*dashboard" name)
      (string-prefix-p "*Help" name)
      (string-prefix-p "*helpful" name)
      (string-prefix-p "*Warnings" name)

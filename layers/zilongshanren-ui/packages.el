@@ -17,6 +17,7 @@
     (whitespace :location built-in)
     ivy-posframe
     helm-posframe
+    dashboard
     ;; hl-anything performance is very slow...
     ;; hl-anything
     ;; if you wnat to use spaceline, please comment out zilong-mode-line
@@ -26,6 +27,95 @@
     ;; company-box
     )
   )
+
+(defun zilongshanren-ui/init-dashboard ()
+  (use-package dashboard
+    :ensure t
+    :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+    :preface
+    (defun my/dashboard-init-info ()
+      "Set a dashboard banner including information on package initialization
+  time and garbage collections."""
+    (setq dashboard-init-info
+            (format "Emacs ready in %.2f seconds with %d garbage collections."
+                    (float-time (time-subtract after-init-time before-init-time)) gcs-done)))
+
+    (defvar dashboard-recover-layout-p nil
+      "Wether recovers the layout.")
+
+    (defun dashboard-goto-recent-files ()
+      "Go to recent files."
+      (interactive)
+      (let ((func (local-key-binding "r")))
+        (and func (funcall func))))
+
+    (defun dashboard-goto-projects ()
+      "Go to projects."
+      (interactive)
+      (let ((func (local-key-binding "p")))
+        (and func (funcall func))))
+
+    (defun open-dashboard ()
+      "Open the *dashboard* buffer and jump to the first widget."
+      (interactive)
+      ;; Check if need to recover layout
+      (if (> (length (window-list-1))
+             ;; exclude `treemacs' window
+             (if (and (fboundp 'treemacs-current-visibility)
+                      (eq (treemacs-current-visibility) 'visible))
+                 2
+               1))
+          (setq dashboard-recover-layout-p t))
+
+      (delete-other-windows)
+
+      ;; Refresh dashboard buffer
+      (when (get-buffer dashboard-buffer-name)
+        (kill-buffer dashboard-buffer-name))
+      (dashboard-insert-startupify-lists)
+      (switch-to-buffer dashboard-buffer-name)
+
+      ;; Jump to the first section
+      (dashboard-goto-recent-files)
+      (evil-force-evilified-state))
+
+    (defun quit-dashboard ()
+      "Quit dashboard window."
+      (interactive)
+      (quit-window t)
+      (when (and dashboard-recover-layout-p
+                 (bound-and-true-p winner-mode))
+        (winner-undo)
+        (setq dashboard-recover-layout-p nil)))
+    :bind (("<f2>" . open-dashboard)
+           :map dashboard-mode-map
+           ("q" . quit-dashboard)
+           )
+    :init
+    (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+    ;; Set the title
+    (setq dashboard-banner-logo-title "Welcome to Emacs, Happy Hacking!")
+    (setq dashboard-startup-banner "~/.spacemacs.d/logo/amadeus.png")
+    ;; Content is not centered by default. To center, set
+    (setq dashboard-center-content t)
+    ;; To disable shortcut "jump" indicators for each section, set
+    (setq dashboard-show-shortcuts nil)
+    (setq dashboard-items '((recents  . 7)
+                            (projects . 5)))
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t)
+    (setq dashboard-heading-icons
+          '((recents   . "file-text")
+            (bookmarks . "bookmark")
+            (agenda    . "calendar")
+            (projects  . "briefcase")
+            (registers . "database"))
+          )
+
+    (dashboard-setup-startup-hook)
+    (add-hook 'after-init-hook 'open-dashboard)
+    (add-hook 'after-init-hook 'my/dashboard-init-info)
+    ))
 
 (defun zilongshanren-ui/init-ivy-posframe ()
   (use-package ivy-posframe

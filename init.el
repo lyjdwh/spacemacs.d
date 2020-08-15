@@ -555,6 +555,8 @@ dump."
 
 (defun dotspacemacs/user-config ()
 
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+
   (setenv "WORKON_HOME" "/home/liuyan/.conda/envs")
   ;;解决org表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)
