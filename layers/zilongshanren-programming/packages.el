@@ -267,8 +267,8 @@
     (require 'dap-python)
     (setq dap-auto-show-output nil)
 
-    (lsp-modeline-diagnostics-mode -1)
     (setq lsp-diagnostics-provider :flycheck)
+    (setq lsp-modeline-diagnostics-enable nil)
 
     ;; support lsp-mode in org babel
     ;; :file "test.py"

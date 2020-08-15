@@ -485,3 +485,6 @@
   "wpl" 'tmux-pane-toggle-vertical
   "wpj" 'tmux-pane-toggle-horizontal
   "wpq" 'tmux-pane-close)
+
+;; zeal
+(spacemacs/set-leader-keys "oZ" 'zeal-at-point)
