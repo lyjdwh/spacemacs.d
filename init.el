@@ -528,12 +528,12 @@ dump."
 
 (defun dotspacemacs/user-init ()
   (setq-default configuration-layer-elpa-archives
-                ;; '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-                  ;; ("org-cn"   . "http://elpa.emacs-china.org/org/")
-                  ;; ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/"))
-                '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-                  ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
-                  ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))
+                ;; '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+                ;;   ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+                ;;   ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))
+                '(("melpa-cn" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")
+                  ("org-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/org/")
+                  ("gnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/"))
                 )
 
   (setq term-char-mode-point-at-process-mark nil)
