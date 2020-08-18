@@ -204,7 +204,8 @@
     :config
     (setq key-chord-two-keys-delay 0.2)
     (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-    (key-chord-define evil-insert-state-map "js" 'hydra-dvp-symbols/body)
+    (key-chord-define evil-insert-state-map "js" 'hydra-insert-symbols/body)
+    (key-chord-define evil-insert-state-map "jd" 'hydra-insert-numbers/body)
     (key-chord-mode 1)
     ))
 
