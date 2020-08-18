@@ -69,7 +69,7 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-use-company-box t
-                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-help-tooltip 'manual
                       ;; :disabled-for org markdown
                       )
      ;;  (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
@@ -636,7 +636,7 @@ dump."
   (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
 
   (setq inhibit-compacting-font-caches t)
-  (global-display-line-numbers-mode -1)
+  (global-display-line-numbers-mode 1)
 
   (defun moon-override-yank-pop (&optional arg)
     "Delete the region before inserting poped string."

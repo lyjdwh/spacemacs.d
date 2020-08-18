@@ -272,8 +272,8 @@ e.g. Sunday, September 17, 2000."
 (defun zilongshanren/pomodoro-notification ()
   "show notifications when pomodoro end"
   (progn (add-hook 'org-pomodoro-finished-hook '(lambda () (zilongshanren/notify-send "'Pomodoro Finished, Have a break!'")))
-           (add-hook 'org-pomodoro-short-break-finished-hook '(lambda () (zilongshanren/notify-send "'Short Break, Ready to Go?'")))
-           (add-hook 'org-pomodoro-long-break-finished-hook '(lambda () (zilongshanren/notify-send "'Long Break, Ready to Go?'" )))))
+           (add-hook 'org-pomodoro-short-break-finished-hook '(lambda () (zilongshanren/notify-send "'After a Short Break, Ready to Go?'")))
+           (add-hook 'org-pomodoro-long-break-finished-hook '(lambda () (zilongshanren/notify-send "'After a Long Break, Ready to Go?'" )))))
 
 (defun zilongshanren/notify-send (message)
   (shell-command (format "notify-send %s -i emacs -a Pomodoro" message))
