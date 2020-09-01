@@ -636,7 +636,7 @@ dump."
   (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
 
   (setq inhibit-compacting-font-caches t)
-  (global-display-line-numbers-mode 1)
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
   (defun moon-override-yank-pop (&optional arg)
     "Delete the region before inserting poped string."

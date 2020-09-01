@@ -282,6 +282,8 @@
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
   "ia" 'org-insert-src-block
   "iS" 'capture-screenshot
+  "k" 'org-ctrl-c-ctrl-c
+  "iT" 'org-set-tags-command
   )
 
 (spacemacs/set-leader-keys
@@ -406,7 +408,7 @@
 (shift-insert-number "close-curly-1" "{")
 (shift-insert-number "close-curly-2" "}")
 
-(defhydra hydra-insert-symbols (global-map ";")
+(defhydra hydra-insert-symbols (:hint nil)
   "insert symbols"
   ("a" shift-insert-number-1 "!")
   ("s" shift-insert-number-2 "@")
@@ -445,7 +447,7 @@
 (insert-number 8 "8")
 (insert-number 9 "9")
 
-(defhydra hydra-insert-numbers (global-map ";")
+(defhydra hydra-insert-numbers (:hint nil)
   "insert numbers"
   ("a" insert-number-1 "1")
   ("s" insert-number-2 "2")
@@ -532,3 +534,9 @@
 
 ;; zeal
 (spacemacs/set-leader-keys "oZ" 'zeal-at-point)
+
+;; helpful
+(spacemacs/set-leader-keys
+  "hdk" #'helpful-key
+  "hdf" #'helpful-callable
+  "hdv" #'helpful-variable)

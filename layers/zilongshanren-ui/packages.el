@@ -90,6 +90,7 @@
     :bind (("<f2>" . open-dashboard)
            :map dashboard-mode-map
            ("q" . quit-dashboard)
+           ("o" . link-hint-open-link)
            )
     :init
     (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
