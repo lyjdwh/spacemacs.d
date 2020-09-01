@@ -88,7 +88,11 @@
         (maple-header :location (recipe :fetcher github :repo "honmaple/maple-emacs" :files ("site-lisp/maple/maple-header.el")))
         ace-pinyin
         tmux-pane
+        ivy-avy
         ))
+
+(defun zilongshanren-misc/init-ivy-avy ()
+  (use-package ivy-avy))
 
 (defun zilongshanren-misc/init-tmux-pane ()
   (use-package tmux-pane
