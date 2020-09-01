@@ -60,6 +60,7 @@
         try
         figlet
         (thing-edit :location (recipe :fetcher github :repo "lyjdwh/thing-edit"))
+        (avy-thing-edit :location (recipe :fetcher github :repo "lyjdwh/avy-thing-edit"))
         (one-key :location local)
         (grep-dired :location (recipe :fetcher github :repo "manateelazycat/grep-dired"))
         (delete-block :location (recipe :fetcher github :repo "manateelazycat/delete-block"))
@@ -458,6 +459,69 @@
                 (("r" . "Replace region/line") . thing-replace-region-or-line)
                 ))
 
+        (setq one-key-menu-avy-thing-edit-alist
+              '(
+                ;; Copy.
+                (("w" . "Copy Word") . avy-thing-copy-word)
+                (("s" . "Copy Symbol") . avy-thing-copy-symbol)
+                (("m" . "Copy Email") . avy-thing-copy-email)
+                (("f" . "Copy Filename") . avy-thing-copy-filename)
+                (("u" . "Copy URL") . avy-thing-copy-url)
+                (("x" . "Copy Sexp") . avy-thing-copy-sexp)
+                (("g" . "Copy Page") . avy-thing-copy-page)
+                (("t" . "Copy Sentence") . avy-thing-copy-sentence)
+                (("o" . "Copy Whitespace") . avy-thing-copy-whitespace)
+                (("i" . "Copy List") . avy-thing-copy-list)
+                (("c" . "Copy Comment") . avy-thing-copy-comment)
+                (("h" . "Copy Function") . avy-thing-copy-defun)
+                (("p" . "Copy Parentheses") . avy-thing-copy-parentheses)
+                (("l" . "Copy Line") . avy-thing-copy-line)
+                (("a" . "Copy To Line Begin") . avy-thing-copy-to-line-beginning)
+                (("e" . "Copy To Line End") . avy-thing-copy-to-line-end)
+                (("b" . "Copy Paragraph") . avy-thing-copy-paragraph)
+                (("n" . "Copy number") . avy-thing-copy-number)
+                ;; Cut.
+                (("W" . "Cut Word") . avy-thing-cut-word)
+                (("S" . "Cut Symbol") . avy-thing-cut-symbol)
+                (("M" . "Cut Email") . avy-thing-cut-email)
+                (("F" . "Cut Filename") . avy-thing-cut-filename)
+                (("U" . "Cut URL") . avy-thing-cut-url)
+                (("X" . "Cut Sexp") . avy-thing-cut-sexp)
+                (("G" . "Cut Page") . avy-thing-cut-page)
+                (("T" . "Cut Sentence") . avy-thing-cut-sentence)
+                (("O" . "Cut Whitespace") . avy-thing-cut-whitespace)
+                (("I" . "Cut List") . avy-thing-cut-list)
+                (("C" . "Cut Comment") . avy-thing-cut-comment)
+                (("H" . "Cut Function") . avy-thing-cut-defun)
+                (("P" . "Cut Parentheses") . avy-thing-cut-parentheses)
+                (("L" . "Cut Line") . avy-thing-cut-line)
+                (("A" . "Cut To Line Begin") . avy-thing-cut-to-line-beginning)
+                (("E" . "Cut To Line End") . avy-thing-cut-to-line-end)
+                (("B" . "Cut Paragraph") . avy-thing-cut-paragraph)
+                (("N" . "Cut number") . avy-thing-cut-number)
+                ))
+
+        (setq one-key-menu-avy-thing-edit-replace-alist
+              '(
+                ;; Copy.
+                (("w" . "Replace Word") . avy-thing-replace-word)
+                (("s" . "Replace Symbol") . avy-thing-replace-symbol)
+                (("m" . "Replace Email") . avy-thing-replace-email)
+                (("f" . "Replace Filename") . avy-thing-replace-filename)
+                (("u" . "Replace URL") . avy-thing-replace-url)
+                (("x" . "Replace Sexp") . avy-thing-replace-sexp)
+                (("g" . "Replace Page") . avy-thing-replace-page)
+                (("t" . "Replace Sentence") . avy-thing-replace-sentence)
+                (("o" . "Replace Whitespace") . avy-thing-replace-whitespace)
+                (("i" . "Replace List") . avy-thing-replace-list)
+                (("h" . "Replace Function") . avy-thing-replace-defun)
+                (("p" . "Replace Parentheses") . avy-thing-replace-parentheses)
+                (("l" . "Replace Line") . avy-thing-replace-line)
+                (("b" . "Replace Paragraph") . avy-thing-replace-paragraph)
+                (("n" . "Replace number") . avy-thing-replace-number)
+                (("r" . "Replace region/line") . avy-thing-replace-region-or-line)
+                ))
+
         (defun one-key-menu-thing-edit ()
           "The `one-key' menu for THING-EDIT."
           (interactive)
@@ -468,10 +532,22 @@
           (interactive)
           (one-key-menu "THING-EDIT" one-key-menu-thing-edit-replace-alist t))
 
+        (defun one-key-menu-avy-thing-edit ()
+          "The `one-key' menu for THING-EDIT."
+          (interactive)
+          (one-key-menu "THING-EDIT" one-key-menu-avy-thing-edit-alist t))
+
+        (defun one-key-menu-avy-thing-edit-replace ()
+          "The `one-key' menu for THING-EDIT."
+          (interactive)
+          (one-key-menu "THING-EDIT" one-key-menu-avy-thing-edit-replace-alist t))
         ))))
 
 (defun zilongshanren-misc/init-thing-edit ()
   (use-package thing-edit))
+
+(defun zilongshanren-misc/init-avy-thing-edit ()
+  (use-package avy-thing-edit))
 
 (defun zilongshanren-misc/init-figlet ()
   (use-package figlet

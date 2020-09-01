@@ -300,6 +300,9 @@
 ;; thing edit
 (spacemacs/set-leader-keys "k" 'one-key-menu-thing-edit)
 (spacemacs/set-leader-keys "rr" 'one-key-menu-thing-edit-replace)
+(define-key evil-normal-state-map (kbd "zk") 'one-key-menu-avy-thing-edit)
+(define-key evil-normal-state-map (kbd "zK") 'one-key-menu-avy-thing-edit-replace)
+(define-key evil-normal-state-map (kbd "zs") 'avy-thing-copy-symbol)
 
 ;; re-builder, a nice interactive tool for building regular expressions
 (spacemacs/set-leader-keys "oR" 're-builder)
