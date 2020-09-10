@@ -169,11 +169,19 @@
     (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)
     (setq org-roam-capture-templates
           '(("d" "org-roam" plain (function org-roam--capture-get-point)
-           "%?"
-           :file-name "%(format-time-string \"%Y-%m-%d--%H-%M-%SZ--${slug}\" (current-time) t)"
-           :head "#+title: ${title}\n"
-           :unnarrowed t))
-          )
+             "%?"
+             :file-name "%(format-time-string \"%Y-%m-%d--%H-%M-%SZ--${slug}\" (current-time) t)"
+             :head "#+title: ${title}\n"
+             :unnarrowed t
+             :empty-lines 1
+             )))
+    (add-to-list 'org-roam-capture-ref-templates
+                 '("a" "Annotation" plain (function org-roam-capture--get-point)
+                   "%U ${body}\n"
+                   :file-name "${slug}"
+                   :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_alias:\n"
+                   :immediate-finish t
+                   :unnarrowed t))
     ))
 
 (defun zilongshanren-org/init-org-roam-server ()
