@@ -54,6 +54,7 @@
         zone
         leetcode
         youdao-dictionary
+        go-translate
         (posframe :location (recipe :fetcher github :repo "tumashu/posframe") )
         rime
         sis
@@ -644,6 +645,17 @@
       (define-key youdao-dictionary-mode-map
         (kbd "s") #'youdao-dictionary-search-from-input)
       )))
+
+(defun zilongshanren-misc/init-go-translate ()
+  (use-package go-translate
+    :commands go-translate go-translate-popup go-translate-kill-ring-save
+    :config
+    (setq go-translate-base-url "https://translate.google.cn")
+    (setq go-translate-buffer-follow-p t)
+    (setq go-translate-local-language "zh-CN")
+    (setq go-translate-target-language "en")
+    (setq go-translate-inputs-function #'go-translate-inputs-current-or-prompt)
+    ))
 
 (defun zilongshanren-misc/init-leetcode ()
   (use-package leetcode
