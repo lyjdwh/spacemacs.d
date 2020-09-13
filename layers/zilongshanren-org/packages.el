@@ -143,6 +143,7 @@
     (org-roam-buffer-width 0.2)
     (org-roam-tag-sources '(prop all-directories))
     (org-roam-file-extensions '("org" "md"))
+    (org-roam-completion-everywhere t)
     :init
     (progn
       (spacemacs/declare-prefix "am" "org-roam")
@@ -173,7 +174,6 @@
              :file-name "%(format-time-string \"%Y-%m-%d--%H-%M-%SZ--${slug}\" (current-time) t)"
              :head "#+title: ${title}\n"
              :unnarrowed t
-             :empty-lines 1
              )))
     (add-to-list 'org-roam-capture-ref-templates
                  '("a" "Annotation" plain (function org-roam-capture--get-point)
@@ -182,6 +182,7 @@
                    :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_alias:\n"
                    :immediate-finish t
                    :unnarrowed t))
+    (add-hook 'org-mode-hook (lambda () (add-to-list 'company-backends #'company-capf)))
     ))
 
 (defun zilongshanren-org/init-org-roam-server ()
