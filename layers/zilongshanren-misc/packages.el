@@ -90,7 +90,32 @@
         ace-pinyin
         tmux-pane
         ivy-avy
+        wttrin
         ))
+
+(defun zilongshanren-misc/init-wttrin ()
+  (use-package wttrin
+    :ensure t
+    :commands wttrin
+    :config
+    (setq wttrin-default-cities '("~Shanghai+Minhang")
+          wttrin-default-accept-language '("Accept-Language" . "zh-CN"))
+
+    (defun wttrin-fetch-raw-string (query)
+      "Get the weather information based on your QUERY."
+      (let ((url-user-agent "curl"))
+        (add-to-list 'url-request-extra-headers wttrin-default-accept-language)
+        (with-current-buffer
+            (url-retrieve-synchronously
+             (concat "https://wttr.in/" query)
+             (lambda (status) (switch-to-buffer (current-buffer))))
+          (decode-coding-string (buffer-string) 'utf-8))))
+
+    (defun wttrin ()
+      "Display weather information for CITY."
+      (interactive)
+      (wttrin-query (car wttrin-default-cities)))
+    ))
 
 (defun zilongshanren-misc/init-ivy-avy ()
   (use-package ivy-avy))

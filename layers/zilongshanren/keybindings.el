@@ -545,3 +545,6 @@
 (spacemacs/set-leader-keys
   "og" #'go-translate-popup
   "oG" #'go-translate)
+
+;; wttrin
+(spacemacs/set-leader-keys "otw" 'wttrin)
