@@ -621,11 +621,34 @@ See `org-capture-templates' for more information."
               ("pw" tags-todo "PROJECT+WORK+CATEGORY=\"work\"")
               ("pl" tags-todo "PROJECT+DREAM+CATEGORY=\"liuyan\"")
               ("r" . "回顾")
-              ("rm" "月度回顾" ((agenda "" ((org-agenda-span 30)
-                                           (org-agenda-start-day "-30d")))))
+              ("rm" "月度回顾"
+               ((agenda ""
+                        ((org-agenda-overriding-header "每月记录")
+                         (org-agenda-span 30)
+                         (org-agenda-start-day "-30d")
+                         (org-agenda-show-log 'clockcheck)
+                         (org-agenda-start-with-log-mode nil)
+                         (org-agenda-log-mode-items '(closed clock))
+                         (org-agenda-clockreport-mode t)
+                         ))))
 
-              ("rw" "周度回顾" ((agenda "" ((org-agenda-span 7)
-                                            (org-agenda-start-day "-7d")))))
+              ("rw" "周度回顾"
+               ((agenda "" ((org-agenda-overriding-header "每周记录")
+                            (org-agenda-span 7)
+                            (org-agenda-start-day "-7d")
+                            (org-agenda-show-log 'clockcheck)
+                            (org-agenda-start-with-log-mode nil)
+                            (org-agenda-log-mode-items '(closed clock))
+                            (org-agenda-clockreport-mode t)
+                            ))))
+              ("rd" "每日回顾"
+               ((agenda "" ((org-agenda-overriding-header "今日记录")
+                            (org-agenda-span 'day)
+                            (org-agenda-show-log 'clockcheck)
+                            (org-agenda-start-with-log-mode nil)
+                            (org-agenda-log-mode-items '(closed clock))
+                            (org-agenda-clockreport-mode t)
+                            ))))
               ("W" "Weekly Review"
                ((stuck "") ;; review stuck projects as designated by org-stuck-projects
                 (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
