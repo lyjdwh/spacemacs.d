@@ -185,13 +185,11 @@
     (setq lsp-python-ms-python-executable-cmd "/home/liuyan/.conda/envs/torch/bin/python")
     ))
 
-(defun zilongshanren-programming/init-lsp-pyright ()
-  (use-package lsp-pyright
-    :ensure t
-    :hook (python-mode . (lambda ()
-                           (require 'lsp-pyright)
-                           (lsp)))      ; or lsp-deferred
-    :config
+(defun zilongshanren-programming/post-init-lsp-pyright ()
+  (progn
+    (add-hook 'python-mode-hook (lambda ()
+                                  (require 'lsp-pyright)
+                                  (lsp)))
     (setq lsp-pyright-diagnostic-mode "workspace")
     (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch")
     ))

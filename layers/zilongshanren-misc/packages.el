@@ -83,13 +83,11 @@
         key-chord
         (evil-pinyin :location (recipe :fetcher github :repo "laishulu/evil-pinyin"))
         kaomoji
-        magit-delta
         (english-teacher :location (recipe :fetcher github :repo "loyalpartner/english-teacher.el"))
         pos-tip
         (maple-header :location (recipe :fetcher github :repo "honmaple/maple-emacs" :files ("site-lisp/maple/maple-header.el")))
         ace-pinyin
         tmux-pane
-        ivy-avy
         wttrin
         ))
 
@@ -116,9 +114,6 @@
       (interactive)
       (wttrin-query (car wttrin-default-cities)))
     ))
-
-(defun zilongshanren-misc/init-ivy-avy ()
-  (use-package ivy-avy))
 
 (defun zilongshanren-misc/init-tmux-pane ()
   (use-package tmux-pane
@@ -190,13 +185,6 @@
     ;;         Woman-Mode) . english-teacher-follow-mode)
     :config
     (setq english-teacher-show-result-function 'english-teacher-posframe-show-result-function)
-    ))
-
-(defun zilongshanren-misc/init-magit-delta ()
-  (use-package magit-delta
-    :after magit
-    :config
-    (magit-delta-mode 1)
     ))
 
 (defun zilongshanren-misc/init-kaomoji ()

@@ -58,7 +58,8 @@ This function should only modify configuration layer settings."
           magit-save-repository-buffers 'dontask
           magit-revert-buffers 'silent
           magit-refs-show-commit-count 'all
-          magit-revision-show-gravatars nil)
+          magit-revision-show-gravatars nil
+          git-enable-magit-delta-plugin t)
      (version-control :variables
                        version-control-diff-tool 'git-gutter
                        version-control-diff-side 'left
@@ -84,7 +85,7 @@ This function should only modify configuration layer settings."
      (latex :variables latex-build-command "LaTeX"
             latex-enable-auto-fill t
             latex-enable-folding t)
-     bibtex
+     (bibtex :packages (not ivy-bibtex))
      pdf
      (markdown :variables markdown-live-preview-engine 'vmd)
      (org :variables org-want-todo-bindings t
@@ -100,7 +101,7 @@ This function should only modify configuration layer settings."
              python-sort-imports-on-save nil
              python-lsp-server 'pyright
              python-pipenv-activate  t
-             ;; python-lsp-server 'mspyls
+             python-lsp-server 'pyright
              ;; python-lsp-git-root "/home/liuyan/apps/python-language-server"
              )
      ipython-notebook
