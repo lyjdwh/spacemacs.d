@@ -185,7 +185,7 @@
   (use-package maple-header
     :hook (prog-mode . maple-header-mode)
     :config
-    (defun maple-header:template(&optional prefix)
+    (defun maple-header/template(&optional prefix)
       "Template with PREFIX."
       (replace-regexp-in-string
        "^" (or prefix comment-start)
@@ -200,26 +200,24 @@
         "         By: \n"
         "Description: \n"
         (make-string 70 ?*))))
-    (maple-header-define modify-by
-      :find ".*\\(By:\\)\\(.*\\)"
-      :replace user-mail-address)
 
-    (add-to-list 'maple-header:auto-insert-alist
+    (maple-header modify-by
+                         :find ".*\\(By:\\)\\(.*\\)"
+                         :replace user-mail-address)
+
+    (setq maple-header/auto-update-alist '(filename email modify modify-by))
+
+    (add-to-list 'maple-header/auto-insert-alist
                  '((sh-mode . "Shell script") nil
-                    "#!/usr/bin/env bash\n"
-                    (maple-header:template) "\n"))
+                   "#!/usr/bin/env bash\n"
+                   (maple-header:template) "\n"))
 
-    (add-to-list 'maple-header:auto-insert-alist
+    (add-to-list 'maple-header/auto-insert-alist
                  '((c++-mode . "C++ program") nil
                    "/*"
                    (string-trim-left
                     (maple-header:template " "))
                    "*/\n"))
-
-    (setq maple-header-filename-p t
-          maple-header-email-p nil
-          maple-header-modify-p t
-          maple-header-modify-by-p t)
     ))
 
 (defun zilongshanren-misc/init-pos-tip ()
