@@ -561,3 +561,11 @@
   "bi" 'bufler
   "bI" 'bufler-one-window
   "bb" 'bufler-switch-buffer)
+
+;; mermaid
+(spacemacs/set-leader-keys-for-major-mode 'mermaid-mode
+  "c" 'mermaid-compile
+  "r" 'mermaid-compile-region
+  "d" 'mermaid-open-doc
+  "b" 'mermaid-open-browser
+  "="  'mermaid-indent-line)

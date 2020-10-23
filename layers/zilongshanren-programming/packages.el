@@ -58,7 +58,24 @@
         magit-todos
         (company-tip :location (recipe :fetcher github :repo "liushihao456/company-tip"))
         vimrc-mode
+        mermaid-mode
+        ob-mermaid
         ))
+
+(defun zilongshanren-programming/init-mermaid-mode ()
+  (use-package mermaid-mode
+    :config
+    (setq mermaid-mmdc-location "/home/liuyan/.yarn/bin/mmdc")
+    (add-to-list 'auto-mode-alist '("\\.mmd\\'" . mermaid-mode))
+    ))
+
+(defun zilongshanren-programming/init-ob-mermaid ()
+  (use-package ob-mermaid
+    :after org
+    :config
+    (setq ob-mermaid-cli-path "/home/liuyan/.yarn/bin/mmdc")
+    (add-to-list 'org-babel-load-languages '(mermaid . t))
+    ))
 
 (defun zilongshanren-programming/init-vimrc-mode ()
   (use-package vimrc-mode
