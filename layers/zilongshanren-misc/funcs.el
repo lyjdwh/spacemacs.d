@@ -244,6 +244,7 @@ org-files and bookmarks"
                    ("Agenda" . (lambda () (org-agenda "" "a")))
                    ("Random Todo" . org-random-entry)
                    ("Search" . (lambda () (call-interactively #'engine/search-google)))
+                   ("pytorch 1.4" . (lambda () (browse-url "https://pytorch.apachecn.org/docs/1.4/")))
                    ("python 标准库" . (lambda () (browse-url "https://docs.python.org/zh-cn/3/library/index.html")))
                    ("Calculator" . (lambda () (helm-calcul-expression)))
                    ("Run current flie" . (lambda () (zilongshanren/run-current-file)))
