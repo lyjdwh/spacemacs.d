@@ -56,8 +56,15 @@
         (ivy-taskrunner :location (recipe :fetcher github :repo "emacs-taskrunner/ivy-taskrunner"))
         counsel-etags
         magit-todos
+        vimrc-mode
         ))
 
+(defun zilongshanren-programming/init-vimrc-mode ()
+  (use-package vimrc-mode
+    :defer t
+    :config
+    (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+    ))
 (defun zilongshanren-programming/init-magit-todos ()
   (use-package magit-todos
     :after magit
