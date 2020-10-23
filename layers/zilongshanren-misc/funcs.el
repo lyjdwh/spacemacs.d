@@ -944,6 +944,20 @@ You can use \\&, \\N to refer matched text."
   (unwind-protect
       (push (read-event) unread-command-events)
     (pos-tip-hide)))
+
+(define-advice server-eval-and-print (:around (&rest r) print-buffer)
+  "Print the current buffer instead of the result of evaluation."
+  (require 'seq)
+  (seq-let (_ expr proc) r
+    (with-local-quit (eval (car (read-from-string expr))))
+    (when proc
+      (require 'e2ansi)
+      (server-reply-print
+       (server-quote-arg
+        (let ((e2ansi-background-mode 'dark))
+          (e2ansi-string-to-ansi (buffer-string))))
+       proc))))
+
 (defun bufler-one-window (&optional force-refresh)
   (interactive "P")
   (bufler-list)
