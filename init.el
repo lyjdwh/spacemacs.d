@@ -121,6 +121,9 @@ This function should only modify configuration layer settings."
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-backend 'lsp-ccls
             c-c++-lsp-executable (file-truename "/usr/bin/ccls"))
+     (cmake :variables
+            cmake-backend 'lsp
+            cmake-enable-cmake-ide-support t)
      zilongshanren
      ;; (chinese :variables chinese-default-input-method 'pinyin
      ;;          chinese-enable-youdao-dict t)
