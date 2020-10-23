@@ -92,7 +92,13 @@
         ;; bongo
         ;; podcaster
         ;; mingus
+        helm-chrome
         ))
+
+(defun zilongshanren-misc/init-helm-chrome ()
+  (use-package helm-chrome
+    :commands helm-chrome-bookmarks
+    ))
 
 ;; (defun zilongshanren-misc/init-podcaster ()
 ;;   (use-package podcaster

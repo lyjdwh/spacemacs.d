@@ -553,3 +553,6 @@
 ;; (spacemacs/set-leader-keys "atm" 'mingus)
 ;; (spacemacs/set-leader-keys "atp" 'podcaster)
 
+;; helm-chrome-bookmark
+(spacemacs/set-leader-keys "obg" 'helm-chrome-bookmarks)
+
