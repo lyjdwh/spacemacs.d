@@ -36,7 +36,9 @@ This function should only modify configuration layer settings."
      helpful
      (ranger :variables ranger-override-dired t )
      emoji
-     (plantuml :variables plantuml-jar-path "~/.spacemacs.d/plantuml.jar")
+     (plantuml :variables
+               plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
+               org-plantuml-jar-path  "~/.spacemacs.d/plantuml.jar")
      ;; lsp
      ;; dap
      colors
