@@ -556,3 +556,8 @@
 ;; helm-chrome-bookmark
 (spacemacs/set-leader-keys "obg" 'helm-chrome-bookmarks)
 
+;; bufler
+(spacemacs/set-leader-keys
+  "bi" 'bufler
+  "bI" 'bufler-one-window
+  "bb" 'bufler-switch-buffer)

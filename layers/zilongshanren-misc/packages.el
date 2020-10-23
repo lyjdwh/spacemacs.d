@@ -93,7 +93,11 @@
         ;; podcaster
         ;; mingus
         helm-chrome
+        bufler
         ))
+
+(defun zilongshanren-misc/init-bufler ()
+  (use-package bufler))
 
 (defun zilongshanren-misc/init-helm-chrome ()
   (use-package helm-chrome

@@ -944,3 +944,7 @@ You can use \\&, \\N to refer matched text."
   (unwind-protect
       (push (read-event) unread-command-events)
     (pos-tip-hide)))
+(defun bufler-one-window (&optional force-refresh)
+  (interactive "P")
+  (bufler-list)
+  (delete-other-windows))
