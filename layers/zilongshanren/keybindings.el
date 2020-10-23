@@ -548,3 +548,8 @@
 
 ;; wttrin
 (spacemacs/set-leader-keys "otw" 'wttrin)
+
+;; music, podcaster
+;; (spacemacs/set-leader-keys "atm" 'mingus)
+;; (spacemacs/set-leader-keys "atp" 'podcaster)
+

@@ -89,7 +89,47 @@
         ace-pinyin
         tmux-pane
         wttrin
+        ;; bongo
+        ;; podcaster
+        ;; mingus
         ))
+
+;; (defun zilongshanren-misc/init-podcaster ()
+;;   (use-package podcaster
+;;     :commands podcaster
+;;     :config
+;;     (setq podcaster-feeds-urls
+;; 	      '("http://www.ximalaya.com/album/5574153.xml"      ;;日谈公园
+;; 	        "http://www.ximalaya.com/album/8583636.xml"      ;;大内密谈
+;; 	        "http://www.ximalaya.com/album/3558668.xml"      ;;黑水公园
+;;             "https://www.pythonhunter.org/episodes/feed.xml" ;;捕蛇者说
+;;             "https://feeds.pacific-content.com/commandlineheroes" ;;command line heroes
+;;             "https://pan.icu/feed"                                ;;内核恐慌
+;;             ))
+;;     (setq podcaster-mp3-player "ffplay")))
+
+;; (defun zilongshanren-misc/init-bongo ()
+;;   (use-package bongo
+;;     :commands bongo-playlist
+;;     :bind (:map bongo-playlist-mode-map
+;;                 ;; `h'         Switch from playlist to library
+;; 	            ("<return>" . bongo-dwim)
+;; 	            ("<space>" . bongo-pause/resume)
+;; 	            ("i" . bongo-insert-file)
+;; 	            ("p" . bongo-play-previous)
+;; 	            ("n" . bongo-play-next)
+;; 	            ("d" . bongo-dired-line)
+;; 	            ("e" . bongo-append-enqueue)
+;; 	            ("s" . bongo-seek)
+;; 	            ("r" . bongo-play-random)
+;;                 ("v" . volume))
+;;     :custom
+;;     (bongo-enabled-backends '(mpv))
+;;     (bongo-default-directory "~/Music/")))
+;; (defun zilongshanren-misc/init-mingus ()
+;;   (use-package mingus
+;;     :commands mingus
+;;     ))
 
 (defun zilongshanren-misc/init-wttrin ()
   (use-package wttrin
