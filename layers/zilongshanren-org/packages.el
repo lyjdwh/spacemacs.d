@@ -29,6 +29,7 @@
     (org-protocol-capture-html :location (recipe :fetcher github :repo "alphapapa/org-protocol-capture-html") )
     (valign :location (recipe :fetcher github :repo "casouri/valign"))
     grip-mode
+    org-super-agenda
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -36,12 +37,29 @@
     ;; plain-org-wiki
     ;; org-preview-html
     ))
+
 ;; (defun zilongshanren-org/init-org-preview-html ()
 ;;   (use-package org-preview-html
 ;;     :defer t
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+
+(defun zilongshanren-org/init-org-super-agenda ()
+  (use-package org-super-agenda
+    :after org
+    :init
+    (setq org-super-agenda-groups
+          '((:name "Important"
+                   :priority "A")
+            (:name "Quick Picks"
+                   :effort< "0:30")
+            (:name "Next Items"
+                   :tag ("NEXT" "outbox"))
+            (:priority<= "B"
+                         :scheduled future)))
+    (add-hook 'org-mode-hook 'org-super-agenda-mode)
+    ))
 
 (defun zilongshanren-org/init-notdeft ()
   (use-package notdeft
@@ -552,7 +570,7 @@
       ;;http://www.howardism.org/Technical/Emacs/journaling-org.html
       ;;add multi-file journal
       (setq org-capture-templates
-            '(("t" "Todo" entry (file+headline org-agenda-file-gtd "Workspace")
+            '(("t" "Todo" entry (file+headline org-agenda-file-gtd "GTD")
                "* TODO [#B] %?\n  %i\n %U"
                :empty-lines 1)
               ("n" "notes" entry (file+headline org-agenda-file-note "Quick notes")
