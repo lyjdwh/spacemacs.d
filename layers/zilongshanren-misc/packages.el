@@ -334,15 +334,13 @@
     :init
     ;; restore on load (even before you require bm)
     (setq bm-restore-repository-on-load t)
-
-    :config
     (setq bm-annotate-on-create t)
     (setq bm-cycle-all-buffers t)
-    (setq bm-repository-file "~/.emacs.d/bm-repository")
-
+    (setq bm-repository-file (format "%sbm-repository"
+                                     spacemacs-cache-directory))
     ;; save bookmarks
     (setq-default bm-buffer-persistence t)
-
+  :config
     ;; Loading the repository from file when on start up.
     (add-hook 'after-init-hook 'bm-repository-load)
 
