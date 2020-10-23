@@ -56,6 +56,7 @@
         (ivy-taskrunner :location (recipe :fetcher github :repo "emacs-taskrunner/ivy-taskrunner"))
         counsel-etags
         magit-todos
+        (company-tip :location (recipe :fetcher github :repo "liushihao456/company-tip"))
         vimrc-mode
         ))
 
@@ -65,6 +66,15 @@
     :config
     (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
     ))
+
+(defun zilongshanren-programming/init-company-tip ()
+  (use-package company-tip
+    :after company
+    :config
+    (company-tip-mode 1)
+    (setq company-tip-delay 0.2)
+    ))
+
 (defun zilongshanren-programming/init-magit-todos ()
   (use-package magit-todos
     :after magit
