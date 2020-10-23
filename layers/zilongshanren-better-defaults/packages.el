@@ -115,7 +115,7 @@
     (setq eaf-proxy-host "127.0.0.1")
     (setq eaf-proxy-port "1080")
     (eaf-setq eaf-browser-aria2-proxy-host "127.0.0.1")
-    (eaf-setq eaf-browser-aria2-proxy-port "8188")
+    (eaf-setq eaf-browser-aria2-proxy-port "12333")
     ;; set dark mode
     (eaf-setq eaf-browser-dark-mode "false")
     (eaf-setq eaf-pdf-dark-mode "false")
