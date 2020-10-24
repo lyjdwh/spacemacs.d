@@ -146,6 +146,7 @@ This function should only modify configuration layer settings."
      pandoc
      (elfeed :variables
              rmh-elfeed-org-files (list "~/org-notes/elfeed.org"))
+     copy-as-format
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
