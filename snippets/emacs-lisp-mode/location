@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: quelpa location
+# key: :l
+# --
+:location (recipe :fetcher github :repo "${1:repo}")
