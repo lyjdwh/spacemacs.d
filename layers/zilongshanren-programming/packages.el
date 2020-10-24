@@ -184,11 +184,11 @@
         (lambda ()
           (setq TeX-auto-untabify t     ; remove all tabs before saving
                 TeX-engine 'xetex     ; use xelatex default
-                ;; TeX-view-program-selection '((output-pdf "Okular"))
+                TeX-view-program-selection '((output-pdf "Okular"))
                 ;; TeX-view-program-selection '((output-pdf "Emacs"))
                 ;; TeX-view-program-list '(("Emacs" "emacsclient -n %o"))
-                TeX-view-program-selection '((output-pdf "PDF Tools"))
-                TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+                ;; TeX-view-program-selection '((output-pdf "PDF Tools"))
+                ;; TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
                 TeX-source-correlate-mode t
                 TeX-source-correlate-start-server t
                 TeX-source-correlate-method 'synctex
