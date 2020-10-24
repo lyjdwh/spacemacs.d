@@ -91,7 +91,14 @@ This function should only modify configuration layer settings."
      pdf
      (markdown :variables markdown-live-preview-engine 'vmd)
      (org :variables org-want-todo-bindings t
-          org-enable-hugo-support t)
+          org-enable-hugo-support t
+          org-enable-org-journal-support t
+          org-journal-dir "~/org-notes/journal"
+          org-journal-file-format "%Y-%m-%d"
+          org-journal-date-prefix "#+TITLE: "
+          org-journal-date-format "%A, %B %d %Y"
+          org-journal-time-prefix "* "
+          org-journal-time-format "")
      ;; gpu
      yaml
      ;;  react
