@@ -48,14 +48,17 @@
 (defun zilongshanren-org/init-org-super-agenda ()
   (use-package org-super-agenda
     :after org
-    :init
+    :config
     (setq org-super-agenda-groups
-          '((:name "Important"
+          '((:name "Today"
+                   :time-grid t
+                   :todo "TODAY")
+            (:name "Important"
                    :priority "A")
             (:name "Quick Picks"
                    :effort< "0:30")
             (:name "Next Items"
-                   :tag ("NEXT" "outbox"))
+                   :tag "next")
             (:priority<= "B"
                          :scheduled future)))
     (add-hook 'org-mode-hook 'org-super-agenda-mode)
