@@ -569,3 +569,7 @@
   "d" 'mermaid-open-doc
   "b" 'mermaid-open-browser
   "="  'mermaid-indent-line)
+
+;; treemacs
+(spacemacs/set-leader-keys "fT" 'treemacs-display-current-project-exclusively)
+(spacemacs/set-leader-keys "pT" 'treemacs-add-and-display-current-project)
