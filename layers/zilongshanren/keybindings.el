@@ -30,8 +30,23 @@
 (define-key evil-normal-state-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
 (define-key evil-normal-state-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
 (define-key evil-normal-state-map (kbd "-") nil)
-(define-key evil-visual-state-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
-(define-key evil-visual-state-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
+
+;; work in visual, and visual line modes
+(evil-define-motion my/evil-next-visual-line (count)
+  "Move the cursor COUNT screen lines down, or 5."
+  :type exclusive
+  (let ((line-move-visual t))
+    (evil-line-move (or count 5))))
+
+(evil-define-motion my/evil-previous-visual-line (count)
+  "Move the cursor COUNT screen lines down, or 5."
+  :type exclusive
+  (let ((line-move-visual t))
+    (evil-line-move (or count 5))))
+
+(define-key evil-visual-state-map (kbd "J") 'my/evil-next-visual-line)
+(define-key evil-visual-state-map (kbd "K") 'my/evil-previous-visual-line)
+
 (evil-define-key 'normal emacs-lisp-mode-map (kbd "gh") 'helpful-at-point)
 (evil-define-key 'normal python-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
 (evil-define-key 'normal c++-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
