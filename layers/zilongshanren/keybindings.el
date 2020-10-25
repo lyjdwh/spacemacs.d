@@ -68,7 +68,7 @@
 (spacemacs/declare-prefix "ot" "Toggle")
 
 (spacemacs/set-leader-keys "oS" 'zilongshanren/helm-hotspots)
-(spacemacs/set-leader-keys "oc" 'my-auto-update-tags-when-save)
+;; (spacemacs/set-leader-keys "oc" 'my-auto-update-tags-when-save)
 (spacemacs/set-leader-keys "fR" 'zilongshanren/rename-file-and-buffer)
 (spacemacs/set-leader-keys "bD" 'spacemacs/kill-other-buffers)
 
@@ -588,3 +588,36 @@
 ;; treemacs
 (spacemacs/set-leader-keys "fT" 'treemacs-display-current-project-exclusively)
 (spacemacs/set-leader-keys "pT" 'treemacs-add-and-display-current-project)
+
+;; hydra-org-clock
+(defhydra hydra-org-clock (:color pink :hint nil)
+"
+org-clock hydra key
+
+clock                             ^^^^effort             ^^watcher
+-------------------------------^^^^^^^---------------------------------
+[_i_]  clock in     [_c_]  cancel     [_e_] set effort     [_t_] toggle
+[_L_]  clock last   [_o_]  clock out  [_E_] reset effort   [_s_] start
+[_r_]  resolve                                         ^^^^[_S_] stop
+[_g_]  goto                                            ^^^^[_w_] status
+[_J_]  jump2current                                    ^^^^[_O_] open plan
+
+[_q_] cancel
+"
+      ("i" org-clock-in)
+      ("o" org-clock-out :exit t)
+      ("r" org-resolve-clocks :exit t)
+      ("g" org-clock-goto :exit t)
+      ("J" spacemacs/org-clock-jump-to-current-clock :exit t)
+      ("c" org-clock-cancel :exit t)
+      ("L" org-clock-in-last)
+      ("e" org-set-effort :exit t)
+      ("E" org-clock-modify-effort-estimate :exit t)
+      ("t" org-clock-watch-toggle :exit t)
+      ("s" (org-clock-watch-toggle 'on) :exit t)
+      ("S" (org-clock-watch-toggle 'off) :exit t)
+      ("w" (org-clock-watch-status))
+      ("O" org-clock-watch-goto-work-plan)
+      ("q" nil :color blue))
+
+(spacemacs/set-leader-keys "oc" 'hydra-org-clock/body)

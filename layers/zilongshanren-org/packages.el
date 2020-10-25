@@ -30,6 +30,7 @@
     (valign :location (recipe :fetcher github :repo "casouri/valign"))
     grip-mode
     org-super-agenda
+    (org-clock-watch :location local)
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -44,6 +45,15 @@
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+
+(defun zilongshanren-org/init-org-clock-watch ()
+  (use-package org-clock-watch
+    :load-path "~/bin/org-clock-watch"
+    :after org
+    :config
+    (setq org-clock-watch-work-plan-file-path "~/org-notes/gtd.org")
+    (org-clock-watch-toggle 'on)
+    ))
 
 (defun zilongshanren-org/init-org-super-agenda ()
   (use-package org-super-agenda
