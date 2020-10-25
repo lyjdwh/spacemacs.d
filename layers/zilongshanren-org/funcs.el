@@ -255,3 +255,13 @@ Adapt from `org-babel-remove-result'."
           (defun org-babel-highlight-result-maybe ()
             (when (eq this-command 'org-ctrl-c-ctrl-c)
               (org-babel-highlight-result))))
+
+(defun org-cycle-num-bullet ()
+  "turn the list bullet to 1. "
+  (interactive)
+  (org-cycle-list-bullet 3))
+
+(defun org-add-checkbox ()
+  "add checkbox to current list item"
+  (interactive)
+  (org-toggle-checkbox '(4)))

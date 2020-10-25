@@ -294,17 +294,14 @@
 (defalias 'org-archive-done-tasks 'zilongshanren/org-archive-done-tasks)
 (defalias 'capture-screenshot 'zilongshanren/capture-screenshot)
 
-(defun org-cycle-num-bullet ()
-  "turn the list bullet to 1. "
-  (interactive)
-  (org-cycle-list-bullet 3))
-
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
   "ia" 'org-insert-src-block
   "iS" 'capture-screenshot
   "k" 'org-ctrl-c-ctrl-c
   "iT" 'org-set-tags-command
-  "1"  'org-cycle-num-bullet)
+  "1"  'org-cycle-num-bullet
+  "2"  'org-add-checkbox
+  )
 
 (spacemacs/set-leader-keys
   "aon" 'org-noter
