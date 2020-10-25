@@ -43,7 +43,7 @@ This function should only modify configuration layer settings."
      ;; dap
      colors
      ;; prodigy
-     ;; github
+     github
      search-engine
      graphviz
      ;;  (haskell :variables haskell-enable-hindent t

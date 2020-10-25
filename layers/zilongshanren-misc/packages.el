@@ -69,7 +69,6 @@
         bbyac
         (meow :location (recipe :fetcher github :repo "DogLooksGood/meow") )
         evil-snipe
-        forge
         (powerthesaurus :location (recipe :fetcher github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
         mw-thesaurus
         langtool
@@ -560,10 +559,6 @@
     :commands (powerthesaurus-lookup-word powerthesaurus-lookup-word-at-point
                                           powerthesaurus-lookup-word-dwim)
     ))
-
-(defun zilongshanren-misc/init-forge ()
-  (use-package forge
-    :after magit))
 
 (defun zilongshanren-misc/init-evil-snipe ()
   (use-package evil-snipe
