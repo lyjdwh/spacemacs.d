@@ -583,32 +583,32 @@
       ;;http://www.howardism.org/Technical/Emacs/journaling-org.html
       ;;add multi-file journal
       (setq org-capture-templates
-            '(("t" "Todo" entry (file+headline org-agenda-file-gtd "GTD")
+            '((;; gtd
+               "t" "study" entry (file+headline org-agenda-file-gtd "Study")
                "* TODO [#B] %?\n  %i\n %U"
                :empty-lines 1)
+              ("w" "work" entry (file+headline org-agenda-file-gtd "Work")
+               "* TODO [#B] %?\n  %i\n %U"
+               :empty-lines 1)
+              ;; note
               ("n" "notes" entry (file+headline org-agenda-file-note "Quick notes")
                "* %?\n  %i\n %U"
                :empty-lines 1)
               ("b" "Blog Ideas" entry (file+headline org-agenda-file-note "Blog Ideas")
                "* TODO [#B] %?\n  %i\n %U"
                :empty-lines 1)
-              ("s" "Code Snippet" entry
-               (file org-agenda-file-code-snippet)
-               "* %?\t%^g\n#+BEGIN_SRC %^{language}\n\n#+END_SRC")
-              ("w" "work" entry (file+headline org-agenda-file-gtd "Work")
-               "* TODO [#A] %?\n  %i\n %U"
-               :empty-lines 1)
-              ("x" "Web site" entry
-               (file+headline org-agenda-file-note "Web")
-               "* %a :website:\n\n%U %?\n\n%:initial")
-              ("p" "Protocol" entry (file+headline org-agenda-file-note "Web")
-               "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
 	          ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Web")
-
                "* %? [[%:link][%:description]] \nCaptured On: %U")
               ("l" "links" entry (file+headline org-agenda-file-note "Quick notes")
                "* TODO [#C] %?\n  %i\n %a \n %U"
                :empty-lines 1)
+              ("p" "Protocol" entry (file+headline org-agenda-file-note "Web")
+               "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+              ;; code snippet
+              ("s" "Code Snippet" entry
+               (file org-agenda-file-code-snippet)
+               "* %?\t%^g\n#+BEGIN_SRC %^{language}\n\n#+END_SRC")
+              ;; journal
               ("j" "Journal Entry"
                entry (file+datetree org-agenda-file-journal)
                "* %?"
@@ -645,12 +645,12 @@ See `org-capture-templates' for more information."
             '(
               ("w" . "任务安排")
               ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
-              ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+              ("wb" "重要且不紧急的任务" tags-todo "-weekly-monthly-daily+PRIORITY=\"B\"")
               ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
               ("b" "Blog" tags-todo "BLOG")
               ("p" . "项目安排")
-              ("pw" tags-todo "PROJECT+WORK+CATEGORY=\"work\"")
-              ("pl" tags-todo "PROJECT+DREAM+CATEGORY=\"liuyan\"")
+              ("pw" tags-todo "project+work")
+              ("pd" tags-todo "project+dream")
               ("r" . "回顾")
               ("rm" "月度回顾"
                ((agenda ""
