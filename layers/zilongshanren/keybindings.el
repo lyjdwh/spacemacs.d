@@ -629,3 +629,16 @@ clock                             ^^^^effort             ^^watcher
   "mh" "docs")
 (spacemacs/set-leader-keys-for-major-mode 'cmake-mode
   "hd" 'cmake-help)
+
+;; pandoc
+(spacemacs/set-leader-keys "atp" 'spacemacs/run-pandoc)
+
+;; gk-habit
+(spacemacs/declare-prefix "ah" "habit")
+(spacemacs/set-leader-keys
+  "ahi" 'gkh-init
+  "ahn" 'gkh-new
+  "ahr" 'gkh-record
+  "aha" 'gkh-archive
+  "ahd" 'gkh-org-table-display
+  "ahc" 'gkh-report-current-week)

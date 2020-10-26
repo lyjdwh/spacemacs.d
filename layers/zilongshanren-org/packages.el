@@ -31,6 +31,7 @@
     grip-mode
     org-super-agenda
     (org-clock-watch :location local)
+    (gk-habit :location local )
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -45,6 +46,14 @@
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+
+(defun zilongshanren-org/init-gk-habit ()
+  (use-package gk-habit
+    :load-path "~/bin/gk-habit"
+    :after org
+    :config
+    (setq gkh-file "~/org-notes/habit.org")
+    ))
 
 (defun zilongshanren-org/init-org-clock-watch ()
   (use-package org-clock-watch
