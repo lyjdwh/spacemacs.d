@@ -15,7 +15,6 @@
         css-mode
         paredit
         lispy
-        cmake-mode
         flycheck
         (nodejs-repl-eval :location local)
         (compile-dwim :location local)
@@ -541,19 +540,6 @@
 ;; (defun zilongshanren-programming/init-google-c-style ()
 ;;   (use-package google-c-style
 ;;     :init (add-hook 'c-mode-common-hook 'google-set-c-style)))
-
-
-(defun zilongshanren-programming/init-cmake-mode ()
-  (use-package cmake-mode
-      :defer t
-      :mode (("CMakeLists\\.txt\\'" . cmake-mode) ("\\.cmake\\'" . cmake-mode))
-      :config
-      (spacemacs/declare-prefix-for-mode 'cmake-mode
-          "mh" "docs")
-      (spacemacs/set-leader-keys-for-major-mode 'cmake-mode
-          "hd" 'cmake-help)
-      (add-hook 'cmake-mode-hook (function cmake-rename-buffer))
-      ))
 
 (defun zilongshanren-programming/post-init-flycheck ()
   (with-eval-after-load 'flycheck

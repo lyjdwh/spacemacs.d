@@ -623,3 +623,9 @@ clock                             ^^^^effort             ^^watcher
       ("q" nil :color blue))
 
 (spacemacs/set-leader-keys "oc" 'hydra-org-clock/body)
+
+;; cmake-mode
+(spacemacs/declare-prefix-for-mode 'cmake-mode
+  "mh" "docs")
+(spacemacs/set-leader-keys-for-major-mode 'cmake-mode
+  "hd" 'cmake-help)
