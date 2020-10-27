@@ -287,6 +287,8 @@
     ;;handle yasnippet by myself
     (setq lsp-enable-snippet nil)
 
+    (setq lsp-headerline-breadcrumb-enable t)
+
     ;; use ffip instead
     (setq lsp-enable-links nil)
     ;; auto restart lsp
