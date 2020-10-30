@@ -165,3 +165,15 @@ The original function deletes trailing whitespace of the current line."
   "used when vi-mode in terminal"
   (interactive)
   (eaf-call "send_key_sequence" eaf--buffer-id "C-["))
+
+(defun change-browser-function ()
+  "change the browser for emacs"
+  (interactive)
+  (if (equal browse-url-browser-function 'eaf-open-browser)
+      (progn
+        (setq browse-url-browser-function 'browse-url-default-browser)
+        (message "use default browser"))
+    (progn
+      (setq browse-url-browser-function 'eaf-open-browser)
+      (message "use eaf as browser"))
+    ))
