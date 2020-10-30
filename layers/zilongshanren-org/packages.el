@@ -31,7 +31,7 @@
     grip-mode
     org-super-agenda
     (org-clock-watch :location local)
-    (gk-habit :location local )
+    (gkhabit :location (recipe :fetcher github :repo "Kinneyzhang/gkhabit"))
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -47,9 +47,8 @@
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
 
-(defun zilongshanren-org/init-gk-habit ()
-  (use-package gk-habit
-    :load-path "~/bin/gk-habit"
+(defun zilongshanren-org/init-gkhabit ()
+  (use-package gkhabit
     :after org
     :config
     (setq gkh-file "~/org-notes/habit.org")
