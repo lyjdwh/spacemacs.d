@@ -265,3 +265,15 @@ Adapt from `org-babel-remove-result'."
   "add checkbox to current list item"
   (interactive)
   (org-toggle-checkbox '(4)))
+
+(defun gkh-delete ()
+  "Delete a habit"
+  (interactive)
+  (let* ((habits (emacsql gkh-db [:select name :from habit
+					                      :where (= status "Active")]))
+	     (habit (completing-read "Choose a habit: " habits nil t)))
+    (emacsql gkh-db `[:delete
+                      :from habit
+			          :where (= name ,habit)])
+    (gkh-org-table-draw)
+    (message "habit %s has been deleted!" habit)))

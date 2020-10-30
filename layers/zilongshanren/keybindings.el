@@ -642,4 +642,5 @@ clock                             ^^^^effort             ^^watcher
   "ahr" 'gkh-record
   "aha" 'gkh-archive
   "ahd" 'gkh-org-table-display
+  "ahD" 'gkh-delete
   "ahc" 'gkh-report-current-week)
