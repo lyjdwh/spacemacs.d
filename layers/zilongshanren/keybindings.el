@@ -644,3 +644,6 @@ clock                             ^^^^effort             ^^watcher
   "ahd" 'gkh-org-table-display
   "ahD" 'gkh-delete
   "ahc" 'gkh-report-current-week)
+
+;; cheat.sh
+(spacemacs/set-leader-keys "ac" 'cheat-sh)

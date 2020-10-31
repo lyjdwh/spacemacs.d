@@ -95,7 +95,12 @@
         bufler
         major-mode-hydra
         elfeed
+        cheat-sh
         ))
+
+(defun zilongshanren-misc/init-cheat-sh ()
+  (use-package cheat-sh
+    :commands cheat-sh))
 
 (defun zilongshanren-misc/init-major-mode-hydra ()
   (use-package major-mode-hydra))
