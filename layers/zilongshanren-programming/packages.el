@@ -548,8 +548,11 @@
     (progn
       (setq flycheck-display-errors-delay 0.9)
       (setq flycheck-idle-change-delay 2.0)
+      (setq flycheck-flake8-maximum-complexity 10)
+      (setq flycheck-flake8-maximum-line-length 120)
 
-      (flycheck-add-next-checker 'python-flake8 'python-mypy)
+      (flycheck-add-next-checker 'python-flake8 'python-pyright)
+      (flycheck-remove-next-checker 'python-flake8 'python-pylint)
       )))
 
 (defun zilongshanren-programming/post-init-eldoc ()
