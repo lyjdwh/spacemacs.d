@@ -324,6 +324,16 @@
 (define-key evil-normal-state-map (kbd "zK") 'one-key-menu-avy-thing-edit-replace)
 (define-key evil-normal-state-map (kbd "zs") 'avy-thing-copy-symbol)
 
+(define-key evil-normal-state-map (kbd "f") 'evil-avy-goto-char-2)
+(define-key evil-normal-state-map (kbd "F") 'evil-avy-goto-word-or-subword-1)
+(define-key evil-visual-state-map (kbd "f") 'evil-avy-goto-char-2)
+(define-key evil-visual-state-map (kbd "F") 'evil-avy-goto-word-or-subword-1)
+
+(define-key evil-normal-state-map (kbd "t") 'evil-snipe-f)
+(define-key evil-normal-state-map (kbd "T") 'evil-snipe-F)
+(define-key evil-visual-state-map (kbd "t") 'evil-snipe-f)
+(define-key evil-visual-state-map (kbd "T") 'evil-snipe-F)
+
 ;; re-builder, a nice interactive tool for building regular expressions
 (spacemacs/set-leader-keys "oR" 're-builder)
 
