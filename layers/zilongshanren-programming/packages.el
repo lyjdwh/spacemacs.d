@@ -215,7 +215,7 @@
     ;; ;; for dev build of language server
     ;; (setq lsp-python-ms-dir
     ;;     (file-name-directory lsp-python-ms-executable))
-    (setq lsp-python-ms-python-executable-cmd "/home/liuyan/.conda/envs/torch/bin/python")
+    (setq lsp-python-ms-python-executable-cmd "/home/liuyan/.conda/envs/torch17/bin/python")
     ))
 
 (defun zilongshanren-programming/post-init-lsp-pyright ()
@@ -224,7 +224,7 @@
                                   (require 'lsp-pyright)
                                   (lsp)))
     (setq lsp-pyright-diagnostic-mode "workspace")
-    (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch")
+    (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch17")
     ))
 
 (defun zilongshanren-programming/init-company-tabnine ()
