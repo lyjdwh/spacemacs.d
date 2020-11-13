@@ -88,7 +88,8 @@
 (defun zilongshanren-better-defaults/init-eaf ()
   (use-package eaf
     :load-path "/home/liuyan/bin/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
-    :commands (eaf-open-this-from-dired eaf-open-ipython eaf-open-camera eaf-open-demo
+    :commands (open-file-with-eaf
+               eaf-open-this-from-dired eaf-open-ipython eaf-open-camera eaf-open-demo
                eaf-open-browser eaf-open-external eaf-open-terminal eaf-toggle-fullscreen
                eaf-open eaf-open-url eaf-open-office eaf-open-mindmap eaf-open-airshare
                eaf-open-bookmark eaf-open-rss-reader eaf-kill-process eaf-search-it
@@ -144,6 +145,28 @@
     (add-to-list 'eaf-pdf-viewer-keybinding '("ae" . "eaf-proxy-add_annot_text_or_edit_annot"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("ad" . "eaf-proxy-add_annot_strikeout_or_delete_annot"))
 
+    (defun eaf-open-this (file)
+      "Open html/pdf/image/video files whenever possible with EAF.
+    Other files will open normally with `dired-find-file' or `dired-find-alternate-file'"
+      (cond
+       ((member (eaf-get-file-name-extension file) eaf-office-extension-list)
+        (eaf-open-office file))
+       ((eaf--get-app-for-extension
+         (eaf-get-file-name-extension file))
+        (eaf-open file))
+       (eaf-find-alternate-file-in-dired
+        (dired-find-alternate-file))
+       (t (dired-find-file))))
+
+    (defun open-file-with-eaf ()
+      "Open current file in eaf."
+      (interactive)
+      (let ((file-path (if (derived-mode-p 'dired-mode)
+                           (dired-get-file-for-visit)
+                         buffer-file-name)))
+        (if file-path
+            (eaf-open-this file-path)
+          (message "No file associated to this buffer."))))
     ))
 
 (defun zilongshanren-better-defaults/post-init-recentf ()

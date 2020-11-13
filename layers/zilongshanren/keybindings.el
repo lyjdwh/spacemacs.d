@@ -158,7 +158,7 @@
 (spacemacs/set-leader-keys "oi" 'ivy-yasnippet)
 
 ;;eaf
-(spacemacs/set-leader-keys "oo" 'eaf-open-this-from-dired)
+(spacemacs/set-leader-keys "fo" 'open-file-with-eaf)
 (spacemacs/declare-prefix "ae" "eaf")
 (spacemacs/set-leader-keys "aei" 'eaf-open-ipython)
 (spacemacs/set-leader-keys "aec" 'eaf-open-camera)
