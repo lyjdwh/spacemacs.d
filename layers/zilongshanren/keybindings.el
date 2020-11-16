@@ -661,3 +661,6 @@ clock                             ^^^^effort             ^^watcher
 ;; smart tab out
 (global-set-key [remap indent-for-tab-command]
                 'smart-tab-jump-out-or-indent)
+
+(spacemacs/set-leader-keys-for-major-mode 'bibtex-mode
+  "f" 'org-ref-bibtex-file/body)
