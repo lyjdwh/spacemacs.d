@@ -118,6 +118,36 @@
     (setq org-ref-bibliography-notes "~/org-notes/notes/bib-notes.org"
           org-ref-default-bibliography '("~/Documents/papers/bib/protein_design.bib")
           org-ref-pdf-directory "~/Documents/papers")
+
+    (with-eval-after-load 'org-ref
+      (defun org-ref-open-bibtex-pdf ()
+        "Open pdf for a bibtex entry, if it exists.
+assumes point is in
+the entry of interest in the bibfile.  but does not check that."
+        (interactive)
+        (save-excursion
+          (bibtex-beginning-of-entry)
+          (let* ((bibtex-expand-strings t)
+                 (entry (bibtex-parse-entry t))
+                 (pdf (reftex-get-bib-field "file" entry))
+                 )
+            (if (file-exists-p pdf)
+                (shell-command (format "xdg-open %s" pdf))
+              (message "%s doesn't exist" pdf))
+            )))
+      (defun org-ref-open-pdf-at-point ()
+        "Open the pdf for bibtex key under point if it exists."
+        (interactive)
+        (let* ((results (org-ref-get-bibtex-key-and-file))
+               (key (car results))
+               (pdf-file (format "%s.pdf" (org-ref-get-mendeley-filename key) ))
+               )
+          (if (file-exists-p pdf-file)
+              (shell-command (format "xdg-open %s" pdf-file))
+            (message "no pdf found for %s" entry))
+          ))
+      ;; (setq org-ref-notes-function 'org-ref-notes-function-one-file)
+      )
     ))
 
 (defun zilongshanren-org/init-org-noter ()
@@ -135,12 +165,12 @@
 
 (defun zilongshanren-org/init-ivy-bibtex ()
   (use-package ivy-bibtex
-    :commands ivy-bibtex
+    :after org-roam-bibtex
     :config
     (setq bibtex-completion-bibliography '("~/Documents/papers/bib/protein_design.bib"))
     (setq bibtex-completion-library-path '("~/Documents/papers"))
     (setq bibtex-completion-pdf-field "File")
-    (setq bibtex-completion-notes-path "~/org-notes/notes")
+    (setq bibtex-completion-notes-path "~/org-notes/notes/papers")
 	(setq bibtex-completion-display-formats
           '((article       . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${tags:6} ${year:4} ${author:36} ${title:*}")
             (inbook        . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${tags:6} ${year:4} ${author:36} ${title:*}")
@@ -153,10 +183,13 @@
     (setq bibtex-completion-find-additional-pdfs t)
 
     (ivy-bibtex-ivify-action bibtex-completion-open-pdf-external ivy-bibtex-open-pdf-external)
+    (ivy-bibtex-ivify-action bibtex-completion-open-annotated-pdf ivy-bibtex-open-annotated-pdf)
+    (ivy-bibtex-ivify-action bibtex-completion-open-pdf ivy-bibtex-open-pdf)
 
     (ivy-add-actions
      'ivy-bibtex
-     '(("P" ivy-bibtex-open-pdf-external "Open PDF file in external viewer (if present)")
+     '(("p" ivy-bibtex-open-pdf-external "Open PDF file in external viewer (if present)")
+       ("P" ivy-bibtex-open-pdf "Open PDF file (if present)")
        ("n" ivy-bibtex-open-annotated-pdf "Open annotated PDF (if present)")
        ))
     (setq bibtex-completion-format-citation-functions
@@ -251,7 +284,15 @@
     :init
     (spacemacs/set-leader-keys
       "ama" 'orb-note-actions)
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      "ma" 'orb-note-actions)
+
     :config
+    (setq orb-note-actions-frontend 'hydra)
+
+    (with-eval-after-load 'orb-note-actions
+      (add-to-list 'orb-note-actions-user (cons "Open PDF file(s) Externally" #'bibtex-completion-open-pdf-external)))
+
     (setq orb-preformat-keywords
           '(("citekey" . "=key=") "title" "url" "file" "author-or-editor" "keywords"))
 
