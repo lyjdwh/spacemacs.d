@@ -663,4 +663,5 @@ clock                             ^^^^effort             ^^watcher
                 'smart-tab-jump-out-or-indent)
 
 (spacemacs/set-leader-keys-for-major-mode 'bibtex-mode
-  "f" 'org-ref-bibtex-file/body)
+  "f" 'org-ref-bibtex-file/body
+  "=" 'org-ref-bibtex-file/bibtex-reformat-and-exit)
