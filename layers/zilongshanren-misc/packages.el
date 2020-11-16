@@ -96,7 +96,15 @@
         major-mode-hydra
         elfeed
         cheat-sh
+        (shengci :location (recipe :fetcher github :repo "EvanMeek/shengci.el"))
         ))
+
+(defun zilongshanren-misc/init-shengci ()
+  (use-package shengci
+    :commands shengci-show-recorded-word shengci-capture-word-and-save
+    shengci-show-memorized-word shengci-practice-guess-recorded-word
+    shengci-practice-guess-memorized-word
+    ))
 
 (defun zilongshanren-misc/init-cheat-sh ()
   (use-package cheat-sh
