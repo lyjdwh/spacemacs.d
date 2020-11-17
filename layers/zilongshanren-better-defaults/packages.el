@@ -22,7 +22,11 @@
     (rotate-text :location local)
     super-save
     company-box
+    (move-to-position-hint :location local)
     ))
+
+(defun zilongshanren-better-defaults/init-move-to-position-hint ()
+  (use-package move-to-position-hint))
 
 (defun zilongshanren-better-defaults/post-init-company-box ()
   (setq company-box-doc-delay 0.2)
