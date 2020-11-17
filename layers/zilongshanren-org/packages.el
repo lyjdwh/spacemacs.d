@@ -289,6 +289,7 @@ the entry of interest in the bibfile.  but does not check that."
       "ma" 'orb-note-actions)
 
     :config
+    (setq bibtex-completion-pdf-open-function 'eaf-open)
     (setq orb-note-actions-frontend 'hydra)
 
     (add-to-list 'orb-note-actions-user (cons "Open PDF file(s) Externally" #'bibtex-completion-open-pdf-external))
