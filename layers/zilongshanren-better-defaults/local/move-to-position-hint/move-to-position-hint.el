@@ -40,11 +40,9 @@
   (interactive)
   (move-to-position-hint 7))
 
-
 (defun move-to-position-hint-8 ()
   (interactive)
   (move-to-position-hint 8))
-
 
 (defun move-to-position-hint-9 ()
   (interactive)
@@ -52,15 +50,15 @@
 
 (defvar position-hint-map
   (let ((keymap (make-sparse-keymap)))
-    (define-key keymap (kbd "1") 'move-to-position-hint-1)
-    (define-key keymap (kbd "2") 'move-to-position-hint-2)
-    (define-key keymap (kbd "3") 'move-to-position-hint-3)
-    (define-key keymap (kbd "4") 'move-to-position-hint-4)
-    (define-key keymap (kbd "5") 'move-to-position-hint-5)
-    (define-key keymap (kbd "6") 'move-to-position-hint-6)
-    (define-key keymap (kbd "7") 'move-to-position-hint-7)
-    (define-key keymap (kbd "8") 'move-to-position-hint-8)
-    (define-key keymap (kbd "9") 'move-to-position-hint-9)
+    (define-key keymap (kbd "a") 'move-to-position-hint-1)
+    (define-key keymap (kbd "s") 'move-to-position-hint-2)
+    (define-key keymap (kbd "d") 'move-to-position-hint-3)
+    (define-key keymap (kbd "f") 'move-to-position-hint-4)
+    (define-key keymap (kbd "g") 'move-to-position-hint-5)
+    (define-key keymap (kbd "h") 'move-to-position-hint-6)
+    (define-key keymap (kbd "j") 'move-to-position-hint-7)
+    (define-key keymap (kbd "k") 'move-to-position-hint-8)
+    (define-key keymap (kbd "l") 'move-to-position-hint-9)
     keymap))
 
 (defun highlight-position-hint (cmd)
@@ -76,7 +74,7 @@
                                (t (format "%d" i))))
                  (overlay-put ov 'face 'position-hint-face)
                  (push ov ovs))))
-    (sit-for 1)
+    (sit-for 1.5)
     (mapcar #'delete-overlay ovs)
     (setq position-hint-move-function cmd)
     (set-transient-map position-hint-map t (lambda () (setq position-hint-move-function nil)))))

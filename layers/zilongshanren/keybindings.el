@@ -325,9 +325,9 @@
 (define-key evil-normal-state-map (kbd "zs") 'avy-thing-copy-symbol)
 
 (define-key evil-normal-state-map (kbd "f") 'evil-avy-goto-char-2)
-(define-key evil-normal-state-map (kbd "F") 'evil-avy-goto-word-or-subword-1)
+(define-key evil-normal-state-map (kbd "F") 'evil-avy-goto-char)
 (define-key evil-visual-state-map (kbd "f") 'evil-avy-goto-char-2)
-(define-key evil-visual-state-map (kbd "F") 'evil-avy-goto-word-or-subword-1)
+(define-key evil-visual-state-map (kbd "F") 'evil-avy-goto-char)
 
 (define-key evil-normal-state-map (kbd "t") 'evil-snipe-f)
 (define-key evil-normal-state-map (kbd "T") 'evil-snipe-F)
