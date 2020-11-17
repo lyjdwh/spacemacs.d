@@ -88,18 +88,8 @@
 
 (defun my-backward-word ()
   (interactive)
-  (call-interactively #'evil-backward-word-begin)
-  (highlight-position-hint #'evil-backward-word-begin))
-
-(defun my-next-line ()
-  (interactive)
-  (call-interactively #'evil-next-line)
-  (highlight-position-hint #'evil-next-line))
-
-(defun my-previous-line ()
-  (interactive)
-  (call-interactively #'evil-previous-line)
-  (highlight-position-hint #'evil-previous-line))
+  (call-interactively #'backward-word)
+  (highlight-position-hint #'backward-word))
 
 (define-key evil-normal-state-map (kbd "w") 'my-forward-word)
 (define-key evil-visual-state-map (kbd "w") 'my-forward-word)
