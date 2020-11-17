@@ -143,7 +143,7 @@
     (add-to-list 'eaf-terminal-keybinding '("C-j" . "eaf-send-key-sequence"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("d" . "eaf-proxy-scroll_up_page"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("u" . "eaf-proxy-scroll_down_page"))
-    (add-to-list 'eaf-pdf-viewer-keybinding '("ah" . "eaf-proxy-add_annot_highlight"))
+    (add-to-list 'eaf-pdf-viewer-keybinding '("aa" . "eaf-proxy-add_annot_highlight"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("au" . "eaf-proxy-add_annot_underline"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("as" . "eaf-proxy-add_annot_squiggly"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("ae" . "eaf-proxy-add_annot_text_or_edit_annot"))
