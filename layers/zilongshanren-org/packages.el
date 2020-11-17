@@ -116,9 +116,10 @@
   (progn
     ;; see org-ref for use of these variables
     (setq org-ref-bibliography-notes "~/org-notes/notes/bib-notes.org"
-          org-ref-default-bibliography '("~/Documents/papers/bib/protein_design.bib")
+          org-ref-default-bibliography '("~/Documents/papers/bib/protein_design.bib" "~/Documents/papers/bib/mendeley.bib")
           org-ref-pdf-directory "~/Documents/papers")
 
+    (add-hook 'bibtex-mode-hook (lambda () (require 'org-ref)))
     (with-eval-after-load 'org-ref
       (defun org-ref-open-bibtex-pdf ()
         "Open pdf for a bibtex entry, if it exists.
@@ -167,7 +168,7 @@ the entry of interest in the bibfile.  but does not check that."
   (use-package ivy-bibtex
     :after org-roam-bibtex
     :config
-    (setq bibtex-completion-bibliography '("~/Documents/papers/bib/protein_design.bib"))
+    (setq bibtex-completion-bibliography '("~/Documents/papers/bib/protein_design.bib" "~/Documents/papers/bib/mendeley.bib"))
     (setq bibtex-completion-library-path '("~/Documents/papers"))
     (setq bibtex-completion-pdf-field "File")
     (setq bibtex-completion-notes-path "~/org-notes/notes/papers")
@@ -290,8 +291,7 @@ the entry of interest in the bibfile.  but does not check that."
     :config
     (setq orb-note-actions-frontend 'hydra)
 
-    (with-eval-after-load 'orb-note-actions
-      (add-to-list 'orb-note-actions-user (cons "Open PDF file(s) Externally" #'bibtex-completion-open-pdf-external)))
+    (add-to-list 'orb-note-actions-user (cons "Open PDF file(s) Externally" #'bibtex-completion-open-pdf-external))
 
     (setq orb-preformat-keywords
           '(("citekey" . "=key=") "title" "url" "file" "author-or-editor" "keywords"))
