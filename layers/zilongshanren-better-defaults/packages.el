@@ -148,6 +148,8 @@
     (add-to-list 'eaf-pdf-viewer-keybinding '("as" . "eaf-proxy-add_annot_squiggly"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("ae" . "eaf-proxy-add_annot_text_or_edit_annot"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("ad" . "eaf-proxy-add_annot_strikeout_or_delete_annot"))
+    (add-to-list 'eaf-pdf-viewer-keybinding '("C-c" . "copy_select"))
+    (add-to-list 'eaf-browser-keybinding '("C-c" . "kill_text"))
 
     (defun eaf-open-this (file)
       "Open html/pdf/image/video files whenever possible with EAF.
