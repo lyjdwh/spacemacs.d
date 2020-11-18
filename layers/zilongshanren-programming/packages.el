@@ -49,7 +49,6 @@
         (color-rg :location (recipe :fetcher github :repo "manateelazycat/color-rg"))
         hl-todo
         counsel-dash
-        (webkit-katex-render :location (recipe :fetcher github :repo "fuxialexander/emacs-webkit-katex-render"))
         (lpy :location (recipe :fetcher github :repo "abo-abo/lpy"))
         taskrunner
         (ivy-taskrunner :location (recipe :fetcher github :repo "emacs-taskrunner/ivy-taskrunner"))
@@ -132,11 +131,6 @@
     :config
     ;; fix key conflict between lpy and lsp
     (define-key lpy-mode-map "(" nil)
-    ))
-
-(defun zilongshanren-programming/init-webkit-katex-render ()
-  (use-package webkit-katex-render
-    :commands webkit-katex-render-mode
     ))
 
 (defun zilongshanren-programming/post-init-counsel-dash ()

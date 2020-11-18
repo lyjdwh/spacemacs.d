@@ -32,6 +32,7 @@
     org-super-agenda
     (org-clock-watch :location local)
     (gkhabit :location (recipe :fetcher github :repo "Kinneyzhang/gkhabit"))
+    (org-latex-instant-preview :location (recipe :fetcher github :repo "yangsheng6810/org-latex-instant-preview"))
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -46,6 +47,17 @@
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+
+(defun zilongshanren-org/init-org-latex-instant-preview ()
+  (use-package org-latex-instant-preview
+    :defer t
+    :hook (org-mode . org-latex-instant-preview-mode)
+    :init
+    (setq org-latex-instant-preview-tex2svg-bin
+          "~/node_modules/mathjax-node-cli/bin/tex2svg")
+    (setq org-latex-instant-preview-posframe-position-handler
+          'posframe-poshandler-point-bottom-left-corner)
+    ))
 
 (defun zilongshanren-org/init-gkhabit ()
   (use-package gkhabit
