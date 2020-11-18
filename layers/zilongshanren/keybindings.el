@@ -42,7 +42,7 @@
   "Move the cursor COUNT screen lines down, or 5."
   :type exclusive
   (let ((line-move-visual t))
-    (evil-line-move (or count 5))))
+    (evil-line-move (or count -5))))
 
 (define-key evil-visual-state-map (kbd "J") 'my/evil-next-visual-line)
 (define-key evil-visual-state-map (kbd "K") 'my/evil-previous-visual-line)
