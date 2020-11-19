@@ -658,10 +658,6 @@ clock                             ^^^^effort             ^^watcher
 ;; cheat.sh
 (spacemacs/set-leader-keys "ac" 'cheat-sh)
 
-;; smart tab out
-(global-set-key [remap indent-for-tab-command]
-                'smart-tab-jump-out-or-indent)
-
 (spacemacs/set-leader-keys-for-major-mode 'bibtex-mode
   "f" 'org-ref-bibtex-file/body
   "=" 'org-ref-bibtex-file/bibtex-reformat-and-exit)

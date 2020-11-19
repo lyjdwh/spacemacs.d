@@ -964,9 +964,10 @@ You can use \\&, \\N to refer matched text."
   (bufler-list)
   (delete-other-windows))
 
-(defun smart-tab-jump-out-or-indent (&optional arg)
-  "Smart tab behavior. Jump out quote or brackets, or indent."
+(defun smart-tab-jump-out (fn &optional arg)
   (interactive "P")
   (if (-contains? (list "\"" "'" ")" "}" ";" "|" ">" "]" ) (make-string 1 (char-after)))
       (forward-char 1)
-    (indent-for-tab-command arg)))
+    (funcall-interactively fn arg)))
+
+(advice-add 'indent-for-tab-command :around 'smart-tab-jump-out)
