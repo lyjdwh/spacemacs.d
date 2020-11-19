@@ -10,7 +10,9 @@
 (defun move-to-position-hint (n)
   (dotimes (_i n)
     (call-interactively position-hint-move-function))
-  (highlight-position-hint position-hint-move-function))
+
+  (unless evil-visual-state-minor-mode
+    (highlight-position-hint position-hint-move-function)))
 
 (defmacro move-to-position-hint-num (num)
   `(defun ,(intern (format "move-to-position-hint-%s" num)) ()
@@ -92,7 +94,7 @@
     (sit-for 1.5)
     (mapcar #'delete-overlay ovs)
     (setq position-hint-move-function cmd)
-    (set-transient-map position-hint-map t (lambda () (setq position-hint-move-function nil)))))
+    (set-transient-map position-hint-map nil)))
 
 (defun my-forward-word ()
   (interactive)
