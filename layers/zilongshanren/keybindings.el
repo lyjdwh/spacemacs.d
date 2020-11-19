@@ -660,4 +660,5 @@ clock                             ^^^^effort             ^^watcher
 
 (spacemacs/set-leader-keys-for-major-mode 'bibtex-mode
   "f" 'org-ref-bibtex-file/body
-  "=" 'org-ref-bibtex-file/bibtex-reformat-and-exit)
+  "=" 'org-ref-bibtex-file/bibtex-reformat-and-exit
+  "P" 'org-ref-eaf-open-bibtex-pdf)

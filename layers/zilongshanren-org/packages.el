@@ -148,6 +148,23 @@ the entry of interest in the bibfile.  but does not check that."
                 (start-process "okular" "*bibtex-okular*" "/usr/bin/okular" pdf-path)
               (message "%s doesn't exist" pdf-path))
             )))
+
+      (defun org-ref-eaf-open-bibtex-pdf ()
+        "Open pdf for a bibtex entry, if it exists.
+assumes point is in
+the entry of interest in the bibfile.  but does not check that."
+        (interactive)
+        (save-excursion
+          (bibtex-beginning-of-entry)
+          (let* ((bibtex-expand-strings t)
+                 (entry (bibtex-parse-entry t))
+                 (pdf-path (reftex-get-bib-field "file" entry))
+                 )
+            (if (file-exists-p pdf-path)
+                (eaf-open pdf-path)
+              (message "%s doesn't exist" pdf-path))
+            )))
+
       (defun org-ref-open-pdf-at-point ()
         "Open the pdf for bibtex key under point if it exists."
         (interactive)
