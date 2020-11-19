@@ -975,6 +975,9 @@
     (setq go-translate-local-language "zh-CN")
     (setq go-translate-target-language "en")
     (setq go-translate-inputs-function #'go-translate-inputs-current-or-prompt)
+
+    (defun go-translate-token--extract-tkk ()
+      (cons 430675 2721866130))
     ))
 
 (defun zilongshanren-misc/init-leetcode ()
