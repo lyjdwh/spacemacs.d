@@ -1456,13 +1456,12 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
     (defhydra multiple-cursors-hydra (:hint nil)
       "
-       ^Up^            ^Down^        ^Other^
-             ----------------------------------------------
-         [_p_]   Next    [_n_]   Next    [_l_] Edit lines
-         [_P_]   Skip    [_N_]   Skip    [_a_] Mark all
-         [_M-p_] Unmark  [_M-n_] Unmark [_r_] Mark by regexp
-         ^ ^             ^ ^ [_q_] Quit
-       "
+     Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cursor%s(if (> (mc/num-cursors) 1) \"s\" \"\")
+    ------------------------------------------------------------------
+     [_p_]   Next     [_n_]   Next     [_l_] Edit lines  [_0_] Insert numbers
+     [_P_]   Skip     [_N_]   Skip     [_a_] Mark all    [_A_] Insert letters
+     [_M-p_] Unmark   [_M-n_] Unmark   [_s_] Search      [_q_] Quit
+     [_|_] Align with input CHAR       [Click] Cursor at point"
       ("l" mc/edit-lines :exit t)
       ("a" mc/mark-all-like-this :exit t)
       ("n" mc/mark-next-like-this)
@@ -1471,9 +1470,15 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       ("p" mc/mark-previous-like-this)
       ("P" mc/skip-to-previous-like-this)
       ("M-p" mc/unmark-previous-like-this)
-      ("r" mc/mark-all-in-region-regexp :exit t)
-      ("q"
-       nil))
+      ("|" mc/vertical-align)
+      ("s" mc/mark-all-in-region-regexp :exit t)
+      ("0" mc/insert-numbers :exit t)
+      ("A" mc/insert-letters :exit t)
+      ("<mouse-1>" mc/add-cursor-on-click)
+      ;; Help with click recognition in this hydra
+      ("<down-mouse-1>" ignore)
+      ("<drag-mouse-1>" ignore)
+      ("q" nil))
 
     (defhydra
       hydra-apropos (:color blue)
