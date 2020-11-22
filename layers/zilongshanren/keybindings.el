@@ -662,3 +662,9 @@ clock                             ^^^^effort             ^^watcher
   "f" 'org-ref-bibtex-file/body
   "=" 'org-ref-bibtex-file/bibtex-reformat-and-exit
   "P" 'org-ref-eaf-open-bibtex-pdf)
+
+;; bufler
+(define-key bufler-list-mode-map (kbd "J") 'magit-section-forward-sibling)
+(define-key bufler-list-mode-map (kbd "K") 'magit-section-backward-sibling)
+(define-key bufler-list-mode-map (kbd "u") 'magit-section-up)
+(define-key bufler-list-mode-map (kbd "L") 'evil-avy-goto-line)
