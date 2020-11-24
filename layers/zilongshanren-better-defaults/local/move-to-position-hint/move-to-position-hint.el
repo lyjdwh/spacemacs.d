@@ -20,6 +20,7 @@
      (interactive)
      (move-to-position-hint, num)))
 
+(move-to-position-hint-num 0)
 (move-to-position-hint-num 1)
 (move-to-position-hint-num 2)
 (move-to-position-hint-num 3)
@@ -49,6 +50,7 @@
 
 (defvar position-hint-map
   (let ((keymap (make-sparse-keymap)))
+    (define-key keymap (kbd "0") 'move-to-position-hint-0)
     (define-key keymap (kbd "a") 'move-to-position-hint-1)
     (define-key keymap (kbd "s") 'move-to-position-hint-2)
     (define-key keymap (kbd "d") 'move-to-position-hint-3)
@@ -79,10 +81,9 @@
 
 (defun highlight-position-hint (cmd)
   (let ((ovs)
-        (symbols '(a s d f g h j k l q w e r t y u i o p z x c v b n m)))
+        (symbols '(0 a s d f g h j k l q w e r t y u i o p z x c v b n m)))
     (save-mark-and-excursion
       (cl-loop for i from 0 to 25 do
-               (call-interactively cmd)
                (let ((ov (make-overlay (point) (1+ (point)))))
                  (overlay-put ov 'display
                               (cond
@@ -90,7 +91,9 @@
                                 (format "%s\n" (nth i symbols)))
                                (t (format "%s" (nth i symbols)))))
                  (overlay-put ov 'face 'position-hint-face)
-                 (push ov ovs))))
+                 (push ov ovs))
+               (call-interactively cmd)
+               ))
     (sit-for 1.5)
     (mapcar #'delete-overlay ovs)
     (setq position-hint-move-function cmd)
@@ -106,10 +109,7 @@
   (call-interactively #'backward-word)
   (highlight-position-hint #'backward-word))
 
-(define-key evil-normal-state-map (kbd "w") 'my-forward-word)
-(define-key evil-visual-state-map (kbd "w") 'my-forward-word)
-
-(define-key evil-normal-state-map (kbd "b") 'my-backward-word)
-(define-key evil-visual-state-map (kbd "b") 'my-backward-word)
+(evil-define-key '(normal visual) 'global-map (kbd "w") 'my-forward-word)
+(evil-define-key '(normal visual) 'global-map (kbd "b") 'my-backward-word)
 
 (provide 'move-to-position-hint)
