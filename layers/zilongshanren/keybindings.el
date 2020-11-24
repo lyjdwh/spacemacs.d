@@ -61,9 +61,12 @@
   (kbd "C-d") 'evil-scroll-down
   "d" 'ivy-occur-delete-candidate)
 
+(evil-define-key 'motion 'global-map (kbd "H") 'evil-first-non-blank)
+(evil-define-key 'motion 'global-map (kbd "L") 'evil-end-of-line)
+
 (with-eval-after-load 'company
   (bb/define-key company-active-map
-      (kbd "C-w") 'evil-delete-backward-word))
+    (kbd "C-w") 'evil-delete-backward-word))
 
 (spacemacs/declare-prefix "ot" "Toggle")
 
