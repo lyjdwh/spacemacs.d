@@ -48,10 +48,10 @@
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
 
-(defun zilongshanren-org/init-org-latex-instant-preview ()
-  (use-package org-latex-instant-preview
+(defun zilongshanren-org/init-org-latex-impatient()
+  (use-package org-latex-impatient
     :defer t
-    :hook (org-mode . org-latex-impatient-preview-mode)
+    :hook (org-mode . org-latex-impatient-mode)
     :init
     (setq org-latex-impatient-tex2svg-bin
           "~/node_modules/mathjax-node-cli/bin/tex2svg")
