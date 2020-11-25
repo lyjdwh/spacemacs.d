@@ -99,7 +99,14 @@
         cheat-sh
         (shengci :location (recipe :fetcher github :repo "EvanMeek/shengci.el"))
         evil-text-object-python
+        evil-matchit
         ))
+
+(defun zilongshanren-misc/post-init-evil-matchit ()
+  (progn
+    (setq evilmi-shortcut "M")
+    (global-evil-matchit-mode 1)
+    ))
 
 (defun zilongshanren-misc/init-evil-text-object-python ()
   (use-package evil-text-object-python

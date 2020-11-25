@@ -163,7 +163,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-excluded-packages
    '(org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
                     evil-args evil-ediff evil-exchange evil-unimpaired
-                    evil-indent-plus volatile-highlights smartparens
+                    volatile-highlights smartparens
                     spaceline holy-mode skewer-mode rainbow-delimiters
                     highlight-indentation vi-tilde-fringe eyebrowse ws-butler
                     smooth-scrolling org-repo-todo org-download org-timer
