@@ -380,6 +380,14 @@ the entry of interest in the bibfile.  but does not check that."
 ;;http://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
 (defun zilongshanren-org/post-init-org ()
   (add-hook 'org-mode-hook (lambda () (spacemacs/toggle-line-numbers-off)) 'append)
+  (add-hook 'org-mode-hook '(lambda ()
+                              (progn
+                                (if
+                                    (member #'company-capf company-backends)
+                                    (setq company-backends
+                                          (delete #'company-capf company-backends)))
+                                (add-to-list 'company-backends '(company-tabnine :with company-capf))
+                                )))
   (with-eval-after-load 'org
     (progn
       ;; 让org-agenda从归档文件中抽取数据
