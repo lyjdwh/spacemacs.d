@@ -98,7 +98,15 @@
         elfeed
         cheat-sh
         (shengci :location (recipe :fetcher github :repo "EvanMeek/shengci.el"))
+        evil-text-object-python
         ))
+
+(defun zilongshanren-misc/init-evil-text-object-python ()
+  (use-package evil-text-object-python
+    :config
+    (setq evil-text-object-python-statement-key "x")
+    (add-hook 'python-mode-hook 'evil-text-object-python-add-bindings)
+    ))
 
 (defun zilongshanren-misc/init-shengci ()
   (use-package shengci
