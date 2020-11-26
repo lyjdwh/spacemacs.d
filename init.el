@@ -761,9 +761,14 @@ unwanted space when exporting org-mode to hugo markdown."
     (global-so-long-mode))
 
   ;; Smooth Scroll
-  (setq scroll-step 1)
-  (setq scroll-margin 10)
-  (setq scroll-conservatively 10000)
+  (add-hook 'prog-mode-hook '(lambda ()
+                               (setq scroll-step 1)
+                               (setq scroll-margin 10)
+                               (setq scroll-conservatively 10000)))
+  (add-hook 'text-mode-hook '(lambda ()
+                               (setq scroll-step 0)
+                               (setq scroll-margin 0)
+                               (setq scroll-conservatively 0)))
 
   (setq python-spacemacs-indent-guess nil)
   (spacemacs/toggle-maximize-frame)
