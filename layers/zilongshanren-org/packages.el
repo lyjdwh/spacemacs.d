@@ -390,6 +390,25 @@ the entry of interest in the bibfile.  but does not check that."
                                 )))
   (with-eval-after-load 'org
     (progn
+
+      ;; 将org-capture“创建的”时间戳添加到properties
+      (defvar org-created-property-name "CREATED"
+        "The name of the org-mode property that stores the creation date of the entry")
+
+      (defun org-set-created-property (&optional active NAME)
+        "Set a property on the entry giving the creation time.
+
+       By default the property is called CREATED. If given the `NAME'
+       argument will be used instead. If the property already exists, it
+       will not be modified."
+        (interactive)
+        (let* ((created (or NAME org-created-property-name))
+               (fmt (if active "<%s>" "[%s]"))
+               (now  (format fmt (format-time-string "%Y-%m-%d %a %H:%M"))))
+          (unless (org-entry-get (point) created nil)
+            (org-set-property created now))))
+      (add-hook 'org-capture-before-finalize-hook #'org-set-created-property)
+
       ;; 让org-agenda从归档文件中抽取数据
       (setq org-agenda-file-regexp "\\`[^.].*\\.org\\(_archive\\)?\\'")
 
@@ -672,22 +691,22 @@ the entry of interest in the bibfile.  but does not check that."
       (setq org-capture-templates
             '((;; gtd
                "t" "study" entry (file+headline org-agenda-file-gtd "Study")
-               "* TODO [#B] %?\n  %i\n %U"
+               "* TODO [#B] %?\n  %i\n"
                :empty-lines 1)
               ("w" "work" entry (file+headline org-agenda-file-gtd "Work")
-               "* TODO [#B] %?\n  %i\n %U"
+               "* TODO [#B] %?\n  %i\n"
                :empty-lines 1)
               ;; note
               ("n" "notes" entry (file+headline org-agenda-file-note "Quick notes")
-               "* %?\n  %i\n %U"
+               "* %?\n  %i\n"
                :empty-lines 1)
               ("b" "Blog Ideas" entry (file+headline org-agenda-file-note "Blog Ideas")
-               "* TODO [#B] %?\n  %i\n %U"
+               "* TODO [#B] %?\n  %i\n"
                :empty-lines 1)
 	          ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Web")
-               "* %? [[%:link][%:description]] \nCaptured On: %U")
+               "* %? [[%:link][%:description]] \n")
               ("l" "links" entry (file+headline org-agenda-file-note "Quick notes")
-               "* TODO [#C] %?\n  %i\n %a \n %U"
+               "* TODO [#C] %?\n  %i\n %a \n"
                :empty-lines 1)
               ("p" "Protocol" entry (file+headline org-agenda-file-note "Web")
                "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
