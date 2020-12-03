@@ -100,7 +100,24 @@
         (shengci :location (recipe :fetcher github :repo "EvanMeek/shengci.el"))
         evil-text-object-python
         evil-matchit
+        avy
         ))
+
+(defun zilongshanren-misc/post-init-avy ()
+  (progn
+    (setq avy-keys (number-sequence ?a ?z))
+    (setq avy-orders-alist
+          '((avy-goto-char . avy-order-closest)
+            (avy-goto-char-2 . avy-order-closest)
+            (avy-goto-parens . avy-order-closest)
+            (avy-goto-word-or-subword-1 . avy-order-closest)
+            (avy-goto-line . avy-order-closest)))
+
+    (evil-define-key '(normal virsual) 'global-map (kbd "gp") 'avy-goto-parens)
+    (evil-define-key '(normal virsual) 'global-map (kbd "gl") 'avy-goto-line)
+    (evil-define-key '(normal visual) 'global-map (kbd "S") 'evil-avy-goto-char-2)
+    (evil-define-key '(normal visual) 'global-map (kbd "s") 'evil-avy-goto-char)
+    ))
 
 (defun zilongshanren-misc/post-init-evil-matchit ()
   (progn

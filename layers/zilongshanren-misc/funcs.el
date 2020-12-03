@@ -971,3 +971,8 @@ You can use \\&, \\N to refer matched text."
     (funcall-interactively fn arg)))
 
 (advice-add 'indent-for-tab-command :around 'smart-tab-jump-out)
+
+(defun avy-goto-parens ()
+  (interactive)
+  (let ((avy-command this-command))   ; for look up in avy-orders-alist
+    (avy-jump "[({\[}]+")))

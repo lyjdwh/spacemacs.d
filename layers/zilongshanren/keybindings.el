@@ -16,7 +16,8 @@
 (define-key global-map (kbd "<f5>") 'zilongshanren/run-current-file)
 (define-key global-map (kbd "<f1>") 'zilongshanren/helm-hotspots)
 
-(global-set-key [remap fill-paragraph] #'endless/fill-or-unfill)
+;; fill-paragraph
+(global-set-key (kbd "M-/") #'endless/fill-or-unfill)
 
 (bind-key* "M--" 'evil-jump-item)
 (bind-key* "C-c k" 'which-key-show-top-level)
@@ -326,16 +327,6 @@
 (define-key evil-normal-state-map (kbd "zk") 'one-key-menu-avy-thing-edit)
 (define-key evil-normal-state-map (kbd "zK") 'one-key-menu-avy-thing-edit-replace)
 (define-key evil-normal-state-map (kbd "zs") 'avy-thing-copy-symbol)
-
-(define-key evil-normal-state-map (kbd "f") 'evil-avy-goto-char-2)
-(define-key evil-normal-state-map (kbd "F") 'evil-avy-goto-char)
-(define-key evil-visual-state-map (kbd "f") 'evil-avy-goto-char-2)
-(define-key evil-visual-state-map (kbd "F") 'evil-avy-goto-char)
-
-(define-key evil-normal-state-map (kbd "t") 'evil-snipe-f)
-(define-key evil-normal-state-map (kbd "T") 'evil-snipe-F)
-(define-key evil-visual-state-map (kbd "t") 'evil-snipe-f)
-(define-key evil-visual-state-map (kbd "T") 'evil-snipe-F)
 
 ;; re-builder, a nice interactive tool for building regular expressions
 (spacemacs/set-leader-keys "oR" 're-builder)
