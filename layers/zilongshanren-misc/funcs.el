@@ -976,3 +976,13 @@ You can use \\&, \\N to refer matched text."
   (interactive)
   (let ((avy-command this-command))   ; for look up in avy-orders-alist
     (avy-jump "[({\[}]+")))
+
+(defun browse-repo-at-remote ()
+  "Browse the current repo with `browse-url'."
+  (interactive)
+  (let* ((remote-ref (browse-at-remote--remote-ref (buffer-file-name)))
+         (remote (car remote-ref))
+         (target-repo (browse-at-remote--get-url-from-remote remote))
+         (repo-url (cdr target-repo)))
+    (browse-url repo-url)
+    ))

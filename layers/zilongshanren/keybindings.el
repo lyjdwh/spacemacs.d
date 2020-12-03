@@ -121,6 +121,7 @@
 (spacemacs/set-leader-keys "gn" 'smerge-next)
 (spacemacs/set-leader-keys "gp" 'smerge-prev)
 (spacemacs/set-leader-keys "gT" 'my-git-timemachine)
+(spacemacs/set-leader-keys "gO" 'browse-repo-at-remote)
 
 (spacemacs/set-leader-keys "sj" 'zilongshanren/counsel-imenu)
 ;; deal with BOM
