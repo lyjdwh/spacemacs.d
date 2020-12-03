@@ -904,7 +904,10 @@
   (use-package thing-edit))
 
 (defun zilongshanren-misc/init-avy-thing-edit ()
-  (use-package avy-thing-edit))
+  (use-package avy-thing-edit
+    :config
+    (setq avy-thing-edit-jump-command 'evil-avy-goto-char)
+    ))
 
 (defun zilongshanren-misc/init-figlet ()
   (use-package figlet
