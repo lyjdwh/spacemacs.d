@@ -115,8 +115,10 @@
 
     (evil-define-key '(normal virsual) 'global-map (kbd "gp") 'avy-goto-parens)
     (evil-define-key '(normal virsual) 'global-map (kbd "gl") 'avy-goto-line)
-    (evil-define-key '(normal visual) 'global-map (kbd "S") 'evil-avy-goto-char-2)
-    (evil-define-key '(normal visual) 'global-map (kbd "s") 'evil-avy-goto-char)
+    (evil-define-key 'normal 'global-map (kbd "S") 'evil-avy-goto-char-2)
+    (evil-define-key 'normal 'global-map (kbd "s") 'evil-avy-goto-char)
+    (evil-define-key 'visual 'global-map (kbd "f") 'evil-avy-goto-char-2)
+    (evil-define-key 'visual 'global-map (kbd "F") 'evil-avy-goto-char)
     ))
 
 (defun zilongshanren-misc/post-init-evil-matchit ()

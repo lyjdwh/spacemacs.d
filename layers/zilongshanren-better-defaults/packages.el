@@ -102,6 +102,7 @@
 
     :diminish eaf-mode
     :init
+    (spacemacs/declare-prefix "ae" "eaf")
     ;; set eaf as default browse
     (setq browse-url-browser-function 'eaf-open-browser)
     (defalias 'browse-web #'eaf-open-browser)

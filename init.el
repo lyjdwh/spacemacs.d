@@ -33,6 +33,9 @@ This function should only modify configuration layer settings."
    '(
      (ivy :variables ivy-enable-advanced-buffer-information nil)
      better-defaults
+     (treemacs :variables
+               treemacs-use-all-the-icons-theme t
+               treemacs-use-icons-dired nil)
      helpful
      (ranger :variables ranger-override-dired t )
      emoji
@@ -86,7 +89,8 @@ This function should only modify configuration layer settings."
      ;; docker
      (latex :variables latex-build-command "LaTeX"
             latex-enable-auto-fill t
-            latex-enable-folding t)
+            latex-enable-folding t
+            latex-backend 'lsp)
      (bibtex :packages (not ivy-bibtex))
      pdf
      (markdown :variables markdown-live-preview-engine 'vmd)
@@ -98,7 +102,8 @@ This function should only modify configuration layer settings."
           org-journal-date-prefix "#+TITLE: "
           org-journal-date-format "%A, %B %d %Y"
           org-journal-time-prefix "* "
-          org-journal-time-format "")
+          org-journal-time-format ""
+          :packages (not org-roam))
      ;; gpu
      yaml
      ;;  react

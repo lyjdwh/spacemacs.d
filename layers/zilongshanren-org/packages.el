@@ -256,7 +256,9 @@ the entry of interest in the bibfile.  but does not check that."
         "amf" 'orb-find-non-ref-file ;; org-roam-find-file
         "amg" 'org-roam-graph
         "amc" 'org-roam-capture
-        "amr" 'org-ref-helm-insert-cite-link)
+        "amr" 'org-ref-helm-insert-cite-link
+        "amg" 'org-roam-tag-add
+        "amd" 'org-roam-tag-delete)
 
       (spacemacs/declare-prefix-for-mode 'org-mode "mm" "org-roam")
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
@@ -267,6 +269,8 @@ the entry of interest in the bibfile.  but does not check that."
         "mi" 'orb-insert-non-ref    ;; org-roam-insert
         "mc" 'org-roam-capture
         "mr" 'org-ref-helm-insert-cite-link
+        "mg" 'org-roam-tag-add
+        "md" 'org-roam-tag-delete
         ))
     :config
     (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)
