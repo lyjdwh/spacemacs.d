@@ -108,10 +108,8 @@ This function should only modify configuration layer settings."
              python-formatter 'black
              python-format-on-save nil
              python-sort-imports-on-save nil
-             python-lsp-server 'pyright
+             python-lsp-server 'mspyls
              python-pipenv-activate  t
-             python-lsp-server 'pyright
-             ;; python-lsp-git-root "/home/liuyan/apps/python-language-server"
              )
      ipython-notebook
      ;; (ruby :variables ruby-version-manager 'chruby)

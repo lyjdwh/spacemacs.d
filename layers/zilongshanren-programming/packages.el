@@ -214,9 +214,9 @@
 
 (defun zilongshanren-programming/post-init-lsp-pyright ()
   (progn
-    (add-hook 'python-mode-hook (lambda ()
-                                  (require 'lsp-pyright)
-                                  (lsp)))
+    ;; (add-hook 'python-mode-hook (lambda ()
+    ;;                               (require 'lsp-pyright)
+    ;;                               (lsp)))
     (setq lsp-pyright-diagnostic-mode "workspace")
     (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch17")
     ))
