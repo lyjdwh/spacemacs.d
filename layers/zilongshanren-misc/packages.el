@@ -1491,32 +1491,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       ("g" helm-github-stars "helm github stars")
       ("r" zilongshanren/run-current-file "run current file"))
 
-    (defhydra multiple-cursors-hydra (:hint nil)
-      "
-     Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cursor%s(if (> (mc/num-cursors) 1) \"s\" \"\")
-    ------------------------------------------------------------------
-     [_p_]   Next     [_n_]   Next     [_l_] Edit lines  [_0_] Insert numbers
-     [_P_]   Skip     [_N_]   Skip     [_a_] Mark all    [_A_] Insert letters
-     [_M-p_] Unmark   [_M-n_] Unmark   [_s_] Search      [_q_] Quit
-     [_|_] Align with input CHAR       [Click] Cursor at point"
-      ("l" mc/edit-lines :exit t)
-      ("a" mc/mark-all-like-this :exit t)
-      ("n" mc/mark-next-like-this)
-      ("N" mc/skip-to-next-like-this)
-      ("M-n" mc/unmark-next-like-this)
-      ("p" mc/mark-previous-like-this)
-      ("P" mc/skip-to-previous-like-this)
-      ("M-p" mc/unmark-previous-like-this)
-      ("|" mc/vertical-align)
-      ("s" mc/mark-all-in-region-regexp :exit t)
-      ("0" mc/insert-numbers :exit t)
-      ("A" mc/insert-letters :exit t)
-      ("<mouse-1>" mc/add-cursor-on-click)
-      ;; Help with click recognition in this hydra
-      ("<down-mouse-1>" ignore)
-      ("<drag-mouse-1>" ignore)
-      ("q" nil))
-
     (defhydra
       hydra-apropos (:color blue)
       "Apropos"
@@ -1743,11 +1717,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     ;; (define-key evil-visual-state-map (kbd "x") 'er/expand-region)
     ;; (define-key evil-visual-state-map (kbd "X") 'er/contract-region)
     (define-key evil-visual-state-map (kbd "C-r") 'zilongshanren/evil-quick-replace)
-    (define-key evil-visual-state-map (kbd "mn") 'mc/mark-next-like-this)
-    (define-key evil-visual-state-map (kbd "mp") 'mc/mark-previous-like-this)
-    (define-key evil-visual-state-map (kbd "ma") 'mc/mark-all-like-this)
-    (define-key evil-visual-state-map (kbd "mf") 'mc/mark-all-like-this-in-defun)
-
 
     ;; in spacemacs, we always use evilify miscro state
     (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
@@ -1801,75 +1770,32 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
 (defun zilongshanren-misc/init-multiple-cursors ()
   (use-package multiple-cursors
-    :init
-    (progn
-
-      (bind-key* "C-s-l" 'mc/edit-lines)
-      (bind-key* "C-s-f" 'mc/mark-all-dwim)
-      (bind-key* "s-." 'mc/mark-next-like-this)
-      (bind-key* "C-s-," 'mc/mark-previous-like-this)
-      (bind-key* "s->" 'mc/unmark-next-like-this)
-      (bind-key* "s-<" 'mc/unmark-previous-like-this)
-      (bind-key* "C-c C-s-." 'mc/mark-all-like-this)
-
-      ;; http://endlessparentheses.com/multiple-cursors-keybinds.html?source=rss
-      (define-prefix-command 'endless/mc-map)
-      ;; C-x m is usually `compose-mail'. Bind it to something
-      ;; else if you use this command.
-      (define-key ctl-x-map "m" 'endless/mc-map)
-;;; Really really nice!
-      (define-key endless/mc-map "i" #'mc/insert-numbers)
-      (define-key endless/mc-map "h" #'mc-hide-unmatched-lines-mode)
-      (define-key endless/mc-map "a" #'mc/mark-all-like-this)
-
-;;; Occasionally useful
-      (define-key endless/mc-map "d" #'mc/mark-all-symbols-like-this-in-defun)
-      (define-key endless/mc-map "r" #'mc/reverse-regions)
-      (define-key endless/mc-map "s" #'mc/sort-regions)
-      (define-key endless/mc-map "l" #'mc/edit-lines)
-      (define-key endless/mc-map "\C-a" #'mc/edit-beginnings-of-lines)
-      (define-key endless/mc-map "\C-e" #'mc/edit-ends-of-lines)
-      )
     :config
-    (setq mc/cmds-to-run-once
-          '(
-            counsel-M-x
-            zilongshanren/my-mc-mark-next-like-this))
-    (setq mc/cmds-to-run-for-all
-          '(
-            electric-newline-and-maybe-indent
-            hungry-delete-backward
-            spacemacs/backward-kill-word-or-region
-            spacemacs/smart-move-beginning-of-line
-            evil-substitute
-            lispy-move-beginning-of-line
-            lispy-move-end-of-line
-            lispy-space
-            lispy-delete-backward
-            evil-exit-visual-state
-            evil-backward-char
-            evil-delete-char
-            evil-escape-emacs-state
-            evil-escape-insert-state
-            mwim-beginning-of-code-or-line
-            mwim-end-of-line-or-code
-            evil-exit-emacs-state
-            evil-previous-visual-line
-            evil-next-visual-line
-            evil-forward-char
-            evil-insert
-            evil-next-line
-            evil-normal-state
-            evil-previous-line
-            evil-append
-            evil-append-line
-            forward-sentence
-            kill-sentence
-            org-self-insert-command
-            sp-backward-delete-char
-            sp-delete-char
-            sp-remove-active-pair-overlay
-            orgtbl-hijacker-command-109))
+    (setq mc/always-run-for-all t)
+    (with-eval-after-load 'multiple-cursors-core
+      (add-to-list 'mc/cmds-to-run-once 'spacemacs/helm-M-x-fuzzy-matching)
+      (add-to-list 'mc/cmds-to-run-once 'counsel-M-x)
+      (add-to-list 'mc/cmds-to-run-once 'spacemacs/default-pop-shell))
+
+    (evil-define-key '(normal visual) 'global-map (kbd "mn") 'mc/mark-next-like-this)
+    (evil-define-key '(normal visual) 'global-map (kbd "mp") 'mc/mark-previous-like-this)
+    (evil-define-key '(normal visual) 'global-map (kbd "mN") 'mc/skip-to-next-like-this)
+    (evil-define-key '(normal visual) 'global-map (kbd "mP") 'mc/skip-to-previous-like-this)
+    (evil-define-key '(normal visual) 'global-map (kbd "mu") 'mc/unmark-next-like-this)
+    (evil-define-key '(normal visual) 'global-map (kbd "mU") 'mc/unmark-previous-like-this)
+    (evil-define-key '(normal visual) 'global-map (kbd "mm") 'mc/mark-more-like-this-extended)
+    (evil-define-key '(normal visual) 'global-map (kbd "me") 'mc/edit-beginnings-of-lines)
+    (evil-define-key '(normal visual) 'global-map (kbd "mE") 'mc/edit-ends-of-lines)
+    (evil-define-key '(normal visual) 'global-map (kbd "ma") 'mc/mark-all-dwim)
+    (evil-define-key '(normal visual) 'global-map (kbd "mA") 'mc/mark-all-like-this)
+    (evil-define-key '(normal visual) 'global-map (kbd "mr") 'mc/mark-all-in-region)
+    (evil-define-key '(normal visual) 'global-map (kbd "md") 'mc/mark-all-like-this-in-defun)
+    (evil-define-key '(normal visual) 'global-map (kbd "mR") 'set-rectangular-region-anchor)
+    (evil-define-key '(normal visual) 'global-map (kbd "mt") 'mc/mark-sgml-tag-pair)
+    (evil-define-key '(normal visual) 'global-map (kbd "mi") 'mc/insert-numbers)
+    (evil-define-key '(normal visual) 'global-map (kbd "mI") 'mc/insert-letters)
+    (evil-define-key '(normal visual) 'global-map (kbd "ms") 'mc/sort-regions)
+    (evil-define-key '(normal visual) 'global-map (kbd "mV") 'mc/reverse-regions)
     ))
 
 (defun zilongshanren-misc/post-init-persp-mode ()
