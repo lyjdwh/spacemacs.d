@@ -986,3 +986,45 @@ You can use \\&, \\N to refer matched text."
          (repo-url (cdr target-repo)))
     (browse-url repo-url)
     ))
+
+;; filter of ivy occur
+;; keybindings: / filter lines; C-/ undo
+(defvar ivy-occur-filter-prefix ">>> ")
+
+(defun ivy-occur/filter-lines ()
+  (interactive)
+  (unless (string-prefix-p "ivy-occur" (symbol-name major-mode))
+    (user-error "Current buffer is not in ivy-occur mode"))
+
+  (let ((inhibit-read-only t)
+        (regexp (read-regexp "Regexp(! for flush)"))
+        (start (save-excursion
+                 (goto-char (point-min))
+                 (re-search-forward "[0-9]+ candidates:"))))
+    (if (string-prefix-p "!" regexp)
+        (flush-lines (substring regexp 1) start (point-max))
+      (keep-lines regexp start (point-max)))
+    (save-excursion
+      (goto-char (point-min))
+      (let ((item (propertize (format "[%s]" regexp) 'face 'ivy-current-match)))
+        (if (looking-at ivy-occur-filter-prefix)
+            (progn
+              (goto-char (line-end-position))
+              (insert item))
+          (insert ivy-occur-filter-prefix item "\n"))))))
+
+(defun ivy-occur/undo ()
+  (interactive)
+  (let ((inhibit-read-only t))
+    (if (save-excursion
+          (goto-char (point-min))
+          (looking-at ivy-occur-filter-prefix))
+        (undo)
+      (user-error "Filter stack is empty"))))
+
+(defun ivy|occur-mode-setup ()
+  (local-set-key "/" #'ivy-occur/filter-lines)
+  (local-set-key (kbd "C-/") #'ivy-occur/undo))
+
+(add-hook 'ivy-occur-mode-hook 'ivy|occur-mode-setup)
+(add-hook 'ivy-occur-grep-mode-hook 'ivy|occur-mode-setup)
