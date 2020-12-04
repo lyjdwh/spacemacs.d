@@ -447,14 +447,10 @@ the entry of interest in the bibfile.  but does not check that."
 
       (spacemacs|disable-company org-mode)
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "," 'org-priority)
-      (spacemacs/set-leader-keys-for-major-mode 'org-mode
         "r" 'avy-org-refile-as-child)
 
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
         "it" 'counsel-org-tag)
-      (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "il" 'zilongshanren/list-all-tabs)
 
       (setq org-complete-tags-always-offer-all-agenda-tags t)
 
