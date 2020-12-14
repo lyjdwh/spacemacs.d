@@ -975,7 +975,7 @@ You can use \\&, \\N to refer matched text."
 (defun avy-goto-parens ()
   (interactive)
   (let ((avy-command this-command))   ; for look up in avy-orders-alist
-    (avy-jump "[({\[}]+")))
+    (avy-jump "[({\[]+")))
 
 (defun browse-repo-at-remote ()
   "Browse the current repo with `browse-url'."

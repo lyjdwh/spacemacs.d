@@ -117,8 +117,8 @@
     (evil-define-key '(normal virsual) 'global-map (kbd "gl") 'avy-goto-line)
     (evil-define-key 'normal 'global-map (kbd "S") 'evil-avy-goto-char-2)
     (evil-define-key 'normal 'global-map (kbd "s") 'evil-avy-goto-char)
-    (evil-define-key 'visual 'global-map (kbd "f") 'evil-avy-goto-char-2)
-    (evil-define-key 'visual 'global-map (kbd "F") 'evil-avy-goto-char)
+    (evil-define-key 'visual 'global-map (kbd "F") 'evil-avy-goto-char-2)
+    (evil-define-key 'visual 'global-map (kbd "f") 'evil-avy-goto-char)
     ))
 
 (defun zilongshanren-misc/post-init-evil-matchit ()
@@ -944,7 +944,7 @@
 (defun zilongshanren-misc/init-rime ()
   (use-package rime
     :config
-    (setq rime-user-data-dir "~/.config/fcitx/rime")
+    (setq rime-user-data-dir "~/.local/share/fcitx5/rime")
 
     (setq rime-posframe-properties
           (list :background-color "#333333"
