@@ -287,3 +287,23 @@ comment box."
            (put ',edit-pre 'function-documentation
                 (format "Prepare local buffer environment for org source block (%s)."
                         (upcase ,lang))))))))
+
+(defun lsp-workon (name)
+  "Change lsp virtual environment and activate it"
+  (interactive
+   (list
+    (completing-read "Work on: " (pyvenv-virtualenv-list)
+                     nil t nil 'pyvenv-workon-history nil nil)))
+  (unless (member name (list "" nil pyvenv-virtual-env-name))
+    (progn
+      (setq lsp-python-ms-python-executable-cmd (format "%s/%s/%s" (pyvenv-workon-home) name "bin/python"))
+      (call-interactively 'lsp-workspace-restart)
+
+      (pyvenv-activate (format "%s/%s"
+                               (pyvenv-workon-home)
+                               name)) )))
+
+(defun current-pyvenv-name ()
+  "show the current pyvenv name"
+  (interactive)
+  (message pyvenv-virtual-env-name))

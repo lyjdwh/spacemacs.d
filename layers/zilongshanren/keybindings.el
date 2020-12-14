@@ -663,3 +663,8 @@ clock                             ^^^^effort             ^^watcher
 (define-key bufler-list-mode-map (kbd "K") 'magit-section-backward-sibling)
 (define-key bufler-list-mode-map (kbd "u") 'magit-section-up)
 (define-key bufler-list-mode-map (kbd "L") 'evil-avy-goto-line)
+
+;; lsp
+(spacemacs/set-leader-keys-for-major-mode 'python-mode
+  "vl" 'lsp-workon
+  "vc" 'current-pyvenv-name)
