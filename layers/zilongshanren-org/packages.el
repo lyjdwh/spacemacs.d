@@ -477,7 +477,7 @@ the entry of interest in the bibfile.  but does not check that."
       (setq org-agenda-span 'day)
       (setq org-agenda-use-tag-inheritance nil) ;; 3-4x speedup
       (setq org-agenda-window-setup 'current-window)
-      (setq org-log-done t)
+      (setq org-log-done nil)
 
       ;; 加密文章
       ;; "http://coldnew.github.io/blog/2013/07/13_5b094.html"
@@ -501,8 +501,7 @@ the entry of interest in the bibfile.  but does not check that."
       ;; (add-to-list 'auto-mode-alist '("\.org\\'" . org-mode))
 
       (setq org-todo-keywords
-            (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
-                    (sequence "WAITING(w@/!)" "SOMEDAY(S)" "|" "CANCELLED(c@/!)" "MEETING(m)" "PHONE(p)"))))
+            '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d)")))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
       ;; Org clock
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
