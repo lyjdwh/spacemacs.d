@@ -28,7 +28,6 @@
     org-ref
     (org-protocol-capture-html :location (recipe :fetcher github :repo "alphapapa/org-protocol-capture-html") )
     (valign :location (recipe :fetcher github :repo "casouri/valign"))
-    grip-mode
     org-super-agenda
     (org-clock-watch :location local)
     (gkhabit :location (recipe :fetcher github :repo "Kinneyzhang/gkhabit"))
@@ -103,14 +102,6 @@
     (setq notdeft-xapian-max-results 0)
     (add-to-list 'load-path "~/bin/notdeft/extras")
     (load "notdeft-example")
-    ))
-
-(defun zilongshanren-org/init-grip-mode ()
-  (use-package grip-mode
-    :ensure t
-    :commands grip-mode
-    :config
-    (setq grip-preview-use-webkit nil)
     ))
 
 (defun zilongshanren-org/init-valign ()

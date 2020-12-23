@@ -85,7 +85,7 @@
         kaomoji
         (english-teacher :location (recipe :fetcher github :repo "loyalpartner/english-teacher.el"))
         pos-tip
-        (maple-header :location (recipe :fetcher github :repo "honmaple/maple-emacs" :files ("site-lisp/maple/maple-header.el")))
+        ;; (maple-header :location (recipe :fetcher github :repo "honmaple/maple-emacs" :files ("site-lisp/maple/maple-header.el")))
         ace-pinyin
         tmux-pane
         wttrin

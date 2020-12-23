@@ -46,7 +46,7 @@ This function should only modify configuration layer settings."
      ;; dap
      colors
      ;; prodigy
-     github
+     (github :packages (not grip-mode))
      search-engine
      graphviz
      ;;  (haskell :variables haskell-enable-hindent t
@@ -179,7 +179,7 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    ;; jeison used in powerthesaurus
-   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor company-tabnine keyfreq grip-mode snails benchmark-init emacsql emacsql-sqlite doom-themes jeison function-args (e2ansi :location (recipe :fetcher github :repo "Lindydancer/e2ansi")))
+   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor company-tabnine keyfreq snails benchmark-init emacsql emacsql-sqlite doom-themes jeison function-args (e2ansi :location (recipe :fetcher github :repo "Lindydancer/e2ansi")))
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

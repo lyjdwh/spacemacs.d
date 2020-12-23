@@ -187,7 +187,7 @@
           )))
 (defun zilongshanren-programming/post-init-lsp-python-ms ()
   (progn
-    (setq lsp-python-ms-python-executable-cmd "~/.conda/envs/torch17/bin/python")
+    (setq lsp-python-ms-python-executable-cmd "~/.conda/envs/torch/bin/python")
     ))
 
 (defun zilongshanren-programming/post-init-lsp-pyright ()
@@ -196,7 +196,7 @@
     ;;                               (require 'lsp-pyright)
     ;;                               (lsp)))
     (setq lsp-pyright-diagnostic-mode "workspace")
-    (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch17")
+    (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch")
     ))
 
 (defun zilongshanren-programming/init-company-tabnine ()
@@ -369,9 +369,5 @@
     (setq company-minimum-prefix-length 1
           company-idle-delay 0.08)
 
-    (when (configuration-layer/package-usedp 'company)
-      (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode python-mode)
-      (spacemacs|add-company-backends :backends company-cmake :modes cmake-mode)
-      )))
     (add-hook 'company-mode-hook 'enable-company-number-keybindings)
     ))
