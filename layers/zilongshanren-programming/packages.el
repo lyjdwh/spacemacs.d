@@ -373,3 +373,5 @@
       (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode python-mode)
       (spacemacs|add-company-backends :backends company-cmake :modes cmake-mode)
       )))
+    (add-hook 'company-mode-hook 'enable-company-number-keybindings)
+    ))
