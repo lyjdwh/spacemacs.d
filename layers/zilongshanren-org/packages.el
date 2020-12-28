@@ -285,7 +285,7 @@ the entry of interest in the bibfile.  but does not check that."
 (defun zilongshanren-org/init-org-roam-server ()
   (use-package org-roam-server
     :init
-    (spacemacs/set-leader-keys "ams" 'open-org-roam-server-other-window)
+    (spacemacs/set-leader-keys "ams" 'open-org-roam-server)
     :commands open-org-roam-server-other-window org-roam-server-mode
     :hook
     (kill-emacs . (lambda () (interactive) (org-roam-server-mode -1)))

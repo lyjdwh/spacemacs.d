@@ -152,6 +152,8 @@
     (add-to-list 'eaf-pdf-viewer-keybinding '("C-c" . "copy_select"))
     (add-to-list 'eaf-browser-keybinding '("C-c" . "kill_text"))
 
+    (add-to-list 'eaf-app-display-function-alist '("browser" . eaf--browser-display))
+
     (defun eaf-open-this (file)
       "Open html/pdf/image/video files whenever possible with EAF.
     Other files will open normally with `dired-find-file' or `dired-find-alternate-file'"

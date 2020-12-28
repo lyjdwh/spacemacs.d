@@ -215,28 +215,11 @@ With a prefix ARG, the cache is invalidated and the bibliography reread."
 	  (-each it bibtex-completion-pdf-open-function)
     (message "No PDF(s) found.")))
 
-(defun open-org-roam-server-other-window ()
-  "Launch dired in a minimal ranger window in other window."
+(defun open-org-roam-server()
   (interactive)
-  (let* ((win-num (length (window-list-1)))
-         (buffer-dir (file-name-directory
-                      (or buffer-file-name
-                          default-directory)))
-         (next-buffer (and (> win-num 1)
-                           (window-buffer (next-window)))))
-    (switch-to-buffer-other-window next-buffer)
-    (if (eq org-roam-server-mode nil)
-        (org-roam-server-mode 1))
-    (eaf-open-browser "127.0.0.1:8080")
-    (cond
-     ;; if window was added, delete
-     ((not (eq win-num (length (window-list-1))))
-      (message "adding delete window hook")
-      (add-hook 'kill-buffer-hook #'delete-window t t))
-     ;; else restore previous buffer
-     (t
-      (add-hook 'kill-buffer-hook
-                `(lambda () (pop-to-buffer ,next-buffer)) t t)))))
+  (if (eq org-roam-server-mode nil)
+      (org-roam-server-mode 1))
+  (eaf-open-browser "127.0.0.1:8080"))
 
 (defun org-babel-highlight-result ()
   "Highlight the result of the current source block.

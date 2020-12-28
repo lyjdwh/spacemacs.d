@@ -177,3 +177,14 @@ The original function deletes trailing whitespace of the current line."
       (setq browse-url-browser-function 'eaf-open-browser)
       (message "use eaf as browser"))
     ))
+
+(defun eaf--browser-get-window ()
+  (get-window-with-predicate
+   (lambda (window)
+     (with-current-buffer (window-buffer window)
+       (string= eaf--buffer-app-name "browser")))))
+
+(defun eaf--browser-display (buf)
+  (let ((browser-window (eaf--browser-get-window)))
+    (select-window (or browser-window (split-window-no-error (selected-window) nil 'left)))
+    (switch-to-buffer buf)))
