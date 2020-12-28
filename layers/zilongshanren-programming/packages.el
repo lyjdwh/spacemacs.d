@@ -30,7 +30,7 @@
         (color-rg :location (recipe :fetcher github :repo "manateelazycat/color-rg"))
         hl-todo
         counsel-dash
-        (lpy :location (recipe :fetcher github :repo "abo-abo/lpy"))
+        lpy
         taskrunner
         (ivy-taskrunner :location (recipe :fetcher github :repo "emacs-taskrunner/ivy-taskrunner"))
         counsel-etags

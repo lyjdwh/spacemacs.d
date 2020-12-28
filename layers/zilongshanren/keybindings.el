@@ -177,7 +177,6 @@
 (spacemacs/set-leader-keys "aem" 'eaf-open-mindmap)
 (spacemacs/set-leader-keys "aea" 'eaf-open-airshare)
 (spacemacs/set-leader-keys "aeB" 'eaf-open-bookmark)
-(spacemacs/set-leader-keys "aer" 'eaf-open-rss-reader)
 (spacemacs/set-leader-keys "aeq" 'eaf-kill-process)
 (spacemacs/set-leader-keys "aes" 'eaf-search-it)
 (spacemacs/set-leader-keys "aef" 'eaf-file-browser-qrcode)
@@ -674,3 +673,6 @@ clock                             ^^^^effort             ^^watcher
 (define-key ivy-minibuffer-map (kbd "C-d") #'ivy-immediate-done)
 (define-key ivy-minibuffer-map (kbd "C-o") #'ivy-dispatching-done)
 (define-key ivy-minibuffer-map (kbd "C-.") #'hydra-ivy/body)
+
+;; search engine
+(spacemacs/set-leader-keys "a/" 'spacemacs/search-engine-select)

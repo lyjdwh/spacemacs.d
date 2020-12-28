@@ -280,7 +280,7 @@ e.g. Sunday, September 17, 2000."
            (add-hook 'org-pomodoro-long-break-finished-hook '(lambda () (zilongshanren/notify-send "'After a Long Break, Ready to Go?'" )))))
 
 (defun zilongshanren/notify-send (message)
-  (shell-command (format "notify-send %s -i emacs -a Pomodoro" message))
+  (shell-command (format "notify-send 'Pomodoro' %s -i emacs" message))
   )
 
 (defun zilongshanren/hidden-dos-eol ()

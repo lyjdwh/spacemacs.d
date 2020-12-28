@@ -40,7 +40,6 @@
         wrap-region
         ranger
         golden-ratio
-        ;; (highlight-global :location (recipe :fetcher github :repo "gle-dai/highlight-global"))
         (highlight-global :location local)
         symbol-overlay
         chinese-conv
@@ -55,7 +54,7 @@
         leetcode
         youdao-dictionary
         go-translate
-        (posframe :location (recipe :fetcher github :repo "tumashu/posframe") )
+        posframe
         rime
         sis
         try
@@ -69,7 +68,7 @@
         bbyac
         meow
         evil-snipe
-        (powerthesaurus :location (recipe :fetcher github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
+        powerthesaurus
         mw-thesaurus
         langtool
         (inherit-org :location local)
@@ -81,7 +80,7 @@
         separedit
         pyim
         key-chord
-        (evil-pinyin :location (recipe :fetcher github :repo "laishulu/evil-pinyin"))
+        evil-pinyin
         kaomoji
         (english-teacher :location (recipe :fetcher github :repo "loyalpartner/english-teacher.el"))
         pos-tip
@@ -1725,6 +1724,8 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
           evil-operator-state-tag (propertize "[O]" 'face '((:background "purple"))))
     (setq evil-insert-state-cursor '("chartreuse3" box))
     (define-key evil-insert-state-map (kbd "C-z") 'evil-emacs-state)
+
+    (evil-define-key 'normal 'global-map (kbd "zy") 'thing-copy-symbol)
     ))
 
 (defun zilongshanren-misc/init-visual-regexp ()

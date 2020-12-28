@@ -44,7 +44,7 @@ This function should only modify configuration layer settings."
                org-plantuml-jar-path  "~/.spacemacs.d/plantuml.jar")
      ;; lsp
      ;; dap
-     colors
+     ;; colors
      ;; prodigy
      (github :packages (not grip-mode))
      search-engine
@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
                        version-control-diff-side 'left
                        version-control-global-margin t
                        )
-     (ibuffer :variables ibuffer-group-buffers-by 'projects)
+     ;; (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'cycle
@@ -92,7 +92,7 @@ This function should only modify configuration layer settings."
             latex-enable-folding t
             latex-backend 'lsp)
      (bibtex :packages (not ivy-bibtex))
-     pdf
+     ;; pdf
      (markdown :variables markdown-live-preview-engine 'vmd)
      (org :variables org-want-todo-bindings t
           org-enable-hugo-support t
@@ -116,7 +116,7 @@ This function should only modify configuration layer settings."
              python-lsp-server 'mspyls
              python-pipenv-activate  t
              )
-     ipython-notebook
+     ;; ipython-notebook
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
      ;;  lua
@@ -157,12 +157,10 @@ This function should only modify configuration layer settings."
             cmake-backend 'lsp
             cmake-enable-cmake-ide-support t)
      zilongshanren
-     ;; (chinese :variables chinese-default-input-method 'pinyin
-     ;;          chinese-enable-youdao-dict t)
      fasd
      dash
      shell-scripts
-     xkcd
+     ;; xkcd
      (wakatime :variables
                wakatime-api-key "93d7f5b0-8719-470e-b5ab-6d763b828bcc"
                wakatime-cli-path "/usr/bin/wakatime")
@@ -179,7 +177,7 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    ;; jeison used in powerthesaurus
-   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor company-tabnine keyfreq snails benchmark-init emacsql emacsql-sqlite doom-themes jeison function-args (e2ansi :location (recipe :fetcher github :repo "Lindydancer/e2ansi")))
+   dotspacemacs-additional-packages '(emacsql emacsql-sqlite emacsql-sqlite3 doom-themes jeison (e2ansi :location (recipe :fetcher github :repo "Lindydancer/e2ansi")))
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

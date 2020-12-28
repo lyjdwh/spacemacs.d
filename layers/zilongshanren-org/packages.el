@@ -17,21 +17,19 @@
     ;; org-mac-link
     org-pomodoro
     (notdeft :location local)
-    sound-wav
     ob-typescript
     evil-org
-    (org-roam :location (recipe :fetcher github :repo "jethrokuan/org-roam"))
+    org-roam
     org-roam-server
     org-roam-bibtex
     ivy-bibtex
     org-noter
     org-ref
     (org-protocol-capture-html :location (recipe :fetcher github :repo "alphapapa/org-protocol-capture-html") )
-    (valign :location (recipe :fetcher github :repo "casouri/valign"))
     org-super-agenda
     (org-clock-watch :location local)
     (gkhabit :location (recipe :fetcher github :repo "Kinneyzhang/gkhabit"))
-    (org-latex-impatient :location (recipe :fetcher github :repo "yangsheng6810/org-latex-impatient"))
+    org-latex-impatient
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -60,7 +58,7 @@
 
 (defun zilongshanren-org/init-gkhabit ()
   (use-package gkhabit
-    :after org
+    :commands gkh-init gkh-new gkh-record gkh-archive gkh-org-table-display gkh-delete gkh-report-current-week
     :config
     (setq gkh-file "~/org-notes/habit.org")
     ))
@@ -76,7 +74,7 @@
 
 (defun zilongshanren-org/init-org-super-agenda ()
   (use-package org-super-agenda
-    :after org
+    :after org-agenda
     :config
     (setq org-super-agenda-groups
           '((:name "Today"
@@ -96,19 +94,14 @@
 (defun zilongshanren-org/init-notdeft ()
   (use-package notdeft
     :load-path "~/bin/notdeft"
+    :commands notdeft notdeft-mode-hydra/body notdeft-open-query notdeft-insert-org-link notdeft-org-link-new-file
+
     :config
     (setq notdeft-directories '("~/org-notes/notes"))
     (setq notdeft-secondary-extensions '("md" "txt"))
     (setq notdeft-xapian-max-results 0)
     (add-to-list 'load-path "~/bin/notdeft/extras")
     (load "notdeft-example")
-    ))
-
-(defun zilongshanren-org/init-valign ()
-  (use-package valign
-    :after org
-    :config
-    (add-hook 'org-mode-hook #'valign-mode)
     ))
 
 (defun zilongshanren-org/init-org-protocol-capture-html ()
@@ -225,7 +218,6 @@ the entry of interest in the bibfile.  but does not check that."
 
 (defun zilongshanren-org/init-org-roam ()
   (use-package org-roam
-    :diminish
     :hook
     (after-init . org-roam-mode)
     :custom
@@ -945,17 +937,11 @@ holding contextual information."
     (setq pow-directory "~/org-notes")))
 
 (defun zilongshanren-org/init-ob-typescript ()
-  (use-package ob-typescript
-    :init))
+  (use-package ob-typescript))
 
 (defun zilongshanren-org/init-worf ()
   (use-package worf
     :defer t
     :init
     (add-hook 'org-mode-hook 'worf-mode)))
-
-(defun zilongshanren-org/init-sound-wav ()
-  (use-package sound-wav
-    :defer t
-    :init))
 ;;; packages.el ends here
