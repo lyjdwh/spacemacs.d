@@ -668,3 +668,9 @@ clock                             ^^^^effort             ^^watcher
 (spacemacs/set-leader-keys-for-major-mode 'python-mode
   "vl" 'lsp-workon
   "vc" 'current-pyvenv-name)
+
+;; ivy
+(define-key ivy-minibuffer-map (kbd "C-RET") #'ivy-call)
+(define-key ivy-minibuffer-map (kbd "C-d") #'ivy-immediate-done)
+(define-key ivy-minibuffer-map (kbd "C-o") #'ivy-dispatching-done)
+(define-key ivy-minibuffer-map (kbd "C-.") #'hydra-ivy/body)
