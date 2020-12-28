@@ -67,7 +67,7 @@
         (delete-block :location (recipe :fetcher github :repo "manateelazycat/delete-block"))
         browse-kill-ring
         bbyac
-        (meow :location (recipe :fetcher github :repo "DogLooksGood/meow") )
+        meow
         evil-snipe
         (powerthesaurus :location (recipe :fetcher github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
         mw-thesaurus
@@ -720,10 +720,9 @@
 
 (defun zilongshanren-misc/init-meow ()
   (use-package meow
-    :custom
-    ;; layout options: qwerty, dvorak, dvp, colemak
-    (meow-layout 'qwerty)
     :config
+    (meow-setup)
+
     (defvar liuyan/mode-now t  "when t, evil-mode is on, when nil, meow mode is on")
     (define-key global-map (kbd "<f7>") 'liuyan/change-mode)
     ))
