@@ -1685,21 +1685,13 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
     (define-key evil-visual-state-map (kbd "y") 'my-evil-yank)
 
-    ;; rebind g,k to gj and gk
-    ;; (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-    ;; (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+    (evil-define-key '(normal visual) 'global-map (kbd "] f") 'end-of-defun)
+    (evil-define-key '(normal visual) 'global-map (kbd "[ f") 'beginning-of-defun)
+    (evil-define-key '(normal visual) 'global-map (kbd "] s") 'forward-sexp)
+    (evil-define-key '(normal visual) 'global-map (kbd "[ s") 'backward-sexp)
+    (evil-define-key '(normal visual) 'global-map (kbd "[ u") 'backward-up-list)
+    (evil-define-key '(normal visual) 'global-map (kbd "] u") 'backward-up-list)
 
-    (define-key evil-normal-state-map (kbd "[ SPC") (lambda () (interactive) (evil-insert-newline-above) (forward-line)))
-    (define-key evil-normal-state-map (kbd "] SPC") (lambda () (interactive) (evil-insert-newline-below) (forward-line -1)))
-
-    (define-key evil-normal-state-map (kbd "g[")
-      (lambda () (interactive) (beginning-of-defun)))
-
-    (define-key evil-normal-state-map (kbd "g]")
-      (lambda () (interactive) (end-of-defun)))
-
-    (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
-    (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
     (define-key evil-normal-state-map (kbd "M-y") 'counsel-yank-pop)
     (define-key evil-normal-state-map (kbd "g f") 'find-file-in-project-at-point)
     (define-key evil-normal-state-map (kbd "g F") 'find-file-at-point)
@@ -1713,8 +1705,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key minibuffer-local-map (kbd "C-w") 'evil-delete-backward-word)
 
     (define-key evil-visual-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
-    ;; (define-key evil-visual-state-map (kbd "x") 'er/expand-region)
-    ;; (define-key evil-visual-state-map (kbd "X") 'er/contract-region)
     (define-key evil-visual-state-map (kbd "C-r") 'zilongshanren/evil-quick-replace)
 
     ;; in spacemacs, we always use evilify miscro state
@@ -1722,18 +1712,10 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     ;; Don't move back the cursor one position when exiting insert mode
     (setq evil-move-cursor-back nil)
 
-    ;; (define-key evil-emacs-state-map (kbd "C-w h") 'evil-window-left)
     (define-key evil-emacs-state-map (kbd "C-w") 'evil-delete-backward-word)
-    ;; (define-key evil-emacs-state-map (kbd "C-w j") 'evil-window-down)
-    ;; (define-key evil-emacs-state-map (kbd "C-w k") 'evil-window-up)
-    ;; (define-key evil-emacs-state-map (kbd "C-w l") 'evil-window-right)
 
-    ;; for emacs shell mode
-    ;; (define-key evil-emacs-state-map (kbd "s-b") 'ido-switch-buffer)
-    ;; (define-key evil-emacs-state-map (kbd "s-f") 'ido-find-file)
     (evil-define-key 'emacs term-raw-map (kbd "C-w")
       'evil-delete-backward-word)
-
 
     (setq evil-normal-state-tag   (propertize "[N]" 'face '((:background "DarkGoldenrod2" :foreground "black")))
           evil-emacs-state-tag    (propertize "[E]" 'face '((:background "SkyBlue2" :foreground "black")))
@@ -1743,16 +1725,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
           evil-operator-state-tag (propertize "[O]" 'face '((:background "purple"))))
     (setq evil-insert-state-cursor '("chartreuse3" box))
     (define-key evil-insert-state-map (kbd "C-z") 'evil-emacs-state)
-    ;; This will break visual column edit
-    ;; enable hybrid editing style
-    ;; (defadvice evil-insert-state (around zilongshanren/holy-mode activate)
-    ;;   "Preparing the holy water flasks."
-    ;;   (evil-emacs-state))
-    ;; disable c-[ temporally
-    ;; (define-key input-decode-map [?\C-\[] (kbd "<C-[>"))
-    ;; (bind-keys ("<C-[>" . evil-normal-state))
-    ;; (setq evil-emacs-state-cursor '("chartreuse3" (bar . 2)))
-    ;; (define-key evil-emacs-state-map [escape] 'evil-normal-state)
     ))
 
 (defun zilongshanren-misc/init-visual-regexp ()
