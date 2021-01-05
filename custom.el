@@ -22,7 +22,6 @@
  '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
    '("1d50bd38eed63d8de5fcfce37c4bb2f660a02d3dff9cbfd807a309db671ff1af" "99ea831ca79a916f1bd789de366b639d09811501e8c092c85b2cb7d697777f93" "e1ecb0536abec692b5a5e845067d75273fe36f24d01210bf0aa5842f2a7e029f" "1526aeed166165811eefd9a6f9176061ec3d121ba39500af2048073bea80911e" "76bfa9318742342233d8b0b42e824130b3a50dcc732866ff8e47366aed69de11" default))
- '(eaf-find-alternate-file-in-dired t)
  '(eaf-python-command "/usr/bin/python3")
  '(erc-nick "liuyan")
  '(erc-port 6666)

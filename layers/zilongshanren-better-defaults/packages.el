@@ -93,7 +93,7 @@
   (use-package eaf
     :load-path "/home/liuyan/bin/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
     :commands (open-file-with-eaf
-               eaf-open-this-from-dired eaf-open-ipython eaf-open-camera eaf-open-demo
+               eaf-open-ipython eaf-open-camera eaf-open-demo
                eaf-open-browser eaf-open-external eaf-open-terminal eaf-toggle-fullscreen
                eaf-open eaf-open-url eaf-open-office eaf-open-mindmap eaf-open-airshare
                eaf-open-bookmark eaf-open-rss-reader eaf-kill-process eaf-search-it
@@ -107,7 +107,6 @@
     (setq browse-url-browser-function 'eaf-open-browser)
     (defalias 'browse-web #'eaf-open-browser)
     :custom
-    (eaf-find-alternate-file-in-dired t)
     (eaf-python-command "/usr/bin/python3")
     (eaf-evil-leader-keymap  spacemacs-cmds)
     (eaf-evil-leader-key "SPC")
@@ -163,8 +162,6 @@
        ((eaf--get-app-for-extension
          (eaf-get-file-name-extension file))
         (eaf-open file))
-       (eaf-find-alternate-file-in-dired
-        (dired-find-alternate-file))
        (t (dired-find-file))))
 
     (defun open-file-with-eaf ()
