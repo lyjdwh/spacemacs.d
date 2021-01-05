@@ -174,6 +174,7 @@
  '(bm-fringe-persistent-face ((t (:background "dark orange" :foreground "black"))))
  '(bm-persistent-face ((t (:background "dark orange" :foreground "black"))))
  '(dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+ '(org-link ((t (:foreground "steel blue" :underline t :weight bold))))
  '(snails-content-buffer-face ((t (:background "#111" :height 130))))
  '(snails-header-line-face ((t (:inherit font-lock-function-name-face :underline t :height 1.2))))
  '(snails-input-buffer-face ((t (:background "#222" :foreground "gold" :height 130)))))
