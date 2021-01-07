@@ -30,6 +30,7 @@
     (org-clock-watch :location local)
     (gkhabit :location (recipe :fetcher github :repo "Kinneyzhang/gkhabit"))
     org-latex-impatient
+    easy-hugo
     ;; org-tree-slide
     ;; ox-reveal
     ;; worf
@@ -44,6 +45,17 @@
 ;;     :init
 ;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
 ;;     ))
+
+(defun zilongshanren-org/init-easy-hugo()
+  (use-package easy-hugo
+    :commands easy-hugo
+    :config
+    (setq easy-hugo-basedir "~/org-notes/blog/")
+    (setq easy-hugo-postdir "content/posts")
+    (setq easy-hugo-image-directory "static/img")
+    (setq easy-hugo-helm-ag t)
+    (setq easy-hugo-url "")
+    ))
 
 (defun zilongshanren-org/init-org-latex-impatient()
   (use-package org-latex-impatient

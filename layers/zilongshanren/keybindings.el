@@ -399,6 +399,7 @@
 
 (spacemacs/set-leader-keys "bj" 'awesome-tab-ace-jump)
 (spacemacs/set-leader-keys "bJ" 'awesome-fast-switch/body)
+(evil-define-key '(normal visual) 'global-map (kbd "gt") 'awesome-fast-switch/body)
 
 ;; counsel
 (spacemacs/set-leader-keys "ss" 'counsel-grep-or-swiper)
