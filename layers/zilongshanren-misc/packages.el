@@ -51,7 +51,6 @@
         git-gutter
         speed-type
         zone
-        leetcode
         youdao-dictionary
         go-translate
         posframe
@@ -1014,16 +1013,6 @@
     (defun go-translate-token--extract-tkk ()
       (cons 430675 2721866130))
     ))
-
-(defun zilongshanren-misc/init-leetcode ()
-  (use-package leetcode
-    :defer t
-    :config
-    (define-key leetcode--problems-mode-map (kbd "TAB") 'leetcode-show-current-problem)
-    (define-key leetcode--problems-mode-map (kbd "<return>") 'leetcode-show-current-problem)
-    (setq leetcode-prefer-language "python3")
-    (setq leetcode--domain "leetcode-cn.com")
-    (setq leetcode--base-url "https://leetcode-cn.com")))
 
 (defun zilongshanren-misc/init-speed-type ()
   (use-package speed-type

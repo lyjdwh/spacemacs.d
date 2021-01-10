@@ -244,16 +244,6 @@
 (spacemacs/set-leader-keys "ohl" 'ivy-magit-todos)
 (spacemacs/set-leader-keys "ohh" 'zilongshanren/highlight-dwim)
 
-;; leetcode
-(spacemacs/declare-prefix "aL" "Leetcode")
-(spacemacs/set-leader-keys
-  "aLl" 'leetcode
-  "aLd" 'leetcode-show-current-problem
-  "aLr" 'leetcode-refresh
-  "aLt" 'leetcode-try
-  "aLu" 'leetcode-submit
-  )
-
 ;; proxy
 (spacemacs/set-leader-keys
   "otp" 'proxy-socks-toggle
