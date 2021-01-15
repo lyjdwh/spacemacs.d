@@ -1996,40 +1996,22 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
 
 (defun zilongshanren-misc/post-init-magit ()
-  (progn
-    (with-eval-after-load 'magit
-      (progn
+  (with-eval-after-load 'magit
+    (defadvice magit-status (around magit-fullscreen activate)
+      (window-configuration-to-register :magit-fullscreen)
+      ad-do-it
+      (delete-other-windows))
+    (defadvice magit-quit-window (after magit-restore-screen activate)
+      (jump-to-register :magit-fullscreen))
 
-        (add-to-list 'magit-no-confirm 'stage-all-changes)
-        (define-key magit-log-mode-map (kbd "W") 'magit-copy-section-value)
-        (setq magit-completing-read-function 'magit-builtin-completing-read)
-
-        (magit-define-popup-switch 'magit-push-popup ?u
-                                   "Set upstream" "--set-upstream")
-
-
-        (magit-add-section-hook 'magit-status-sections-hook
-                                'magit-insert-assume-unchanged-files nil t)
-
-        ;; insert the hidden files section in the magit status buffer.
-        (magit-add-section-hook 'magit-status-sections-hook
-                                'magit-insert-skip-worktree-files nil t)
-
-        (define-key magit-status-mode-map "ga" 'magit-jump-to-assume-unchanged)
-
-        (define-key magit-status-mode-map "gw" 'magit-jump-to-skip-worktree)
-        ))
-
-    ;; prefer two way ediff
-    (setq magit-ediff-dwim-show-on-hunks t)
-
-    (setq magit-push-always-verify nil)
-
-    (eval-after-load 'magit
-      '(define-key magit-mode-map (kbd "C-c g")
-         #'zilongshanren/magit-visit-pull-request))
-
-    (setq magit-process-popup-time 10)))
+    ;; speed up magit
+    ;; (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
+    ;; (remove-hook 'magit-status-sections-hook 'magit-insert-status-headers)
+    ;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-pushremote)
+    ;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
+    ;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
+    ;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent)
+    ))
 
 (defun zilongshanren-misc/post-init-git-messenger ()
   (use-package git-messenger

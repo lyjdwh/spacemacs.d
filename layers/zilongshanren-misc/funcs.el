@@ -512,25 +512,6 @@ e.g. Sunday, September 17, 2000."
               :action 'my-find-file-in-git-repo
               :caller 'counsel-find-file-recent-directory)))
 
-(defun zilongshanren/magit-visit-pull-request ()
-  "Visit the current branch's PR on GitHub."
-  (interactive)
-  (let ((remote-branch (magit-get-current-branch)))
-    (cond
-     ((null remote-branch)
-      (message "No remote branch"))
-     (t
-      (browse-url
-       (if (or 1 (spacemacs/system-is-mswindows))
-           "https://git.code.oa.com/lionqu/HLMJ_js/merge_requests/new"
-         (format "https://github.com/%s/pull/new/%s"
-                 (replace-regexp-in-string
-                  "\\`.+github\\.com:\\(.+\\)\\.git\\'" "\\1"
-                  (magit-get "remote"
-                             (magit-get-remote)
-                             "url"))
-                 remote-branch)))))))
-
 (defun zilongshanren/markdown-to-html ()
   (interactive)
   (start-process "grip" "*gfm-to-html*" "grip" (buffer-file-name) "5000")
