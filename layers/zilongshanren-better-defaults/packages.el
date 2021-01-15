@@ -75,13 +75,12 @@
     (snails-header-line-face ((t (:inherit font-lock-function-name-face :underline t :height 1.2))))
     :config
     (add-to-list 'load-path "/home/liuyan/bin/fuz.el/")
+    (setq snails-default-backends nil)
     (setq snails-prefix-backends
-          '((">" '(snails-backend-command))
-            ("@" '(snails-backend-imenu))
-            ("#" '(snails-backend-current-buffer))
-            ("!" '(snails-backend-rg))
-            (":" '(snails-backend-search-pdf))
-            ("?" '(snails-backend-eaf-browser-search snails-backend-eaf-github-search snails-backend-google-suggestion snails-backend-eaf-browser-history))))
+          '((":" '(snails-backend-search-pdf))
+            (";" '(snails-backend-eaf-pdf-table))
+            ("?" '(snails-backend-eaf-browser-search snails-backend-eaf-github-search snails-backend-google-suggestion))))
+    (setq snails-show-with-frame nil)
     (define-key snails-mode-map (kbd "C-j") 'snails-select-next-item)
     (define-key snails-mode-map (kbd "C-k") 'snails-select-prev-item)
     (define-key snails-mode-map (kbd "C-h") 'snails-select-prev-backend)
