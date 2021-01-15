@@ -368,6 +368,4 @@
 
     (setq company-minimum-prefix-length 1
           company-idle-delay 0.08)
-
-    (add-hook 'company-mode-hook 'enable-company-number-keybindings)
     ))
