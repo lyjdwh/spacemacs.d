@@ -786,7 +786,7 @@ unwanted space when exporting org-mode to hugo markdown."
                                (setq scroll-step 1)
                                (setq scroll-margin 10)
                                (setq scroll-conservatively 10000)))
-  (add-hook 'text-mode-hook '(lambda ()
+  (add-hook 'org-mode-hook '(lambda ()
                                (setq scroll-step 0)
                                (setq scroll-margin 0)
                                (setq scroll-conservatively 0)))

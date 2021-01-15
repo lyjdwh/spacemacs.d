@@ -243,6 +243,7 @@
 (spacemacs/set-leader-keys "ohi" 'hl-todo-insert)
 (spacemacs/set-leader-keys "ohl" 'ivy-magit-todos)
 (spacemacs/set-leader-keys "ohh" 'zilongshanren/highlight-dwim)
+(spacemacs/set-leader-keys "ohc" 'zilongshanren/clearn-highlight)
 
 ;; proxy
 (spacemacs/set-leader-keys
@@ -619,6 +620,7 @@ clock                             ^^^^effort             ^^watcher
       ("q" nil :color blue))
 
 (spacemacs/set-leader-keys "oc" 'hydra-org-clock/body)
+(evil-define-key '(normal visual) 'global-map (kbd "go") 'hydra-org-clock/body)
 
 ;; cmake-mode
 (spacemacs/declare-prefix-for-mode 'cmake-mode
