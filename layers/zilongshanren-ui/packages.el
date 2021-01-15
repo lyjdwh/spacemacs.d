@@ -96,7 +96,7 @@
     (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
     ;; Set the title
     (setq dashboard-banner-logo-title "Welcome to Emacs, Happy Hacking!")
-    (setq dashboard-startup-banner "~/.spacemacs.d/logo/amadeus.png")
+    (setq dashboard-startup-banner "~/.spacemacs.d/resources/amadeus.png")
     ;; Content is not centered by default. To center, set
     (setq dashboard-center-content t)
     ;; To disable shortcut "jump" indicators for each section, set
