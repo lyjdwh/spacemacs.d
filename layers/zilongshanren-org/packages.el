@@ -641,8 +641,8 @@ the entry of interest in the bibfile.  but does not check that."
       ;; (add-hook 'org-after-todo-state-change-hook 'org-subtask-reset)
 
       (setq org-plantuml-jar-path
-            (expand-file-name "~/.spacemacs.d/plantuml.jar"))
-      (setq org-ditaa-jar-path "~/.spacemacs.d/ditaa.jar")
+            (expand-file-name "~/.spacemacs.d/resources/plantuml.jar"))
+      (setq org-ditaa-jar-path "~/.spacemacs.d/resources/ditaa.jar")
 
       (org-babel-do-load-languages
        'org-babel-load-languages

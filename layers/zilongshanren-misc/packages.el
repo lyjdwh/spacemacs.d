@@ -70,7 +70,7 @@
         powerthesaurus
         mw-thesaurus
         langtool
-        (inherit-org :location local)
+        (inherit-org :location (recipe :fetcher github :repo "chenyanming/inherit-org"))
         (awesome-tab :location (recipe :fetcher github :repo "manateelazycat/awesome-tab"))
         bm
         counsel
@@ -666,7 +666,6 @@
 (defun zilongshanren-misc/init-inherit-org ()
   ;; use imenu or counsel-outline to jump outline
   (use-package inherit-org
-    :load-path "~/bin/inherit-org"
     :after org
     :config
     (with-eval-after-load 'info

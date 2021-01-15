@@ -1,26 +1,63 @@
-* My personal Emacs configuration
-Hacking journey begins start from 2013.
+My personal Emacs configuration, modified from [[https://github.com/zilongshanren/spacemacs-private][zilongshanren]]
 
-It was written for Emacs 25.1+ on MacOS 10.11+
+* How to use
+** spacemacs
 
-** How to use
-Follow the install instruction here: https://github.com/zilongshanren/spacemacs#install ,
-make sure your are using the fork repo: https://github.com/zilongshanren/spacemacs
+   #+BEGIN_SRC sh
+     git clone https://github.com/lyjdwh/spacemacs.d.git ~/.spacemacs.d
+     git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
+     sudo pacman -S emacs zeal aspell aspell-en git-delta wkhtmltopdf ccls
+     cnpm install mathjax-node-cli
 
-Why use the forked repo?  What's the difference between the forked repo and the original repo?
+     ## all-the-icons-install-fonts
+     ## company-tabnine-install-binary
 
-*Nothing difference!*
+     ## update
+     ## cd ~/.emacs.d && git pull --rebase
 
-The forked version is only a few commits behind the original repo, becuase sometimes the original repo can't functional well.
+     mkdir ~/bin
+   #+END_SRC
 
-** What's the highlight of this configuration
-1. It's a highly optimized Spacemacs configuration, you should use the configuration together with the *develop* branch of the forked Spacemacs.
-2. I prefer to the =Ivy= completion interface, so I removed many helm related packages but keep the =helm-ag= package. The =counsel-ag= counterpart is not powerful as =helm-ag=.
-3. I also removed some packages I don't have any chance to use. The complete list lies in the exclude section of the =init.el= file.
-4. I also exclude the =Spaceline= package, cause it's easy to frozen the Emacs with this package enabled. So I create my own mode line configuration based on =Spaceline=.
-5. The =Swiper= package sometimes frozen the Emacs UI when you split the window with very long lines. You could use `pkill -SIGUSR2 -i emacs` in command line to save the frozen Emacs.
+** org protocol
+   https://www.orgroam.com/manual.html#Installation-_00281_0029
 
-** Optional    
-*** Install Imagemagick 
+** eaf
 
-** Happing Hacking
+   #+BEGIN_SRC sh
+     cd ~/bin && git clone https://github.com/manateelazycat/emacs-application-framework.git
+
+     sudo pacman -S python-pyqt5 python-pyqt5-sip python-pyqtwebengine \
+          python-qrcode python-dbus python-pyinotify \
+          python-markdown nodejs aria2 libreoffice python-qtconsole \
+          filebrowser-bin wmctrl
+
+     ## Grip has dependency of flask and Markdown
+     pip install pymupdf grip flask Markdown
+   #+END_SRC
+
+** snails
+
+   #+BEGIN_SRC sh
+     cd ~/bin && git clone https://github.com/manateelazycat/snails.git
+     sudo pacman -S rust clang
+     cd ~/bin && git clone https://github.com/cireu/fuz.el
+     cd fuz.el
+     cargo build --release
+     cp target/release/libfuz_core.so fuz-core.so
+   #+END_SRC
+
+** notdeft
+
+   #+BEGIN_SRC sh
+     cd ~/bin && git clone https://github.com/hasu/notdeft.git
+     cd notdeft && make
+     cd xapian && make
+   #+END_SRC
+
+** org-clock-watch
+
+   #+BEGIN_SRC sh
+     cd ~/bin && git clone https://github.com/wztdream/org-clock-watch.git
+   #+END_SRC
+
+ Happing Hacking
