@@ -22,15 +22,6 @@
                                         (define-key map (kbd "C-n") #'inline-or-region-replace-next)
                                         map))
 
-(defun browse-hugo-maybe ()
-  (interactive)
-  (let ((hugo-service-name "Hugo Server")
-        (hugo-service-port "1313"))
-    (if (prodigy-service-started-p (prodigy-find-service hugo-service-name))
-        (progn
-          (message "Hugo detected, launching browser...")
-          (browse-url (concat "http://localhost:" hugo-service-port))))))
-
 (defun zilongshanren/highlight-dwim ()
   (interactive)
   (if (use-region-p)
@@ -43,22 +34,6 @@
     (interactive)
   (clear-highlight-frame)
   (symbol-overlay-remove-all))
-
-(defun ivy-with-thing-at-point (cmd)
-  (let ((ivy-initial-inputs-alist
-         (list
-          (cons cmd (thing-at-point 'symbol)))))
-    (funcall cmd)))
-
-;; Example 1
-(defun counsel-ag-thing-at-point ()
-  (interactive)
-  (ivy-with-thing-at-point 'counsel-ag))
-
-;; Example 2
-;; (defun swiper-thing-at-point ()
-;;   (interactive)
-;;   (ivy-with-thing-at-point 'swiper))
 
 ;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
 (defmacro adjust-major-mode-keymap-with-evil (m &optional r)
@@ -123,70 +98,6 @@
   (interactive)
   (persp-save-state-to-file (concat persp-save-dir "liuyan")))
 
-;; http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
-;; ;FIXME: make it work with zsh
-(defun counsel-yank-bash-history ()
-  "Yank the bash history"
-  (interactive)
-  (let (hist-cmd collection val)
-    (shell-command "history -r") ; reload history
-    (setq collection
-          (nreverse
-           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
-                                           (buffer-string))
-                         "\n"
-                         t)))
-    (when (and collection (> (length collection) 0)
-               (setq val (if (= 1 (length collection)) (car collection)
-                           (ivy-read (format "Bash history:") collection))))
-      (kill-new val)
-      (message "%s => kill-ring" val))))
-
-  ;; my fix for tab indent
-(defun zilongshanren/indent-region(numSpaces)
-  (progn
-                                      ; default to start and end of current line
-    (setq regionStart (line-beginning-position))
-    (setq regionEnd (line-end-position))
-
-                                      ; if there's a selection, use that instead of the current line
-    (when (use-region-p)
-      (setq regionStart (region-beginning))
-      (setq regionEnd (region-end))
-      )
-
-    (save-excursion                          ; restore the position afterwards
-      (goto-char regionStart)                ; go to the start of region
-      (setq start (line-beginning-position)) ; save the start of the line
-      (goto-char regionEnd)                  ; go to the end of region
-      (setq end (line-end-position))         ; save the end of the line
-
-      (indent-rigidly start end numSpaces) ; indent between start and end
-      (setq deactivate-mark nil)           ; restore the selected region
-      )
-    )
-  )
-
-
-(defun zilongshanren/tab-region (N)
-  (interactive "p")
-  (if (use-region-p)
-      (zilongshanren/indent-region 4)               ; region was selected, call indent-region
-    (insert "    ")                   ; else insert four spaces as expected
-    ))
-
-(defun zilongshanren/untab-region (N)
-  (interactive "p")
-  (zilongshanren/indent-region -4))
-
-(defun zilongshanren/hack-tab-key ()
-  (interactive)
-  (local-set-key (kbd "<tab>") 'zilongshanren/tab-region)
-  (local-set-key (kbd "<S-tab>") 'zilongshanren/untab-region)
-  )
-
-;; I'm don't like this settings too much.
-;; (add-hook 'prog-mode-hook 'zilongshanren/hack-tab-key)
 (defun endless/fill-or-unfill ()
   "Like `fill-paragraph', but unfill if used twice."
   (interactive)
@@ -248,7 +159,6 @@ org-files and bookmarks"
                    ("python 标准库" . (lambda () (browse-url "https://docs.python.org/zh-cn/3/library/index.html")))
                    ("Calculator" . (lambda () (helm-calcul-expression)))
                    ("Run current flie" . (lambda () (zilongshanren/run-current-file)))
-                   ("Blog" . browse-hugo-maybe)
                    ))
     (candidate-number-limit)
     (action . (("Open" . (lambda (x) (funcall x)))))))
@@ -303,39 +213,6 @@ e.g. Sunday, September 17, 2000."
   (while (re-search-forward "\\(^\\s-*$\\)\n" nil t)
     (replace-match "\n")
     (forward-char 1)))
-
-;; for running long run ansi-term
-(defun zilongshanren/named-term (name)
-  (interactive "sName: ")
-  (ansi-term "/bin/zsh" name))
-
-
-(defun zilongshanren/ash-term-hooks ()
-  ;; dabbrev-expand in term
-  (define-key term-raw-escape-map "/"
-    (lambda ()
-      (interactive)
-      (let ((beg (point)))
-        (dabbrev-expand nil)
-        (kill-region beg (point)))
-      (term-send-raw-string (substring-no-properties (current-kill 0)))))
-  ;; yank in term (bound to C-c C-y)
-  (define-key term-raw-escape-map "\C-y"
-    (lambda ()
-      (interactive)
-      (term-send-raw-string (current-kill 0)))))
-
-(defun zilongshanren/terminal ()
-  "Switch to terminal. Launch if nonexistent."
-  (interactive)
-  (if (get-buffer "*ansi-term*")
-      (switch-to-buffer-other-window "*ansi-term*")
-    (progn
-      (split-window-right-and-focus)
-      (ansi-term "/bin/zsh")))
-  (get-buffer-process "*ansi-term*"))
-
-(defalias 'tt 'zilongshanren/terminal)
 
 ;;add count for chinese, mainly used for writing chinese blog post
 ;; http://kuanyui.github.io/2014/01/18/count-chinese-japanese-and-english-words-in-emacs/

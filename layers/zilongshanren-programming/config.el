@@ -16,8 +16,6 @@
   :documentation "Enable iimage mode"
   :evil-leader "oti")
 
-(add-hook 'term-mode-hook 'zilongshanren/ash-term-hooks)
-
 (add-to-list 'auto-mode-alist (cons (concat "\\." (regexp-opt
                                                    '("xml"
                                                      "xsd"
