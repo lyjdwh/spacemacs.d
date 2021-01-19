@@ -44,9 +44,10 @@
 
 (defun zilongshanren-org/init-org-latex-impatient()
   (use-package org-latex-impatient
-    :defer t
-    :hook (org-mode . org-latex-impatient-mode)
+    :commands org-latex-impatient-mode
     :init
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      "To" 'org-latex-impatient-mode)
     (setq org-latex-impatient-tex2svg-bin
           "~/node_modules/mathjax-node-cli/bin/tex2svg")
     (setq org-latex-impatient-posframe-position-handler
@@ -92,7 +93,6 @@
   (use-package notdeft
     :load-path "~/bin/notdeft"
     :commands notdeft notdeft-mode-hydra/body notdeft-open-query notdeft-insert-org-link notdeft-org-link-new-file
-
     :config
     (setq notdeft-directories '("~/org-notes/notes"))
     (setq notdeft-secondary-extensions '("md" "txt"))
@@ -230,11 +230,13 @@ the entry of interest in the bibfile.  but does not check that."
         "amt" 'org-roam-today
         "amb" 'org-roam-switch-to-buffer
         "amf" 'orb-find-non-ref-file ;; org-roam-find-file
+        "ami" 'orb-insert-non-ref    ;; org-roam-insert
         "amg" 'org-roam-graph
         "amc" 'org-roam-capture
         "amr" 'org-ref-helm-insert-cite-link
         "amg" 'org-roam-tag-add
-        "amd" 'org-roam-tag-delete)
+        "amd" 'org-roam-tag-delete
+        "amC" 'org-roam-unlinked-references)
 
       (spacemacs/declare-prefix-for-mode 'org-mode "mm" "org-roam")
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
@@ -244,6 +246,7 @@ the entry of interest in the bibfile.  but does not check that."
         "mf" 'orb-find-non-ref-file ;; org-roam-find-file
         "mi" 'orb-insert-non-ref    ;; org-roam-insert
         "mc" 'org-roam-capture
+        "mC" 'org-roam-unlinked-references
         "mr" 'org-ref-helm-insert-cite-link
         "mg" 'org-roam-tag-add
         "md" 'org-roam-tag-delete
