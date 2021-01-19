@@ -14,7 +14,6 @@
 (defconst zilongshanren-org-packages
   '(
     (org :location built-in)
-    ;; org-mac-link
     org-pomodoro
     (notdeft :location local)
     ob-typescript
@@ -25,26 +24,12 @@
     ivy-bibtex
     org-noter
     org-ref
-    (org-protocol-capture-html :location (recipe :fetcher github :repo "alphapapa/org-protocol-capture-html") )
     org-super-agenda
     (org-clock-watch :location local)
     (gkhabit :location (recipe :fetcher github :repo "Kinneyzhang/gkhabit"))
     org-latex-impatient
     easy-hugo
-    ;; org-tree-slide
-    ;; ox-reveal
-    ;; worf
-    ;; org-download
-    ;; plain-org-wiki
-    ;; org-preview-html
     ))
-
-;; (defun zilongshanren-org/init-org-preview-html ()
-;;   (use-package org-preview-html
-;;     :defer t
-;;     :init
-;;     (add-hook 'org-mode-hook 'org-preview-html-mode)
-;;     ))
 
 (defun zilongshanren-org/init-easy-hugo()
   (use-package easy-hugo
@@ -115,10 +100,6 @@
     (add-to-list 'load-path "~/bin/notdeft/extras")
     (load "notdeft-example")
     ))
-
-(defun zilongshanren-org/init-org-protocol-capture-html ()
-  (use-package org-protocol-capture-html
-    :after org-capture))
 
 (defun zilongshanren-org/post-init-org-ref ()
   (progn
@@ -917,43 +898,7 @@ holding contextual information."
                           (concat (org-html-section first-content "" info) contents))
                         (org-html--container headline info))))))))))
 
-(defun zilongshanren-org/init-org-mac-link ()
-  (use-package org-mac-link
-    :commands org-mac-grab-link
-    :init
-    (progn
-      (add-hook 'org-mode-hook
-                (lambda ()
-                  (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link))))
-    :defer t))
-
-(defun zilongshanren-org/post-init-ox-reveal ()
-  (setq org-reveal-root "file:///Users/liuyan/.emacs.d/reveal-js"))
-
-
-(defun zilongshanren-org/init-org-tree-slide ()
-  (use-package org-tree-slide
-    :init
-    (spacemacs/set-leader-keys "oto" 'org-tree-slide-mode)))
-
-
-(defun zilongshanren-org/init-org-download ()
-  (use-package org-download
-    :defer t
-    :init
-    (org-download-enable)))
-
-(defun zilongshanren-org/init-plain-org-wiki ()
-  (use-package plain-org-wiki
-    :init
-    (setq pow-directory "~/org-notes")))
-
 (defun zilongshanren-org/init-ob-typescript ()
   (use-package ob-typescript))
 
-(defun zilongshanren-org/init-worf ()
-  (use-package worf
-    :defer t
-    :init
-    (add-hook 'org-mode-hook 'worf-mode)))
 ;;; packages.el ends here
