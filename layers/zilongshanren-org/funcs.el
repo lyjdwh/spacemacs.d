@@ -219,7 +219,7 @@ With a prefix ARG, the cache is invalidated and the bibliography reread."
   (interactive)
   (if (eq org-roam-server-mode nil)
       (org-roam-server-mode 1))
-  (eaf-open-browser "127.0.0.1:8080"))
+  (browse-url "127.0.0.1:8080"))
 
 (defun org-babel-highlight-result ()
   "Highlight the result of the current source block.

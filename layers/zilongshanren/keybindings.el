@@ -182,16 +182,6 @@
 (spacemacs/set-leader-keys "aef" 'eaf-file-browser-qrcode)
 (spacemacs/set-leader-keys "otb" 'change-browser-function)
 
-(spacemacs/set-leader-keys-for-major-mode 'org-mode
-  "m." 'eaf-interleave-sync-current-note
-  "mj" 'eaf-interleave-sync-next-note
-  "mk" 'eaf-interleave-sync-previous-note)
-
-(spacemacs/set-leader-keys
-  "ami" 'eaf-interleave-add-note
-  "amo" 'eaf-interleave-open-notes-file
-  "amq" 'eaf-interleave-quit)
-
 ;; snails
 (spacemacs/set-leader-keys "aa" 'snails)
 (spacemacs/set-leader-keys "sn" 'snails-search-point)

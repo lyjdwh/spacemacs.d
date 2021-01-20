@@ -226,27 +226,26 @@ the entry of interest in the bibfile.  but does not check that."
     (progn
       (spacemacs/declare-prefix "am" "org-roam")
       (spacemacs/set-leader-keys
-        "aml" 'org-roam
+        "amo" 'org-roam
         "amt" 'org-roam-today
         "amb" 'org-roam-switch-to-buffer
         "amf" 'orb-find-non-ref-file ;; org-roam-find-file
         "ami" 'orb-insert-non-ref    ;; org-roam-insert
-        "amg" 'org-roam-graph
-        "amc" 'org-roam-capture
+        "amI" 'org-roam-insert-immediate
+        "amc" 'org-roam-unlinked-references
         "amr" 'org-ref-helm-insert-cite-link
         "amg" 'org-roam-tag-add
-        "amd" 'org-roam-tag-delete
-        "amC" 'org-roam-unlinked-references)
+        "amd" 'org-roam-tag-delete)
 
       (spacemacs/declare-prefix-for-mode 'org-mode "mm" "org-roam")
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "ml" 'org-roam
+        "mo" 'org-roam
         "mt" 'org-roam-today
         "mb" 'org-roam-switch-to-buffer
         "mf" 'orb-find-non-ref-file ;; org-roam-find-file
         "mi" 'orb-insert-non-ref    ;; org-roam-insert
-        "mc" 'org-roam-capture
-        "mC" 'org-roam-unlinked-references
+        "mI" 'org-roam-insert-immediate
+        "mc" 'org-roam-unlinked-references
         "mr" 'org-ref-helm-insert-cite-link
         "mg" 'org-roam-tag-add
         "md" 'org-roam-tag-delete
