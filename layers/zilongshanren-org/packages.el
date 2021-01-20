@@ -19,6 +19,7 @@
     ob-typescript
     evil-org
     org-roam
+    (org-transclusion :location local)
     org-roam-server
     org-roam-bibtex
     ivy-bibtex
@@ -267,6 +268,16 @@ the entry of interest in the bibfile.  but does not check that."
                    :immediate-finish t
                    :unnarrowed t))
     (add-hook 'org-mode-hook (lambda () (add-to-list 'company-backends #'company-capf)))
+    ))
+
+(defun zilongshanren-org/init-org-transclusion()
+  (use-package org-transclusion
+    :load-path "~/bin/org-transclusion"
+    :commands org-transclusion-mode
+    :init
+    (define-key global-map (kbd "<f3>") #'org-transclusion-mode)
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      "me" 'org-transclusion-open-edit-src-buffer-at-point)
     ))
 
 (defun zilongshanren-org/init-org-roam-server ()
