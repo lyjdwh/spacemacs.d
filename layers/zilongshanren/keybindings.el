@@ -221,9 +221,8 @@
 
 
 ;; take screenshot
-(spacemacs/declare-prefix "as" "shot")
-(spacemacs/set-leader-keys "asf" 'screenshot)
-(spacemacs/set-leader-keys "asF" 'screenshot-clip)
+(spacemacs/set-leader-keys "atf" 'screenshot)
+(spacemacs/set-leader-keys "atF" 'screenshot-clip)
 
 ;; highlight todo and similar keywords
 (spacemacs/declare-prefix "oh" "hl-todo/highlight")
@@ -658,4 +657,4 @@ clock                             ^^^^effort             ^^watcher
 (define-key ivy-minibuffer-map (kbd "C-.") #'hydra-ivy/body)
 
 ;; search engine
-(spacemacs/set-leader-keys "a/" 'spacemacs/search-engine-select)
+(spacemacs/set-leader-keys "as" 'spacemacs/search-engine-select)

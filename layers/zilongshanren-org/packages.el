@@ -19,14 +19,14 @@
     ob-typescript
     evil-org
     org-roam
-    (org-transclusion :location local)
+    (org-transclusion :location (recipe :fetcher github :repo "nobiot/org-transclusion" :files ("*")))
     org-roam-server
     org-roam-bibtex
     ivy-bibtex
     org-noter
     org-ref
     org-super-agenda
-    (org-clock-watch :location local)
+    (org-clock-watch :location (recipe :fetcher github :repo "wztdream/org-clock-watch" :files ("*")))
     (gkhabit :location (recipe :fetcher github :repo "Kinneyzhang/gkhabit"))
     org-latex-impatient
     easy-hugo
@@ -64,7 +64,6 @@
 
 (defun zilongshanren-org/init-org-clock-watch ()
   (use-package org-clock-watch
-    :load-path "~/bin/org-clock-watch"
     :after org
     :config
     (setq org-clock-watch-work-plan-file-path "~/org-notes/gtd.org")
@@ -272,7 +271,6 @@ the entry of interest in the bibfile.  but does not check that."
 
 (defun zilongshanren-org/init-org-transclusion()
   (use-package org-transclusion
-    :load-path "~/bin/org-transclusion"
     :commands org-transclusion-mode
     :init
     (define-key global-map (kbd "<f3>") #'org-transclusion-mode)

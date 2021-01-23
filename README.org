@@ -23,17 +23,14 @@ My personal Emacs configuration, modified from [[https://github.com/zilongshanre
 
 ** eaf
 
-   #+BEGIN_SRC sh
-     cd ~/bin && git clone https://github.com/manateelazycat/emacs-application-framework.git
+    [[https://github.com/manateelazycat/emacs-application-framework#install][eaf install]]
 
-     sudo pacman -S python-pyqt5 python-pyqt5-sip python-pyqtwebengine \
-          python-qrcode python-dbus python-pyinotify \
-          python-markdown nodejs aria2 libreoffice python-qtconsole \
-          filebrowser-bin wmctrl
+    #+BEGIN_SRC sh
+      git clone --depth=1 -b master https://github.com/manateelazycat/emacs-application-framework.git ~/bin/emacs-application-framework
 
-     ## Grip has dependency of flask and Markdown
-     pip install pymupdf grip flask Markdown
-   #+END_SRC
+      cd ~/bin/emacs-application-framework
+      ./install-eaf.sh
+    #+END_SRC
 
 ** snails
 
@@ -52,12 +49,6 @@ My personal Emacs configuration, modified from [[https://github.com/zilongshanre
      cd ~/bin && git clone https://github.com/hasu/notdeft.git
      cd notdeft && make
      cd xapian && make
-   #+END_SRC
-
-** org-clock-watch
-
-   #+BEGIN_SRC sh
-     cd ~/bin && git clone https://github.com/wztdream/org-clock-watch.git
    #+END_SRC
 
  Happing Hacking

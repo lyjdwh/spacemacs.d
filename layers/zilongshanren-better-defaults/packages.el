@@ -75,11 +75,11 @@
     (snails-header-line-face ((t (:inherit font-lock-function-name-face :underline t :height 1.2))))
     :config
     (add-to-list 'load-path "/home/liuyan/bin/fuz.el/")
-    (setq snails-default-backends nil)
+    (setq snails-default-backends '(snails-backend-eaf-browser-search snails-backend-eaf-github-search snails-backend-google-suggestion))
     (setq snails-prefix-backends
           '((":" '(snails-backend-search-pdf))
             (";" '(snails-backend-eaf-pdf-table))
-            ("?" '(snails-backend-eaf-browser-search snails-backend-eaf-github-search snails-backend-google-suggestion))))
+            ))
     (setq snails-show-with-frame nil)
     (define-key snails-mode-map (kbd "C-j") 'snails-select-next-item)
     (define-key snails-mode-map (kbd "C-k") 'snails-select-prev-item)
@@ -125,7 +125,7 @@
     (eaf-setq eaf-pdf-dark-mode "false")
     (eaf-setq eaf-mindmap-dark-mode "false")
     ;; web
-    (eaf-setq eaf-browser-default-zoom "1.25")
+    ;; (eaf-setq eaf-browser-default-zoom "1.25")
     (eaf-setq eaf-browser-enable-adblocker "true")
     ;; camera
     (eaf-setq eaf-camera-save-path "~/Pictures")
