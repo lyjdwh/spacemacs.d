@@ -1963,14 +1963,14 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
         (ivy-set-actions
          t
-         '(("f" my-find-file-in-git-repo "find files")
-           ("!" my-open-file-in-external-app "Open file in external app")
+         '(("i" wr/insert-a-head-from-a-file "roam insert head")
+           ("f" my-find-file-in-git-repo "find files")
+           ("e" my-open-file-in-external-app "Open file in external app")
            ("I" ivy-insert-action "insert")
-           ("C" ivy-kill-new-action "copy")
-           ("d" ivy--kill-buffer-action )
+           ("c" ivy-kill-new-action "copy")
            ("k" ivy--kill-buffer-action "kill")
            ("r" ivy--rename-buffer-action "rename")
-           ("S" ivy-ff-checksum-action "Checksum")))
+           ("s" ivy-ff-checksum-action "Checksum")))
 
         (spacemacs/set-leader-keys "fad" 'counsel-goto-recent-directory)
         (spacemacs/set-leader-keys "faf" 'counsel-find-file-recent-directory)
