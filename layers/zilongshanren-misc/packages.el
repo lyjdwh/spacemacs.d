@@ -94,12 +94,20 @@
         bufler
         major-mode-hydra
         elfeed
-        cheat-sh
         (shengci :location (recipe :fetcher github :repo "EvanMeek/shengci.el"))
         evil-text-object-python
         evil-matchit
         avy
+        (telega :location (recipe :fetcher github :repo "zevlg/telega.el" :files ("*")))
         ))
+
+(defun zilongshanren-misc/init-telega()
+  (use-package telega
+    :commands telega
+    :config
+    (setq telega-proxies '((:server "localhost" :port 1080
+                               :enable t :type (:@type "proxyTypeSocks5"))))
+    ))
 
 (defun zilongshanren-misc/post-init-avy ()
   (progn
@@ -138,10 +146,6 @@
     shengci-show-memorized-word shengci-practice-guess-recorded-word
     shengci-practice-guess-memorized-word
     ))
-
-(defun zilongshanren-misc/init-cheat-sh ()
-  (use-package cheat-sh
-    :commands cheat-sh))
 
 (defun zilongshanren-misc/init-major-mode-hydra ()
   (use-package major-mode-hydra))

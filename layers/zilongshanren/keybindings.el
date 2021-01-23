@@ -631,9 +631,6 @@ clock                             ^^^^effort             ^^watcher
   "ahD" 'gkh-delete
   "ahc" 'gkh-report-current-week)
 
-;; cheat.sh
-(spacemacs/set-leader-keys "ac" 'cheat-sh)
-
 (spacemacs/set-leader-keys-for-major-mode 'bibtex-mode
   "f" 'org-ref-bibtex-file/body
   "=" 'org-ref-bibtex-file/bibtex-reformat-and-exit
@@ -658,3 +655,16 @@ clock                             ^^^^effort             ^^watcher
 
 ;; search engine
 (spacemacs/set-leader-keys "as" 'spacemacs/search-engine-select)
+
+;; telega
+(spacemacs/declare-prefix "ac" "chat")
+(spacemacs/set-leader-keys
+  "act" 'telega
+  "acc" 'telega-chat-with
+  "acb" 'telega-switch-buffer
+  "acF" 'telega-buffer-file-send
+  "acf" 'telega-chatbuf-attach
+  "aca" 'telega-account-switch
+  "acw" 'telega-browse-url
+  "acs" 'telega-saved-messages
+  "aci" 'telega-switch-important-chat)

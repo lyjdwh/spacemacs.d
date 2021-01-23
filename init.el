@@ -177,7 +177,7 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    ;; jeison used in powerthesaurus
-   dotspacemacs-additional-packages '(ctable deferred epc emacsql emacsql-sqlite emacsql-sqlite3 doom-themes jeison (e2ansi :location (recipe :fetcher github :repo "Lindydancer/e2ansi")))
+   dotspacemacs-additional-packages '(visual-fill-column ctable deferred epc emacsql emacsql-sqlite emacsql-sqlite3 doom-themes jeison (e2ansi :location (recipe :fetcher github :repo "Lindydancer/e2ansi")))
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
