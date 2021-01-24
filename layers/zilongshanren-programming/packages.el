@@ -205,14 +205,14 @@
     :defer 1
     :custom
     (company-tabnine-max-num-results 9)
-    ;; :bind
+    :bind
     ;; (("M-q" . company-other-backend)
-    ;;  ("C-z t" . company-tabnine))
+    (("C-c t" . company-tabnine))
     :hook
     (lsp-after-open . (lambda ()
                         (setq company-tabnine-max-num-results 4)
                         (add-to-list 'company-transformers 'company//sort-by-tabnine t)
-                        (add-to-list 'company-backends '(company-capf :with company-yasnippet :with company-tabnine :separate))
+                        (add-to-list 'company-backends '(company-capf :with company-tabnine))
                         ))
     (kill-emacs . company-tabnine-kill-process)
     :config

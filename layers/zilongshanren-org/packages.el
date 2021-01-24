@@ -377,7 +377,7 @@ the entry of interest in the bibfile.  but does not check that."
                                     (member #'company-capf company-backends)
                                     (setq company-backends
                                           (delete #'company-capf company-backends)))
-                                (add-to-list 'company-backends '(company-tabnine :with company-capf))
+                                ;; (add-to-list 'company-backends '(company-tabnine :with company-capf))
                                 )))
   (with-eval-after-load 'org
     (progn
