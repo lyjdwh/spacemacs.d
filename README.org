@@ -6,7 +6,7 @@ My personal Emacs configuration, modified from [[https://github.com/zilongshanre
    #+BEGIN_SRC sh
      git clone https://github.com/lyjdwh/spacemacs.d.git ~/.spacemacs.d
      git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-     sudo pacman -S emacs zeal aspell aspell-en git-delta wkhtmltopdf ccls
+     sudo pacman -S emacs zeal aspell aspell-en git-delta wkhtmltopdf ccls telegram-tdlib
      cnpm install mathjax-node-cli
 
      ## all-the-icons-install-fonts
