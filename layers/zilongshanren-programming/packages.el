@@ -197,6 +197,7 @@
     ;;                               (lsp)))
     (setq lsp-pyright-diagnostic-mode "workspace")
     (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch")
+    (setq lsp-pyright-typechecking-mode "off")
     ))
 
 (defun zilongshanren-programming/init-company-tabnine ()

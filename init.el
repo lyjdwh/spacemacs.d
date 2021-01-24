@@ -113,7 +113,8 @@ This function should only modify configuration layer settings."
              python-formatter 'black
              python-format-on-save nil
              python-sort-imports-on-save nil
-             python-lsp-server 'mspyls
+             ;; python-lsp-server 'mspyls
+             python-lsp-server 'pyright
              python-pipenv-activate  t
              )
      ;; ipython-notebook
