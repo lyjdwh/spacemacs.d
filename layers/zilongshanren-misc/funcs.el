@@ -588,6 +588,7 @@ WIN-ID : Window index."
      (string-prefix-p "*Warnings" name)
      (string-prefix-p "*scratch" name)
      (string-prefix-p "*Agenda" name)
+     (string-prefix-p "*liuyan" name)
      (string-prefix-p "*Ibuffer" name)
 
      ;; Is not magit buffer.

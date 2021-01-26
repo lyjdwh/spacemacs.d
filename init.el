@@ -85,7 +85,8 @@ This function should only modify configuration layer settings."
      ;;        :variables counsel-gtags-auto-update t
      ;;        )
      (shell :variables shell-default-shell 'vterm
-            shell-default-term-shell "/usr/bin/zsh")
+            shell-default-term-shell "/usr/bin/zsh"
+            shell-default-height 40)
      ;; docker
      (latex :variables latex-build-command "LaTeX"
             latex-enable-auto-fill t
