@@ -559,12 +559,6 @@
 ;; helm-chrome-bookmark
 (spacemacs/set-leader-keys "obg" 'helm-chrome-bookmarks)
 
-;; bufler
-(spacemacs/set-leader-keys
-  "bi" 'bufler
-  "bI" 'bufler-one-window
-  "bb" 'bufler-switch-buffer)
-
 ;; mermaid
 (spacemacs/set-leader-keys-for-major-mode 'mermaid-mode
   "c" 'mermaid-compile
@@ -635,12 +629,6 @@ clock                             ^^^^effort             ^^watcher
   "f" 'org-ref-bibtex-file/body
   "=" 'org-ref-bibtex-file/bibtex-reformat-and-exit
   "P" 'org-ref-eaf-open-bibtex-pdf)
-
-;; bufler
-(define-key bufler-list-mode-map (kbd "J") 'magit-section-forward-sibling)
-(define-key bufler-list-mode-map (kbd "K") 'magit-section-backward-sibling)
-(define-key bufler-list-mode-map (kbd "u") 'magit-section-up)
-(define-key bufler-list-mode-map (kbd "L") 'evil-avy-goto-line)
 
 ;; lsp
 (spacemacs/set-leader-keys-for-major-mode 'python-mode

@@ -91,7 +91,6 @@
         ;; podcaster
         ;; mingus
         helm-chrome
-        bufler
         major-mode-hydra
         elfeed
         (shengci :location (recipe :fetcher github :repo "EvanMeek/shengci.el"))
@@ -297,9 +296,6 @@
     :bindings
     "?"  'my/elfeed-search-view-hydra/body)
   ))
-
-(defun zilongshanren-misc/init-bufler ()
-  (use-package bufler))
 
 (defun zilongshanren-misc/init-helm-chrome ()
   (use-package helm-chrome

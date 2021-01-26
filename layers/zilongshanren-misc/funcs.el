@@ -588,6 +588,7 @@ WIN-ID : Window index."
      (string-prefix-p "*Warnings" name)
      (string-prefix-p "*scratch" name)
      (string-prefix-p "*Agenda" name)
+     (string-prefix-p "*Ibuffer" name)
 
      ;; Is not magit buffer.
      (and (string-prefix-p "magit" name)
@@ -816,11 +817,6 @@ You can use \\&, \\N to refer matched text."
         (let ((e2ansi-background-mode 'dark))
           (e2ansi-string-to-ansi (buffer-string))))
        proc))))
-
-(defun bufler-one-window (&optional force-refresh)
-  (interactive "P")
-  (bufler-list)
-  (delete-other-windows))
 
 (defun smart-tab-jump-out (fn &optional arg)
   (interactive "P")

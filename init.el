@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
                        version-control-diff-side 'left
                        version-control-global-margin t
                        )
-     ;; (ibuffer :variables ibuffer-group-buffers-by 'projects)
+     (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'cycle
