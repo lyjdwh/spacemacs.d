@@ -112,7 +112,7 @@
 
 (defun zilongshanren-programming/init-lpy ()
   (use-package lpy
-    :defer t
+    :commands lpy-mode
     :config
     ;; fix key conflict between lpy and lsp
     (define-key lpy-mode-map "(" nil)
@@ -212,7 +212,7 @@
     (lsp-after-open . (lambda ()
                         (setq company-tabnine-max-num-results 4)
                         (add-to-list 'company-transformers 'company//sort-by-tabnine t)
-                        (add-to-list 'company-backends '(company-capf :with company-tabnine))
+                        (add-to-list 'company-backends '(company-capf :with company-tabnine :separate))
                         ))
     (kill-emacs . company-tabnine-kill-process)
     :config
@@ -253,11 +253,18 @@
     (setq lsp-ui-sideline-show-code-actions nil)
     (setq lsp-ui-sideline-show-hover t)
 
+    ;; Disable features that have great potential to be slow.
     (setq lsp-enable-folding nil)
+    (setq lsp-enable-text-document-color nil)
+
+    ;; Reduce unexpected modifications to code
+    (setq lsp-enable-on-type-formatting nil)
+
+    ;; Make breadcrumbs opt-in; they're redundant with the modeline and imenu
+    (setq lsp-headerline-breadcrumb-enable nil)
+
     ;;handle yasnippet by myself
     (setq lsp-enable-snippet nil)
-
-    (setq lsp-headerline-breadcrumb-enable t)
 
     ;; use ffip instead
     (setq lsp-enable-links nil)
@@ -271,7 +278,7 @@
     (setq dap-auto-show-output nil)
 
     (setq lsp-diagnostics-provider :flycheck)
-    (setq lsp-modeline-diagnostics-enable nil)
+
 
     ;; support lsp-mode in org babel
     ;; :file "test.py"
@@ -293,7 +300,7 @@
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   ;; if you use pyton3, then you could comment the following line
   (setq python-shell-interpreter "ipython")
-  (add-hook 'python-mode-hook #'lpy-mode))
+  )
 
 (defun zilongshanren-programming/post-init-yasnippet ()
   (progn

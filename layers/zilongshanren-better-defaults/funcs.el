@@ -164,7 +164,7 @@ The original function deletes trailing whitespace of the current line."
 (defun eaf-send-ctrl-esc-sequence ()
   "used when vi-mode in terminal"
   (interactive)
-  (eaf-call "send_key_sequence" eaf--buffer-id "C-["))
+  (eaf-call-sync "send_key_sequence" eaf--buffer-id "C-["))
 
 (defun change-browser-function ()
   "change the browser for emacs"

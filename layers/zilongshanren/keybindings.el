@@ -656,3 +656,5 @@ clock                             ^^^^effort             ^^watcher
   "acw" 'telega-browse-url
   "acs" 'telega-saved-messages
   "aci" 'telega-switch-important-chat)
+
+(spacemacs/set-leader-keys-for-major-mode 'python-mode "Tp" 'lpy-mode)

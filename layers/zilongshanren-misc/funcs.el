@@ -146,7 +146,8 @@ org-files and bookmarks"
 (defun zilongshanren//hotspots-sources ()
   "Construct the helm sources for my hotspots"
   `((name . "Mail and News")
-    (candidates . (("RSS" . elfeed)
+    (candidates . (("docs" . (lambda () (browse-url "https://devdocs.io/")))
+                   ("RSS" . elfeed)
                    ("Github Trending" . (lambda() (browse-url "https://github.com/trending")))
                    ("Reddit" . (lambda() (browse-url "https://www.reddit.com/subreddits/mine/")))
                    ("Hack news" . (lambda() (browse-url "https://news.ycombinator.com/")))
