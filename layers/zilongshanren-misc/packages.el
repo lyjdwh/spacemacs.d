@@ -124,6 +124,9 @@
     :config
     (setq telega-proxies '((:server "localhost" :port 1080
                                :enable t :type (:@type "proxyTypeSocks5"))))
+
+    (define-key telega-msg-button-map (kbd "k") nil)
+    (define-key telega-msg-button-map (kbd "j") nil)
     ))
 
 (defun zilongshanren-misc/post-init-avy ()
