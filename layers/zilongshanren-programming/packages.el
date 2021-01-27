@@ -241,17 +241,15 @@
 
 (defun zilongshanren-programming/post-init-lsp-mode ()
   (progn
+    (setq lsp-enable-file-watchers nil)
     (setq lsp-file-watch-threshold 2000)
-    (setq read-process-output-max (* 1024 1024 8)) ;; 8mb
+    (setq read-process-output-max (* 1024 1024 100)) ;; 100mb
 
+    ;; lsp-ui
     (setq lsp-ui-doc-enable nil)
-    ;; (setq lsp-ui-doc-use-webkit t)
-    ;; (setq lsp-eldoc-render-all t)
-
     (setq lsp-ui-imenu-enable nil)
-
     (setq lsp-ui-sideline-show-code-actions nil)
-    (setq lsp-ui-sideline-show-hover t)
+    (setq lsp-ui-sideline-show-hover nil)
 
     ;; Disable features that have great potential to be slow.
     (setq lsp-enable-folding nil)
@@ -375,5 +373,5 @@
     (setq company-dabbrev-char-regexp "[\\.0-9a-z-_'/]")
 
     (setq company-minimum-prefix-length 1
-          company-idle-delay 0.08)
+          company-idle-delay 0.02)
     ))
