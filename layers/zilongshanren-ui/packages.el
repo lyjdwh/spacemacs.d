@@ -18,6 +18,12 @@
     doom-modeline
     ibuffer
     ibuffer-projectile
+    snow
+    ))
+
+(defun zilongshanren-misc/init-snow()
+  (use-package snow
+    :commands snow
     ))
 
 (defun zilongshanren-ui/post-init-ibuffer-projectile()

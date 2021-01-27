@@ -243,7 +243,7 @@
   (progn
     (setq lsp-enable-file-watchers nil)
     (setq lsp-file-watch-threshold 2000)
-    (setq read-process-output-max (* 1024 1024 100)) ;; 100mb
+    (setq read-process-output-max (* 1024 1024 8)) ;; 8mb
 
     ;; lsp-ui
     (setq lsp-ui-doc-enable nil)

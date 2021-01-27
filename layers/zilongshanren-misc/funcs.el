@@ -592,6 +592,7 @@ WIN-ID : Window index."
      (string-prefix-p "*liuyan" name)
      (string-prefix-p "*Ibuffer" name)
      (string-prefix-p "*Flycheck" name)
+     (string-prefix-p "*snow" name)
 
      ;; Is not magit buffer.
      (and (string-prefix-p "magit" name)
