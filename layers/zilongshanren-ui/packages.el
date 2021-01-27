@@ -21,7 +21,7 @@
     snow
     ))
 
-(defun zilongshanren-misc/init-snow()
+(defun zilongshanren-ui/init-snow()
   (use-package snow
     :commands snow
     ))
