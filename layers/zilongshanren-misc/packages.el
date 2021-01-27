@@ -99,8 +99,20 @@
         avy
         (telega :location (recipe :fetcher github :repo "zevlg/telega.el" :files ("*")))
         vterm
+        (casease :location (recipe :fetcher github :repo "DogLooksGood/casease"))
         ))
 
+(defun zilongshanren-misc/init-casease()
+  (use-package casease
+    :config
+    (casease-setup
+     :hook python-mode-hook
+     :separator ?-
+     :entries
+     ((pascal "\\(-\\)[a-z]" "[A-Z]")
+      (snake "[a-z]")))
+    )
+  )
 (defun zilongshanren-misc/post-init-vterm()
   (setq vterm-max-scrollback 5000)
   (add-hook 'vterm-mode-hook 'evil-emacs-state)
