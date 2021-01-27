@@ -31,7 +31,9 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     (ivy :variables ivy-enable-advanced-buffer-information nil)
+     (ivy :variables ivy-enable-advanced-buffer-information nil
+          :packages (not ivy-rich)
+          )
      better-defaults
      (treemacs :variables
                treemacs-use-all-the-icons-theme t
@@ -197,7 +199,7 @@ This function should only modify configuration layer settings."
                     helm-flyspell flyspell-correct-helm clean-aindent-mode
                     helm-c-yasnippet ace-jump-helm-line helm-make magithub
                     helm-themes helm-swoop helm-spacemacs-help smeargle
-                    ido-vertical-mode flx-ido ivy-rich helm-purpose
+                    ido-vertical-mode flx-ido helm-purpose
                     )
    dotspacemacs-install-packages 'used-only
    dotspacemacs-delete-orphan-packages t))
@@ -595,24 +597,10 @@ dump."
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 
   (setenv "WORKON_HOME" "/home/liuyan/.conda/envs")
-  ;;解决org表格里面中英文对齐的问题
-  (when (configuration-layer/layer-usedp 'chinese)
-    (when (and (spacemacs/system-is-linux) window-system)
-      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
 
   ;; enable org-protocol
   (require 'org-protocol)
   (require 'org-roam-protocol)
-
-  ;; Setting Chinese Font
-  (when (and (spacemacs/system-is-mswindows) window-system)
-    (setq ispell-program-name "aspell")
-    (setq w32-pass-alt-to-system nil)
-    (setq w32-apps-modifier 'super)
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font)
-                        charset
-                        (font-spec :family "Microsoft Yahei" :size 14))))
 
   (fset 'evil-visual-update-x-selection 'ignore)
 
@@ -623,9 +611,6 @@ dump."
   (spacemacs|add-company-backends :modes text-mode)
 
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-
-  ;; temp fix for ivy-switch-buffer
-  ;; (spacemacs/set-leader-keys "bb" 'helm-mini)
 
   (global-hungry-delete-mode t)
   (spacemacs|diminish helm-gtags-mode)

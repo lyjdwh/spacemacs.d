@@ -19,7 +19,26 @@
     ibuffer
     ibuffer-projectile
     snow
+    ivy-rich
+    all-the-icons-ivy-rich
     ))
+
+(defun zilongshanren-ui/init-ivy-rich()
+  (use-package all-the-icons-ivy-rich
+    :after ivy-rich
+    :config
+    (all-the-icons-ivy-rich-mode 1)
+    ))
+
+(defun zilongshanren-ui/init-all-the-icons-ivy-rich()
+  (use-package ivy-rich
+    :after counsel
+    :config
+    (setq ivy-rich-parse-remote-buffer nil)
+    (ivy-rich-mode)
+    (setq ivy-virtual-abbreviate
+          (or (and ivy-rich-mode 'abbreviate) 'name))
+  ))
 
 (defun zilongshanren-ui/init-snow()
   (use-package snow
@@ -80,6 +99,7 @@
 (defun zilongshanren-ui/post-init-doom-modeline()
   (setq doom-modeline-buffer-file-name-style 'truncate-with-project
         doom-modeline-env-python-executable "python"
+        doom-modeline-unicode-fallback t
         )
   )
 

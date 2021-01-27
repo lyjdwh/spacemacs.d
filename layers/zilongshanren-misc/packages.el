@@ -100,7 +100,13 @@
         (telega :location (recipe :fetcher github :repo "zevlg/telega.el" :files ("*")))
         vterm
         (casease :location (recipe :fetcher github :repo "DogLooksGood/casease"))
+        counsel-projectile
         ))
+
+(defun zilongshanren-misc/post-init-counsel-projectile()
+  (with-eval-after-load 'counsel
+    (counsel-projectile-mode 1)
+    ))
 
 (defun zilongshanren-misc/init-casease()
   (use-package casease

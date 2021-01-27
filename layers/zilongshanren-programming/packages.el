@@ -251,12 +251,17 @@
     (setq lsp-ui-sideline-show-code-actions nil)
     (setq lsp-ui-sideline-show-hover nil)
 
+    ;; workspace
+    (setq lsp-keep-workspace-alive nil)
+    (setq lsp-modeline-workspace-status-enable nil)
+
     ;; Disable features that have great potential to be slow.
     (setq lsp-enable-folding nil)
     (setq lsp-enable-text-document-color nil)
 
     ;; Reduce unexpected modifications to code
     (setq lsp-enable-on-type-formatting nil)
+    (setq lsp-enable-indentation nil)
 
     (setq lsp-headerline-breadcrumb-enable t)
 
@@ -372,5 +377,5 @@
     (setq company-dabbrev-char-regexp "[\\.0-9a-z-_'/]")
 
     (setq company-minimum-prefix-length 1
-          company-idle-delay 0.02)
+          company-idle-delay 0)
     ))
