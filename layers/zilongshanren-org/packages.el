@@ -30,14 +30,19 @@
     (gkhabit :location (recipe :fetcher github :repo "Kinneyzhang/gkhabit"))
     org-latex-impatient
     easy-hugo
+    ox-hugo
     ))
+
+(defun zilongshanren-org/post-init-ox-hugo()
+  (setq org-hugo-section "post")
+  )
 
 (defun zilongshanren-org/init-easy-hugo()
   (use-package easy-hugo
     :commands easy-hugo
     :config
     (setq easy-hugo-basedir "~/org-notes/blog/")
-    (setq easy-hugo-postdir "content/posts")
+    (setq easy-hugo-postdir "content/post")
     (setq easy-hugo-image-directory "static/img")
     (setq easy-hugo-helm-ag t)
     (setq easy-hugo-url "")
@@ -341,17 +346,6 @@ the entry of interest in the bibfile.  but does not check that."
 :NOTER_PAGE:
 :END:")))
     ))
-
-(defun zilongshanren-org/post-init-evil-org ()
-  (defun evil-org--populate-navigation-bindings ()
-    "Configures gj/gk/gh/gl for navigation."
-    (let-alist evil-org-movement-bindings
-      (evil-define-key 'motion evil-org-mode-map
-        (kbd (concat "g" .left)) 'org-previous-visible-heading
-        (kbd (concat "g" .right)) 'org-next-visible-heading
-        (kbd (concat "g" .up)) 'org-backward-element
-        (kbd (concat "g" .down)) 'org-forward-element
-        (kbd (concat "g" (capitalize .left))) 'evil-org-top))))
 
 (defun zilongshanren-org/post-init-org-pomodoro ()
   (progn

@@ -182,6 +182,12 @@
 (spacemacs/set-leader-keys "aef" 'eaf-file-browser-qrcode)
 (spacemacs/set-leader-keys "otb" 'change-browser-function)
 
+(spacemacs/set-leader-keys-for-major-mode 'eaf-edit-mode
+  "c" 'eaf-edit-buffer-confirm
+  "k" 'eaf-edit-buffer-cancel
+  "o" 'eaf-edit-buffer-switch-to-org-mode
+  )
+
 ;; snails
 (spacemacs/set-leader-keys "aa" 'snails)
 (spacemacs/set-leader-keys "sn" 'snails-search-point)
@@ -286,6 +292,8 @@
   "iT" 'org-set-tags-command
   "1"  'org-cycle-num-bullet
   "2"  'org-add-checkbox
+  "r" 'avy-org-refile-as-child
+  "it" 'counsel-org-tag
   )
 
 (spacemacs/set-leader-keys

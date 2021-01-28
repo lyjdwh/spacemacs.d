@@ -237,7 +237,9 @@
           (setq candidates-lsp (nreverse candidates-lsp))
           (setq candidates-tabnine (nreverse candidates-tabnine))
           (nconc (seq-take candidates-tabnine 4)
-                 (seq-take candidates-lsp 20)))))))
+                 candidates-lsp
+                 ;; (seq-take candidates-lsp 20)
+                 ))))))
 
 (defun zilongshanren-programming/post-init-lsp-mode ()
   (progn
