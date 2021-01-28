@@ -133,6 +133,22 @@
 
     (define-key telega-msg-button-map (kbd "k") nil)
     (define-key telega-msg-button-map (kbd "j") nil)
+    (with-eval-after-load 'company
+      (add-hook 'telega-chat-mode-hook (lambda ()
+                                         (make-local-variable 'company-backends)
+                                         (dolist (it '(telega-company-botcmd telega-company-emoji))
+                                           (push it company-backends)))))
+    (with-eval-after-load 'all-the-icons
+      (add-to-list 'all-the-icons-mode-icon-alist
+                   '(telega-root-mode all-the-icons-fileicon "telegram"
+                                      :heigt 1.0
+                                      :v-adjust -0.2
+                                      :face all-the-icons-yellow))
+      (add-to-list 'all-the-icons-mode-icon-alist
+                   '(telega-chat-mode all-the-icons-fileicon "telegram"
+                                      :heigt 1.0
+                                      :v-adjust -0.2
+                                      :face all-the-icons-blue)))
     ))
 
 (defun zilongshanren-misc/post-init-avy ()
