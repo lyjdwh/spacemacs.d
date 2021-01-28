@@ -1,4 +1,4 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;; -*- coding: utf-8 -*-
 
 (defvar org-agenda-dir ""
   "gtd org files location")

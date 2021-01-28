@@ -1,4 +1,4 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;; -*- coding: utf-8 -*-
 
 (define-key global-map [(shift return)] 'zilongshanren/smart-open-line)
 

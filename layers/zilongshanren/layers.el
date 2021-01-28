@@ -1,4 +1,4 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;; -*- coding: utf-8 -*-
 
 (configuration-layer/declare-layers '(
                                       zilongshanren-misc

@@ -1,4 +1,4 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;; -*- coding: utf-8 -*-
 
 (defvar inline-or-region-replace-last-input "")
 (defvar inline-or-region-replace-history nil)

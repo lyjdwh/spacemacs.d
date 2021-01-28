@@ -1,4 +1,4 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;; -*- coding: utf-8 -*-
 
 (defun zilongshanren/run-current-file ()
   "Compile and/or Execute the current file."

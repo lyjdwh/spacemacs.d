@@ -1,4 +1,4 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;; -*- coding: utf-8 -*-
 
 (defmacro th/define-context-key (keymap key dispatch)
   "Define KEY in KEYMAP to execute according to DISPATCH.
