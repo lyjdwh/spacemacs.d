@@ -79,7 +79,19 @@
         vterm
         (casease :location (recipe :fetcher github :repo "DogLooksGood/casease"))
         counsel-projectile
+        benchmark-init
         ))
+
+(defun zilongshanren-misc/init-benchmark-init()
+  (use-package benchmark-init
+    :defines swiper-font-lock-exclude
+    :commands (benchmark-init/activate)
+    :hook (after-init . benchmark-init/deactivate)
+    :init (benchmark-init/activate)
+    :config
+    (with-eval-after-load 'swiper
+      (add-to-list 'swiper-font-lock-exclude 'benchmark-init/tree-mode))
+  ))
 
 (defun zilongshanren-misc/post-init-counsel-projectile()
   (with-eval-after-load 'counsel
