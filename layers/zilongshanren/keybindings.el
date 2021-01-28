@@ -1,13 +1,4 @@
-;;; keybindings.el --- zilongshanren Layer packages File for Spacemacs
-;;
-;; Copyright (c) 2015-2016 zilongshanren
-;;
-;; Author: zilongshanren <lyjdwh@gmail.com>
-;; URL: https://github.com/zilongshanren/spacemacs-private
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; License: GPLv3
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (define-key global-map [(shift return)] 'zilongshanren/smart-open-line)
 
@@ -294,6 +285,7 @@
   "2"  'org-add-checkbox
   "r" 'avy-org-refile-as-child
   "it" 'counsel-org-tag
+  "tl" 'org-toggle-link-display
   )
 
 (spacemacs/set-leader-keys

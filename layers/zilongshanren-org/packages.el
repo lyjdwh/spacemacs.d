@@ -1,23 +1,10 @@
-;;; packages.el --- zilong-ui layer packages file for Spacemacs.
-;;
-;; Copyright (c) 2014-2016 zilongshanren
-;;
-;; Author: liuyan <lyjdwh@gmail.com>
-;; URL: https://github.com/zilongshanren/spacemacs-private
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; License: GPLv3
-
-;;; Code:
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (defconst zilongshanren-org-packages
   '(
     (org :location built-in)
     org-pomodoro
     (notdeft :location local)
-    ob-typescript
-    evil-org
     org-roam
     (org-transclusion :location (recipe :fetcher github :repo "nobiot/org-transclusion" :files ("*")))
     org-roam-server
@@ -226,7 +213,6 @@ the entry of interest in the bibfile.  but does not check that."
     (org-roam-buffer-width 0.2)
     (org-roam-tag-sources '(prop all-directories))
     (org-roam-file-extensions '("org" "md"))
-    (org-roam-completion-everywhere t)
     :init
     (progn
       (spacemacs/declare-prefix "am" "org-roam")
@@ -360,22 +346,9 @@ the entry of interest in the bibfile.  but does not check that."
                 (register-to-point 1)
 ))))
 
-;;In order to export pdf to support Chinese, I should install Latex at here: https://www.tug.org/mactex/
-;; http://freizl.github.io/posts/2012-04-06-export-orgmode-file-in-Chinese.html
-;;http://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
 (defun zilongshanren-org/post-init-org ()
-  (add-hook 'org-mode-hook (lambda () (spacemacs/toggle-line-numbers-off)) 'append)
-  (add-hook 'org-mode-hook '(lambda ()
-                              (progn
-                                (if
-                                    (member #'company-capf company-backends)
-                                    (setq company-backends
-                                          (delete #'company-capf company-backends)))
-                                ;; (add-to-list 'company-backends '(company-tabnine :with company-capf))
-                                )))
   (with-eval-after-load 'org
     (progn
-
       ;; 将org-capture“创建的”时间戳添加到properties
       (defvar org-created-property-name "CREATED"
         "The name of the org-mode property that stores the creation date of the entry")
@@ -398,88 +371,12 @@ the entry of interest in the bibfile.  but does not check that."
       (setq org-agenda-file-regexp "\\`[^.].*\\.org\\(_archive\\)?\\'")
 
       (setq org-confirm-babel-evaluate nil)
-      ;; disable < auto pair for org mode
-      ;; disable {} auto pairing in electric-pair-mode for web-mode
-      (add-hook
-       'org-mode-hook
-       (lambda ()
-         (setq-local electric-pair-inhibit-predicate
-                     `(lambda (c)
-                        (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
-
-      (require 'org-tempo)
-      ;; Allow multiple line Org emphasis markup.
-      ;; http://emacs.stackexchange.com/a/13828/115
-      (setcar (nthcdr 4 org-emphasis-regexp-components) 20) ;Up to 20 lines, default is just 1
-      ;; Below is needed to apply the modified `org-emphasis-regexp-components'
-      ;; settings from above.
-      (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
-
-      ;; (defun th/org-outline-context-p ()
-      ;;   (re-search-backward org-outline-regexp))
-      ;; ;; Some usages
-      ;; (th/define-context-key org-mode
-      ;;                        (kbd "RET")
-      ;;                        (when (th/outline-context-p)
-      ;;                          'org-insert-heading-respect-content))
-
-      ;; Jump out of a TeX macro when pressing TAB twice.
-      ;; (th/define-context-key TeX-mode-map (kbd "TAB")
-      ;;                        (when (and (= 1 (length (this-command-keys-vector)))
-	  ;;                                   (equal last-command-event (elt (this-command-keys-vector) 0))
-	  ;;                                   (TeX-current-macro))
-	  ;;                          #'th/TeX-goto-macro-end)))
-
-      (spacemacs|disable-company org-mode)
-      (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "r" 'avy-org-refile-as-child)
-
-      (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "it" 'counsel-org-tag)
-
-      (setq org-complete-tags-always-offer-all-agenda-tags t)
-
-      (require 'org-compat)
-      (require 'org)
-      ;; (add-to-list 'org-modules "org-habit")
-      (add-to-list 'org-modules 'org-habit)
-      (require 'org-habit)
-
-      (setq org-refile-use-outline-path 'file)
-      (setq org-outline-path-complete-in-steps nil)
-      (setq org-refile-targets
-            '((nil :maxlevel . 4)
-              (org-agenda-files :maxlevel . 4)))
       ;; config stuck project
       (setq org-stuck-projects
             '("TODO={.+}/-DONE" nil nil "SCHEDULED:\\|DEADLINE:"))
 
-      (setq org-agenda-inhibit-startup t) ;; ~50x speedup
       (setq org-agenda-span 'day)
-      (setq org-agenda-use-tag-inheritance nil) ;; 3-4x speedup
       (setq org-agenda-window-setup 'current-window)
-      (setq org-log-done nil)
-
-      ;; 加密文章
-      ;; "http://coldnew.github.io/blog/2013/07/13_5b094.html"
-      ;; org-mode 設定
-      (require 'org-crypt)
-
-      ;; 當被加密的部份要存入硬碟時，自動加密回去
-      (org-crypt-use-before-save-magic)
-
-      ;; 設定要加密的 tag 標籤為 secret
-      (setq org-crypt-tag-matcher "secret")
-
-      ;; 避免 secret 這個 tag 被子項目繼承 造成重複加密
-      ;; (但是子項目還是會被加密喔)
-      (setq org-tags-exclude-from-inheritance (quote ("secret")))
-
-      ;; 用於加密的 GPG 金鑰
-      ;; 可以設定任何 ID 或是設成 nil 來使用對稱式加密 (symmetric encryption)
-      (setq org-crypt-key nil)
-
-      ;; (add-to-list 'auto-mode-alist '("\.org\\'" . org-mode))
 
       (setq org-todo-keywords
             '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d)")))
@@ -491,69 +388,9 @@ the entry of interest in the bibfile.  but does not check that."
       (setq org-clock-in-switch-to-state "STARTED")
       ;; Save clock data and notes in the LOGBOOK drawer
       (setq org-clock-into-drawer t)
-      ;; Removes clocked tasks with 0:00 duration
-      (setq org-clock-out-remove-zero-time-clocks t) ;; Show the clocked-in task - if any - in the header line
+      (setq org-log-done nil)
 
-      (setq org-tags-match-list-sublevels nil)
-
-      (add-hook 'org-mode-hook '(lambda ()
-                                  ;; keybinding for editing source code blocks
-                                  ;; keybinding for inserting code blocks
-                                  (local-set-key (kbd "C-c i s")
-                                                 'zilongshanren/org-insert-src-block)))
-      (require 'ox-publish)
-      (add-to-list 'org-latex-classes '("ctexart" "\\documentclass[11pt]{ctexart}
-                                        [NO-DEFAULT-PACKAGES]
-                                        \\usepackage[utf8]{inputenc}
-                                        \\usepackage[T1]{fontenc}
-                                        \\usepackage{fixltx2e}
-                                        \\usepackage{graphicx}
-                                        \\usepackage{longtable}
-                                        \\usepackage{float}
-                                        \\usepackage{wrapfig}
-                                        \\usepackage{rotating}
-                                        \\usepackage[normalem]{ulem}
-                                        \\usepackage{amsmath}
-                                        \\usepackage{textcomp}
-                                        \\usepackage{marvosym}
-                                        \\usepackage{wasysym}
-                                        \\usepackage{amssymb}
-                                        \\usepackage{booktabs}
-                                        \\usepackage[colorlinks,linkcolor=black,anchorcolor=black,citecolor=black]{hyperref}
-                                        \\tolerance=1000
-                                        \\usepackage{listings}
-                                        \\usepackage{xcolor}
-                                        \\lstset{
-                                        %行号
-                                        numbers=left,
-                                        %背景框
-                                        framexleftmargin=10mm,
-                                        frame=none,
-                                        %背景色
-                                        %backgroundcolor=\\color[rgb]{1,1,0.76},
-                                        backgroundcolor=\\color[RGB]{245,245,244},
-                                        %样式
-                                        keywordstyle=\\bf\\color{blue},
-                                        identifierstyle=\\bf,
-                                        numberstyle=\\color[RGB]{0,192,192},
-                                        commentstyle=\\it\\color[RGB]{0,96,96},
-                                        stringstyle=\\rmfamily\\slshape\\color[RGB]{128,0,0},
-                                        %显示空格
-                                        showstringspaces=false
-                                        }
-                                        "
-                                        ("\\section{%s}" . "\\section*{%s}")
-                                        ("\\subsection{%s}" . "\\subsection*{%s}")
-                                        ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                                        ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                                        ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-      ;; {{ export org-mode in Chinese into PDF
-      ;; @see http://freizl.github.io/posts/tech/2012-04-06-export-orgmode-file-in-Chinese.html
-      ;; and you need install texlive-xetex on different platforms
-      ;; To install texlive-xetex:
-      ;;    `sudo USE="cjk" emerge texlive-xetex` on Gentoo Linux
-      ;; }}
+      ;; export org-mode in Chinese into PDF
       (setq org-latex-default-class "ctexart")
       (setq org-latex-pdf-process
             '(
@@ -563,68 +400,6 @@ the entry of interest in the bibfile.  but does not check that."
               "rm -fr %b.out %b.log %b.tex auto"))
 
       (setq org-latex-listings t)
-
-      (defun org-random-entry (&optional arg)
-        "Select and goto a random todo item from the global agenda"
-        (interactive "P")
-        (if org-agenda-overriding-arguments
-            (setq arg org-agenda-overriding-arguments))
-        (if (and (stringp arg) (not (string-match "\\S-" arg))) (setq arg nil))
-        (let* ((today (org-today))
-               (date (calendar-gregorian-from-absolute today))
-               (kwds org-todo-keywords-for-agenda)
-               (lucky-entry nil)
-               (completion-ignore-case t)
-               (org-agenda-buffer (when (buffer-live-p org-agenda-buffer)
-                                    org-agenda-buffer))
-               (org-select-this-todo-keyword
-                (if (stringp arg) arg
-                  (and arg (integerp arg) (> arg 0)
-                       (nth (1- arg) kwds))))
-               rtn rtnall files file pos marker buffer)
-          (when (equal arg '(4))
-            (setq org-select-this-todo-keyword
-                  (org-icompleting-read "Keyword (or KWD1|K2D2|...): "
-                                        (mapcar 'list kwds) nil nil)))
-          (and (equal 0 arg) (setq org-select-this-todo-keyword nil))
-          (catch 'exit
-            (org-compile-prefix-format 'todo)
-            (org-set-sorting-strategy 'todo)
-            (setq files (org-agenda-files nil 'ifmode)
-                  rtnall nil)
-            (while (setq file (pop files))
-              (catch 'nextfile
-                (org-check-agenda-file file)
-                (setq rtn (org-agenda-get-day-entries file date :todo))
-                (setq rtnall (append rtnall rtn))))
-
-            (when rtnall
-              (setq lucky-entry
-                    (nth (random
-                          (safe-length
-                           (setq entries rtnall)))
-                         entries))
-
-              (setq marker (or (get-text-property 0 'org-marker lucky-entry)
-                               (org-agenda-error)))
-              (setq buffer (marker-buffer marker))
-              (setq pos (marker-position marker))
-              (org-pop-to-buffer-same-window buffer)
-              (widen)
-              (goto-char pos)
-              (when (derived-mode-p 'org-mode)
-                (org-show-context 'agenda)
-                (save-excursion
-                  (and (outline-next-heading)
-                       (org-flag-heading nil))) ; show the next heading
-                (when (outline-invisible-p)
-                  (show-entry))         ; display invisible text
-                (run-hooks 'org-agenda-after-show-hook))))))
-
-      ;;reset subtask
-      (setq org-default-properties (cons "RESET_SUBTASKS" org-default-properties))
-
-      ;; (add-hook 'org-after-todo-state-change-hook 'org-subtask-reset)
 
       (setq org-plantuml-jar-path
             (expand-file-name "~/.spacemacs.d/resources/plantuml.jar"))
@@ -636,7 +411,6 @@ the entry of interest in the bibfile.  but does not check that."
          (ruby . t)
          (shell . t)
          (dot . t)
-         (typescript . t)
          (js . t)
          (latex .t)
          (python . t)
@@ -644,9 +418,6 @@ the entry of interest in the bibfile.  but does not check that."
          (plantuml . t)
          (C . t)
          (ditaa . t)))
-
-
-      (require 'ox-md nil t)
 
       ;; define the refile targets
       (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
@@ -656,9 +427,6 @@ the entry of interest in the bibfile.  but does not check that."
       (setq org-default-notes-file (expand-file-name "gtd.org" org-agenda-dir))
       (setq org-agenda-file-blogposts (expand-file-name "all-posts.org" org-agenda-dir))
       (setq org-agenda-files (list org-agenda-dir))
-
-      ;; C-n for the next org agenda item
-      (define-key org-agenda-mode-map (kbd "C-p") 'org-agenda-previous-item)
 
       (with-eval-after-load 'org-agenda
         (define-key org-agenda-mode-map (kbd "P") 'org-pomodoro)
@@ -771,139 +539,8 @@ See `org-capture-templates' for more information."
                 (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
                 ))))
 
-      (defvar zilongshanren-website-html-preamble
-        "<div class='nav'>
-<ul>
-<li><a href='http://zilongshanren.com'>博客</a></li>
-<li><a href='/index.html'>Wiki目录</a></li>
-</ul>
-</div>")
-      (defvar zilongshanren-website-html-blog-head
-        " <link rel='stylesheet' href='css/site.css' type='text/css'/> \n
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/worg.css\"/>")
-      (setq org-publish-project-alist
-            `(
-              ("blog-notes"
-               :base-directory "~/org-notes"
-               :base-extension "org"
-               :publishing-directory "~/org-notes/public_html/"
-
-               :recursive t
-               :html-head , zilongshanren-website-html-blog-head
-               :publishing-function org-html-publish-to-html
-               :headline-levels 4       ; Just the default for this project.
-               :auto-preamble t
-               :exclude "gtd.org"
-               :exclude-tags ("ol" "noexport")
-               :section-numbers nil
-               :html-preamble ,zilongshanren-website-html-preamble
-               :author "zilongshanren"
-               :email "lyjdwh@gmail.com"
-               :auto-sitemap t          ; Generate sitemap.org automagically...
-               :sitemap-filename "index.org" ; ... call it sitemap.org (it's the default)...
-               :sitemap-title "我的wiki"     ; ... with title 'Sitemap'.
-               :sitemap-sort-files anti-chronologically
-               :sitemap-file-entry-format "%t" ; %d to output date, we don't need date here
-               )
-              ("blog-static"
-               :base-directory "~/org-notes"
-               :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-               :publishing-directory "~/org-notes/public_html/"
-               :recursive t
-               :publishing-function org-publish-attachment
-               )
-              ("blog" :components ("blog-notes" "blog-static"))))
-
-
-
       (add-hook 'org-after-todo-statistics-hook 'zilong/org-summary-todo)
-      ;; used by zilong/org-clock-sum-today-by-tags
-
-      (define-key org-mode-map (kbd "s-p") 'org-priority)
-      (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "tl" 'org-toggle-link-display)
-      (define-key evil-normal-state-map (kbd "C-c C-w") 'org-refile)
-
-      ;; hack for org headline toc
-      (defun org-html-headline (headline contents info)
-        "Transcode a HEADLINE element from Org to HTML.
-CONTENTS holds the contents of the headline.  INFO is a plist
-holding contextual information."
-        (unless (org-element-property :footnote-section-p headline)
-          (let* ((numberedp (org-export-numbered-headline-p headline info))
-                 (numbers (org-export-get-headline-number headline info))
-                 (section-number (and numbers
-                                      (mapconcat #'number-to-string numbers "-")))
-                 (level (+ (org-export-get-relative-level headline info)
-                           (1- (plist-get info :html-toplevel-hlevel))))
-                 (todo (and (plist-get info :with-todo-keywords)
-                            (let ((todo (org-element-property :todo-keyword headline)))
-                              (and todo (org-export-data todo info)))))
-                 (todo-type (and todo (org-element-property :todo-type headline)))
-                 (priority (and (plist-get info :with-priority)
-                                (org-element-property :priority headline)))
-                 (text (org-export-data (org-element-property :title headline) info))
-                 (tags (and (plist-get info :with-tags)
-                            (org-export-get-tags headline info)))
-                 (full-text (funcall (plist-get info :html-format-headline-function)
-                                     todo todo-type priority text tags info))
-                 (contents (or contents ""))
-                 (ids (delq nil
-                            (list (org-element-property :CUSTOM_ID headline)
-                                  (org-export-get-reference headline info)
-                                  (org-element-property :ID headline))))
-                 (preferred-id (car ids))
-                 (extra-ids
-                  (mapconcat
-                   (lambda (id)
-                     (org-html--anchor
-                      (if (org-uuidgen-p id) (concat "ID-" id) id)
-                      nil nil info))
-                   (cdr ids) "")))
-            (if (org-export-low-level-p headline info)
-                ;; This is a deep sub-tree: export it as a list item.
-                (let* ((type (if numberedp 'ordered 'unordered))
-                       (itemized-body
-                        (org-html-format-list-item
-                         contents type nil info nil
-                         (concat (org-html--anchor preferred-id nil nil info)
-                                 extra-ids
-                                 full-text))))
-                  (concat (and (org-export-first-sibling-p headline info)
-                               (org-html-begin-plain-list type))
-                          itemized-body
-                          (and (org-export-last-sibling-p headline info)
-                               (org-html-end-plain-list type))))
-              (let ((extra-class (org-element-property :HTML_CONTAINER_CLASS headline))
-                    (first-content (car (org-element-contents headline))))
-                ;; Standard headline.  Export it as a section.
-                (format "<%s id=\"%s\" class=\"%s\">%s%s</%s>\n"
-                        (org-html--container headline info)
-                        (org-export-get-reference headline info)
-                        (concat (format "outline-%d" level)
-                                (and extra-class " ")
-                                extra-class)
-                        (format "\n<h%d id=\"%s\">%s%s</h%d>\n"
-                                level
-                                preferred-id
-                                extra-ids
-                                (concat
-                                 (and numberedp
-                                      (format
-                                       "<span class=\"section-number-%d\">%s</span> "
-                                       level
-                                       (mapconcat #'number-to-string numbers ".")))
-                                 full-text)
-                                level)
-                        ;; When there is no section, pretend there is an
-                        ;; empty one to get the correct <div
-                        ;; class="outline-...> which is needed by
-                        ;; `org-info.js'.
-                        (if (eq (org-element-type first-content) 'section) contents
-                          (concat (org-html-section first-content "" info) contents))
-                        (org-html--container headline info))))))))))
-
-(defun zilongshanren-org/init-ob-typescript ()
-  (use-package ob-typescript))
+      (add-hook 'org-mode-hook #'zilongshanren/org-ispell)
+      )))
 
 ;;; packages.el ends here

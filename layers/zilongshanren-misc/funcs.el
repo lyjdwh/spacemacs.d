@@ -1,13 +1,4 @@
-;;; funcs.el --- zilongshanren Layer packages File for Spacemacs
-;;
-;; Copyright (c) 2015-2016 zilongshanren
-;;
-;; Author: zilongshanren <lyjdwh@gmail.com>
-;; URL: https://github.com/zilongshanren/spacemacs-private
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; License: GPLv3
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (defvar inline-or-region-replace-last-input "")
 (defvar inline-or-region-replace-history nil)
@@ -154,7 +145,6 @@ org-files and bookmarks"
                    ("emacs-china" . (lambda() (browse-url "https://emacs-china.org")))
                    ("Arxiv" . (lambda() (browse-url "http://arxiv.xixiaoyao.cn/")))
                    ("Agenda" . (lambda () (org-agenda "" "a")))
-                   ("Random Todo" . org-random-entry)
                    ("Search" . (lambda () (call-interactively #'engine/search-google)))
                    ("pytorch 1.4" . (lambda () (browse-url "https://pytorch.apachecn.org/docs/1.4/")))
                    ("python 标准库" . (lambda () (browse-url "https://docs.python.org/zh-cn/3/library/index.html")))

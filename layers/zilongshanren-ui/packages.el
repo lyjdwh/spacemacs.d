@@ -1,14 +1,4 @@
-;;; packages.el --- zilong-ui layer packages file for Spacemacs.
-;;
-;; Copyright (c) 2014-2016 zilongshanren
-;;
-;; Author: liuyan <lyjdwh@gmail.com>
-;; URL: https://github.com/zilongshanren/spacemacs-private
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; License: GPLv3
-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 (defconst zilongshanren-ui-packages
   '(
     ivy-posframe

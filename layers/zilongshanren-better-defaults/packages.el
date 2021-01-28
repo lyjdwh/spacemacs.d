@@ -1,14 +1,4 @@
-; -*- lexical-binding: t -*-
-;;; packages.el --- zilongshanren Layer packages File for Spacemacs
-;;
-;; Copyright (c) 2014-2016 zilongshanren
-;;
-;; Author: zilongshanren <lyjdwh@gmail.com>
-;; URL: https://github.com/zilongshanren/spacemacs-private
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; License: GPLv3
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (defconst zilongshanren-better-defaults-packages
   '(

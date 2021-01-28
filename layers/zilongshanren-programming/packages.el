@@ -1,15 +1,5 @@
-;;; packages.el --- zilongshanren Layer packages File for Spacemacs;;
-;; Copyright (c) 2014-2016 zilongshanren
-;;
-;; Author: zilongshanren <lyjdwh@gmail.com>
-;; URL: https://github.com/zilongshanren/spacemacs-private
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; License: GPLv3
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
-;; List of all packages to install and/or initialize. Built-in packages
-;; which require an initialization must be listed explicitly in the list.
 (setq zilongshanren-programming-packages
       '(
         flycheck
