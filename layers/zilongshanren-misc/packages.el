@@ -80,7 +80,81 @@
         (casease :location (recipe :fetcher github :repo "DogLooksGood/casease"))
         counsel-projectile
         benchmark-init
+        mu4e
         ))
+
+(defun zilongshanren-misc/post-init-mu4e()
+  (setq mu4e-account-alist
+        '(("Gmail"
+           ;; Under each account, set the account-specific variables you want.
+           (mu4e-sent-messages-behavior sent)
+           (mu4e-sent-folder "~/.mail/gmail/[Gmail].已发邮件")
+           (mu4e-drafts-folder "~/.mail/gmail/[Gmail].草稿")
+           (user-mail-address "lyjdwh@gmail.com")
+           (user-full-name "liuyan"))
+          ("Foxmail"
+           (mu4e-sent-messages-behavior sent)
+           (mu4e-sent-folder "/home/liuyan/.mail/qq/Sent Messages")
+           (mu4e-drafts-folder "/home/liuyan/.mail/qq/Drafts")
+           (user-mail-address "1412511544@qq.com")
+           (user-full-name "liuyan"))
+          )
+        )
+
+;;; Set up some common mu4e variables
+  (setq mu4e-maildir "~/.mail"
+        mu4e-trash-folder "/trash"
+        mu4e-refile-folder "/archive"
+        mu4e-get-mail-command "offlineimap -o -q"
+        mu4e-update-interval 3600
+        mu4e-view-show-images t
+        mu4e-view-show-addresses t
+        mu4e-enable-mode-line t
+        mu4e-enable-notifications t
+        message-kill-buffer-on-exit t
+        )
+
+;;; Bookmarks
+  (setq mu4e-bookmarks
+        `(("flag:unread AND NOT flag:trashed" "Unread messages" ?u)
+          ("date:today..now" "Today's messages" ?t)
+          ("date:7d..now" "Last 7 days" ?w)
+          ("mime:image/*" "Messages with images" ?p)
+          ))
+
+  (with-eval-after-load 'mu4e-alert
+    ;; Enable Desktop notifications
+    ;; (mu4e-alert-set-default-style 'notifications)) ; For linux
+    (mu4e-alert-set-default-style 'libnotify))  ; Alternative for linux
+  ;; (mu4e-alert-set-default-style 'notifier))   ; For Mac OSX (through the
+                                        ; terminal notifier app)
+  ;; (mu4e-alert-set-default-style 'growl))      ; Alternative for Mac OSX
+
+
+  (require 'mu4e-contrib)
+  (setq mu4e-html2text-command 'mu4e-shr2text)
+  ;; try to emulate some of the eww key-bindings
+  (add-hook 'mu4e-view-mode-hook
+            (lambda ()
+              (local-set-key (kbd "<tab>") 'shr-next-link)
+              (local-set-key (kbd "<backtab>") 'shr-previous-link)))
+
+  ;; something about ourselves
+  (require 'smtpmail)
+  (setq user-mail-address "1412511544@qq.com"
+        user-full-name "liuyan"
+        smtpmail-stream-type 'starttls
+        starttls-use-gnutls t
+        mu4e-compose-signature-auto-include nil)
+
+  (setq send-mail-function            'smtpmail-send-it
+        message-send-mail-function    'smtpmail-send-it
+        smtpmail-auth-credentials     (expand-file-name "~/.authinfo")
+        smtpmail-stream-type          'tls
+        smtpmail-smtp-server          "smtp.qq.com"
+        smtpmail-smtp-service         465
+        smtpmail-smtp-user "1412511544@qq.com")
+  )
 
 (defun zilongshanren-misc/init-benchmark-init()
   (use-package benchmark-init

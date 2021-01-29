@@ -328,10 +328,6 @@
 ;; evil avy
 (spacemacs/set-leader-keys "jj" 'evil-avy-goto-char-2)
 
-;; multi-cursor
-;; space v 选中，m/e
-(spacemacs/set-leader-keys "om" 'multiple-cursors-hydra/body)
-
 ;; langtool
 (spacemacs/set-leader-keys
   "oen" 'langtool-goto-next-error
@@ -659,3 +655,8 @@ clock                             ^^^^effort             ^^watcher
   "aci" 'telega-switch-important-chat)
 
 (spacemacs/set-leader-keys-for-major-mode 'python-mode "Tp" 'lpy-mode)
+
+;; mail
+(spacemacs/set-leader-keys "om" 'mu4e)
+(spacemacs/set-leader-keys-for-major-mode 'mu4e-view-mode
+  "e" 'eaf-open-mail-as-html)

@@ -81,7 +81,7 @@
 (defun zilongshanren-better-defaults/init-eaf ()
   (use-package eaf
     :load-path "/home/liuyan/bin/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
-    :commands (open-file-with-eaf
+    :commands (open-file-with-eaf eaf-open-mail-as-html
                eaf-open-ipython eaf-open-camera eaf-open-demo
                eaf-open-browser eaf-open-external eaf-open-terminal eaf-toggle-fullscreen
                eaf-open eaf-open-url eaf-open-office eaf-open-mindmap eaf-open-airshare
