@@ -172,7 +172,8 @@ This function should only modify configuration layer settings."
              rmh-elfeed-org-files (list "~/org-notes/elfeed.org"))
      copy-as-format
      (mu4e :variables
-           mu4e-enable-async-operations t)
+           mu4e-enable-async-operations t
+           mu4e-org-compose-support t)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these

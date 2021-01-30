@@ -105,7 +105,7 @@
   (setq mu4e-maildir "~/.mail"
         mu4e-trash-folder "/trash"
         mu4e-refile-folder "/archive"
-        mu4e-get-mail-command "offlineimap -o -q"
+        mu4e-get-mail-command "offlineimap -o"
         mu4e-update-interval 3600
         mu4e-view-show-images t
         mu4e-view-show-addresses t
