@@ -98,8 +98,7 @@
            (mu4e-drafts-folder "/home/liuyan/.mail/qq/Drafts")
            (user-mail-address "1412511544@qq.com")
            (user-full-name "liuyan"))
-          )
-        )
+          ))
 
 ;;; Set up some common mu4e variables
   (setq mu4e-maildir "~/.mail"
@@ -112,6 +111,7 @@
         mu4e-enable-mode-line t
         mu4e-enable-notifications t
         message-kill-buffer-on-exit t
+        mu4e-compose-signature-auto-include nil
         )
 
 ;;; Bookmarks
@@ -139,17 +139,20 @@
               (local-set-key (kbd "<tab>") 'shr-next-link)
               (local-set-key (kbd "<backtab>") 'shr-previous-link)))
 
-  ;; something about ourselves
-  (require 'smtpmail)
-  (setq user-mail-address "1412511544@qq.com"
-        user-full-name "liuyan"
-        smtpmail-stream-type 'starttls
-        starttls-use-gnutls t
-        mu4e-compose-signature-auto-include nil)
+  (add-hook 'mu4e-main-mode-hook
+            (lambda ()
+              (evilified-state-evilify-map mu4e-main-mode-map
+                :mode mu4e-main-mode
+                :bindings
+                (kbd "j") 'next-line
+                (kbd "J") 'mu4e~headers-jump-to-maildir)
+              ))
 
-  (setq send-mail-function            'smtpmail-send-it
-        message-send-mail-function    'smtpmail-send-it
-        smtpmail-auth-credentials     (expand-file-name "~/.authinfo")
+  ;; something about ourselves
+  (setq user-mail-address "1412511544@qq.com"
+        user-full-name "liuyan")
+
+  (setq smtpmail-auth-credentials     (expand-file-name "~/.authinfo")
         smtpmail-stream-type          'tls
         smtpmail-smtp-server          "smtp.qq.com"
         smtpmail-smtp-service         465
