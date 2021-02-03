@@ -38,6 +38,15 @@
 (defun zilongshanren-ui/init-snow()
   (use-package snow
     :commands snow
+    :init
+    (defun snow-without-modeline( fn &optional arg)
+      (interactive "P")
+      (funcall-interactively fn arg)
+      (with-current-buffer "*snow*"
+        (funcall-interactively 'hide-mode-line-mode)
+        ))
+
+    (advice-add 'snow :around 'snow-without-modeline)
     ))
 
 (defun zilongshanren-ui/post-init-ibuffer-projectile()
