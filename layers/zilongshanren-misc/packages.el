@@ -195,6 +195,7 @@
   (use-package telega
     :commands telega
     :hook
+    ('telega-chat-mode . #'company-mode)
     ('telega-chat-mode . #'yas-minor-mode-on)
     ('telega-chat-mode . (lambda ()
                            (make-local-variable 'company-backends)

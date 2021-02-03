@@ -11,7 +11,12 @@
     snow
     ivy-rich
     all-the-icons-ivy-rich
+    emojify
     ))
+
+(defun zilongshanren-ui/post-init-emojify()
+  (global-emojify-mode)
+  )
 
 (defun zilongshanren-ui/init-ivy-rich()
   (use-package all-the-icons-ivy-rich
