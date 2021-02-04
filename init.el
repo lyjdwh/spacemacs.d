@@ -589,10 +589,7 @@ dump."
   (setq byte-compile-warnings '(not obsolete))
   (setq warning-minimum-level :error)
 
-  ;; https://github.com/syl20bnr/spacemacs/issues/8901
-  ;; (setq-default quelpa-build-tar-executable "/usr/local/bin/gtar")
-  ;; hack for remove purpose mode
-  ;; (setq purpose-mode nil)
+  (setq frame-resize-pixelwise t)
   )
 
 (defun dotspacemacs/user-config ()
