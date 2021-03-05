@@ -198,13 +198,13 @@
     :bind
     ;; (("M-q" . company-other-backend)
     (("C-c t" . company-tabnine))
-    :hook
-    (lsp-after-open . (lambda ()
-                        (setq company-tabnine-max-num-results 4)
-                        (add-to-list 'company-transformers 'company//sort-by-tabnine t)
-                        (add-to-list 'company-backends '(company-capf :with company-tabnine :separate))
-                        ))
-    (kill-emacs . company-tabnine-kill-process)
+    ;; :hook
+    ;; (lsp-after-open . (lambda ()
+    ;;                     (setq company-tabnine-max-num-results 4)
+    ;;                     (add-to-list 'company-transformers 'company//sort-by-tabnine t)
+    ;;                     (add-to-list 'company-backends '(company-capf :with company-tabnine :separate))
+    ;;                     ))
+    ;; (kill-emacs . company-tabnine-kill-process)
     :config
     ;; Enable TabNine on default
     ;; (add-to-list 'company-backends #'company-tabnine)
