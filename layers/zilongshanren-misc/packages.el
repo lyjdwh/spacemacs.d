@@ -115,12 +115,19 @@
         )
 
 ;;; Bookmarks
-  (setq mu4e-bookmarks
-        `(("flag:unread AND NOT flag:trashed" "Unread messages" ?u)
-          ("date:today..now" "Today's messages" ?t)
-          ("date:7d..now" "Last 7 days" ?w)
-          ("mime:image/*" "Messages with images" ?p)
-          ))
+  (with-eval-after-load 'mu4e
+    (setq mu4e-bookmarks
+          `(("flag:unread AND NOT flag:trashed" "Unread messages" ?u)
+            ("date:today..now" "Today's messages" ?t)
+            ("date:7d..now" "Last 7 days" ?w)
+            ("mime:image/*" "Messages with images" ?p)
+            (,(mapconcat 'identity
+                         (mapcar
+                          (lambda (maildir)
+                            (concat "maildir:" (car maildir)))
+                          mu4e-maildir-shortcuts) " OR ")
+             "All inboxes" ?i)
+            )))
 
   (with-eval-after-load 'mu4e-alert
     ;; Enable Desktop notifications

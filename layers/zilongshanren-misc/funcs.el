@@ -585,6 +585,7 @@ WIN-ID : Window index."
      (string-prefix-p "*snow" name)
      (string-prefix-p "*elfeed" name)
      (string-prefix-p "*mu4e" name)
+     (string-prefix-p "*wttr" name)
 
      ;; Is not magit buffer.
      (and (string-prefix-p "magit" name)
