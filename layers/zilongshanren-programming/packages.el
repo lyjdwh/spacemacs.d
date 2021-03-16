@@ -25,7 +25,7 @@
         (ivy-taskrunner :location (recipe :fetcher github :repo "emacs-taskrunner/ivy-taskrunner"))
         counsel-etags
         magit-todos
-        (company-tip :location (recipe :fetcher github :repo "liushihao456/company-tip"))
+        (company-tip :location (recipe :fetcher github :repo "liushihao456/emacs_config" :files ("packages/company-tip/*.el")))
         vimrc-mode
         mermaid-mode
         ob-mermaid
@@ -273,6 +273,7 @@
 
     (setq lsp-diagnostics-provider :flycheck)
 
+    (setq lsp-modeline-diagnostics-scope :project)
 
     ;; support lsp-mode in org babel
     ;; :file "test.py"
