@@ -754,7 +754,6 @@
 (defun zilongshanren-misc/init-bm ()
   (use-package bm
     :ensure t
-    :demand t
     :init
     ;; restore on load (even before you require bm)
     (setq bm-restore-repository-on-load t)
@@ -820,11 +819,11 @@
 
 (defun zilongshanren-misc/init-mw-thesaurus ()
   (use-package mw-thesaurus
-    :demand t
     :commands  mw-thesaurus-lookup-at-point
     :config
     (add-hook 'mw-thesaurus-mode-hook 'variable-pitch-mode)
     (setq mw-thesaurus--api-key "69fe3e22-45d0-4e53-8b6f-a3ace4b2ce3a")
+    (define-key mw-thesaurus-mode-map [remap evil-record-macro] #'mw-thesaurus--quit)
     ))
 
 (defun zilongshanren-misc/init-powerthesaurus ()

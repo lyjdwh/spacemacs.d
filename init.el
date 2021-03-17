@@ -116,35 +116,35 @@ This function should only modify configuration layer settings."
              python-formatter 'black
              python-format-on-save nil
              python-sort-imports-on-save nil
-             python-lsp-server 'mspyls
+             python-lsp-server 'pyright
              python-pipenv-activate  t
              )
      ;; ipython-notebook
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
      ;;  lua
-     (html :variables
-           css-enable-lsp t
-           less-enable-lsp t
-           scss-enable-lsp t
-           html-enable-lsp t
-           web-fmt-tool 'prettier)
-     (javascript :variables
-                 javascript-backend 'lsp
-                 javascript-lsp-linter t
-                 js2-mode-show-strict-warnings nil
-                 js2-mode-show-parse-errors nil
-                 javascript-import-tool 'import-js
-                 javascript-fmt-tool 'prettier
-                 js2-basic-offset 2
-                 js-indent-level 2
-                 javascript-repl 'nodejs)
-     (vue :variables
-          vue-backend 'lsp
-          web-mode-markup-indent-offset 2
-          web-mode-css-indent-offset 2
-          web-mode-code-indent-offset 2
-          web-mode-attr-indent-offset 2)
+     ;; (html :variables
+     ;;       css-enable-lsp t
+     ;;       less-enable-lsp t
+     ;;       scss-enable-lsp t
+     ;;       html-enable-lsp t
+     ;;       web-fmt-tool 'prettier)
+     ;; (javascript :variables
+     ;;             javascript-backend 'lsp
+     ;;             javascript-lsp-linter t
+     ;;             js2-mode-show-strict-warnings nil
+     ;;             js2-mode-show-parse-errors nil
+     ;;             javascript-import-tool 'import-js
+     ;;             javascript-fmt-tool 'prettier
+     ;;             js2-basic-offset 2
+     ;;             js-indent-level 2
+     ;;             javascript-repl 'nodejs)
+     ;; (vue :variables
+     ;;      vue-backend 'lsp
+     ;;      web-mode-markup-indent-offset 2
+     ;;      web-mode-css-indent-offset 2
+     ;;      web-mode-code-indent-offset 2
+     ;;      web-mode-attr-indent-offset 2)
      ;; (typescript :variables
      ;;             typescript-fmt-on-save nil
      ;;             typescript-fmt-tool 'typescript-formatter
