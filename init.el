@@ -66,7 +66,8 @@ This function should only modify configuration layer settings."
           magit-revert-buffers 'silent
           magit-refs-show-commit-count 'all
           magit-revision-show-gravatars nil
-          git-enable-magit-delta-plugin t)
+          git-enable-magit-delta-plugin t
+          git-enable-magit-todos-plugin t)
      (version-control :variables
                        version-control-diff-tool 'git-gutter
                        version-control-diff-side 'left
@@ -106,7 +107,7 @@ This function should only modify configuration layer settings."
           org-journal-date-format "%A, %B %d %Y"
           org-journal-time-prefix "* "
           org-journal-time-format ""
-          :packages (not org-roam))
+          :packages (not org-roam org-roam-server))
      ;; gpu
      yaml
      ;;  react

@@ -24,7 +24,6 @@
         taskrunner
         (ivy-taskrunner :location (recipe :fetcher github :repo "emacs-taskrunner/ivy-taskrunner"))
         counsel-etags
-        magit-todos
         (company-tip :location (recipe :fetcher github :repo "liushihao456/emacs_config" :files ("packages/company-tip/*.el")))
         vimrc-mode
         mermaid-mode
@@ -63,13 +62,6 @@
     :config
     (company-tip-mode 1)
     (setq company-tip-delay 0.2)
-    ))
-
-(defun zilongshanren-programming/init-magit-todos ()
-  (use-package magit-todos
-    :after magit
-    :config
-    (magit-todos-mode 1)
     ))
 
 (defun zilongshanren-programming/init-counsel-etags ()
@@ -185,7 +177,7 @@
     ;; (add-hook 'python-mode-hook (lambda ()
     ;;                               (require 'lsp-pyright)
     ;;                               (lsp)))
-    (setq lsp-pyright-diagnostic-mode "workspace")
+    ;; (setq lsp-pyright-diagnostic-mode "workspace")
     (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch")
     (setq lsp-pyright-typechecking-mode "off")
     ))
