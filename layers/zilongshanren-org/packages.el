@@ -18,6 +18,77 @@
     org-latex-impatient
     easy-hugo
     ox-hugo
+    iscroll
+    ))
+
+(defun zilongshanren-org/init-iscroll()
+  (use-package iscroll
+    :hook (org-mode . iscroll-mode)
+    :config
+    (evil-define-motion iscroll-evil-next-line (count)
+      "Move the cursor COUNT lines down."
+      :type line
+      (let (line-move-visual)
+        (iscroll-evil-line-move (or count 1))))
+
+    (evil-define-motion iscroll-evil-previous-line (count)
+      "Move the cursor COUNT lines up."
+      :type line
+      (let (line-move-visual)
+        (iscroll-evil-line-move (- (or count 1)))))
+
+    (evil-define-motion iscroll-evil-next-visual-line (count)
+      "Move the cursor COUNT screen lines down."
+      :type exclusive
+      (let ((line-move-visual t))
+        (iscroll-evil-line-move (or count 1))))
+
+    (evil-define-motion iscroll-evil-previous-visual-line (count)
+      "Move the cursor COUNT screen lines up."
+      :type exclusive
+      (let ((line-move-visual t))
+        (iscroll-evil-line-move (- (or count 1)))))
+
+    (defun iscroll-evil-line-move (count &optional noerror)
+      "A wrapper for line motions which conserves the column.
+  Signals an error at buffer boundaries unless NOERROR is non-nil."
+      (cond
+       (noerror
+        (condition-case nil
+            (evil-line-move count)
+          (error nil)))
+       (t
+        (evil-signal-without-movement
+          (setq this-command (if (>= count 0)
+                                 #'iscroll-next-line
+                               #'iscroll-previous-line))
+          (let ((opoint (point)))
+            (condition-case err
+                (with-no-warnings
+                  (funcall this-command (abs count)))
+              ((beginning-of-buffer end-of-buffer)
+               (let ((col (or goal-column
+                              (if (consp temporary-goal-column)
+                                  (car temporary-goal-column)
+                                temporary-goal-column))))
+                 (if line-move-visual
+                     (vertical-motion (cons col 0))
+                   (line-move-finish col opoint (< count 0)))
+                 ;; Maybe we should just `ding'?
+                 (signal (car err) (cdr err))))))))))
+
+    (define-advice iscroll-mode (:after (&optional arg) yang)
+      "Add evil keybinings for iscroll."
+      (if iscroll-mode
+          (progn
+            (global-set-key [remap evil-next-line] #'iscroll-evil-next-line)
+            (global-set-key [remap evil-previous-line] #'iscroll-evil-previous-line)
+            (global-set-key [remap evil-next-visual-line] #'iscroll-evil-next-visual-line)
+            (global-set-key [remap evil-previous-visual-line] #'iscroll-evil-previous-visual-line))
+        (global-set-key [remap evil-next-line] nil)
+        (global-set-key [remap evil-previous-line] nil)
+        (global-set-key [remap evil-next-visual-line] nil)
+        (global-set-key [remap evil-previous-visual-line] nil)))
     ))
 
 (defun zilongshanren-org/post-init-ox-hugo()

@@ -262,8 +262,7 @@ with options to run in the shell.")
 
 (setq counsel-git-cmd "git ls-files -z --full-name -- ':!:*.js.meta' ':!:*.meta'")
 
-(add-hook 'text-mode-hook 'spacemacs/toggle-centered-point)
-(add-hook 'progkmode-hook 'spacemacs/toggle-centered-point)
+(add-hook 'prog-mode-hook 'spacemacs/toggle-centered-point)
 
 ;; Remove useless whitespace before saving a fil
 (add-hook 'before-save-hook #'delete-trailing-whitespace-except-current-line)
