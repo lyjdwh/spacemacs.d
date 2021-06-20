@@ -79,7 +79,6 @@
         vterm
         (casease :location (recipe :fetcher github :repo "DogLooksGood/casease"))
         counsel-projectile
-        benchmark-init
         mu4e
         (org-media-note :location (recipe :fetcher github :repo "yuchen-lea/org-media-note"))
         ))
@@ -177,17 +176,6 @@
         smtpmail-smtp-service         465
         smtpmail-smtp-user "1412511544@qq.com")
   )
-
-(defun zilongshanren-misc/init-benchmark-init()
-  (use-package benchmark-init
-    :defines swiper-font-lock-exclude
-    :commands (benchmark-init/activate)
-    :hook (after-init . benchmark-init/deactivate)
-    :init (benchmark-init/activate)
-    :config
-    (with-eval-after-load 'swiper
-      (add-to-list 'swiper-font-lock-exclude 'benchmark-init/tree-mode))
-  ))
 
 (defun zilongshanren-misc/post-init-counsel-projectile()
   (with-eval-after-load 'counsel

@@ -138,6 +138,7 @@ org-files and bookmarks"
   "Construct the helm sources for my hotspots"
   `((name . "Mail and News")
     (candidates . (("docs" . (lambda () (browse-url "https://devdocs.io/")))
+                   ("YesPlayMusic" . (lambda () (browse-url "https://music.qier222.com")))
                    ("RSS" . elfeed)
                    ("Github Trending" . (lambda() (browse-url "https://github.com/trending")))
                    ("Reddit" . (lambda() (browse-url "https://www.reddit.com/subreddits/mine/")))
@@ -146,7 +147,7 @@ org-files and bookmarks"
                    ("Arxiv" . (lambda() (browse-url "http://arxiv.xixiaoyao.cn/")))
                    ("Agenda" . (lambda () (org-agenda "" "a")))
                    ("Search" . (lambda () (call-interactively #'engine/search-google)))
-                   ("pytorch 1.4" . (lambda () (browse-url "https://pytorch.apachecn.org/docs/1.4/")))
+                   ("pytorch 1.7" . (lambda () (browse-url "https://pytorch.apachecn.org/docs/1.7/")))
                    ("python 标准库" . (lambda () (browse-url "https://docs.python.org/zh-cn/3/library/index.html")))
                    ("Calculator" . (lambda () (helm-calcul-expression)))
                    ("Run current flie" . (lambda () (zilongshanren/run-current-file)))

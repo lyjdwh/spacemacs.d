@@ -172,6 +172,7 @@
 (spacemacs/set-leader-keys "aes" 'eaf-search-it)
 (spacemacs/set-leader-keys "aef" 'eaf-file-browser-qrcode)
 (spacemacs/set-leader-keys "otb" 'change-browser-function)
+(spacemacs/set-leader-keys "aep" 'eaf-toggle-proxy)
 
 (spacemacs/set-leader-keys-for-major-mode 'eaf-edit-mode
   "c" 'eaf-edit-buffer-confirm
