@@ -81,7 +81,19 @@
         counsel-projectile
         benchmark-init
         mu4e
+        (org-media-note :location (recipe :fetcher github :repo "yuchen-lea/org-media-note"))
         ))
+
+(defun zilongshanren-misc/init-org-media-note()
+  (use-package org-media-note
+    :hook ((org-mode .  org-media-note-mode)
+           (org-mode .  org-media-note-setup-org-ref)
+           )
+    :config
+    (require 'org-attach)
+    (spacemacs/set-leader-keys "av" 'org-media-note-hydra/body)
+    (setq org-media-note-screenshot-image-dir "~/org-notes/notes/imgs")
+    ))
 
 (defun zilongshanren-misc/post-init-mu4e()
   (setq mu4e-account-alist
