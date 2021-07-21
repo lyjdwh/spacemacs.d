@@ -7,7 +7,7 @@
     (notdeft :location local)
     org-roam
     (org-transclusion :location (recipe :fetcher github :repo "nobiot/org-transclusion" :files ("*")))
-    org-roam-server
+    ;; org-roam-server
     org-roam-bibtex
     ivy-bibtex
     org-noter
@@ -278,49 +278,56 @@ the entry of interest in the bibfile.  but does not check that."
     (after-init . org-roam-mode)
     :custom
     (org-roam-directory deft-dir)
-    (org-roam-buffer-position 'left)
-    (org-roam-link-title-format "%s")
-    (org-roam-completion-system 'ivy)
-    (org-roam-buffer-width 0.2)
-    (org-roam-tag-sources '(prop all-directories))
     (org-roam-file-extensions '("org" "md"))
     :init
+    (setq org-roam-v2-ack t)
     (progn
       (spacemacs/declare-prefix "am" "org-roam")
       (spacemacs/set-leader-keys
-        "amo" 'org-roam
-        "amt" 'org-roam-today
-        "amb" 'org-roam-switch-to-buffer
-        "amf" 'orb-find-non-ref-file ;; org-roam-find-file
-        "ami" 'orb-insert-non-ref    ;; org-roam-insert
-        "amI" 'org-roam-insert-immediate
-        "amc" 'org-roam-unlinked-references
-        "amr" 'org-ref-helm-insert-cite-link
-        "amg" 'org-roam-tag-add
-        "amd" 'org-roam-tag-delete)
+        "amt" 'org-roam-buffer
+        "amf" 'org-roam-node-find ;; orb-find-non-ref-file
+        "ami" 'org-roam-node-insert   ;; orb-insert-non-ref
+        "ama" 'org-roam-tag-add
+        "amd" 'org-roam-tag-remove
+        ) ;;org-ref-helm-insert-cite-link
+      ;; org-roam-ref-find
+      ;; org-roam-alias-add
+      ;; org-roam-alias-remove
+      ;; org-roam-ref-add
+      ;; org-roam-ref-remove
 
       (spacemacs/declare-prefix-for-mode 'org-mode "mm" "org-roam")
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "mo" 'org-roam
-        "mt" 'org-roam-today
-        "mb" 'org-roam-switch-to-buffer
-        "mf" 'orb-find-non-ref-file ;; org-roam-find-file
-        "mi" 'orb-insert-non-ref    ;; org-roam-insert
-        "mI" 'org-roam-insert-immediate
-        "mc" 'org-roam-unlinked-references
-        "mr" 'org-ref-helm-insert-cite-link
-        "mg" 'org-roam-tag-add
+        "mt" 'org-roam-buffer
+        "mf" 'org-roam-node-find ;; orb-find-non-ref-file
+        "mi" 'org-roam-node-insert   ;; orb-insert-non-ref
+        "ma" 'org-roam-tag-add
         "md" 'org-roam-tag-delete
         ))
     :config
+    (org-roam-setup)
+    (setq org-roam-mode-sections
+          (list #'org-roam-backlinks-section
+                #'org-roam-reflinks-section
+                ;; #'org-roam-unlinked-references-section
+                ))
+
+    (setq org-roam-db-gc-threshold most-positive-fixnum)
+
+    (add-to-list 'display-buffer-alist
+                 '(("\\*org-roam\\*"
+                    (display-buffer-in-direction)
+                    (direction . right)
+                    (window-width . 0.33)
+                    (window-height . fit-window-to-buffer))))
+
     (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)
     (setq org-roam-capture-templates
-          '(("d" "org-roam" plain (function org-roam--capture-get-point)
-             "%?"
-             :file-name "%(format-time-string \"%Y-%m-%d--%H-%M-%SZ--${slug}\" (current-time) t)"
-             :head "#+title: ${title}\n"
-             :unnarrowed t
-             )))
+          '(("d" "org-roam" plain "%?"
+             :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                "#+title: ${title}\n")
+             :unnarrowed t)))
+
     (add-to-list 'org-roam-capture-ref-templates
                  '("a" "Annotation" plain (function org-roam-capture--get-point)
                    "%U ${body}\n"
@@ -328,6 +335,7 @@ the entry of interest in the bibfile.  but does not check that."
                    :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_alias:\n"
                    :immediate-finish t
                    :unnarrowed t))
+
     (add-hook 'org-mode-hook (lambda () (add-to-list 'company-backends #'company-capf)))
     ))
 
