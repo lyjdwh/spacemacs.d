@@ -87,7 +87,8 @@
                eaf-open eaf-open-url eaf-open-office eaf-open-mindmap eaf-open-airshare
                eaf-open-bookmark eaf-open-rss-reader eaf-kill-process eaf-search-it
                eaf-file-browser-qrcode eaf-interleave-sync-current-note eaf-interleave-sync-next-note
-               eaf-interleave-sync-previous-note eaf-interleave-add-note eaf-interleave-open-notes-file eaf-interleave-quit)
+               eaf-interleave-sync-previous-note eaf-interleave-add-note eaf-interleave-open-notes-file eaf-interleave-quit
+               eaf-open-netease-cloud-music)
 
     :diminish eaf-mode
     :init
@@ -101,7 +102,7 @@
     (eaf-evil-leader-key "SPC")
     :config
     (require 'eaf-evil)
-    (require 'eaf-org)
+    (require 'eaf-all-the-icons)
     (setq eaf-buffer-title-format "EAF/%s")
     (setq eaf-grip-token "d95425cda9aa8c58779a312be6fe4662b965a441")
     ;; set proxy
@@ -110,6 +111,7 @@
     (setq eaf-proxy-port "1080")
     (eaf-setq eaf-browser-aria2-proxy-host "127.0.0.1")
     (eaf-setq eaf-browser-aria2-proxy-port "12333")
+    (setq eaf-browser-translate-language "zh-CN")
     ;; set dark mode
     (eaf-setq eaf-browser-dark-mode "true")
     (eaf-setq eaf-pdf-dark-mode "false")
@@ -127,6 +129,14 @@
     (add-hook 'eaf-pdf-viewer-hook 'eaf-interleave-app-mode)
     (add-hook 'eaf-browser-hook 'eaf-interleave-app-mode)
     (add-hook 'org-mode-hook 'eaf-interleave-mode)
+    ;; org
+    (require 'eaf-org)
+    (defun eaf-org-open-file (file &optional link)
+      "An wrapper function on `eaf-open'."
+      (eaf-open file))
+
+    ;; use `emacs-application-framework' to open PDF file: link
+    (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
     ;; key customize
     (add-to-list 'eaf-terminal-keybinding '("C-'" . "eaf-send-ctrl-esc-sequence"))
     (add-to-list 'eaf-terminal-keybinding '("C-j" . "eaf-send-key-sequence"))
