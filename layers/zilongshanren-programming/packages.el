@@ -28,8 +28,13 @@
         vimrc-mode
         mermaid-mode
         ob-mermaid
+        citre
         ;; prettier-js
         ))
+
+(defun zilongshanren-programming/init-citre()
+  (use-package citre
+  ))
 
 (defun zilongshanren-programming/post-init-prettier-js ()
   (setq prettier-js-args '("--tab-width" "4")))
