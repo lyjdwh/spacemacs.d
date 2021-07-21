@@ -109,7 +109,20 @@
   (call-interactively #'backward-word)
   (highlight-position-hint #'backward-word))
 
+
+(defun my-forward-word-end ()
+  (interactive)
+  (call-interactively #'evil-forward-word-end)
+  (highlight-position-hint #'evil-forward-word-end))
+
+(defun my-backward-word-end ()
+  (interactive)
+  (call-interactively #'evil-backward-word-end)
+  (highlight-position-hint #'evil-backward-word-end))
+
 (evil-define-key '(normal visual) 'global-map (kbd "w") 'my-forward-word)
 (evil-define-key '(normal visual) 'global-map (kbd "b") 'my-backward-word)
+(evil-define-key '(normal visual) 'global-map (kbd "e") 'my-forward-word-end)
+(evil-define-key '(normal visual) 'global-map (kbd "ge") 'my-backward-word-end)
 
 (provide 'move-to-position-hint)
