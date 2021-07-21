@@ -663,3 +663,5 @@ clock                             ^^^^effort             ^^watcher
 (spacemacs/set-leader-keys "om" 'mu4e)
 (spacemacs/set-leader-keys-for-major-mode 'mu4e-view-mode
   "e" 'eaf-open-mail-as-html)
+
+(spacemacs/set-leader-keys "amm" 'netease-cloud-music)

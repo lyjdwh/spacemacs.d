@@ -81,7 +81,52 @@
         counsel-projectile
         mu4e
         (org-media-note :location (recipe :fetcher github :repo "yuchen-lea/org-media-note"))
+        (netease-cloud-music :location (recipe :fetcher github :repo "SpringHan/netease-cloud-music.el"))
         ))
+
+(defun zilongshanren-misc/init-netease-cloud-music()
+  (use-package netease-cloud-music
+    :config
+    (setq netease-cloud-music-show-lyric 'all)
+    (setq netease-cloud-music-repeat-mode "random")
+    (require 'netease-cloud-music-ui)
+
+    (set-face-attribute 'netease-cloud-music-artist-face nil
+                        :inherit nil
+                        :foreground "MediumSpringGreen"
+                        :height 1.0
+                        )
+    (set-face-attribute 'netease-cloud-music-playlist-face nil
+                        :foreground "light sky blue"
+                        :weight 'normal
+                        )
+    (set-face-attribute 'netease-cloud-music-playlists-face nil
+                        :foreground "light sky blue"
+                        :weight 'bold
+                        :height 1.2
+                        )
+
+    ;; [remap netease-cloud-music-clear-playlist]
+    (define-key netease-cloud-music-mode-map (kbd "k") #'evil-previous-line)
+    (define-key netease-cloud-music-mode-map (kbd "j") #'evil-next-line)
+    (define-key netease-cloud-music-mode-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
+    (define-key netease-cloud-music-mode-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
+    (define-key netease-cloud-music-mode-map (kbd "D") #'netease-cloud-music-clear-playlist)
+    (define-key netease-cloud-music-mode-map (kbd "a") #'netease-cloud-music-storage-current-song)
+    (define-key netease-cloud-music-mode-map (kbd "A") #'netease-cloud-music-storage-song)
+    (define-key netease-cloud-music-mode-map (kbd "S") #'netease-cloud-music-add-storage-to-current-playlist)
+    (define-key netease-cloud-music-mode-map (kbd "O") #'netease-cloud-music-clear-storage)
+
+    (define-key netease-cloud-music-switch-song-mode-map (kbd "k") #'evil-previous-line)
+    (define-key netease-cloud-music-switch-song-mode-map (kbd "j") #'evil-next-line)
+    (define-key netease-cloud-music-switch-song-mode-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
+    (define-key netease-cloud-music-switch-song-mode-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
+
+    (define-key netease-cloud-music-switch-playlist-mode-map (kbd "k") #'evil-previous-line)
+    (define-key netease-cloud-music-switch-playlist-mode-map (kbd "j") #'evil-next-line)
+    (define-key netease-cloud-music-switch-playlist-mode-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
+    (define-key netease-cloud-music-switch-playlist-mode-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
+    ))
 
 (defun zilongshanren-misc/init-org-media-note()
   (use-package org-media-note
@@ -1063,6 +1108,16 @@
     (sis-global-inline-mode t)
     (setq sis-inline-with-other	t)
     (setq sis-english-pattern "[a-zA-Z!@#$%^&*()-=_+,./<>?;':\"|\\]")
+    (setq sis-inline-single-space-close t)
+
+    (defun netease-detector (&rest _)
+      (let ((name (buffer-name)))
+        (if (string-prefix-p "*Netease" name)
+            'english)
+        ))
+
+    (add-to-list 'sis-context-detectors
+                 'netease-detector)
     ))
 
 (defun zilongshanren-misc/init-rime ()

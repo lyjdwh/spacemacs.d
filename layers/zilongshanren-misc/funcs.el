@@ -570,6 +570,7 @@ Enter custom-name or RET to save image with timestamp"
      (string-prefix-p "*elfeed" name)
      (string-prefix-p "*mu4e" name)
      (string-prefix-p "*wttr" name)
+     (string-prefix-p "*Netease" name)
 
      ;; Is not magit buffer.
      (and (string-prefix-p "magit" name)
