@@ -984,3 +984,21 @@ You can use \\&, \\N to refer matched text."
                                                        (string-trim-left (car (last (split-string (substring-no-properties wr--head-var-a) " → "))))))))))
       (message "A head has been inserted.")
       (xref-goto-xref))))
+
+(defun netease-cloud-music-add-storage-to-selected-playlist ()
+  "Add the songs in storage into selected playlist."
+  (interactive)
+  (if (null netease-cloud-music-storage)
+      (na-error "The storage is empty!")
+    (let (playlist playlist-id ids)
+      (setq playlist (completing-read "Enter the song: " (netease-cloud-music-delete--list-playlist)))
+      (setq playlist-id
+            (progn
+              (string-match "^\\(.*\\) - \\(.*\\)" playlist)
+              (string-to-number (match-string 2 playlist))))
+      (dolist (song netease-cloud-music-storage)
+        (setq ids (append ids (list (car song)))))
+      (netease-cloud-music--track t playlist-id ids))
+    (if (get-buffer netease-cloud-music-buffer-name)
+        (netease-cloud-music-interface-init)
+      )))

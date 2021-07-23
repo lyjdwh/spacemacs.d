@@ -306,6 +306,7 @@ the entry of interest in the bibfile.  but does not check that."
         ))
     :config
     (org-roam-setup)
+    (setq org-id-link-to-org-use-id t)
     (setq org-roam-mode-sections
           (list #'org-roam-backlinks-section
                 #'org-roam-reflinks-section

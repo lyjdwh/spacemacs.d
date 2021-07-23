@@ -131,7 +131,7 @@
     (define-key netease-cloud-music-mode-map (kbd "D") #'netease-cloud-music-clear-playlist)
     (define-key netease-cloud-music-mode-map (kbd "a") #'netease-cloud-music-storage-current-song)
     (define-key netease-cloud-music-mode-map (kbd "A") #'netease-cloud-music-storage-song)
-    (define-key netease-cloud-music-mode-map (kbd "S") #'netease-cloud-music-add-storage-to-current-playlist)
+    (define-key netease-cloud-music-mode-map (kbd "S") #'netease-cloud-music-add-storage-to-selected-playlist)
     (define-key netease-cloud-music-mode-map (kbd "O") #'netease-cloud-music-clear-storage)
 
     (define-key netease-cloud-music-switch-song-mode-map (kbd "k") #'evil-previous-line)
