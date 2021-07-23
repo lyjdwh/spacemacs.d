@@ -240,13 +240,16 @@
     (setq lsp-ui-sideline-show-code-actions nil)
     (setq lsp-ui-sideline-show-hover nil)
 
+    ;; lens
+    (setq lsp-lens-enable t)
+
     ;; workspace
     (setq lsp-keep-workspace-alive nil)
-    (setq lsp-modeline-workspace-status-enable nil)
+    (setq lsp-modeline-workspace-status-enable t)
 
     ;; Disable features that have great potential to be slow.
     (setq lsp-enable-folding nil)
-    (setq lsp-enable-text-document-color nil)
+    (setq lsp-enable-text-document-color t)
 
     ;; Reduce unexpected modifications to code
     (setq lsp-enable-on-type-formatting nil)
