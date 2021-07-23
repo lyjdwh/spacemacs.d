@@ -83,7 +83,13 @@
         (org-media-note :location (recipe :fetcher github :repo "yuchen-lea/org-media-note"))
         (netease-cloud-music :location (recipe :fetcher github :repo "SpringHan/netease-cloud-music.el"))
         elisp-demos
+        forge
         ))
+
+(defun zilongshanren-misc/post-init-forge()
+  (with-eval-after-load 'forge
+    (add-to-list 'forge-alist '("github.com.cnpmjs.org" "api.github.com" "github.com.cnpmjs.org" forge-github-repository))
+    ))
 
 (defun zilongshanren-misc/init-elisp-demos()
   (use-package elisp-demos
