@@ -82,7 +82,18 @@
         mu4e
         (org-media-note :location (recipe :fetcher github :repo "yuchen-lea/org-media-note"))
         (netease-cloud-music :location (recipe :fetcher github :repo "SpringHan/netease-cloud-music.el"))
+        elisp-demos
         ))
+
+(defun zilongshanren-misc/init-elisp-demos()
+  (use-package elisp-demos
+    :config
+    (advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update)
+    (spacemacs/set-leader-keys-for-major-mode 'helpful-mode
+      "d" #'elisp-demos-for-helpful
+      "a" #'elisp-demos-add-demo)
+    (spacemacs/set-leader-keys "hdd" #'elisp-demos-find-demo)
+    ))
 
 (defun zilongshanren-misc/init-netease-cloud-music()
   (use-package netease-cloud-music
