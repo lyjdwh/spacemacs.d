@@ -770,6 +770,17 @@ unwanted space when exporting org-mode to hugo markdown."
 
   (setq python-spacemacs-indent-guess nil)
   (spacemacs/toggle-maximize-frame)
+
+  (defun configure-only-for-tui-frame (FRAME)
+    "Things only for tui frame"
+    (when (equal (framep FRAME) t)
+      (custom-set-faces '(hl-line ((((type tty) (background dark))
+                                    (:extend t :background "color-236")))))
+
+      ))
+
+  (add-hook 'after-make-frame-functions #'configure-only-for-tui-frame)
+
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
