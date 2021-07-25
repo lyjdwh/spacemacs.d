@@ -8,7 +8,7 @@
     org-roam
     (org-transclusion :location (recipe :fetcher github :repo "nobiot/org-transclusion" :files ("*")))
     ;; org-roam-server
-    org-roam-bibtex
+    (org-roam-bibtex :location (recipe :fetcher github :repo "org-roam/org-roam-bibtex" :branch "org-roam-v2"))
     ivy-bibtex
     org-noter
     org-ref
@@ -284,25 +284,37 @@ the entry of interest in the bibfile.  but does not check that."
     (progn
       (spacemacs/declare-prefix "am" "org-roam")
       (spacemacs/set-leader-keys
-        "amt" 'org-roam-buffer
+        "amb" 'org-roam-buffer
+        "amt" 'org-roam-buffer-toggle
         "amf" 'org-roam-node-find ;; orb-find-non-ref-file
+        "amF" 'org-roam-ref-find
         "ami" 'org-roam-node-insert   ;; orb-insert-non-ref
+        "amI" 'org-id-get-create
         "ama" 'org-roam-tag-add
         "amd" 'org-roam-tag-remove
+        "amD" 'org-roam-demote-entire-buffer
+        "amr" 'org-roam-refile
         ) ;;org-ref-helm-insert-cite-link
-      ;; org-roam-ref-find
-      ;; org-roam-alias-add
-      ;; org-roam-alias-remove
-      ;; org-roam-ref-add
-      ;; org-roam-ref-remove
 
       (spacemacs/declare-prefix-for-mode 'org-mode "mm" "org-roam")
+      (spacemacs/declare-prefix-for-mode 'org-mode "mmo" "node properties")
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "mt" 'org-roam-buffer
+        "mb" 'org-roam-buffer
+        "mt" 'org-roam-buffer-toggle
         "mf" 'org-roam-node-find ;; orb-find-non-ref-file
+        "mF" 'org-roam-ref-find
         "mi" 'org-roam-node-insert   ;; orb-insert-non-ref
+        "mI" 'org-id-get-create
         "ma" 'org-roam-tag-add
         "md" 'org-roam-tag-delete
+        "mD" 'org-roam-demote-entire-buffer
+        "mr" 'org-roam-refile
+        "moa" 'org-roam-alias-add
+        "moA" 'org-roam-alias-remove
+        "mot" 'org-roam-tag-add
+        "moT" 'org-roam-tag-remove
+        "mor" 'org-roam-ref-add
+        "moR" 'org-roam-ref-remove
         ))
     :config
     (org-roam-setup)
@@ -316,11 +328,13 @@ the entry of interest in the bibfile.  but does not check that."
     (setq org-roam-db-gc-threshold most-positive-fixnum)
 
     (add-to-list 'display-buffer-alist
-                 '(("\\*org-roam\\*"
-                    (display-buffer-in-direction)
-                    (direction . right)
-                    (window-width . 0.33)
-                    (window-height . fit-window-to-buffer))))
+                 '("\\*org-roam\\*"
+                   (display-buffer-in-side-window)
+                   (side . right)
+                   (slot . 0)
+                   (window-width . 0.33)
+                   (window-parameters . ((no-other-window . t)
+                                         (no-delete-other-windows . t)))))
 
     (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)
     (setq org-roam-capture-templates
@@ -375,42 +389,47 @@ the entry of interest in the bibfile.  but does not check that."
     :hook (org-roam-mode . org-roam-bibtex-mode)
     :init
     (spacemacs/set-leader-keys
-      "ama" 'orb-note-actions)
+      "ama" 'orb-note-actions
+      "aml" 'orb-insert-link
+      )
     (spacemacs/set-leader-keys-for-major-mode 'org-mode
-      "ma" 'orb-note-actions)
+      "ma" 'orb-note-actions
+      "ml" 'orb-insert-link)
 
     :config
     (setq bibtex-completion-pdf-open-function 'eaf-open)
     (setq orb-note-actions-frontend 'hydra)
+    (setq orb-insert-interface 'generic)
+    (setq orb-insert-generic-candidates-format 'entry)
 
     (add-to-list 'orb-note-actions-user (cons "Open PDF file(s) Externally" #'bibtex-completion-open-pdf-external))
 
     (setq orb-preformat-keywords
           '(("citekey" . "=key=") "title" "url" "file" "author-or-editor" "keywords"))
 
-    (setq orb-templates
-          '())
-    (setq orb-templates
-          '(("r" "ref" plain (function org-roam-capture--get-point) ""
-             :file-name "papers/${title}"
-             :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n"
-             :unnarrowed t)
-            ("n" "ref + noter" plain (function org-roam-capture--get-point)
-             ""
-             :file-name "papers/${title}"
-             :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}
+    (add-to-list 'org-roam-capture-templates
+                 '("r" "ref" plain
+                   ""
+                   :if-new
+                   (file+head "papers/${title}.org" "#+title: ${title}\n")
+                   :unnarrowed t)
+                 )
 
-- tags ::
-- keywords :: ${keywords}
+    (add-to-list 'org-roam-capture-templates
+                 '("n" "ref+noter" plain
+                   "- tags ::
+- keywords :: %^{keywords}
 
-* ${title}
+* %^{title}
 :PROPERTIES:
-:Custom_ID: ${citekey}
-:URL: ${url}
-:AUTHOR: ${author-or-editor}
-:NOTER_DOCUMENT: %(orb-process-file-field \"${citekey}\")
-:NOTER_PAGE:
-:END:")))
+:Custom_ID: %^{citekey}
+:URL: %^{url}
+:AUTHOR: %^{author-or-editor}
+:NOTER_DOCUMENT: %^{file}  ; <== special file keyword: if more than one filename
+:NOTER_PAGE:               ;     is available, the user will be prompted to choose
+:END:"
+                   :if-new
+                   (file+head "papers/${title}.org" "#+title: ${title}\n")))
     ))
 
 (defun zilongshanren-org/post-init-org-pomodoro ()
