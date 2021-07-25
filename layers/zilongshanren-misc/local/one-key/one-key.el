@@ -493,7 +493,7 @@ last command when it miss match in key alist."
           (cond
            ;; Match user keystrokes.
            ((catch 'match
-              (loop for ((k . desc) . command) in info-alist do
+              (cl-loop for ((k . desc) . command) in info-alist do
                     ;; Get match key.
                     (setq match-key k)
                     ;; Call function when match keystroke.
@@ -689,14 +689,14 @@ Argument INFO-ALIST is help information as format ((key . describe) . command)."
 (defun one-key-help-format (info-alist)
   "Format `one-key' help information.
 Argument INFO-ALIST is help information as format ((key . describe) . command)."
-  (let* ((max-length (loop for ((key . desc) . command) in info-alist
+  (let* ((max-length (cl-loop for ((key . desc) . command) in info-alist
                            maximize (+ (string-width key) (string-width desc))))
          (current-length 0)
          (items-per-line (or one-key-items-per-line
                              (floor (/ (- (window-width) 3)
                                        (+ max-length 4)))))
          keystroke-msg)
-    (loop for ((key . desc) . command) in info-alist
+    (cl-loop for ((key . desc) . command) in info-alist
           for counter from 1  do
           (push (format "[%s] %s " key desc) keystroke-msg)
           (setq current-length (+ (string-width key) (string-width desc)))
@@ -729,7 +729,7 @@ TITLE is title name that any string you like."
       ;; Insert (("key" . "desc") . command).
       (while (not (eobp))
         (unless (eq (point-at-bol) (point-at-eol))
-          (destructuring-bind (key cmd)
+          (cl-destructuring-bind (key cmd)
               (split-string (buffer-substring (point-at-bol) (point-at-eol)) "\t+")
             (delete-region (point-at-bol) (point-at-eol))
             (insert (format "((\"%s\" . \"%s\") . %s)"
