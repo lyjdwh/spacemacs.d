@@ -94,20 +94,25 @@ This function should only modify configuration layer settings."
      (latex :variables latex-build-command "LaTeX"
             latex-enable-auto-fill t
             latex-enable-folding t
-            latex-backend 'lsp)
+            latex-backend 'lsp
+            latex-refresh-preview t
+            latex-enable-magic t
+            )
      (bibtex :packages (not ivy-bibtex))
      ;; pdf
      (markdown :variables markdown-live-preview-engine 'vmd)
      (org :variables org-want-todo-bindings t
           org-enable-hugo-support t
           org-enable-org-journal-support t
+          org-enable-notifications t
+          org-start-notification-daemon-on-startup t
           org-journal-dir "~/org-notes/journal"
           org-journal-file-format "%Y-%m-%d"
           org-journal-date-prefix "#+TITLE: "
           org-journal-date-format "%A, %B %d %Y"
           org-journal-time-prefix "* "
           org-journal-time-format ""
-          :packages (not org-roam org-roam-server))
+          :packages (not org-roam org-roam-server org-contrib))
      ;; gpu
      yaml
      ;;  react

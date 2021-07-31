@@ -19,6 +19,13 @@
     easy-hugo
     ox-hugo
     iscroll
+    cdlatex
+    ))
+
+(defun zilongshanren-org/init-cdlatex()
+  (use-package cdlatex
+    :hook (LaTeX-mode . turn-on-cdlatex)
+    :hook (org-mode . turn-on-org-cdlatex)
     ))
 
 (defun zilongshanren-org/init-iscroll()
