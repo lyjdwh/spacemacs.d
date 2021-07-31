@@ -109,18 +109,17 @@
     (setq eaf-proxy-type "socks5")
     (setq eaf-proxy-host "127.0.0.1")
     (setq eaf-proxy-port "1080")
-    (eaf-setq eaf-browser-aria2-proxy-host "127.0.0.1")
-    (eaf-setq eaf-browser-aria2-proxy-port "12333")
+    (setq eaf-browser-aria2-proxy-host "127.0.0.1")
+    (setq eaf-browser-aria2-proxy-port "12333")
     (setq eaf-browser-translate-language "zh-CN")
     ;; set dark mode
-    (eaf-setq eaf-browser-dark-mode "true")
-    (eaf-setq eaf-pdf-dark-mode "false")
-    (eaf-setq eaf-mindmap-dark-mode "false")
+    (setq eaf-pdf-dark-mode nil)
+    (setq eaf-mindmap-dark-mode nil)
     ;; web
-    ;; (eaf-setq eaf-browser-default-zoom "1.25")
-    (eaf-setq eaf-browser-enable-adblocker "true")
+    ;; (setq eaf-browser-default-zoom "1.25")
+    (setq eaf-browser-enable-adblocker t)
     ;; camera
-    (eaf-setq eaf-camera-save-path "~/Pictures")
+    (setq eaf-camera-save-path "~/Pictures")
     ;; interleave
     (setq eaf-interleave-org-notes-dir-list '("~/org-notes/notes/"))
     (setq eaf-interleave-split-direction 'vertical)
