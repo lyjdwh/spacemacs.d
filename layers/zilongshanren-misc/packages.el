@@ -80,6 +80,7 @@
         (casease :location (recipe :fetcher github :repo "DogLooksGood/casease"))
         counsel-projectile
         mu4e
+        org-msg
         (org-media-note :location (recipe :fetcher github :repo "yuchen-lea/org-media-note"))
         (netease-cloud-music :location (recipe :fetcher github :repo "SpringHan/netease-cloud-music.el"))
         elisp-demos
@@ -156,23 +157,22 @@
     (setq org-media-note-screenshot-image-dir "~/org-notes/notes/imgs")
     ))
 
-(defun zilongshanren-misc/post-init-mu4e()
-  (setq mu4e-account-alist
-        '(("Gmail"
-           ;; Under each account, set the account-specific variables you want.
-           (mu4e-sent-messages-behavior sent)
-           (mu4e-sent-folder "~/.mail/gmail/[Gmail].已发邮件")
-           (mu4e-drafts-folder "~/.mail/gmail/[Gmail].草稿")
-           (user-mail-address "lyjdwh@gmail.com")
-           (user-full-name "liuyan"))
-          ("Foxmail"
-           (mu4e-sent-messages-behavior sent)
-           (mu4e-sent-folder "/home/liuyan/.mail/qq/Sent Messages")
-           (mu4e-drafts-folder "/home/liuyan/.mail/qq/Drafts")
-           (user-mail-address "1412511544@qq.com")
-           (user-full-name "liuyan"))
-          ))
+(defun zilongshanren-misc/init-org-msg()
+  (use-package org-msg
+    :after mu4e
+    :config
+    (setq mail-user-agent 'mu4e-user-agent
+          org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+          org-msg-startup "hidestars indent inlineimages"
+          org-msg-default-alternatives '((new		. (text html))
+				                                 (reply-to-html	. (text html))
+				                                 (reply-to-text	. (text)))
+	        org-msg-signature "")
 
+    (org-msg-mode)
+  ))
+
+(defun zilongshanren-misc/post-init-mu4e()
 ;;; Set up some common mu4e variables
   (setq mu4e-maildir "~/.mail"
         mu4e-trash-folder "/trash"
@@ -181,11 +181,12 @@
         mu4e-update-interval 3600
         mu4e-view-show-images t
         mu4e-view-show-addresses t
-        mu4e-enable-mode-line t
-        mu4e-enable-notifications t
         message-kill-buffer-on-exit t
         mu4e-compose-signature-auto-include nil
-        )
+        smtpmail-auth-credentials  (expand-file-name "~/.authinfo")
+        smtpmail-stream-type  'starttls
+        smtpmail-smtp-service 587
+        mu4e-sent-messages-behavior 'sent)
 
 ;;; Bookmarks
   (with-eval-after-load 'mu4e
@@ -228,15 +229,39 @@
                 (kbd "J") 'mu4e~headers-jump-to-maildir)
               ))
 
-  ;; something about ourselves
-  (setq user-mail-address "1412511544@qq.com"
-        user-full-name "liuyan")
+  (setq mu4e-contexts
+      `( ,(make-mu4e-context
+      :name "qq"
+      :enter-func (lambda () (mu4e-message "Switch to the QQ mail context"))
+      ;; leave-func not defined
+      :match-func (lambda (msg)
+        (when msg
+          (mu4e-message-contact-field-matches msg
+            :to "1412511544@qq.com")))
+      :vars '((user-mail-address      . "1412511544@qq.com")
+              (user-full-name     . "liuyan")
+              (smtpmail-smtp-server . "smtp.qq.com")
+              (smtpmail-smtp-user . "1412511544@qq.com")
+              (mu4e-sent-folder . "/qq/Sent Messages")
+              (mu4e-drafts-folder . "/qq/Drafts")
+         ))
+         ,(make-mu4e-context
+      :name "gmail"
+      :enter-func (lambda () (mu4e-message "Switch to the gmail context"))
+      ;; leave-fun not defined
+      :match-func (lambda (msg)
+        (when msg
+          (mu4e-message-contact-field-matches msg
+            :to "lyjdwh@gmail.com")))
+      :vars '((user-mail-address      . "lyjdwh@gmail.com")
+              (user-full-name     . "yan.liu")
+              (smtpmail-smtp-server . "smtp.gmail.com")
+              (smtpmail-smtp-user . "lyjdwh@gmail.com")
+              (mu4e-sent-folder . "/gmail/[Gmail].已发邮件")
+              (mu4e-drafts-folder . "/gmail/[Gmail].草稿")
+         ))))
 
-  (setq smtpmail-auth-credentials     (expand-file-name "~/.authinfo")
-        smtpmail-stream-type          'tls
-        smtpmail-smtp-server          "smtp.qq.com"
-        smtpmail-smtp-service         465
-        smtpmail-smtp-user "1412511544@qq.com")
+  (setq org-mu4e-convert-to-html t)
   )
 
 (defun zilongshanren-misc/post-init-counsel-projectile()
