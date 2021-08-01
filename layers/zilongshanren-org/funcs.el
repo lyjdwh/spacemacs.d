@@ -65,22 +65,6 @@
   (let (org-log-done org-log-states)    ; turn off logging
     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
-(defun my/org-roam--backlinks-list (file)
-  (if (org-roam--org-roam-file-p file)
-      (--reduce-from
-       (concat acc (format "- [[file:%s][%s]]\n"
-                           (file-relative-name (car it) org-roam-directory)
-                                 (org-roam--get-title-or-slug (car it))))
-       "" (org-roam-sql [:select [from] :from links :where (= to $s1)] file))
-    ""))
-
-(defun my/org-export-preprocessor (backend)
-  (let ((links (my/org-roam--backlinks-list (buffer-file-name))))
-    (unless (string= links "")
-      (save-excursion
-        (goto-char (point-max))
-        (insert (concat "\n* Backlinks\n") links)))))
-
 (defun ivy-bibtex-my-publications (&optional arg)
   "Search BibTeX entries authored by “Jane Doe”.
 
@@ -109,11 +93,11 @@ With a prefix ARG, the cache is invalidated and the bibliography reread."
 	  (-each it bibtex-completion-pdf-open-function)
     (message "No PDF(s) found.")))
 
-(defun open-org-roam-server()
+(defun open-org-roam-ui()
   (interactive)
-  (if (eq org-roam-server-mode nil)
-      (org-roam-server-mode 1))
-  (browse-url "127.0.0.1:8080"))
+  (if (eq org-roam-ui-mode nil)
+      (org-roam-ui-mode 1))
+  (browse-url "127.0.0.1:35901"))
 
 (defun org-babel-highlight-result ()
   "Highlight the result of the current source block.

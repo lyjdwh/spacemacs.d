@@ -7,7 +7,6 @@
     (notdeft :location local)
     org-roam
     (org-transclusion :location (recipe :fetcher github :repo "nobiot/org-transclusion" :files ("*")))
-    ;; org-roam-server
     (org-roam-bibtex :location (recipe :fetcher github :repo "org-roam/org-roam-bibtex" :branch "org-roam-v2"))
     ivy-bibtex
     org-noter
@@ -20,6 +19,7 @@
     ox-hugo
     iscroll
     cdlatex
+    (org-roam-ui :location (recipe :fetcher github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
     ))
 
 (defun zilongshanren-org/init-cdlatex()
@@ -156,7 +156,7 @@
                    :tag "next")
             (:priority<= "B"
                          :scheduled future)))
-    (add-hook 'org-mode-hook 'org-super-agenda-mode)
+    (add-hook 'org-agenda-mode-hook 'org-super-agenda-mode)
     ))
 
 (defun zilongshanren-org/init-notdeft ()
@@ -343,7 +343,6 @@ the entry of interest in the bibfile.  but does not check that."
                    (window-parameters . ((no-other-window . t)
                                          (no-delete-other-windows . t)))))
 
-    (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)
     (setq org-roam-capture-templates
           '(("d" "org-roam" plain "%?"
              :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
@@ -370,24 +369,21 @@ the entry of interest in the bibfile.  but does not check that."
       "me" 'org-transclusion-open-edit-src-buffer-at-point)
     ))
 
-(defun zilongshanren-org/init-org-roam-server ()
-  (use-package org-roam-server
+(defun zilongshanren-org/init-org-roam-ui ()
+  (use-package org-roam-ui
+    :load-path "~/bin/org-roam-ui"
     :init
-    (spacemacs/set-leader-keys "ams" 'open-org-roam-server)
-    :commands open-org-roam-server-other-window org-roam-server-mode
-    :hook
-    (kill-emacs . (lambda () (interactive) (org-roam-server-mode -1)))
-    :config
-    (setq org-roam-server-host "127.0.0.1"
-          org-roam-server-port 8080
-          org-roam-server-export-inline-images t
-          org-roam-server-authenticate nil
-          org-roam-server-network-poll t
-          org-roam-server-network-arrows nil
-          org-roam-server-network-label-truncate t
-          org-roam-server-network-label-truncate-length 60
-          org-roam-server-network-label-wrap-length 20)
-    (org-roam-server-mode 1)
+    (spacemacs/set-leader-keys
+      "ams" 'open-org-roam-ui
+      "amz" 'orui-node-zoom
+      "amL" 'orui-node-local)
+
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      "mz" 'orui-node-zoom
+      "mL" 'orui-node-local)
+
+    (setq org-roam-ui-mode nil)
+    :commands org-roam-ui-mode orui-node-zoom orui-node-local
     ))
 
 (defun zilongshanren-org/init-org-roam-bibtex ()
