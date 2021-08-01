@@ -67,7 +67,9 @@ This function should only modify configuration layer settings."
           magit-refs-show-commit-count 'all
           magit-revision-show-gravatars nil
           git-enable-magit-delta-plugin t
-          git-enable-magit-todos-plugin t)
+          git-enable-magit-todos-plugin t
+          git-messenger:show-detail t
+          git-messenger:use-magit-popup t)
      (version-control :variables
                        version-control-diff-tool 'git-gutter
                        version-control-diff-side 'left
