@@ -665,3 +665,5 @@ clock                             ^^^^effort             ^^watcher
   "e" 'eaf-open-mail-as-html)
 
 (spacemacs/set-leader-keys "amm" 'netease-cloud-music)
+
+(spacemacs/set-leader-keys-for-major-mode 'latex-mode "e" #'TeX-error-overview)

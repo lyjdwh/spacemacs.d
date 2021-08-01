@@ -171,6 +171,7 @@
           (imenu-add-menubar-index)
           (define-key LaTeX-mode-map (kbd "TAB") 'TeX-complete-symbol)
           (turn-on-reftex)
+          (TeX-toggle-debug-warnings)
           )))
 (defun zilongshanren-programming/post-init-lsp-python-ms ()
   (progn
@@ -281,6 +282,8 @@
       '("go" "python" "ipython" "ruby" "js" "css" "sass" "C" "C++" "rust" "java" "sh"))
     (dolist (lang org-babel-lang-list)
       (eval `(lsp-org-babel-enable ,lang)))
+
+    (add-hook 'lsp-completion-mode-hook '(lambda () (setq-local company-backends (delete 'company-capf company-backends))))
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
