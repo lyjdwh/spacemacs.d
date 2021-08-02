@@ -114,7 +114,7 @@ This function should only modify configuration layer settings."
           org-journal-date-format "%A, %B %d %Y"
           org-journal-time-prefix "* "
           org-journal-time-format ""
-          :packages (not org-roam org-roam-server org-contrib))
+          :packages (not org-roam org-roam-server))
      ;; gpu
      yaml
      ;;  react
@@ -582,11 +582,11 @@ dump."
 (defun dotspacemacs/user-init ()
   (setq-default configuration-layer-elpa-archives
                 ;; '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-                ;;   ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
-                ;;   ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))
+                ;;   ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                ;;   ("nongnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu"))
                 '(("melpa-cn" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")
-                  ("org-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/org/")
-                  ("gnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/"))
+                  ("gnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
+                  ("nongnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/nongnu/"))
                 )
 
   (setq term-char-mode-point-at-process-mark nil)
