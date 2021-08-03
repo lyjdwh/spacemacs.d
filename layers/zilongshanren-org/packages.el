@@ -88,10 +88,10 @@
       "Add evil keybinings for iscroll."
       (if iscroll-mode
           (progn
-            (global-set-key [remap evil-next-line] #'iscroll-evil-next-line)
-            (global-set-key [remap evil-previous-line] #'iscroll-evil-previous-line)
-            (global-set-key [remap evil-next-visual-line] #'iscroll-evil-next-visual-line)
-            (global-set-key [remap evil-previous-visual-line] #'iscroll-evil-previous-visual-line))
+            (evil-global-set-key 'normal (kbd "j") #'iscroll-evil-next-line)
+            (evil-global-set-key 'normal (kbd "k") #'iscroll-evil-previous-line)
+            (evil-global-set-key 'visual (kbd "j") #'iscroll-evil-next-visual-line)
+            (evil-global-set-key 'visual (kbd "k") #'iscroll-evil-previous-visual-line))
         (global-set-key [remap evil-next-line] nil)
         (global-set-key [remap evil-previous-line] nil)
         (global-set-key [remap evil-next-visual-line] nil)
