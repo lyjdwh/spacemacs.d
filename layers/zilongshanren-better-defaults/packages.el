@@ -80,29 +80,46 @@
 
 (defun zilongshanren-better-defaults/init-eaf ()
   (use-package eaf
-    :load-path "/home/liuyan/bin/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
-    :commands (open-file-with-eaf eaf-open-mail-as-html
-               eaf-open-ipython eaf-open-camera eaf-open-demo
-               eaf-open-browser eaf-open-external eaf-open-terminal eaf-toggle-fullscreen
+    :load-path "/home/liuyan/bin/eaf" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
+    :commands (open-file-with-eaf eaf-open-mail-as-html eaf-open-camera
+               eaf-open-browser eaf-open-external eaf-toggle-fullscreen
                eaf-open eaf-open-url eaf-open-office eaf-open-mindmap eaf-open-airshare
-               eaf-open-bookmark eaf-open-rss-reader eaf-kill-process eaf-search-it
-               eaf-file-browser-qrcode eaf-interleave-sync-current-note eaf-interleave-sync-next-note
-               eaf-interleave-sync-previous-note eaf-interleave-add-note eaf-interleave-open-notes-file eaf-interleave-quit
-               eaf-open-netease-cloud-music)
-
+               eaf-open-bookmark eaf-kill-process eaf-search-it eaf-file-browser-qrcode
+               eaf-install-dependencies)
     :diminish eaf-mode
     :init
+    (use-package epc :defer t :ensure t)
+    (use-package ctable :defer t :ensure t)
+    (use-package deferred :defer t :ensure t)
+    (use-package s :defer t :ensure t)
+
     (spacemacs/declare-prefix "ae" "eaf")
     ;; set eaf as default browse
     (setq browse-url-browser-function 'eaf-open-browser)
     (defalias 'browse-web #'eaf-open-browser)
+
     :custom
     (eaf-python-command "/usr/bin/python3")
     (eaf-evil-leader-keymap  spacemacs-cmds)
     (eaf-evil-leader-key "SPC")
     :config
+    (require 'eaf-js-video-player)
+    (require 'eaf-org-previewer)
+    (require 'eaf-image-viewer)
+    (require 'eaf-file-sender)
+    (require 'eaf-file-browser)
+    (require 'eaf-airshare)
+    (require 'eaf-browser)
+    (require 'eaf-pdf-viewer)
+    (require 'eaf-video-player)
+    (require 'eaf-mindmap)
+    (require 'eaf-markdown-previewer)
+    (require 'eaf-file-manager)
+    (require 'eaf-camera)
+
     (require 'eaf-evil)
     (require 'eaf-all-the-icons)
+    (require 'eaf-mail)
     (setq eaf-buffer-title-format "EAF/%s")
     (setq eaf-grip-token "d95425cda9aa8c58779a312be6fe4662b965a441")
     ;; set proxy
@@ -120,14 +137,6 @@
     (setq eaf-browser-enable-adblocker t)
     ;; camera
     (setq eaf-camera-save-path "~/Pictures")
-    ;; interleave
-    (setq eaf-interleave-org-notes-dir-list '("~/org-notes/notes/"))
-    (setq eaf-interleave-split-direction 'vertical)
-    (setq eaf-interleave-disable-narrowing t)
-    (setq eaf-interleave-split-lines 20)
-    (add-hook 'eaf-pdf-viewer-hook 'eaf-interleave-app-mode)
-    (add-hook 'eaf-browser-hook 'eaf-interleave-app-mode)
-    (add-hook 'org-mode-hook 'eaf-interleave-mode)
     ;; org
     (require 'eaf-org)
     (defun eaf-org-open-file (file &optional link)
@@ -137,8 +146,6 @@
     ;; use `emacs-application-framework' to open PDF file: link
     (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
     ;; key customize
-    (add-to-list 'eaf-terminal-keybinding '("C-'" . "eaf-send-ctrl-esc-sequence"))
-    (add-to-list 'eaf-terminal-keybinding '("C-j" . "eaf-send-key-sequence"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("d" . "eaf-proxy-scroll_up_page"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("u" . "eaf-proxy-scroll_down_page"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("aa" . "eaf-proxy-add_annot_highlight"))
@@ -149,7 +156,7 @@
     (add-to-list 'eaf-pdf-viewer-keybinding '("C-c" . "copy_select"))
     (add-to-list 'eaf-browser-keybinding '("C-c" . "kill_text"))
 
-    (add-to-list 'eaf-app-display-function-alist '("browser" . eaf--browser-display))
+    (add-to-list 'eaf-preview-display-function-alist '("browser" . eaf--browser-display))
 
     (defun eaf-open-this (file)
       "Open html/pdf/image/video files whenever possible with EAF.
