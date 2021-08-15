@@ -11,6 +11,7 @@
  '(company-dabbrev-minimum-length 3)
  '(company-dabbrev-other-buffers nil)
  '(company-show-numbers t)
+ '(company-show-quick-access t)
  '(company-statistics-auto-restore nil)
  '(compilation-message-face 'default)
  '(ctags-update-delay-seconds 1024)

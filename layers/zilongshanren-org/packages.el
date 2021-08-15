@@ -372,7 +372,6 @@ the entry of interest in the bibfile.  but does not check that."
 
 (defun zilongshanren-org/init-org-roam-ui ()
   (use-package org-roam-ui
-    :load-path "~/bin/org-roam-ui"
     :init
     (spacemacs/set-leader-keys
       "ams" 'open-org-roam-ui

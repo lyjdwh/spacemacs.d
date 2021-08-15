@@ -34,6 +34,9 @@
 
 (defun zilongshanren-programming/init-citre()
   (use-package citre
+    :config
+    (setq citre-auto-enable-citre-mode-modes '(prog-mode))
+    (require 'citre-config)
   ))
 
 (defun zilongshanren-programming/post-init-prettier-js ()
@@ -111,8 +114,9 @@
     (add-hook 'LaTeX-mode-hook (lambda () (setq-local counsel-dash-docsets '("LaTeX"))))
     (add-hook 'emacs-lisp-mode-hook (lambda () (setq-local counsel-dash-docsets '("Emacs Lisp"))))
     (add-hook 'c++-mode-hook (lambda () (setq-local counsel-dash-docsets '("C++"))))
-    (add-hook 'python-mode-hook (lambda () (setq-local counsel-dash-docsets '("Python 3" "PyTorch" "NumPy" "Matplotlib" "Pandas" "scikit-learn" "torchvision" "torchtext"))))
+    (add-hook 'python-mode-hook (lambda () (setq-local counsel-dash-docsets '("Python3" "PyTorch" "PytorchLightning" "Pytorch-Geometric" "NumPy" "Matplotlib" "Pandas" "scikit-learn" "torchvision" "torchtext"))))
     (setq counsel-dash-enable-debugging nil)
+    (setq dash-docs-enable-debugging nil)
     ))
 
 (defun zilongshanren-programming/post-init-hl-todo ()

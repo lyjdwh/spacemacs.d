@@ -93,7 +93,7 @@ This function should only modify configuration layer settings."
             shell-default-term-shell "/usr/bin/zsh"
             shell-default-height 40)
      ;; docker
-     (latex :variables latex-build-command "LaTeX"
+     (latex :variables latex-build-command "LatexMk"
             latex-enable-auto-fill t
             latex-enable-folding t
             latex-backend 'lsp
@@ -780,6 +780,7 @@ unwanted space when exporting org-mode to hugo markdown."
 
   (setq python-spacemacs-indent-guess nil)
   (spacemacs/toggle-maximize-frame)
+  (spacemacs/toggle-display-time)
 
   (defun configure-only-for-tui-frame (FRAME)
     "Things only for tui frame"
