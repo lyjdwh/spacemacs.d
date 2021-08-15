@@ -162,11 +162,12 @@
 (defun zilongshanren-org/init-notdeft ()
   (use-package notdeft
     :load-path "~/bin/notdeft"
-    :commands notdeft notdeft-mode-hydra/body notdeft-open-query notdeft-insert-org-link notdeft-org-link-new-file
+    :commands notdeft notdeft-mode-hydra/body notdeft-open-query notdeft-insert-org-link notdeft-org-link-existing-note notdeft-org-link-new-file
     :config
     (setq notdeft-directories '("~/org-notes/notes"))
     (setq notdeft-secondary-extensions '("md" "txt"))
     (setq notdeft-xapian-max-results 0)
+    (setq notdeft-allow-org-property-drawers t)
     (add-to-list 'load-path "~/bin/notdeft/extras")
     (load "notdeft-example")
     ))

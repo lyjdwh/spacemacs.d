@@ -521,8 +521,9 @@
 (spacemacs/set-leader-keys
   "ann" 'notdeft
   "anh" 'notdeft-mode-hydra/body
+  "anH" 'notdeft-global-hydra/body
   "ans" 'notdeft-open-query
-  "ani" 'notdeft-insert-org-link
+  "ani" 'notdeft-org-link-existing-note
   "anI" 'notdeft-org-link-new-file)
 
 ;; tmux-pane
