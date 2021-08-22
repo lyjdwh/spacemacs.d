@@ -2025,12 +2025,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
 (defun zilongshanren-misc/post-init-magit ()
   (with-eval-after-load 'magit
-    (defadvice magit-status (around magit-fullscreen activate)
-      (window-configuration-to-register :magit-fullscreen)
-      ad-do-it
-      (delete-other-windows))
-    (defadvice magit-quit-window (after magit-restore-screen activate)
-      (jump-to-register :magit-fullscreen))
 
     ;; speed up magit
     ;; (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)

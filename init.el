@@ -60,7 +60,7 @@ This function should only modify configuration layer settings."
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
      (git :variables
-          git-magit-status-fullscreen t
+          git-magit-status-fullscreen nil
           magit-push-always-verify nil
           magit-save-repository-buffers 'dontask
           magit-revert-buffers 'silent
