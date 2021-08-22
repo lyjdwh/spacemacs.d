@@ -147,8 +147,8 @@
 
 ;; emacs daemon
 (spacemacs/set-leader-keys "qD" 'spacemacs/restart-emacs-debug-init)
-(spacemacs/set-leader-keys "qd" 'liuyan/server-shutdown)
-(spacemacs/set-leader-keys "Th" 'liuyan/toggle-terminal-transparency)
+(if (equal (framep-on-display) t)
+    (spacemacs/set-leader-keys "qq" 'server-edit))
 
 ;;ivy-yasnippet
 (spacemacs/set-leader-keys "oi" 'ivy-yasnippet)

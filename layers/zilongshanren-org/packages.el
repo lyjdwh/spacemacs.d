@@ -134,6 +134,7 @@
 
 (defun zilongshanren-org/init-org-clock-watch ()
   (use-package org-clock-watch
+    :if (not (equal (framep-on-display) t))
     :after org
     :config
     (setq org-clock-watch-work-plan-file-path "~/org-notes/gtd.org")
