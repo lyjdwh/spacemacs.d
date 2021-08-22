@@ -325,7 +325,7 @@ the entry of interest in the bibfile.  but does not check that."
         "moR" 'org-roam-ref-remove
         ))
     :config
-    (org-roam-setup)
+    (org-roam-db-autosync-mode)
     (setq org-id-link-to-org-use-id t)
     (setq org-roam-mode-sections
           (list #'org-roam-backlinks-section
@@ -344,19 +344,33 @@ the entry of interest in the bibfile.  but does not check that."
                    (window-parameters . ((no-other-window . t)
                                          (no-delete-other-windows . t)))))
 
+    (cl-defmethod org-roam-node-directories ((node org-roam-node))
+      (if-let ((dirs (file-name-directory (file-relative-name (org-roam-node-file node) org-roam-directory))))
+          (format "(%s)" (string-join (f-split dirs) "/"))
+        ""))
+    (cl-defmethod org-roam-node-filetitle ((node org-roam-node))
+      "Return the file TITLE for the node."
+      (org-roam-get-keyword "TITLE" (org-roam-node-file node)))
+
+    (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
+      "Return the hierarchy for the node."
+      (let ((title (org-roam-node-title node))
+            (olp (org-roam-node-olp node))
+            (level (org-roam-node-level node))
+            (filetitle (org-roam-node-filetitle node)))
+        (concat
+         (if (> level 0) (concat filetitle " > "))
+         (if (> level 1) (concat (string-join olp " > ") " > "))
+         title))
+      )
+
+    (setq org-roam-node-display-template "${directories} ${tags:20 } ${hierarchy:*}")
+
     (setq org-roam-capture-templates
           '(("d" "org-roam" plain "%?"
              :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                                 "#+title: ${title}\n")
              :unnarrowed t)))
-
-    (add-to-list 'org-roam-capture-ref-templates
-                 '("a" "Annotation" plain (function org-roam-capture--get-point)
-                   "%U ${body}\n"
-                   :file-name "${slug}"
-                   :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_alias:\n"
-                   :immediate-finish t
-                   :unnarrowed t))
 
     (add-hook 'org-mode-hook (lambda () (add-to-list 'company-backends #'company-capf)))
     ))
@@ -374,7 +388,7 @@ the entry of interest in the bibfile.  but does not check that."
   (use-package org-roam-ui
     :init
     (spacemacs/set-leader-keys
-      "ams" 'open-org-roam-ui
+      "ams" 'orui-open
       "amz" 'orui-node-zoom
       "amL" 'orui-node-local)
 
@@ -383,7 +397,7 @@ the entry of interest in the bibfile.  but does not check that."
       "mL" 'orui-node-local)
 
     (setq org-roam-ui-mode nil)
-    :commands org-roam-ui-mode orui-node-zoom orui-node-local
+    :commands org-roam-ui-mode orui-node-zoom orui-node-local orui-open
     ))
 
 (defun zilongshanren-org/init-org-roam-bibtex ()

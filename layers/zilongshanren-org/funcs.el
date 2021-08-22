@@ -93,12 +93,6 @@ With a prefix ARG, the cache is invalidated and the bibliography reread."
 	  (-each it bibtex-completion-pdf-open-function)
     (message "No PDF(s) found.")))
 
-(defun open-org-roam-ui()
-  (interactive)
-  (if (eq org-roam-ui-mode nil)
-      (org-roam-ui-mode 1))
-  (browse-url "127.0.0.1:35901"))
-
 (defun org-babel-highlight-result ()
   "Highlight the result of the current source block.
 Adapt from `org-babel-remove-result'."
