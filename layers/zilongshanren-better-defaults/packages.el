@@ -85,7 +85,7 @@
                eaf-open-browser eaf-open-external eaf-toggle-fullscreen
                eaf-open eaf-open-url eaf-open-office eaf-open-mindmap eaf-open-airshare
                eaf-open-bookmark eaf-kill-process eaf-search-it eaf-file-browser-qrcode
-               eaf-install-dependencies)
+               eaf-install-dependencies eaf-open-file-manager eaf-open-in-file-manager)
     :diminish eaf-mode
     :init
     (use-package epc :defer t :ensure t)
@@ -99,11 +99,9 @@
     (defalias 'browse-web #'eaf-open-browser)
 
     :custom
-    (eaf-python-command "/usr/bin/python3")
     (eaf-evil-leader-keymap  spacemacs-cmds)
     (eaf-evil-leader-key "SPC")
     :config
-    (require 'eaf-js-video-player)
     (require 'eaf-org-previewer)
     (require 'eaf-image-viewer)
     (require 'eaf-file-sender)
@@ -121,7 +119,6 @@
     (require 'eaf-all-the-icons)
     (require 'eaf-mail)
     (setq eaf-buffer-title-format "EAF/%s")
-    (setq eaf-grip-token "d95425cda9aa8c58779a312be6fe4662b965a441")
     ;; set proxy
     (setq eaf-proxy-type "socks5")
     (setq eaf-proxy-host "127.0.0.1")
