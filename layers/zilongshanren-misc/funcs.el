@@ -364,7 +364,7 @@ e.g. Sunday, September 17, 2000."
                   (if (executable-find "fasd")
                       (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
     (ivy-read "directories:" collection
-              :action 'dired
+              :action 'eaf-open-in-file-manager
               :caller 'counsel-goto-recent-directory)))
 
 (defun counsel-find-file-recent-directory ()
@@ -995,3 +995,21 @@ You can use \\&, \\N to refer matched text."
     (if (get-buffer netease-cloud-music-buffer-name)
         (netease-cloud-music-interface-init)
       )))
+
+(defun netease-cloud-music-love-song ()
+  "love current playing song."
+  (interactive)
+  (if (null netease-cloud-music-process)
+      (netease-cloud-music-error "you're not playing any song!")
+    (let ((song (nth netease-cloud-music-playlist-song-index
+                     (if netease-cloud-music-use-local-playlist
+                         netease-cloud-music-playlist
+                       netease-cloud-music-playlists-songs)))
+          )
+      (netease-cloud-music--track t (cdr (car netease-cloud-music-playlists)) (list (car song)))
+      (message "[netease-cloud-music]: love current playing song.")
+      )))
+
+(defun open-v2raya()
+  (interactive)
+  (browse-url "http://127.0.0.1:2017/"))

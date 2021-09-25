@@ -82,10 +82,11 @@
   (use-package eaf
     :load-path "/home/liuyan/bin/eaf" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
     :commands (open-file-with-eaf eaf-open-mail-as-html eaf-open-camera
-               eaf-open-browser eaf-open-external eaf-toggle-fullscreen
+               eaf-open-browser eaf-open-browser-other-window eaf-open-external eaf-toggle-fullscreen
                eaf-open eaf-open-url eaf-open-office eaf-open-mindmap eaf-open-airshare
                eaf-open-bookmark eaf-kill-process eaf-search-it eaf-file-browser-qrcode
-               eaf-install-dependencies eaf-open-file-manager eaf-open-in-file-manager)
+               eaf-install-dependencies eaf-install-and-update eaf-open-file-manager eaf-open-in-file-manager
+               eaf-pdf-synctex-forward-view)
     :diminish eaf-mode
     :init
     (use-package epc :defer t :ensure t)
@@ -95,8 +96,8 @@
 
     (spacemacs/declare-prefix "ae" "eaf")
     ;; set eaf as default browse
-    (setq browse-url-browser-function 'eaf-open-browser)
-    (defalias 'browse-web #'eaf-open-browser)
+    (setq browse-url-browser-function 'eaf-open-browser-other-window)
+    (defalias 'browse-web #'eaf-open-browser-other-window)
 
     :custom
     (eaf-evil-leader-keymap  spacemacs-cmds)
@@ -118,30 +119,41 @@
     (require 'eaf-evil)
     (require 'eaf-all-the-icons)
     (require 'eaf-mail)
+
     (setq eaf-buffer-title-format "EAF/%s")
-    ;; set proxy
+
+    ;; browser
     (setq eaf-proxy-type "socks5")
     (setq eaf-proxy-host "127.0.0.1")
     (setq eaf-proxy-port "1080")
     (setq eaf-browser-aria2-proxy-host "127.0.0.1")
     (setq eaf-browser-aria2-proxy-port "12333")
     (setq eaf-browser-translate-language "zh-CN")
+    (setq eaf-chrome-bookmark-file "~/.config/chromium/Default/Bookmarks")
+    (setq eaf-browser-chrome-history-file "~/.config/chromium/Default/History")
+    (setq eaf-browser-enable-autofill t)
+    ;; (setq eaf-browser-default-zoom 1.25)
+    (setq eaf-browser-enable-adblocker t)
+
     ;; set dark mode
     (setq eaf-pdf-dark-mode nil)
     (setq eaf-mindmap-dark-mode nil)
-    ;; web
-    ;; (setq eaf-browser-default-zoom "1.25")
-    (setq eaf-browser-enable-adblocker t)
+
     ;; camera
     (setq eaf-camera-save-path "~/Pictures")
+
     ;; org
     (require 'eaf-org)
     (defun eaf-org-open-file (file &optional link)
       "An wrapper function on `eaf-open'."
       (eaf-open file))
 
+    (setq eaf-org-override-pdf-links-open t)
+    (setq eaf-org-override-pdf-links-store t)
+
     ;; use `emacs-application-framework' to open PDF file: link
     (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
+
     ;; key customize
     (add-to-list 'eaf-pdf-viewer-keybinding '("d" . "eaf-proxy-scroll_up_page"))
     (add-to-list 'eaf-pdf-viewer-keybinding '("u" . "eaf-proxy-scroll_down_page"))
@@ -153,7 +165,7 @@
     (add-to-list 'eaf-pdf-viewer-keybinding '("C-c" . "copy_select"))
     (add-to-list 'eaf-browser-keybinding '("C-c" . "kill_text"))
 
-    (add-to-list 'eaf-preview-display-function-alist '("browser" . eaf--browser-display))
+    ;; (add-to-list 'eaf-preview-display-function-alist '("browser" . eaf--browser-display))
 
     (defun eaf-open-this (file)
       "Open html/pdf/image/video files whenever possible with EAF.

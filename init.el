@@ -32,18 +32,20 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layers
    '(
      (ivy :variables ivy-enable-advanced-buffer-information nil
-          :packages (not ivy-rich)
+          :packages (not ivy-rich all-the-icons-ivy-rich)
           )
      better-defaults
+     (unicode-fonts :variables unicode-fonts-enable-ligatures nil)
+     (spacemacs-editing-visual :packages (not rainbow-delimiters))
      (treemacs :variables
                treemacs-use-all-the-icons-theme t
                treemacs-use-icons-dired nil)
      helpful
      (ranger :variables ranger-override-dired t )
      emoji
-     (plantuml :variables
-               plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
-               org-plantuml-jar-path  "~/.spacemacs.d/plantuml.jar")
+     ;; (plantuml :variables
+     ;;           plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
+     ;;           org-plantuml-jar-path  "~/.spacemacs.d/plantuml.jar")
      ;; lsp
      ;; dap
      ;; colors
@@ -114,7 +116,7 @@ This function should only modify configuration layer settings."
           org-journal-date-format "%A, %B %d %Y"
           org-journal-time-prefix "* "
           org-journal-time-format ""
-          :packages (not org-roam org-roam-server))
+          :packages (not org-roam))
      ;; gpu
      yaml
      ;;  react
@@ -202,7 +204,7 @@ This function should only modify configuration layer settings."
    '(org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
                     evil-args evil-ediff evil-exchange evil-unimpaired
                     volatile-highlights smartparens
-                    spaceline holy-mode skewer-mode rainbow-delimiters
+                    spaceline holy-mode skewer-mode
                     highlight-indentation vi-tilde-fringe eyebrowse ws-butler
                     smooth-scrolling org-repo-todo org-download org-timer
                     livid-mode evil-escape company-quickhelp
@@ -581,12 +583,12 @@ dump."
 
 (defun dotspacemacs/user-init ()
   (setq-default configuration-layer-elpa-archives
-                ;; '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-                ;;   ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                ;;   ("nongnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu"))
-                '(("melpa-cn" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")
-                  ("gnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
-                  ("nongnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/nongnu/"))
+                ;; '(("melpa-cn" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")
+                ;;   ("gnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
+                ;;   ("nongnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/nongnu/"))
+                '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+                  ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
+                  ("nongnu-cn"   . "http://elpa.emacs-china.org/nongnu"))
                 )
 
   (setq term-char-mode-point-at-process-mark nil)
@@ -745,8 +747,9 @@ unwanted space when exporting org-mode to hugo markdown."
 
   ;;copy/paste with emacs in terminal
   ;;from https://hugoheden.wordpress.com/2009/03/08/copypaste-with-emacs-in-terminal/
-  (unless window-system
-    (when (getenv "DISPLAY")
+
+  (if (equal (framep-on-display) t)
+    (progn
       ;; Callback for when user cuts
       (defun xsel-cut-function (text &optional push)
         ;; Insert text to temp-buffer, and "send" content to xsel stdin
@@ -768,7 +771,7 @@ unwanted space when exporting org-mode to hugo markdown."
       ;; Attach callbacks to hooks
       (setq interprogram-cut-function 'xsel-cut-function)
       (setq interprogram-paste-function 'xsel-paste-function)
-      ))
+  ))
 
   ;; Better Compilation
   (setq-default compilation-always-kill t) ; kill compilation process before starting another

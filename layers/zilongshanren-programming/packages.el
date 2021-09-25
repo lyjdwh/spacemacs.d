@@ -172,6 +172,9 @@
                 ;;     (mode-io-correlate
                 ;;      " --synctex-forward %n:0:%b -x \"emacsclient +%{line} %{input}\""))))
                 )
+          (add-to-list 'TeX-view-program-list '("eaf" eaf-pdf-synctex-forward-view))
+          (add-to-list 'TeX-view-program-selection '(output-pdf "eaf"))
+
           (imenu-add-menubar-index)
           (define-key LaTeX-mode-map (kbd "TAB") 'TeX-complete-symbol)
           (turn-on-reftex)

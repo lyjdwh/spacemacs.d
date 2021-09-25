@@ -127,7 +127,8 @@
 
 ;; youdao
 (spacemacs/set-leader-keys "oy" 'my-youdao-search-at-point)
-(spacemacs/set-leader-keys "oY" 'youdao-dictionary-search-from-input)
+;; (spacemacs/set-leader-keys "oY" 'youdao-dictionary-search-from-input)
+(spacemacs/set-leader-keys "oY" 'fanyi-dwim2)
 (spacemacs/set-leader-keys "ow" 'youdao-dictionary-play-voice-at-point)
 (spacemacs/set-leader-keys "oW" 'youdao-dictionary-play-voice-from-input)
 
@@ -148,7 +149,7 @@
 ;; emacs daemon
 (spacemacs/set-leader-keys "qD" 'spacemacs/restart-emacs-debug-init)
 (if (equal (framep-on-display) t)
-    (spacemacs/set-leader-keys "qq" 'server-edit))
+    (spacemacs/set-leader-keys "qq" 'evil-quit-all))
 
 ;;ivy-yasnippet
 (spacemacs/set-leader-keys "oi" 'ivy-yasnippet)
@@ -158,7 +159,8 @@
 (spacemacs/declare-prefix "ae" "eaf")
 (spacemacs/set-leader-keys "aei" 'eaf-install-dependencies)
 (spacemacs/set-leader-keys "aec" 'eaf-open-camera)
-(spacemacs/set-leader-keys "aeb" 'eaf-open-browser)
+(spacemacs/set-leader-keys "aeb" 'eaf-open-browser-other-window)
+(spacemacs/set-leader-keys "aeh" 'eaf-open-browser-with-history)
 (spacemacs/set-leader-keys "aee" 'eaf-open-external)
 (spacemacs/set-leader-keys "aet" 'eaf-toggle-fullscreen)
 (spacemacs/set-leader-keys "aeo" 'eaf-open)
@@ -171,6 +173,7 @@
 (spacemacs/set-leader-keys "aef" 'eaf-file-browser-qrcode)
 (spacemacs/set-leader-keys "otb" 'change-browser-function)
 (spacemacs/set-leader-keys "aep" 'eaf-toggle-proxy)
+(spacemacs/set-leader-keys "aeu" 'eaf-install-and-update)
 (spacemacs/set-leader-keys "of" 'eaf-open-in-file-manager)
 
 (spacemacs/set-leader-keys-for-major-mode 'eaf-edit-mode
@@ -667,3 +670,6 @@ clock                             ^^^^effort             ^^watcher
 (spacemacs/set-leader-keys "amm" 'netease-cloud-music)
 
 (spacemacs/set-leader-keys-for-major-mode 'latex-mode "e" #'TeX-error-overview)
+
+;; v2raya
+(spacemacs/set-leader-keys "ov" 'open-v2raya)
