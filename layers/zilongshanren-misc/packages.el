@@ -87,7 +87,12 @@
         elisp-demos
         forge
         rainbow-delimiters
+        xref
         ))
+
+(defun zilongshanren-misc/post-init-xref()
+  (setq xref-search-program 'ripgrep)
+  )
 
 (defun zilongshanren-misc/init-rainbow-delimiters()
   (use-package rainbow-delimiters
@@ -142,6 +147,7 @@
     (define-key netease-cloud-music-mode-map (kbd "A") #'netease-cloud-music-storage-song)
     (define-key netease-cloud-music-mode-map (kbd "S") #'netease-cloud-music-add-storage-to-selected-playlist)
     (define-key netease-cloud-music-mode-map (kbd "O") #'netease-cloud-music-clear-storage)
+    (define-key netease-cloud-music-mode-map (kbd "L") #'netease-cloud-music-love-song)
 
     (define-key netease-cloud-music-switch-song-mode-map (kbd "k") #'evil-previous-line)
     (define-key netease-cloud-music-switch-song-mode-map (kbd "j") #'evil-next-line)
@@ -517,11 +523,33 @@
                                                (("t TAB" :complete-tag "Choose"))
                                                ))
 
+    (defun my/elfeed-translate (url)
+      (interactive (list (or (when-let* ((entry (or elfeed-show-entry
+                                                    (car (elfeed-search-selected)))))
+                               (elfeed-entry-link entry))
+                             (read-from-minibuffer "Feed URL: "))))
+      (eaf-open-browser (format "https://translate.google.com/translate?tl=zh-CN&sl=en&u=%s" url)))
+
     (evilified-state-evilify-map elfeed-search-mode-map
       :mode elfeed-search-mode
       :eval-after-load elfeed-search
       :bindings
-      "?"  'my/elfeed-search-view-hydra/body)
+      "?"  'my/elfeed-search-view-hydra/body
+      "t"  'my/elfeed-translate
+      "J" '(lambda () (interactive) (evil-next-line 5))
+      "K" '(lambda () (interactive) (evil-previous-line 5))
+      )
+
+    (evilified-state-evilify-map elfeed-show-mode-map
+      :mode elfeed-show-mode
+      :eval-after-load elfeed-show
+      :bindings
+      "t" 'my/elfeed-translate
+      "J" '(lambda () (interactive) (evil-next-line 5))
+      "K" '(lambda () (interactive) (evil-previous-line 5))
+      )
+
+    (setq elfeed-curl-extra-arguments '("-x" "socks5h://localhost:1080"))
   ))
 
 (defun zilongshanren-misc/init-helm-chrome ()
@@ -1224,7 +1252,16 @@
     (fanyi-providers '(fanyi-haici-provider fanyi-longman-provider fanyi-youdao-thesaurus-provider))
     :commands fanyi-dwim fanyi-dwim2
     :config
-    (define-key fanyi-mode-map (kbd "s") #'fanyi-dwim)
+
+    (evilified-state-evilify-map fanyi-mode-map
+      :bindings
+      "go" 'spacemacs/counsel-jump-in-buffer
+      "gj" 'org-forward-element
+      "gk" 'org-backward-element
+      "s" 'fanyi-dwim
+      "J" '(lambda () (interactive) (evil-next-line 5))
+      "K" '(lambda () (interactive) (evil-previous-line 5))
+      )
     ))
 
 (defun zilongshanren-misc/init-youdao-dictionary ()
@@ -1246,16 +1283,50 @@
 
 (defun zilongshanren-misc/init-go-translate ()
   (use-package go-translate
-    :commands go-translate go-translate-popup go-translate-kill-ring-save
+    :commands gts-do-translate-popup gts-do-translate gts-do-translate-kill-ring
     :config
-    (setq go-translate-base-url "https://translate.google.cn")
-    (setq go-translate-buffer-follow-p t)
-    (setq go-translate-local-language "zh-CN")
-    (setq go-translate-target-language "en")
-    (setq go-translate-inputs-function #'go-translate-inputs-current-or-prompt)
+    (setq gts-translate-list '(("en" "zh")))
+    (setq gts-default-translator
+          (gts-translator
+           :picker (gts-noprompt-picker)
+           :engines (list (gts-google-engine))
+           :render  (gts-buffer-render)
+           ))
 
-    (defun go-translate-token--extract-tkk ()
-      (cons 430675 2721866130))
+    (setq gts-popup-translator
+      (gts-translator
+       :picker (gts-noprompt-picker)
+       :engines (list (gts-google-engine :parser (gts-google-summary-parser)))
+       :render (gts-posframe-pop-render)
+       ))
+
+    (setq gts-kill-ring-translator
+          (gts-translator
+           :picker (gts-noprompt-picker)
+           :engines (list (gts-google-engine :parser (gts-google-summary-parser)))
+           :render (gts-kill-ring-render)
+           ))
+
+    (cl-defmethod gts-translate :before ((o gts-engine) task callback)
+      (with-slots (text) task
+        ;; 删除多余行的逻辑，有没有更简单的方法?
+        (with-temp-buffer
+          (insert text)
+          (goto-char (point-min))
+          (while (re-search-forward "\n" nil t)
+            (if (equal (char-after) ?\n)
+                (re-search-forward "[^\n]" nil t)
+              (kill-backward-chars 1)
+              (insert " ")))
+          (setf text (buffer-string)))))
+
+    (defun gts-do-translate-popup ()
+      (interactive)
+      (gts-translate gts-popup-translator))
+
+    (defun gts-do-translate-kill-ring ()
+      (interactive)
+      (gts-translate gts-kill-ring-translator))
     ))
 
 (defun zilongshanren-misc/init-speed-type ()

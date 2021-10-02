@@ -399,6 +399,8 @@ the entry of interest in the bibfile.  but does not check that."
 
     (setq org-roam-ui-mode nil)
     :commands org-roam-ui-mode orui-node-zoom orui-node-local orui-open
+    :config
+    (setq org-roam-ui-browser-function 'eaf-open-browser)
     ))
 
 (defun zilongshanren-org/init-org-roam-bibtex ()

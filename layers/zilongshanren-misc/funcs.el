@@ -1012,4 +1012,4 @@ You can use \\&, \\N to refer matched text."
 
 (defun open-v2raya()
   (interactive)
-  (browse-url "http://127.0.0.1:2017/"))
+  (eaf-open-browser "http://127.0.0.1:2017/"))

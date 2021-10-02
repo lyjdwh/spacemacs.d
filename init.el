@@ -35,7 +35,6 @@ This function should only modify configuration layer settings."
           :packages (not ivy-rich all-the-icons-ivy-rich)
           )
      better-defaults
-     (unicode-fonts :variables unicode-fonts-enable-ligatures nil)
      (spacemacs-editing-visual :packages (not rainbow-delimiters))
      (treemacs :variables
                treemacs-use-all-the-icons-theme t
@@ -179,7 +178,7 @@ This function should only modify configuration layer settings."
                wakatime-cli-path "/usr/bin/wakatime")
      pandoc
      (elfeed :variables
-             rmh-elfeed-org-files (list "~/org-notes/elfeed.org"))
+             rmh-elfeed-org-files (list "~/org-notes/notes/elfeed.org"))
      copy-as-format
      (mu4e :variables
            mu4e-enable-async-operations t
@@ -588,7 +587,7 @@ dump."
                 ;;   ("nongnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/nongnu/"))
                 '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
                   ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
-                  ("nongnu-cn"   . "http://elpa.emacs-china.org/nongnu"))
+                  ("nongnu-cn"   . "http://elpa.emacs-china.org/nongnu/"))
                 )
 
   (setq term-char-mode-point-at-process-mark nil)
@@ -612,6 +611,7 @@ dump."
   (setenv "WORKON_HOME" "/home/liuyan/.conda/envs")
 
   ;; enable org-protocol
+  (require 'org-install)
   (require 'org-protocol)
   (require 'org-roam-protocol)
 
@@ -795,6 +795,7 @@ unwanted space when exporting org-mode to hugo markdown."
 
   (add-hook 'after-make-frame-functions #'configure-only-for-tui-frame)
 
+  (setq redisplay-skip-fontification-on-input t)
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
