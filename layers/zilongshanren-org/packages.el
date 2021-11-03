@@ -7,7 +7,7 @@
     (notdeft :location local)
     org-roam
     (org-transclusion :location (recipe :fetcher github :repo "nobiot/org-transclusion" :files ("*")))
-    (org-roam-bibtex :location (recipe :fetcher github :repo "org-roam/org-roam-bibtex" :branch "org-roam-v2"))
+    org-roam-bibtex
     ivy-bibtex
     org-noter
     org-ref
@@ -19,7 +19,14 @@
     ox-hugo
     iscroll
     cdlatex
+    xenops
     (org-roam-ui :location (recipe :fetcher github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
+    ))
+
+(defun zilongshanren-org/init-xenops()
+  (use-package xenops
+    :hook (LaTeX-mode . xenops-mode)
+    :hook (org-mode . xenops-mode)
     ))
 
 (defun zilongshanren-org/init-cdlatex()
@@ -138,7 +145,7 @@
     :after org
     :config
     (setq org-clock-watch-work-plan-file-path "~/org-notes/gtd.org")
-    (org-clock-watch-toggle 'on)
+    ;; (org-clock-watch-toggle 'on)
     ))
 
 (defun zilongshanren-org/init-org-super-agenda ()
@@ -389,17 +396,17 @@ the entry of interest in the bibfile.  but does not check that."
   (use-package org-roam-ui
     :init
     (spacemacs/set-leader-keys
-      "ams" 'orui-open
-      "amz" 'orui-node-zoom
-      "amL" 'orui-node-local)
+      "ams" 'org-roam-ui-open
+      "amz" 'org-roam-ui-node-zoom
+      "amL" 'org-roam-ui-node-local)
 
     (spacemacs/set-leader-keys-for-major-mode 'org-mode
-      "mz" 'orui-node-zoom
-      "mL" 'orui-node-local)
+      "mz" 'org-roam-ui-node-zoom
+      "mL" 'org-roam-ui-node-local)
 
-    (setq org-roam-ui-mode nil)
-    :commands org-roam-ui-mode orui-node-zoom orui-node-local orui-open
+    :commands org-roam-ui-mode org-roam-ui-node-zoom org-roam-ui-node-local org-roam-ui-open
     :config
+    (setq org-roam-ui-open-on-start nil)
     (setq org-roam-ui-browser-function 'eaf-open-browser)
     ))
 

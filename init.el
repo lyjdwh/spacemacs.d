@@ -585,9 +585,9 @@ dump."
                 ;; '(("melpa-cn" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")
                 ;;   ("gnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
                 ;;   ("nongnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/nongnu/"))
-                '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-                  ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
-                  ("nongnu-cn"   . "http://elpa.emacs-china.org/nongnu/"))
+                '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+                  ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")
+                  ("nongnu-cn"   . "http://elpa.zilongshanren.com/nongnu/"))
                 )
 
   (setq term-char-mode-point-at-process-mark nil)

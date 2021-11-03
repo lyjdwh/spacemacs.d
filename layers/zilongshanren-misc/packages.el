@@ -547,6 +547,11 @@
       "t" 'my/elfeed-translate
       "J" '(lambda () (interactive) (evil-next-line 5))
       "K" '(lambda () (interactive) (evil-previous-line 5))
+      "w" 'my-forward-word
+      "b" 'self-insert-command
+      "H" 'evil-first-non-blank
+      "L" 'evil-end-of-line
+      "v" 'evil-visual-char
       )
 
     (setq elfeed-curl-extra-arguments '("-x" "socks5h://localhost:1080"))
@@ -1904,6 +1909,8 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (evil-define-key '(normal visual) 'global-map (kbd "[ s") 'backward-sexp)
     (evil-define-key '(normal visual) 'global-map (kbd "[ u") 'backward-up-list)
     (evil-define-key '(normal visual) 'global-map (kbd "] u") 'backward-up-list)
+    (evil-define-key '(normal visual) 'global-map (kbd "] p") 'evil-forward-paragraph)
+    (evil-define-key '(normal visual) 'global-map (kbd "[ p") 'evil-backward-paragraph)
 
     (define-key evil-normal-state-map (kbd "M-y") 'counsel-yank-pop)
     (define-key evil-normal-state-map (kbd "g f") 'find-file-in-project-at-point)

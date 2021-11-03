@@ -174,6 +174,7 @@
 (spacemacs/set-leader-keys "otb" 'change-browser-function)
 (spacemacs/set-leader-keys "aep" 'eaf-toggle-proxy)
 (spacemacs/set-leader-keys "aeu" 'eaf-install-and-update)
+(spacemacs/set-leader-keys "aer" 'eaf-open-rss-reader)
 (spacemacs/set-leader-keys "of" 'eaf-open-in-file-manager)
 
 (spacemacs/set-leader-keys-for-major-mode 'eaf-edit-mode

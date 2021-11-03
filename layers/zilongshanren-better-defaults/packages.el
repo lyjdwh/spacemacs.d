@@ -86,7 +86,7 @@
                eaf-open eaf-open-url eaf-open-office eaf-open-mindmap eaf-open-airshare
                eaf-open-bookmark eaf-kill-process eaf-search-it eaf-file-browser-qrcode
                eaf-install-dependencies eaf-install-and-update eaf-open-file-manager eaf-open-in-file-manager
-               eaf-pdf-synctex-forward-view)
+               eaf-pdf-synctex-forward-view eaf-open-rss-reader)
     :diminish eaf-mode
     :init
     (use-package epc :defer t :ensure t)
@@ -115,6 +115,7 @@
     (require 'eaf-markdown-previewer)
     (require 'eaf-file-manager)
     (require 'eaf-camera)
+    (require 'eaf-rss-reader)
 
     (require 'eaf-evil)
     (require 'eaf-all-the-icons)
@@ -187,6 +188,16 @@
         (if file-path
             (eaf-open-this file-path)
           (message "No file associated to this buffer."))))
+
+    (defun eaf-goto-left-tab ()
+      "Go to left tab when awesome-tab exists."
+      (interactive)
+      (awesome-tab-backward-tab))
+
+    (defun eaf-goto-right-tab ()
+      "Go to right tab when awesome-tab exists."
+      (interactive)
+      (awesome-tab-forward-tab))
     ))
 
 (defun zilongshanren-better-defaults/post-init-recentf ()

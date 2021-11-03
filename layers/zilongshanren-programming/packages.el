@@ -290,7 +290,6 @@
     (dolist (lang org-babel-lang-list)
       (eval `(lsp-org-babel-enable ,lang)))
 
-    (add-hook 'lsp-completion-mode-hook '(lambda () (setq-local company-backends (delete 'company-capf company-backends))))
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
