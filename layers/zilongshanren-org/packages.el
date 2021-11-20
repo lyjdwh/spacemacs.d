@@ -14,13 +14,14 @@
     org-super-agenda
     (org-clock-watch :location (recipe :fetcher github :repo "wztdream/org-clock-watch" :files ("*")))
     (gkhabit :location (recipe :fetcher github :repo "Kinneyzhang/gkhabit"))
-    org-latex-impatient
+    (popweb :location (recipe :fetcher github :repo "manateelazycat/popweb" :files ("*.*")))
+    (popweb-latex :location (recipe :fetcher github :repo "manateelazycat/popweb" :files ("extension/latex/*")))
     easy-hugo
     ox-hugo
     iscroll
     cdlatex
     xenops
-    (org-roam-ui :location (recipe :fetcher github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
+    org-roam-ui
     ))
 
 (defun zilongshanren-org/init-xenops()
@@ -120,16 +121,16 @@
     (setq easy-hugo-url "")
     ))
 
-(defun zilongshanren-org/init-org-latex-impatient()
-  (use-package org-latex-impatient
-    :commands org-latex-impatient-mode
+(defun zilongshanren-org/init-popweb()
+  (use-package popweb
+    :commands popweb-latex-mode
+    ))
+
+(defun zilongshanren-org/init-popweb-latex()
+  (use-package popweb-latex
     :init
-    (spacemacs/set-leader-keys-for-major-mode 'org-mode
-      "To" 'org-latex-impatient-mode)
-    (setq org-latex-impatient-tex2svg-bin
-          "~/node_modules/mathjax-node-cli/bin/tex2svg")
-    (setq org-latex-impatient-posframe-position-handler
-          'posframe-poshandler-point-bottom-left-corner)
+    (spacemacs/set-leader-keys "otl" 'popweb-latex-mode)
+    :commands popweb-latex-mode
     ))
 
 (defun zilongshanren-org/init-gkhabit ()
