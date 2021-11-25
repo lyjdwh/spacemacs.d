@@ -88,7 +88,17 @@
         forge
         rainbow-delimiters
         xref
+        blamer
         ))
+
+(defun zilongshanren-misc/init-blamer()
+  (use-package blamer
+    :init
+    (spacemacs/set-leader-keys "otg" 'global-blamer-mode)
+    :custom
+    (blamer-idle-time 0.3)
+    (blamer-min-offset 70)
+    ))
 
 (defun zilongshanren-misc/post-init-xref()
   (setq xref-search-program 'ripgrep)
