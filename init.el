@@ -626,27 +626,11 @@ dump."
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
   (global-hungry-delete-mode t)
-  (spacemacs|diminish helm-gtags-mode)
-  (spacemacs|diminish ggtags-mode)
-  (spacemacs|diminish which-key-mode)
-  (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
-  (spacemacs|diminish counsel-mode)
 
   (evilified-state-evilify-map special-mode-map :mode special-mode)
 
   (add-to-list 'auto-mode-alist
                '("Capstanfile\\'" . yaml-mode))
-
-  (defun js-indent-line ()
-    "Indent the current line as JavaScript."
-    (interactive)
-    (let* ((parse-status
-            (save-excursion (syntax-ppss (point-at-bol))))
-           (offset (- (point) (save-excursion (back-to-indentation) (point)))))
-      (if (nth 3 parse-status)
-          'noindent
-        (indent-line-to (js--proper-indentation parse-status))
-        (when (> offset 0) (forward-char offset)))))
 
   (global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
   (defun un-indent-by-removing-4-spaces ()
@@ -681,47 +665,6 @@ dump."
                                (counsel-grep .2)
                                (t . 3)))
 
-  ;; boost find file and load saved persp layout  performance
-  ;; which will break some function on windows platform
-  ;; eg. known issues: magit related buffer color, reopen will fix it
-  (when (spacemacs/system-is-mswindows)
-    (progn (setq find-file-hook nil)
-           (setq vc-handled-backends nil)
-           (setq magit-refresh-status-buffer nil)
-           (add-hook 'find-file-hook 'spacemacs/check-large-file)
-
-           ;; emax.7z in not under pdumper release
-           ;; https://github.com/m-parashar/emax64/releases/tag/pdumper-20180619
-           (defvar emax-root (concat (expand-file-name "~") "/emax"))
-
-           (when (file-exists-p emax-root)
-             (progn
-               (defvar emax-root (concat (expand-file-name "~") "/emax"))
-               (defvar emax-bin64 (concat emax-root "/bin64"))
-               (defvar emax-mingw64 (concat emax-root "/mingw64/bin"))
-               (defvar emax-lisp (concat emax-root "/lisp"))
-
-               (setq exec-path (cons emax-bin64 exec-path))
-               (setenv "PATH" (concat emax-bin64 ";" (getenv "PATH")))
-
-               (setq exec-path (cons emax-mingw64 exec-path))
-               (setenv "PATH" (concat emax-mingw64 ";" (getenv "PATH")))
-               ))
-
-           (add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))))
-
-  ;; (setq exec-path (cons "/Users/lionqu/.nvm/versions/node/v10.16.0/bin/" exec-path))
-  ;; (setenv "PATH" (concat "/Users/lionqu/.nvm/versions/node/v10.16.0/bin:" (getenv "PATH")))
-
-  (defun counsel-locate-cmd-es (input)
-    "Return a shell command based on INPUT."
-    (counsel-require-program "es.exe")
-    (encode-coding-string (format "es.exe -i -r -p %s"
-                                  (counsel-unquote-regex-parens
-                                   (ivy--regex input t)))
-                          'gbk))
-  ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
-
   (add-hook 'org-mode-hook 'emojify-mode)
   (add-hook 'org-mode-hook 'auto-fill-mode)
 
@@ -741,9 +684,6 @@ unwanted space when exporting org-mode to hugo markdown."
   ;; fix for the magit popup doesn't have a q keybindings
   (with-eval-after-load 'transient
     (transient-bind-q-to-quit))
-
-  ;; fix for the lsp error
-  (defvar spacemacs-jump-handlers-fundamental-mode nil)
 
   ;;copy/paste with emacs in terminal
   ;;from https://hugoheden.wordpress.com/2009/03/08/copypaste-with-emacs-in-terminal/
@@ -796,6 +736,8 @@ unwanted space when exporting org-mode to hugo markdown."
   (add-hook 'after-make-frame-functions #'configure-only-for-tui-frame)
 
   (setq redisplay-skip-fontification-on-input t)
+
+  (better-pixel-scroll-mode t)
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
