@@ -164,15 +164,15 @@
                 TeX-PDF-mode t
                 reftex-plug-into-AUCTeX t
                 Tex-save-query nil
-                ;; TeX-view-program-list
-                ;; '(("Okular" "okular --unique %o#src:%n`pwd`/./%b")
-                ;;   ("Skim" "displayline -b -g %n %o %b")
-                ;;   ("Zathura"
-                ;;    ("zathura %o"
-                ;;     (mode-io-correlate
-                ;;      " --synctex-forward %n:0:%b -x \"emacsclient +%{line} %{input}\""))))
+                TeX-view-program-list
+                '(("Okular" "okular --unique %o#src:%n`pwd`/./%b")
+                  ("eaf" eaf-pdf-synctex-forward-view)
+                  ("Skim" "displayline -b -g %n %o %b")
+                  ("Zathura"
+                   ("zathura %o"
+                    (mode-io-correlate
+                     " --synctex-forward %n:0:%b -x \"emacsclient +%{line} %{input}\""))))
                 )
-          (add-to-list 'TeX-view-program-list '("eaf" eaf-pdf-synctex-forward-view))
           (add-to-list 'TeX-view-program-selection '(output-pdf "eaf"))
 
           (imenu-add-menubar-index)
