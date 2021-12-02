@@ -115,7 +115,7 @@ This function should only modify configuration layer settings."
           org-journal-date-format "%A, %B %d %Y"
           org-journal-time-prefix "* "
           org-journal-time-format ""
-          :packages (not org-roam))
+          :packages (not org-roam org-appear))
      ;; gpu
      yaml
      ;;  react

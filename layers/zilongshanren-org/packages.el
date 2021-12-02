@@ -24,12 +24,37 @@
     org-roam-ui
     aas
     laas
+    org-appear
+    ))
+
+(defun zilongshanren-org/init-org-appear()
+  (use-package org-appear
+    :hook
+    (org-mode . org-appear-mode)
+    :init
+    ;; Instant toggle raw format on insert mode, 1 second delay on normal mode.
+    (add-hook 'evil-insert-state-entry-hook (lambda() (setq org-appear-delay 0)))
+    (add-hook 'evil-normal-state-entry-hook (lambda() (setq org-appear-delay 1)))
+    :config
+    ;; Hide emphasis makers.
+    (setq org-hide-emphasis-markers t)
+    :custom
+    (org-appear-delay 0)
+    (org-appear-autolinks t)
+    (org-appear-autoentities t)
+    (org-appear-autokeywords t)
+    (org-appear-autosubmarkers t)
+    (org-appear-autoemphasis t)
     ))
 
 (defun zilongshanren-org/init-aas()
   (use-package aas
     :hook (LaTeX-mode . aas-activate-for-major-mode)
     :hook (org-mode . aas-activate-for-major-mode)
+    :config
+    (aas-set-snippets 'org-mode
+      ;; expand unconditionally
+      "imt" "#+attr_org: :width  700")
     ))
 
 (defun zilongshanren-org/init-laas()
@@ -64,6 +89,8 @@
   (use-package xenops
     :hook (LaTeX-mode . xenops-mode)
     :hook (org-mode . xenops-mode)
+    :config
+    (setq xenops-math-image-scale-factor 1.2)
     ))
 
 (defun zilongshanren-org/init-cdlatex()
