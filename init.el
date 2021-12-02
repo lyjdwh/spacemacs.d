@@ -581,14 +581,10 @@ dump."
   )
 
 (defun dotspacemacs/user-init ()
-  (setq-default configuration-layer-elpa-archives
-                ;; '(("melpa-cn" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")
-                ;;   ("gnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
-                ;;   ("nongnu-cn"   . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/nongnu/"))
-                '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
-                  ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")
-                  ("nongnu-cn"   . "http://elpa.zilongshanren.com/nongnu/"))
-                )
+  ;; (setq-default configuration-layer-elpa-archives
+  ;;               '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+  ;;                 ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")
+  ;;                 ("nongnu-cn"   . "http://elpa.zilongshanren.com/nongnu/")))
 
   (setq term-char-mode-point-at-process-mark nil)
 
@@ -737,7 +733,7 @@ unwanted space when exporting org-mode to hugo markdown."
 
   (setq redisplay-skip-fontification-on-input t)
 
-  (better-pixel-scroll-mode t)
+  (pixel-scroll-precision-mode t)
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))

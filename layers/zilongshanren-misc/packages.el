@@ -359,7 +359,7 @@
             (avy-goto-line . avy-order-closest)))
 
     (evil-define-key '(normal visual) 'global-map (kbd "gp") 'avy-goto-parens)
-    (evil-define-key '(normal visual) 'global-map (kbd "gL") 'avy-goto-line)
+    (evil-define-key '(normal visual) 'global-map (kbd "gl") 'avy-goto-line)
     (evil-define-key 'normal 'global-map (kbd "S") 'evil-avy-goto-char-2)
     (evil-define-key 'normal 'global-map (kbd "s") 'evil-avy-goto-char)
     (evil-define-key 'visual 'global-map (kbd "F") 'evil-avy-goto-char-2)

@@ -198,6 +198,25 @@
       "Go to right tab when awesome-tab exists."
       (interactive)
       (awesome-tab-forward-tab))
+
+    (defun eaf-pdf-synctex-forward-view ()
+      "View the PDF file of Tex synchronously."
+      (interactive)
+      (let* ((pdf-url (expand-file-name (TeX-active-master (TeX-output-extension))))
+             (tex-buffer (window-buffer (minibuffer-selected-window)))
+             (tex-file (buffer-file-name tex-buffer))
+             (line-num (progn (set-buffer tex-buffer) (line-number-at-pos)))
+             (opened-buffer (eaf-pdf--find-buffer pdf-url))
+             (synctex-info (eaf-pdf--get-synctex-info tex-file line-num pdf-url)))
+        (if (not opened-buffer)
+            (progn
+              (when (< (length (window-list)) 2)
+                (split-window-right))
+              (evil-window-top-left)
+              (eaf-open pdf-url "pdf-viewer" (format "synctex_info=%s" synctex-info)))
+          (pop-to-buffer opened-buffer)
+          (eaf-call-sync "call_function_with_args" eaf--buffer-id
+                         "jump_to_page_synctex" (format "%s" synctex-info)))))
     ))
 
 (defun zilongshanren-better-defaults/post-init-recentf ()
