@@ -156,15 +156,21 @@
     (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
 
     ;; key customize
-    (add-to-list 'eaf-pdf-viewer-keybinding '("d" . "eaf-proxy-scroll_up_page"))
-    (add-to-list 'eaf-pdf-viewer-keybinding '("u" . "eaf-proxy-scroll_down_page"))
-    (add-to-list 'eaf-pdf-viewer-keybinding '("aa" . "eaf-proxy-add_annot_highlight"))
-    (add-to-list 'eaf-pdf-viewer-keybinding '("au" . "eaf-proxy-add_annot_underline"))
-    (add-to-list 'eaf-pdf-viewer-keybinding '("as" . "eaf-proxy-add_annot_squiggly"))
-    (add-to-list 'eaf-pdf-viewer-keybinding '("ae" . "eaf-proxy-add_annot_text_or_edit_annot"))
-    (add-to-list 'eaf-pdf-viewer-keybinding '("ad" . "eaf-proxy-add_annot_strikeout_or_delete_annot"))
-    (add-to-list 'eaf-pdf-viewer-keybinding '("C-c" . "copy_select"))
-    (add-to-list 'eaf-browser-keybinding '("C-c" . "kill_text"))
+    (eaf-bind-key scroll_up_page "d" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key scroll_down_page "u" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key add_annot_highlight "ah" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key add_annot_underline "au" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key add_annot_squiggly "as" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key add_annot_inline_text "ai" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key add_annot_popup_text "ap" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key add_annot_strikeout_or_delete_annot "ad" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key edit_annot_text "ae" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key move_annot_text "am" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key undo_annot_action "aU" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key redo_annot_action "aR" eaf-pdf-viewer-keybinding)
+
+    (eaf-bind-key copy_select "C-c" eaf-pdf-viewer-keybinding)
+    (eaf-bind-key kill_text "C-c" eaf-browser-keybinding)
 
     ;; (add-to-list 'eaf-preview-display-function-alist '("browser" . eaf--browser-display))
 
