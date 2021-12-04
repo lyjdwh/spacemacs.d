@@ -238,7 +238,7 @@
 
 (defun zilongshanren-programming/post-init-lsp-mode ()
   (progn
-    (setq lsp-enable-file-watchers nil)
+    (setq lsp-enable-file-watchers t)
     (setq lsp-file-watch-threshold 2000)
     (setq read-process-output-max (* 1024 1024 8)) ;; 8mb
 
@@ -290,6 +290,9 @@
     (dolist (lang org-babel-lang-list)
       (eval `(lsp-org-babel-enable ,lang)))
 
+    (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
+    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]data\\'")
+    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]*logs*\\'")
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
