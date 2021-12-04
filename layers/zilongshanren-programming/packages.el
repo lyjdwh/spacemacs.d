@@ -24,7 +24,7 @@
         taskrunner
         (ivy-taskrunner :location (recipe :fetcher github :repo "emacs-taskrunner/ivy-taskrunner"))
         counsel-etags
-        (company-tip :location (recipe :fetcher github :repo "liushihao456/emacs_config" :files ("packages/company-tip/*.el")))
+        (company-tip :location local)
         vimrc-mode
         mermaid-mode
         ob-mermaid
