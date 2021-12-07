@@ -476,11 +476,6 @@ the entry of interest in the bibfile.  but does not check that."
 
 (defun zilongshanren-org/init-org-roam ()
   (use-package org-roam
-    :hook
-    (after-init . org-roam-mode)
-    :custom
-    (org-roam-directory deft-dir)
-    (org-roam-file-extensions '("org" "md"))
     :init
     (setq org-roam-v2-ack t)
     (progn
@@ -518,8 +513,13 @@ the entry of interest in the bibfile.  but does not check that."
         "mor" 'org-roam-ref-add
         "moR" 'org-roam-ref-remove
         ))
+    :custom
+    (org-roam-directory deft-dir)
+    (org-roam-file-extensions '("org" "md"))
     :config
     (org-roam-db-autosync-mode)
+    (add-hook 'org-roam-mode-hook (lambda ()
+                                    (require 'org-roam-protocol)))
     (setq org-id-link-to-org-use-id t)
     (setq org-roam-mode-sections
           (list #'org-roam-backlinks-section
@@ -567,6 +567,12 @@ the entry of interest in the bibfile.  but does not check that."
              :unnarrowed t)))
 
     (add-hook 'org-mode-hook (lambda () (add-to-list 'company-backends #'company-capf)))
+
+    (evilified-state-evilify-map org-roam-mode-map
+      :mode org-roam-mode
+      :bindings
+      "o" 'link-hint-open-link
+      "r" 'org-roam-buffer-refresh)
     ))
 
 (defun zilongshanren-org/init-org-transclusion()

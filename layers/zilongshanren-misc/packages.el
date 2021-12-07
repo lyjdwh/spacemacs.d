@@ -201,7 +201,7 @@
   (setq mu4e-maildir "~/.mail"
         mu4e-trash-folder "/trash"
         mu4e-refile-folder "/archive"
-        mu4e-get-mail-command "offlineimap -o"
+        mu4e-get-mail-command "proxychains -q mbsync -a"
         mu4e-update-interval 3600
         mu4e-view-show-images t
         mu4e-view-show-addresses t
@@ -211,6 +211,10 @@
         smtpmail-stream-type  'starttls
         smtpmail-smtp-service 587
         mu4e-sent-messages-behavior 'sent)
+
+
+  ;; Use Ivy for mu4e completions (maildir folders, etc)
+  (setq mu4e-completing-read-function #'ivy-completing-read)
 
 ;;; Bookmarks
   (with-eval-after-load 'mu4e
@@ -281,11 +285,9 @@
               (user-full-name     . "yan.liu")
               (smtpmail-smtp-server . "smtp.gmail.com")
               (smtpmail-smtp-user . "lyjdwh@gmail.com")
-              (mu4e-sent-folder . "/gmail/[Gmail].已发邮件")
-              (mu4e-drafts-folder . "/gmail/[Gmail].草稿")
+              (mu4e-sent-folder . "/gmail/Sent")
+              (mu4e-drafts-folder . "/gmail/[Gmail]/Drafts")
          ))))
-
-  (setq org-mu4e-convert-to-html t)
   )
 
 (defun zilongshanren-misc/post-init-counsel-projectile()

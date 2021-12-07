@@ -581,10 +581,10 @@ dump."
   )
 
 (defun dotspacemacs/user-init ()
-  ;; (setq-default configuration-layer-elpa-archives
-  ;;               '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
-  ;;                 ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")
-  ;;                 ("nongnu-cn"   . "http://elpa.zilongshanren.com/nongnu/")))
+  (setq-default configuration-layer-elpa-archives
+                '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+                  ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")
+                  ("nongnu-cn"   . "http://elpa.zilongshanren.com/nongnu/")))
 
   (setq term-char-mode-point-at-process-mark nil)
 
@@ -609,7 +609,6 @@ dump."
   ;; enable org-protocol
   (require 'org-install)
   (require 'org-protocol)
-  (require 'org-roam-protocol)
 
   (fset 'evil-visual-update-x-selection 'ignore)
 
