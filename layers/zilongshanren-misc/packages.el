@@ -339,6 +339,8 @@
                              (push it company-backends))
                            ))
     :config
+    (defconst telega-tdlib-min-version "1.7.0")
+
     (setq telega-proxies '((:server "localhost" :port 1080
                                     :enable t :type (:@type "proxyTypeSocks5")))
           telega-sticker-set-download t)
