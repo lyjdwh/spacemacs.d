@@ -17,6 +17,7 @@
     (tree-sitter-langs :location local)
     (grammatical-edit :location (recipe :fetcher github :repo "manateelazycat/grammatical-edit"))
     (find-orphan :location (recipe :fetcher github :repo "manateelazycat/find-orphan"))
+    evil-textobj-tree-sitter
     ))
 
 (defun zilongshanren-better-defaults/init-tree-sitter()
@@ -97,6 +98,20 @@
       (interactive)
       (setq find-orphan-search-dir (or (projectile-project-root) default-directory))
       (find-orphan-function 'find-orphan-match-times-in-directory "directory"))
+    ))
+
+(defun zilongshanren-better-defaults/init-evil-textobj-tree-sitter()
+  (use-package evil-textobj-tree-sitter
+    :config
+    ;; v/y + a/i + f/c/x
+    (define-key evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
+    (define-key evil-inner-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.inner"))
+
+    (define-key evil-outer-text-objects-map "c" (evil-textobj-tree-sitter-get-textobj "class.outer"))
+    (define-key evil-inner-text-objects-map "c" (evil-textobj-tree-sitter-get-textobj "class.inner"))
+
+    (define-key evil-outer-text-objects-map "x" (evil-textobj-tree-sitter-get-textobj "statement.outer"))
+    (define-key evil-inner-text-objects-map "x" (evil-textobj-tree-sitter-get-textobj "statement.outer"))
     ))
 
 (defun zilongshanren-better-defaults/init-move-to-position-hint ()
