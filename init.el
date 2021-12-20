@@ -582,9 +582,9 @@ dump."
 
 (defun dotspacemacs/user-init ()
   (setq-default configuration-layer-elpa-archives
-                '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
-                  ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")
-                  ("nongnu-cn"   . "http://elpa.zilongshanren.com/nongnu/")))
+                '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+                  ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                  ("nongnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")))
 
   (setq term-char-mode-point-at-process-mark nil)
 
