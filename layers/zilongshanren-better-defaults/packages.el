@@ -13,6 +13,54 @@
     super-save
     company-box
     (move-to-position-hint :location local)
+    tree-sitter
+    tree-sitter-langs
+    (grammatical-edit :location (recipe :fetcher github :repo "manateelazycat/grammatical-edit"))
+    ))
+
+(defun zilongshanren-better-defaults/init-tree-sitter()
+  (use-package tree-sitter))
+
+(defun zilongshanren-better-defaults/init-tree-sitter-langs()
+  (use-package tree-sitter-langs))
+
+(defun zilongshanren-better-defaults/init-grammatical-edit()
+  (use-package grammatical-edit
+    :config
+    (dolist (hook (list
+                   'c-mode-common-hook
+                   'c-mode-hook
+                   'c++-mode-hook
+                   'java-mode-hook
+                   'emacs-lisp-mode-hook
+                   'lisp-interaction-mode-hook
+                   'lisp-mode-hook
+                   'sh-mode-hook
+                   'python-mode-hook
+                   'js-mode-hook
+                   'go-mode-hook
+                   'css-mode-hook
+                   'rust-mode-hook
+                   'minibuffer-inactive-mode-hook
+                   ))
+      (add-hook hook '(lambda () (grammatical-edit-mode 1))))
+
+    (define-key grammatical-edit-mode-map (kbd "(") 'grammatical-edit-open-round)
+    (define-key grammatical-edit-mode-map (kbd "[") 'grammatical-edit-open-bracket)
+    (define-key grammatical-edit-mode-map (kbd "{") 'grammatical-edit-open-curly)
+    (define-key grammatical-edit-mode-map (kbd ")") 'grammatical-edit-close-round)
+    (define-key grammatical-edit-mode-map (kbd "]") 'grammatical-edit-close-bracket)
+    (define-key grammatical-edit-mode-map (kbd "}") 'grammatical-edit-close-curly)
+    (define-key grammatical-edit-mode-map (kbd "=") 'grammatical-edit-equal)
+
+    (define-key grammatical-edit-mode-map (kbd "C-\"") 'grammatical-edit-wrap-double-quote)
+    (define-key grammatical-edit-mode-map (kbd "C-'") 'grammatical-edit-wrap-single-quote)
+    (define-key grammatical-edit-mode-map (kbd "C-)") 'grammatical-edit-wrap-round)
+    (define-key grammatical-edit-mode-map (kbd "C-(") 'grammatical-edit-unwrap)
+
+    (define-key grammatical-edit-mode-map (kbd "C-k") 'grammatical-edit-kill)
+
+    (define-key grammatical-edit-mode-map (kbd "C-<return>") 'grammatical-edit-jump-out-pair-and-newline)
     ))
 
 (defun zilongshanren-better-defaults/init-move-to-position-hint ()
