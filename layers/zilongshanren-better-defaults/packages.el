@@ -19,10 +19,16 @@
     ))
 
 (defun zilongshanren-better-defaults/init-tree-sitter()
-  (use-package tree-sitter))
+  (use-package tree-sitter
+    :config
+    (global-tree-sitter-mode)
+    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+    ))
 
 (defun zilongshanren-better-defaults/init-tree-sitter-langs()
-  (use-package tree-sitter-langs))
+  (use-package tree-sitter-langs
+    :after tree-sitter
+    ))
 
 (defun zilongshanren-better-defaults/init-grammatical-edit()
   (use-package grammatical-edit

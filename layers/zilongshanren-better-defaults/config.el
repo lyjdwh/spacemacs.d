@@ -266,10 +266,3 @@ with options to run in the shell.")
 
 ;; Remove useless whitespace before saving a fil
 (add-hook 'before-save-hook #'delete-trailing-whitespace-except-current-line)
-
-(set-face-attribute 'font-lock-function-name-face nil
-                    :height 160
-                    :weight 'bold
-                    ;; :underline t
-                    ;; :overline t
-                    )
