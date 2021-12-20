@@ -16,6 +16,7 @@
     tree-sitter
     (tree-sitter-langs :location local)
     (grammatical-edit :location (recipe :fetcher github :repo "manateelazycat/grammatical-edit"))
+    (find-orphan :location (recipe :fetcher github :repo "manateelazycat/find-orphan"))
     ))
 
 (defun zilongshanren-better-defaults/init-tree-sitter()
@@ -50,6 +51,10 @@
                    'js-mode-hook
                    'go-mode-hook
                    'css-mode-hook
+                   'html-mode-hook
+                   'javascript-mode-hook
+                   'typescript-mode-hook
+                   'json-mode-hook
                    'rust-mode-hook
                    'minibuffer-inactive-mode-hook
                    ))
@@ -74,10 +79,24 @@
     ;; (define-key grammatical-edit-mode-map (kbd "M-{") 'grammatical-edit-wrap-curly)
 
     (define-key grammatical-edit-mode-map (kbd "C-k") 'grammatical-edit-kill)
+    (define-key grammatical-edit-mode-map (kbd "C-d") 'grammatical-edit-backward-kill)
 
     ;; (define-key grammatical-edit-mode-map (kbd "M-p") 'grammatical-edit-jump-right)
     ;; (define-key grammatical-edit-mode-map (kbd "M-n") 'grammatical-edit-jump-left)
     (define-key grammatical-edit-mode-map (kbd "C-<return>") 'grammatical-edit-jump-out-pair-and-newline)
+    ))
+
+(defun zilongshanren-better-defaults/init-find-orphan()
+  (use-package find-orphan
+    :commands find-orphan-function-in-project find-orphan-function-in-buffer
+    :init
+    (spacemacs/set-leader-keys "sro" 'find-orphan-function-in-project)
+    (spacemacs/set-leader-keys "srb" 'find-orphan-function-in-buffer)
+    :config
+    (defun find-orphan-function-in-project ()
+      (interactive)
+      (setq find-orphan-search-dir (or (projectile-project-root) default-directory))
+      (find-orphan-function 'find-orphan-match-times-in-directory "directory"))
     ))
 
 (defun zilongshanren-better-defaults/init-move-to-position-hint ()
