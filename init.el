@@ -598,6 +598,7 @@ dump."
   (setq warning-minimum-level :error)
 
   (setq frame-resize-pixelwise t)
+  (setq quelpa-git-clone-depth 1)
   )
 
 (defun dotspacemacs/user-config ()

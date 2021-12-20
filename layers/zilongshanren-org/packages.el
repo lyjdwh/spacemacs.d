@@ -477,7 +477,6 @@ the entry of interest in the bibfile.  but does not check that."
 (defun zilongshanren-org/init-org-roam ()
   (use-package org-roam
     :init
-    (setq org-roam-v2-ack t)
     (progn
       (spacemacs/declare-prefix "am" "org-roam")
       (spacemacs/set-leader-keys

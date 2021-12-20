@@ -14,7 +14,7 @@
     company-box
     (move-to-position-hint :location local)
     tree-sitter
-    tree-sitter-langs
+    (tree-sitter-langs :location local)
     (grammatical-edit :location (recipe :fetcher github :repo "manateelazycat/grammatical-edit"))
     ))
 
@@ -27,7 +27,11 @@
 
 (defun zilongshanren-better-defaults/init-tree-sitter-langs()
   (use-package tree-sitter-langs
+    :load-path "~/bin/tree-sitter-langs"
     :after tree-sitter
+    :config
+    (tree-sitter-load 'elisp "elisp")
+    (add-to-list 'tree-sitter-major-mode-language-alist '(emacs-lisp-mode . elisp))
     ))
 
 (defun zilongshanren-better-defaults/init-grammatical-edit()
@@ -59,13 +63,20 @@
     (define-key grammatical-edit-mode-map (kbd "}") 'grammatical-edit-close-curly)
     (define-key grammatical-edit-mode-map (kbd "=") 'grammatical-edit-equal)
 
+    (define-key grammatical-edit-mode-map (kbd "\"") 'grammatical-edit-double-quote)
+    (define-key grammatical-edit-mode-map (kbd "'") 'grammatical-edit-single-quote)
+
     (define-key grammatical-edit-mode-map (kbd "C-\"") 'grammatical-edit-wrap-double-quote)
     (define-key grammatical-edit-mode-map (kbd "C-'") 'grammatical-edit-wrap-single-quote)
     (define-key grammatical-edit-mode-map (kbd "C-)") 'grammatical-edit-wrap-round)
     (define-key grammatical-edit-mode-map (kbd "C-(") 'grammatical-edit-unwrap)
+    ;; (define-key grammatical-edit-mode-map (kbd "M-[") 'grammatical-edit-wrap-bracket)
+    ;; (define-key grammatical-edit-mode-map (kbd "M-{") 'grammatical-edit-wrap-curly)
 
     (define-key grammatical-edit-mode-map (kbd "C-k") 'grammatical-edit-kill)
 
+    ;; (define-key grammatical-edit-mode-map (kbd "M-p") 'grammatical-edit-jump-right)
+    ;; (define-key grammatical-edit-mode-map (kbd "M-n") 'grammatical-edit-jump-left)
     (define-key grammatical-edit-mode-map (kbd "C-<return>") 'grammatical-edit-jump-out-pair-and-newline)
     ))
 
