@@ -639,6 +639,10 @@ clock                             ^^^^effort             ^^watcher
   "vl" 'lsp-workon
   "vc" 'current-pyvenv-name)
 
+(spacemacs/set-leader-keys-for-major-mode 'org-mode
+  "bm" 'lsp-org
+  "bM" 'lsp-virtual-buffer-disconnect)
+
 ;; ivy
 (define-key ivy-minibuffer-map (kbd "C-RET") #'ivy-call)
 (define-key ivy-minibuffer-map (kbd "C-d") #'ivy-immediate-done)

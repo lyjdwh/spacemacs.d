@@ -298,13 +298,6 @@
 
     (setq lsp-modeline-diagnostics-scope :project)
 
-    ;; support lsp-mode in org babel
-    ;; :file "test.py"
-    (defvar org-babel-lang-list
-      '("go" "python" "ipython" "ruby" "js" "css" "sass" "C" "C++" "rust" "java" "sh"))
-    (dolist (lang org-babel-lang-list)
-      (eval `(lsp-org-babel-enable ,lang)))
-
     (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
     (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]data\\'")
     (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]*logs*\\'")
