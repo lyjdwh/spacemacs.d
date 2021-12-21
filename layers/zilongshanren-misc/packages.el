@@ -1965,6 +1965,12 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key evil-insert-state-map (kbd "C-z") 'evil-emacs-state)
 
     (evil-define-key 'normal 'global-map (kbd "zy") 'thing-copy-symbol)
+
+    ;; add pulse highlight on yank
+    (defun evil-yank-advice (orig-fn beg end &rest args)
+      (pulse-momentary-highlight-region beg end)
+      (apply orig-fn beg end args))
+    (advice-add 'evil-yank :around 'evil-yank-advice)
     ))
 
 (defun zilongshanren-misc/init-visual-regexp ()
