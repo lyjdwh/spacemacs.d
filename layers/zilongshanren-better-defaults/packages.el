@@ -107,11 +107,23 @@
     (define-key evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
     (define-key evil-inner-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.inner"))
 
+    (define-key evil-outer-text-objects-map "F" (evil-textobj-tree-sitter-get-textobj "call.outer"))
+    (define-key evil-inner-text-objects-map "F" (evil-textobj-tree-sitter-get-textobj "call.inner"))
+
     (define-key evil-outer-text-objects-map "c" (evil-textobj-tree-sitter-get-textobj "class.outer"))
     (define-key evil-inner-text-objects-map "c" (evil-textobj-tree-sitter-get-textobj "class.inner"))
 
+    (define-key evil-outer-text-objects-map "C" (evil-textobj-tree-sitter-get-textobj "comment.outer"))
+    (define-key evil-inner-text-objects-map "C" (evil-textobj-tree-sitter-get-textobj "comment.outer"))
+
+    (define-key evil-outer-text-objects-map "i" (evil-textobj-tree-sitter-get-textobj "conditional.outer"))
+    (define-key evil-inner-text-objects-map "i" (evil-textobj-tree-sitter-get-textobj "conditional.inner"))
+
     (define-key evil-outer-text-objects-map "x" (evil-textobj-tree-sitter-get-textobj "statement.outer"))
     (define-key evil-inner-text-objects-map "x" (evil-textobj-tree-sitter-get-textobj "statement.outer"))
+
+    (define-key evil-outer-text-objects-map "L" (evil-textobj-tree-sitter-get-textobj "loop.outer"))
+    (define-key evil-inner-text-objects-map "L" (evil-textobj-tree-sitter-get-textobj "loop.inner"))
     ))
 
 (defun zilongshanren-better-defaults/init-move-to-position-hint ()
