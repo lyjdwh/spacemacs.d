@@ -402,6 +402,16 @@
 
     (defvar elfeed-search-filter)
 
+    (defun my/elfeed-set-date()
+      (interactive)
+      (save-match-data
+        (let* ((date-regexp (rx (group (or bos blank) "@" (1+ digit) (1+ (not blank)))))
+               (date-tag (when (string-match date-regexp elfeed-search-filter)
+                           (match-string 1 elfeed-search-filter))))
+          (elfeed-search-set-filter
+           (replace-regexp-in-string date-regexp (read-string "Date: " date-tag)
+                                     elfeed-search-filter t t)))))
+
     (cl-defmacro my/elfeed-search-view-hydra-define (name body views)
       "Define a pretty hydra named NAME with BODY and VIEWS.
     VIEWS is a plist: in it, each property is a string which becomes
@@ -455,15 +465,7 @@
                                  (replace-regexp-in-string (rx space) "\\s-" string t t)))
         (let* ((completion-fns
                 (list (cons :complete-age
-                            (lambda ()
-                              (interactive)
-                              (save-match-data
-                                (let* ((date-regexp (rx (group (or bos blank) "@" (1+ digit) (1+ (not blank)))))
-                                       (date-tag (when (string-match date-regexp elfeed-search-filter)
-                                                   (match-string 1 elfeed-search-filter))))
-                                  (elfeed-search-set-filter
-                                   (replace-regexp-in-string date-regexp (read-string "Date: " date-tag)
-                                                             elfeed-search-filter t t))))))
+                            '(my/elfeed-set-date))
                       (cons :complete-feed
                             '(concat "=" (replace-regexp-in-string
                                           (rx space) "\\s-"
@@ -534,7 +536,8 @@
                                                (("@" :complete-age "Date")
                                                 ("d" nil))
                                                "Status"
-                                               (("wu" "+unread"))
+                                               (("wu" "+unread")
+                                                ("m" "+latter"))
                                                "Feed"
                                                (("f TAB" :complete-feed "Choose"))
                                                "Tags"
@@ -548,6 +551,10 @@
                              (read-from-minibuffer "Feed URL: "))))
       (eaf-open-browser (format "https://translate.google.com/translate?tl=zh-CN&sl=en&u=%s" url)))
 
+    (require 'elfeed-lib)
+    (defalias 'elfeed-toggle-latter
+      (elfeed-expose #'elfeed-search-toggle-all 'latter))
+
     (evilified-state-evilify-map elfeed-search-mode-map
       :mode elfeed-search-mode
       :eval-after-load elfeed-search
@@ -556,6 +563,7 @@
       "t"  'my/elfeed-translate
       "J" '(lambda () (interactive) (evil-next-line 5))
       "K" '(lambda () (interactive) (evil-previous-line 5))
+      "m" 'elfeed-toggle-latter
       )
 
     (evilified-state-evilify-map elfeed-show-mode-map
