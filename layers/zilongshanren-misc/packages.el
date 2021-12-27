@@ -1492,6 +1492,7 @@
       ))
 
   (spacemacs/set-leader-keys "atrr" 'my-ranger)
+  (spacemacs/set-leader-keys "fj" 'deer)
   )
 
 ;; copy from spacemacs helm layer

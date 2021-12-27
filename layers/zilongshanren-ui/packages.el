@@ -19,13 +19,6 @@
   )
 
 (defun zilongshanren-ui/init-ivy-rich()
-  (use-package all-the-icons-ivy-rich
-    :after ivy-rich
-    :config
-    (all-the-icons-ivy-rich-mode 1)
-    ))
-
-(defun zilongshanren-ui/init-all-the-icons-ivy-rich()
   (use-package ivy-rich
     :after counsel
     :config
@@ -33,7 +26,14 @@
     (ivy-rich-mode)
     (setq ivy-virtual-abbreviate
           (or (and ivy-rich-mode 'abbreviate) 'name))
-  ))
+    ))
+
+(defun zilongshanren-ui/init-all-the-icons-ivy-rich()
+  (use-package all-the-icons-ivy-rich
+    :after ivy-rich
+    :config
+    (all-the-icons-ivy-rich-mode 1)
+    ))
 
 (defun zilongshanren-ui/init-snow()
   (use-package snow
@@ -191,10 +191,10 @@
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
     (setq dashboard-heading-icons
-          '((recents   . "file-text")
+          '((recents   . "zap")
             (bookmarks . "bookmark")
             (agenda    . "calendar")
-            (projects  . "briefcase")
+            (projects  . "heart")
             (registers . "database"))
           )
 

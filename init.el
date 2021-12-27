@@ -38,7 +38,8 @@ This function should only modify configuration layer settings."
      (spacemacs-editing-visual :packages (not rainbow-delimiters))
      (treemacs :variables
                treemacs-use-all-the-icons-theme t
-               treemacs-use-icons-dired nil)
+               treemacs-use-icons-dired t
+               treemacs-use-git-mode 'deferred)
      helpful
      (ranger :variables ranger-override-dired t )
      emoji
