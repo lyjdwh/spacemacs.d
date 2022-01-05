@@ -13,18 +13,10 @@
     super-save
     company-box
     (move-to-position-hint :location local)
-    tree-sitter
     (tree-sitter-langs :location local)
     (grammatical-edit :location (recipe :fetcher github :repo "manateelazycat/grammatical-edit"))
     (find-orphan :location (recipe :fetcher github :repo "manateelazycat/find-orphan"))
     evil-textobj-tree-sitter
-    ))
-
-(defun zilongshanren-better-defaults/init-tree-sitter()
-  (use-package tree-sitter
-    :config
-    (global-tree-sitter-mode)
-    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
     ))
 
 (defun zilongshanren-better-defaults/init-tree-sitter-langs()

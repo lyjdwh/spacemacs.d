@@ -35,6 +35,8 @@ This function should only modify configuration layer settings."
           :packages (not ivy-rich all-the-icons-ivy-rich)
           )
      better-defaults
+     (tree-sitter :variables tree-sitter-syntax-highlight-enable t
+                  :packages (not tree-sitter-langs))
      (spacemacs-editing-visual :packages (not rainbow-delimiters))
      (treemacs :variables
                treemacs-use-all-the-icons-theme t
