@@ -130,6 +130,7 @@ This function should only modify configuration layer settings."
              python-sort-imports-on-save nil
              python-lsp-server 'pyright
              python-pipenv-activate  t
+             :packages (not importmagic)
              )
      ;; ipython-notebook
      ;; (ruby :variables ruby-version-manager 'chruby)
@@ -448,7 +449,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
@@ -721,7 +722,6 @@ unwanted space when exporting org-mode to hugo markdown."
     (global-so-long-mode))
 
   (setq python-spacemacs-indent-guess nil)
-  (spacemacs/toggle-maximize-frame)
   (spacemacs/toggle-display-time)
 
   (defun configure-only-for-tui-frame (FRAME)

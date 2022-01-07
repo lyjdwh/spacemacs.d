@@ -289,6 +289,9 @@
         (global-set-key [remap evil-previous-line] nil)
         (global-set-key [remap evil-next-visual-line] nil)
         (global-set-key [remap evil-previous-visual-line] nil)))
+
+    (define-key evil-normal-state-map (kbd "J") '(lambda () (interactive) (iscroll-evil-next-line 5)))
+    (define-key evil-normal-state-map (kbd "K") '(lambda () (interactive) (iscroll-evil-previous-line 5)))
     ))
 
 (defun zilongshanren-org/post-init-ox-hugo()
@@ -706,6 +709,9 @@ the entry of interest in the bibfile.  but does not check that."
       ;; Save clock data and notes in the LOGBOOK drawer
       (setq org-clock-into-drawer t)
       (setq org-log-done nil)
+
+      ;; after org 9.5.2
+      (setq org-adapt-indentation t)
 
       (add-to-list 'org-latex-classes '("ctexart" "\\documentclass[11pt]{ctexart}
                                         [NO-DEFAULT-PACKAGES]

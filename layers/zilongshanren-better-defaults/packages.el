@@ -338,7 +338,7 @@
     (make-backup-files nil)
     :config
     (super-save-mode 1)
-    (setq super-save-idle-duration 60)
+    (setq super-save-idle-duration 5)
     ))
 
 (defun zilongshanren-better-defaults/init-rotate-text ()
