@@ -20,10 +20,10 @@ This function should only modify configuration layer settings."
    ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
    ;; (default 'unused)
-   dotspacemacs-enable-lazy-installation nil
+   dotspacemacs-enable-lazy-installation 'unused
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
-   dotspacemacs-ask-for-lazy-installation nil
+   dotspacemacs-ask-for-lazy-installation t
    ;; If non-nil layers with lazy install support are lazy installed.
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
           magit-revert-buffers 'silent
           magit-refs-show-commit-count 'all
           magit-revision-show-gravatars nil
-          git-enable-magit-delta-plugin t
+          git-enable-magit-delta-plugin nil
           git-enable-magit-todos-plugin t
           git-messenger:show-detail t
           git-messenger:use-magit-popup t)
@@ -199,7 +199,10 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    ;; jeison used in powerthesaurus
-   dotspacemacs-additional-packages '(visual-fill-column emacsql emacsql-sqlite emacsql-sqlite3 doom-themes jeison (e2ansi :location (recipe :fetcher github :repo "Lindydancer/e2ansi")) websocket simple-httpd f)
+   dotspacemacs-additional-packages
+   '(visual-fill-column emacsql emacsql-sqlite emacsql-sqlite3 doom-themes jeison
+                        (e2ansi :location (recipe :fetcher github :repo "Lindydancer/e2ansi"))
+                        websocket simple-httpd f epc ctable)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

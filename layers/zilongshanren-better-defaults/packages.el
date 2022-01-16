@@ -450,11 +450,11 @@
     (setq eaf-buffer-title-format "EAF/%s")
 
     ;; browser
-    (setq eaf-proxy-type "socks5")
-    (setq eaf-proxy-host "127.0.0.1")
-    (setq eaf-proxy-port "1080")
-    (setq eaf-browser-aria2-proxy-host "127.0.0.1")
-    (setq eaf-browser-aria2-proxy-port "12333")
+    ;; (setq eaf-proxy-type "socks5")
+    ;; (setq eaf-proxy-host "127.0.0.1")
+    ;; (setq eaf-proxy-port "1080")
+    ;; (setq eaf-browser-aria2-proxy-host "127.0.0.1")
+    ;; (setq eaf-browser-aria2-proxy-port "12333")
     (setq eaf-browser-translate-language "zh-CN")
     (setq eaf-chrome-bookmark-file "~/.config/chromium/Default/Bookmarks")
     (setq eaf-browser-chrome-history-file "~/.config/chromium/Default/History")
