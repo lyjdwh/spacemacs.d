@@ -331,14 +331,33 @@
 
 (defun zilongshanren-better-defaults/init-super-save ()
   (use-package super-save
-    :diminish
     :custom
     (super-save-auto-save-when-idle t)
+    (super-save-idle-duration 1)
     (auto-save-default nil)
     (make-backup-files nil)
+    (save-silently t)
     :config
+    (defcustom super-save-all-buffers t
+      "Save all buffers when t, save only current buffer otherwise"
+      :group 'super-save
+      :type 'boolean)
+
+    (defun super-save-command ()
+      "Save the buffer if needed."
+      (let ((buffer-to-save (if super-save-all-buffers
+                                (buffer-list)
+                              (list (current-buffer)))))
+        (save-excursion
+          (dolist (buf buffer-to-save)
+            (set-buffer buf)
+            (when (and buffer-file-name
+                       (buffer-modified-p (current-buffer))
+                       (file-writable-p buffer-file-name)
+                       (if (file-remote-p buffer-file-name) super-save-remote-files t))
+              (save-buffer))))))
+
     (super-save-mode 1)
-    (setq super-save-idle-duration 5)
     ))
 
 (defun zilongshanren-better-defaults/init-rotate-text ()
