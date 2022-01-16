@@ -40,9 +40,6 @@
 (global-prettify-symbols-mode 1)
 (setq-default fill-column 80)
 
-;; prevent dired window press o to split into three column
-(setq-default split-width-threshold 200)
-
 (setq recenter-positions '(top middle bottom))
 ;; delete the selection with a key press
 (delete-selection-mode t)
@@ -162,15 +159,6 @@ Single Capitals as you type."
       nil))
 
 (add-hook 'find-file-hook 'spacemacs/check-large-file)
-
-(defadvice find-file (before make-directory-maybe
-                             (filename &optional wildcards) activate)
-  "Create parent directory if not exists while visiting file."
-  (unless (file-exists-p filename)
-    (let ((dir (file-name-directory filename)))
-      (when dir
-        (unless (file-exists-p dir)
-          (make-directory dir t))))))
 
 (add-hook 'minibuffer-inactive-mode-hook
           #'(lambda() (set (make-local-variable 'semantic-mode) nil)
