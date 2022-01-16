@@ -737,6 +737,11 @@ unwanted space when exporting org-mode to hugo markdown."
 
   (add-hook 'after-make-frame-functions #'configure-only-for-tui-frame)
 
+  ;; emacsclient -t not open scratch buffer when opening file
+  (if (equal (framep-on-display) t)
+      (setq xterm-extra-capabilities 'nil))
+
+  ;; 缓解在快速移动时大量代码的语法高亮
   (setq redisplay-skip-fontification-on-input t)
 
   (pixel-scroll-precision-mode t)
