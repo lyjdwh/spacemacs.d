@@ -727,16 +727,6 @@ unwanted space when exporting org-mode to hugo markdown."
   (setq python-spacemacs-indent-guess nil)
   (spacemacs/toggle-display-time)
 
-  (defun configure-only-for-tui-frame (FRAME)
-    "Things only for tui frame"
-    (when (equal (framep FRAME) t)
-      (custom-set-faces '(hl-line ((((type tty) (background dark))
-                                    (:extend t :background "color-236")))))
-
-      ))
-
-  (add-hook 'after-make-frame-functions #'configure-only-for-tui-frame)
-
   ;; emacsclient -t not open scratch buffer when opening file
   (if (equal (framep-on-display) t)
       (setq xterm-extra-capabilities 'nil))
