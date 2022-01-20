@@ -53,7 +53,6 @@
                    ))
       (add-hook hook '(lambda () (grammatical-edit-mode 1))))
 
-    (define-key grammatical-edit-mode-map (kbd "(") 'grammatical-edit-open-round)
     (define-key grammatical-edit-mode-map (kbd "[") 'grammatical-edit-open-bracket)
     (define-key grammatical-edit-mode-map (kbd "{") 'grammatical-edit-open-curly)
     (define-key grammatical-edit-mode-map (kbd ")") 'grammatical-edit-close-round)

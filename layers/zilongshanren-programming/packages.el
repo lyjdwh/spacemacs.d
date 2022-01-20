@@ -256,13 +256,14 @@
     (setq lsp-enable-file-watchers t)
     (setq lsp-file-watch-threshold 2000)
     (setq read-process-output-max (* 1024 1024 8)) ;; 8mb
-    (setq lsp-use-plists t)
 
     ;; lsp-ui
     (setq lsp-ui-doc-enable nil)
+    (setq lsp-ui-doc-position 'at-point)
     (setq lsp-ui-imenu-enable nil)
     (setq lsp-ui-sideline-show-code-actions nil)
     (setq lsp-ui-sideline-show-hover nil)
+    (setq lsp-ui-sideline-update-mode 'line)
 
     ;; lens
     (setq lsp-lens-enable t)

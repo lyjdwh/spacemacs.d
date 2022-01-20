@@ -59,7 +59,7 @@ This function should only modify configuration layer settings."
      ;;           haskell-completion-backend 'intero)
      (syntax-checking :variables syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
-     (spell-checking :variables spell-checking-enable-by-default t)
+     (spell-checking :variables spell-checking-enable-by-default nil)
      ;; (vinegar :variables vinegar-reuse-dired-buffer t)
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
@@ -130,7 +130,7 @@ This function should only modify configuration layer settings."
              python-sort-imports-on-save nil
              python-lsp-server 'pyright
              python-pipenv-activate  t
-             :packages (not importmagic)
+             :packages (not importmagic pydoc sphinx-doc)
              )
      ;; ipython-notebook
      ;; (ruby :variables ruby-version-manager 'chruby)
