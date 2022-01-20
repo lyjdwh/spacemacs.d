@@ -278,21 +278,8 @@
                  ;; Maybe we should just `ding'?
                  (signal (car err) (cdr err))))))))))
 
-    (define-advice iscroll-mode (:after (&optional arg) yang)
-      "Add evil keybinings for iscroll."
-      (if iscroll-mode
-          (progn
-            (evil-global-set-key 'normal (kbd "j") #'iscroll-evil-next-line)
-            (evil-global-set-key 'normal (kbd "k") #'iscroll-evil-previous-line)
-            (evil-global-set-key 'visual (kbd "j") #'iscroll-evil-next-visual-line)
-            (evil-global-set-key 'visual (kbd "k") #'iscroll-evil-previous-visual-line))
-        (global-set-key [remap evil-next-line] nil)
-        (global-set-key [remap evil-previous-line] nil)
-        (global-set-key [remap evil-next-visual-line] nil)
-        (global-set-key [remap evil-previous-visual-line] nil)))
-
-    (define-key evil-normal-state-map (kbd "J") '(lambda () (interactive) (iscroll-evil-next-line 5)))
-    (define-key evil-normal-state-map (kbd "K") '(lambda () (interactive) (iscroll-evil-previous-line 5)))
+    (evil-define-key '(normal visual) 'org-mode-map (kbd "j") 'iscroll-evil-next-line)
+    (evil-define-key '(normal visual) 'org-mode-map (kbd "k") 'iscroll-evil-previous-line)
     ))
 
 (defun zilongshanren-org/post-init-ox-hugo()
