@@ -30,7 +30,6 @@
  '(expand-region-exclude-text-mode-expansions '(html-mode nxml-mode web-mode))
  '(expand-region-reset-fast-key "r")
  '(fci-rule-color "#5B6268")
- '(flycheck-python-flake8-executable "/home/liuyan/.conda/envs/torch17/bin/python")
  '(global-command-log-mode nil)
  '(helm-buffer-max-length 56)
  '(helm-move-to-line-cycle-in-source t)
@@ -71,9 +70,7 @@
  '(jdee-db-active-breakpoint-face-colors (cons "#1B2229" "#51afef"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#1B2229" "#98be65"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#1B2229" "#3f444a"))
- '(lsp-flycheck-live-reporting nil)
  '(lsp-ui-doc-border "#93a1a1")
- '(lsp-ui-flycheck-live-reporting nil)
  '(lua-documentation-url "http://www.lua.org/manual/5.3/manual.html")
  '(magit-use-overlays nil)
  '(nrepl-message-colors

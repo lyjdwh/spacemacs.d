@@ -29,8 +29,12 @@
         mermaid-mode
         ob-mermaid
         citre
+        blacken
         ;; prettier-js
         ))
+
+(defun zilongshanren-programming/post-init-blacken ()
+  (setq blacken-skip-string-normalization t))
 
 (defun zilongshanren-programming/init-citre()
   (use-package citre
@@ -302,7 +306,8 @@
     (require 'dap-python)
     (setq dap-auto-show-output nil)
 
-    (setq lsp-diagnostics-provider :flycheck)
+    (setq lsp-diagnostics-provider :none)
+    (setq lsp-modeline-diagnostics-enable nil)
 
     (setq lsp-modeline-diagnostics-scope :project)
 
@@ -321,7 +326,8 @@
 
 (defun zilongshanren-programming/post-init-python ()
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-  ;; if you use pyton3, then you could comment the following line
+  (add-hook 'python-mode-hook #'flycheck-mode)
+  (setq flycheck-flake8rc '(".flake8" ".flake8rc" "pyproject.toml" "setup.cfg"))
   (setq python-shell-interpreter "ipython")
   )
 
@@ -378,6 +384,7 @@
 
       (flycheck-add-next-checker 'python-flake8 'python-pyright)
       (flycheck-remove-next-checker 'python-flake8 'python-pylint)
+      (flycheck-remove-next-checker 'python-flake8 'python-mypy)
       )))
 
 (defun zilongshanren-programming/post-init-eldoc ()
