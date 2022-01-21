@@ -266,7 +266,7 @@
     (setq lsp-ui-sideline-update-mode 'line)
 
     ;; lens
-    (setq lsp-lens-enable t)
+    (setq lsp-lens-enable nil)
 
     ;; workspace
     (setq lsp-keep-workspace-alive nil)
@@ -274,7 +274,7 @@
 
     ;; Disable features that have great potential to be slow.
     (setq lsp-enable-folding nil)
-    (setq lsp-enable-text-document-color t)
+    (setq lsp-enable-text-document-color nil)
 
     ;; Reduce unexpected modifications to code
     (setq lsp-enable-on-type-formatting nil)
@@ -285,12 +285,18 @@
     ;;handle yasnippet by myself
     (setq lsp-enable-snippet nil)
 
-    ;; use ffip instead
-    (setq lsp-enable-links nil)
+    (setq lsp-enable-links t)
+
+    ;; display parameters doc in overlay instead of minibuffer
+    (setq lsp-signature-function 'lsp-signature-posframe)
+    (setq lsp-signature-posframe-params '(:poshandler posframe-poshandler-point-bottom-left-corner-upward :width 60 :border-width 1 :min-width 60))
+
+    (setq lsp-idle-delay 0.2)
+
     ;; auto restart lsp
     (setq lsp-restart 'auto-restart)
     (setq lsp-log-io nil)
-    (setq lsp-enable-semantic-highlighting 1)
+    (setq lsp-semantic-tokens-enable nil)
     (lsp-treemacs-sync-mode 1)
 
     (require 'dap-python)
