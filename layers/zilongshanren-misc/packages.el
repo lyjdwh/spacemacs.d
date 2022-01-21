@@ -2164,6 +2164,9 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     ;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
     ;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
     ;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent)
+
+    ;; show differences within lines, magit-delta too slow
+    (setq magit-diff-refine-hunk 'all)
     ))
 
 (defun zilongshanren-misc/post-init-git-messenger ()

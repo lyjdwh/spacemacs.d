@@ -725,7 +725,6 @@ unwanted space when exporting org-mode to hugo markdown."
     (global-so-long-mode))
 
   (setq python-spacemacs-indent-guess nil)
-  (spacemacs/toggle-display-time)
 
   ;; emacsclient -t not open scratch buffer when opening file
   (if (equal (framep-on-display) t)

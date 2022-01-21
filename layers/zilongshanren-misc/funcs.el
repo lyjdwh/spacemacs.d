@@ -364,7 +364,7 @@ e.g. Sunday, September 17, 2000."
                   (if (executable-find "fasd")
                       (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
     (ivy-read "directories:" collection
-              :action 'eaf-open-in-file-manager
+              :action 'dired
               :caller 'counsel-goto-recent-directory)))
 
 (defun counsel-find-file-recent-directory ()
@@ -800,6 +800,7 @@ You can use \\&, \\N to refer matched text."
     (funcall-interactively fn arg)))
 
 (advice-add 'indent-for-tab-command :around 'smart-tab-jump-out)
+(advice-add 'c-indent-line-or-region :around 'smart-tab-jump-out)
 
 (defun avy-goto-parens ()
   (interactive)
