@@ -570,8 +570,6 @@ the entry of interest in the bibfile.  but does not check that."
     :commands org-transclusion-mode
     :init
     (define-key global-map (kbd "<f3>") #'org-transclusion-mode)
-    (spacemacs/set-leader-keys-for-major-mode 'org-mode
-      "me" 'org-transclusion-open-edit-src-buffer-at-point)
     ))
 
 (defun zilongshanren-org/init-org-roam-ui ()

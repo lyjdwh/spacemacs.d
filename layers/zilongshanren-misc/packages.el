@@ -3,7 +3,6 @@
 (setq zilongshanren-misc-packages
       '(
         helm-ag
-        projectile
         find-file-in-project
         multiple-cursors
         visual-regexp
@@ -18,7 +17,6 @@
         git-messenger
         gist
         hydra
-        wrap-region
         ranger
         golden-ratio
         (highlight-global :location local)
@@ -78,7 +76,6 @@
         telega
         vterm
         (casease :location (recipe :fetcher github :repo "DogLooksGood/casease"))
-        counsel-projectile
         mu4e
         org-msg
         (org-media-note :location (recipe :fetcher github :repo "yuchen-lea/org-media-note"))
@@ -300,11 +297,6 @@
               (mu4e-drafts-folder . "/gmail/[Gmail]/Drafts")
          ))))
   )
-
-(defun zilongshanren-misc/post-init-counsel-projectile()
-  (with-eval-after-load 'counsel
-    (counsel-projectile-mode 1)
-    ))
 
 (defun zilongshanren-misc/init-casease()
   (use-package casease
@@ -1901,10 +1893,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
     (push "TAGS" spacemacs-useless-buffers-regexp)
 
-    (adjust-major-mode-keymap-with-evil "git-timemachine")
-    (adjust-major-mode-keymap-with-evil "tabulated-list")
-
-    (define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
     (define-key evil-insert-state-map (kbd "C-r") 'evil-paste-from-register)
 
     ;; ;; change evil initial mode state
@@ -2030,25 +2018,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
 (defun zilongshanren-misc/init-find-file-in-project ()
   (use-package find-file-in-project
-    :defer t
-    :config
-    (progn
-      ;; If you use other VCS (subversion, for example), enable the following option
-      ;;(setq ffip-project-file ".svn")
-      ;; in MacOS X, the search file command is CMD+p
-      ;; for this project, I'm only interested certain types of files
-      (setq-default ffip-patterns '("*.html" "*.js" "*.css" "*.java" "*.xml" "*.cpp" "*.h" "*.c" "*.mm" "*.m" "*.el"))
-      ;; if the full path of current file is under SUBPROJECT1 or SUBPROJECT2
-      ;; OR if I'm reading my personal issue track document,
-      (defadvice find-file-in-project (before my-find-file-in-project activate compile)
-        (when (ffip-current-full-filename-match-pattern-p "\\(HLMJ_js\\)")
-          ;; set the root directory into "~/projs/PROJECT_DIR"
-          (setq-local ffip-project-root "~/Github/HLMJ_js")
-          ;; well, I'm not interested in concatenated BIG js file or file in dist/
-          (setq-local ffip-find-options "-not -size +64k -not -iwholename '*/bin/*'")
-          ;; do NOT search files in below directories, the default value is better.
-          (setq-default ffip-prune-patterns '(".git" ".hg" "*.svn" "node_modules" "bower_components" "temp"))))
-      (ad-activate 'find-file-in-project))))
+    :defer t))
 
 (defun zilongshanren-misc/post-init-projectile ()
   (progn
@@ -2060,43 +2030,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
     (spacemacs/set-leader-keys "pf" 'zilongshanren/open-file-with-projectile-or-counsel-git)
     ))
-
-(defun zilongshanren-misc/init-moz-controller ()
-  (use-package moz-controller
-    :init
-    (progn
-      (moz-controller-global-mode t)
-      (spacemacs|hide-lighter moz-controller-mode))))
-
-
-(defun zilongshanren-misc/init-ag ()
-  (use-package ag
-    :init))
-
-(defun zilongshanren-misc/post-init-erc ()
-  (progn
-    (add-hook 'erc-text-matched-hook 'my-erc-hook)
-    (spaceline-toggle-erc-track-off)))
-
-(defun zilongshanren-misc/init-wrap-region ()
-  (use-package wrap-region
-    :init
-    (progn
-      (wrap-region-global-mode t)
-      (wrap-region-add-wrappers
-       '(("$" "$")
-         ("{-" "-}" "#")
-         ("/" "/" nil ruby-mode)
-         ("/* " " */" "#" (java-mode javascript-mode css-mode js2-mode))
-         ("`" "`" nil (markdown-mode ruby-mode))))
-      (add-to-list 'wrap-region-except-modes 'dired-mode)
-      (add-to-list 'wrap-region-except-modes 'web-mode)
-      )
-    :defer t
-    :config
-    (spacemacs|hide-lighter wrap-region-mode)))
-
-
 
 (defun zilongshanren-misc/init-keyfreq ()
   (use-package keyfreq
@@ -2123,8 +2056,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
         (ivy-set-actions
          t
-         '(("i" wr/insert-a-head-from-a-file "roam insert head")
-           ("f" my-find-file-in-git-repo "find files")
+         '(("f" my-find-file-in-git-repo "find files")
            ("e" my-open-file-in-external-app "Open file in external app")
            ("I" ivy-insert-action "insert")
            ("c" ivy-kill-new-action "copy")
@@ -2151,7 +2083,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
         (define-key ivy-minibuffer-map (kbd "C-j") 'ivy-next-line)
         (define-key ivy-minibuffer-map (kbd "C-k") 'ivy-previous-line)))
 
-    (define-key global-map (kbd "C-s") 'my-swiper-search)))
+    ))
 
 
 (defun zilongshanren-misc/post-init-magit ()
@@ -2178,17 +2110,8 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
 (defun zilongshanren-misc/post-init-markdown-mode ()
   (progn
-    (add-to-list 'auto-mode-alist '("\\.mdown\\'" . markdown-mode))
-
     (with-eval-after-load 'markdown-mode
       (progn
-        ;; (when (configuration-layer/package-usedp 'company)
-        ;;   (spacemacs|add-company-hook markdown-mode))
-
-        (spacemacs/set-leader-keys-for-major-mode 'gfm-mode-map
-          "p" 'zilongshanren/markdown-to-html)
-        (spacemacs/set-leader-keys-for-major-mode 'markdown-mode
-          "p" 'zilongshanren/markdown-to-html)
         (spacemacs/set-leader-keys-for-major-mode 'markdown-mode
           "it" 'markdown-insert-table)
         (spacemacs/set-leader-keys-for-major-mode 'markdown-mode

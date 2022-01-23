@@ -26,14 +26,6 @@
   (clear-highlight-frame)
   (symbol-overlay-remove-all))
 
-;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
-(defmacro adjust-major-mode-keymap-with-evil (m &optional r)
-  `(eval-after-load (quote ,(if r r m))
-     '(progn
-        (evil-make-overriding-map ,(intern (concat m "-mode-map")) 'normal)
-        ;; force update evil keymaps after git-timemachine-mode loaded
-        (add-hook (quote ,(intern (concat m "-mode-hook"))) #'evil-normalize-keymaps))))
-
 ;; insert ; at the end of current line
 (defun zilongshanren/insert-semicolon-at-the-end-of-this-line ()
   (interactive)
@@ -99,33 +91,12 @@
            fill-column)))
     (call-interactively #'fill-paragraph)))
 
-(defun my-unwind-git-timemachine ()
-  (if (not (eq last-command-event 13))
-      (git-timemachine-quit)))
-
-;; http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html
-(defun my-git-timemachine-show-selected-revision ()
-  "Show last (current) revision of file."
-  (interactive)
-  (let (collection)
-    (setq collection
-          (mapcar (lambda (rev)
-                    ;; re-shape list for the ivy-read
-                    (cons (concat (substring (nth 0 rev) 0 7) "|" (nth 5 rev) "|" (nth 6 rev)) rev))
-                  (git-timemachine--revisions)))
-    (ivy-read "commits:"
-              collection
-              :unwind #'my-unwind-git-timemachine
-              :action (lambda (rev)
-                        (git-timemachine-show-revision (cdr rev))))))
-
 (defun my-git-timemachine ()
   "Open git snapshot with the selected version.  Based on ivy-mode."
   (interactive)
   (unless (featurep 'git-timemachine)
     (require 'git-timemachine))
   (git-timemachine--start #'my-git-timemachine-show-selected-revision))
-
 
 (defun zilongshanren/helm-hotspots ()
   "helm interface to my hotspots, which includes my locations,
@@ -166,14 +137,6 @@ org-files and bookmarks"
 e.g. Sunday, September 17, 2000."
   (interactive)                 ; permit invocation in minibuffer
   (insert (format-time-string "%A, %B %e, %Y")))
-
-(defun zilongshanren/open-file-with-projectile-or-counsel-git ()
-  (interactive)
-  (if (zilongshanren/git-project-root)
-      (counsel-git)
-    (if (projectile-project-p)
-        (projectile-find-file)
-      (counsel-file-jump))))
 
 (defun zilongshanren/pomodoro-notification ()
   "show notifications when pomodoro end"
@@ -278,35 +241,13 @@ e.g. Sunday, September 17, 2000."
   (let ((directory default-directory))
     (locate-dominating-file directory ".git")))
 
-(defadvice persp-switch (after my-quit-helm-perspectives activate)
-  (setq hydra-deactivate t))
-
-(defun wrap-sexp-with-new-round-parens ()
+(defun zilongshanren/open-file-with-projectile-or-counsel-git ()
   (interactive)
-  (insert "()")
-  (backward-char)
-  (sp-forward-slurp-sexp))
-
-(defun evil-paste-after-from-0 ()
-  (interactive)
-  (let ((evil-this-register ?0))
-    (call-interactively 'evil-paste-after)))
-
-(defun my-erc-hook (match-type nick message)
-  "Shows a growl notification, when user's nick was mentioned. If the buffer is currently not visible, makes it sticky."
-  (unless (posix-string-match "^\\** *Users on #" message)
-    (zilongshanren/growl-notification
-     (concat "ERC: : " (buffer-name (current-buffer)))
-     message
-     t
-     )))
-
-(defun my-swiper-search (p)
-  (interactive "P")
-  (let ((current-prefix-arg nil))
-    (call-interactively
-     (if p #'spacemacs/swiper-region-or-symbol
-       #'swiper))))
+  (if (zilongshanren/git-project-root)
+      (counsel-git)
+    (if (projectile-project-p)
+        (projectile-find-file)
+      (counsel-file-jump))))
 
 (defun ivy-ff-checksum ()
   (interactive)
@@ -380,32 +321,6 @@ e.g. Sunday, September 17, 2000."
     (ivy-read "directories:" collection
               :action 'my-find-file-in-git-repo
               :caller 'counsel-find-file-recent-directory)))
-
-(defun zilongshanren/markdown-to-html ()
-  (interactive)
-  (start-process "grip" "*gfm-to-html*" "grip" (buffer-file-name) "5000")
-  (browse-url (format "http://localhost:5000/%s.%s" (file-name-base) (file-name-extension (buffer-file-name)))))
-
-(defun github-browse-file--relative-url ()
-  "Return \"username/repo\" for current repository.
-
-Error out if this isn't a GitHub repo."
-  (require 'vc-git)
-  (let ((url (vc-git--run-command-string nil "config" "remote.origin.url")))
-    (unless url (error "Not in a GitHub repo"))
-    (when (and url (string-match "github.com:?/?\\(.*\\)" url))
-      (replace-regexp-in-string "\\.git$" "" (match-string 1 url)))))
-
-(defun zilong/github-browse-commit ()
-  "Show the GitHub page for the current commit."
-  (interactive)
-  (let* ((commit git-messenger:last-commit-id)
-         (url (concat "https://github.com/"
-                      (github-browse-file--relative-url)
-                      "/commit/"
-                      commit)))
-    (browse-url url)
-    (git-messenger:popup-close)))
 
 (defun zilongshanren/show-current-buffer-major-mode ()
   (interactive)
@@ -817,6 +732,27 @@ You can use \\&, \\N to refer matched text."
     (browse-url repo-url)
     ))
 
+(defun github-browse-file--relative-url ()
+  "Return \"username/repo\" for current repository.
+
+Error out if this isn't a GitHub repo."
+  (require 'vc-git)
+  (let ((url (vc-git--run-command-string nil "config" "remote.origin.url")))
+    (unless url (error "Not in a GitHub repo"))
+    (when (and url (string-match "github.com:?/?\\(.*\\)" url))
+      (replace-regexp-in-string "\\.git$" "" (match-string 1 url)))))
+
+(defun zilong/github-browse-commit ()
+  "Show the GitHub page for the current commit."
+  (interactive)
+  (let* ((commit git-messenger:last-commit-id)
+         (url (concat "https://github.com/"
+                      (github-browse-file--relative-url)
+                      "/commit/"
+                      commit)))
+    (browse-url url)
+    (git-messenger:popup-close)))
+
 ;; filter of ivy occur
 ;; keybindings: / filter lines; C-/ undo
 (defvar ivy-occur-filter-prefix ">>> ")
@@ -943,41 +879,6 @@ You can use \\&, \\N to refer matched text."
    '("&" . meow-query-replace)
    '("%" . meow-query-replace-regexp)
    '("<escape>" . meow-last-buffer)))
-
-;; https://emacs-china.org/t/org-roam-v1-2-3-headline/15978/7
-(setq-default wr--head-var-a "headline name")
-
-(defun wr/counsel-outline-action (x)
-  (setq wr--head-var-a (car x)))
-
-(defun wr/counsel-outline ()
-  (interactive)
-  (let ((settings (cdr (assq major-mode counsel-outline-settings))))
-    (ivy-read "Outline: " (counsel-outline-candidates settings)
-              :action (or (plist-get settings :action)
-                          #'wr/counsel-outline-action)
-              :history (or (plist-get settings :history)
-                           'counsel-outline-history)
-              :preselect (max (1- counsel-outline--preselect) 0)
-              :caller (or (plist-get settings :caller)
-                          'wr/counsel-outline))))
-
-(defun wr/insert-a-head-from-a-file (x)
-  (interactive)
-  (xref-push-marker-stack)
-  (save-restriction
-    (save-excursion
-      (with-ivy-window
-        (pcase (cdr x)
-          (`(:path ,foo :title ,bar) (progn
-                                       (with-temp-buffer
-                                         (erase-buffer)
-                                         (insert-file-contents foo)
-                                         (call-interactively #'wr/counsel-outline))
-                                       (insert (format "[[file:%s::*%s][%s]]" foo (car (last (split-string (substring-no-properties wr--head-var-a) " → ")))
-                                                       (string-trim-left (car (last (split-string (substring-no-properties wr--head-var-a) " → "))))))))))
-      (message "A head has been inserted.")
-      (xref-goto-xref))))
 
 (defun netease-cloud-music-add-storage-to-selected-playlist ()
   "Add the songs in storage into selected playlist."

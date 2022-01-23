@@ -4,11 +4,9 @@
       '(
         flycheck
         (compile-dwim :location local)
-        json-mode
         yasnippet
         (cc-mode :location built-in)
         (python :location built-in)
-        (emacs-lisp :location built-in)
         company
         (eldoc :location built-in)
         lsp-mode
@@ -30,7 +28,6 @@
         ob-mermaid
         citre
         blacken
-        ;; prettier-js
         ))
 
 (defun zilongshanren-programming/post-init-blacken ()
@@ -43,14 +40,9 @@
     (require 'citre-config)
   ))
 
-(defun zilongshanren-programming/post-init-prettier-js ()
-  (setq prettier-js-args '("--tab-width" "4")))
-
 (defun zilongshanren-programming/init-mermaid-mode ()
   (use-package mermaid-mode
-    :config
-    (setq mermaid-mmdc-location "/home/liuyan/.yarn/bin/mmdc")
-    (add-to-list 'auto-mode-alist '("\\.mmd\\'" . mermaid-mode))
+    :mode "\\.mmd\\'"
     ))
 
 (defun zilongshanren-programming/init-ob-mermaid ()
@@ -70,6 +62,7 @@
 
 (defun zilongshanren-programming/init-company-tip ()
   (use-package company-tip
+    :if (not (equal (framep-on-display) t))
     :after company
     :config
     (company-tip-mode 1)
@@ -144,7 +137,7 @@
 (defun zilongshanren-programming/init-highlight-indent-guides ()
   (use-package highlight-indent-guides
     :diminish
-    :hook ((prog-mode web-mode nxml-mode) . highlight-indent-guides-mode)
+    :hook (prog-mode . highlight-indent-guides-mode)
     :custom
     (highlight-indent-guides-method 'character)
     (highlight-indent-guides-responsive 'top)
@@ -197,16 +190,16 @@
     ;; (setq lsp-pyright-diagnostic-mode "workspace")
     (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch")
     (setq lsp-pyright-typechecking-mode "off")
+    (pyvenv-activate  lsp-pyright-venv-path)
     ))
 
 (defun zilongshanren-programming/init-company-tabnine ()
   (use-package company-tabnine
     :defer 1
-    :custom
-    (company-tabnine-max-num-results 9)
     :bind
     (("M-q" . company-other-backend)
-     ("C-c t" . company-tabnine))
+     ("C-c t" . company-tabnine)
+     ("C-t" . company-tabnine))
     :init
     (defun company//sort-by-tabnine (candidates)
       "Integrate company-tabnine with lsp-mode"
@@ -233,7 +226,9 @@
       "Hook to attach to `lsp-after-open'."
       (setq-local company-tabnine-max-num-results 4)
       (add-to-list 'company-transformers 'company//sort-by-tabnine t)
-      (add-to-list 'company-backends '(company-capf :with company-tabnine :separate)))
+      ;; (add-to-list 'company-backends '(company-capf :with company-tabnine :separate)
+      ;; (add-to-list 'company-backends '(company-tabnine :with company-capf :separate)
+      (add-to-list 'company-backends '(company-capf company-tabnine :with company-yasnippet)))
 
     (defun company-tabnine-toggle (&optional enable)
       "Enable/Disable TabNine. If ENABLE is non-nil, definitely enable it."
@@ -249,14 +244,18 @@
         (remove-hook 'lsp-after-open-hook #'lsp-after-open-tabnine)
         (company-tabnine-kill-process)
         (message "TabNine disabled.")))
+
+    (spacemacs/set-leader-keys "ott" 'company-tabnine-toggle)
     :hook
     (kill-emacs . company-tabnine-kill-process)
     :config
+    (setq company-tabnine-max-num-results 4)
+    (setq company-tabnine-executable-args (list "--no-lsp=true"))
     (company-tabnine-toggle t)
   ))
 
 (defun zilongshanren-programming/post-init-lsp-mode ()
-  (progn
+  (with-eval-after-load 'lsp-mode
     (setq lsp-enable-file-watchers t)
     (setq lsp-file-watch-threshold 2000)
     (setq read-process-output-max (* 1024 1024 8)) ;; 8mb
@@ -289,13 +288,14 @@
     ;;handle yasnippet by myself
     (setq lsp-enable-snippet nil)
 
-    (setq lsp-enable-links t)
+    (setq lsp-enable-links nil)
 
     ;; display parameters doc in overlay instead of minibuffer
     (setq lsp-signature-function 'lsp-signature-posframe)
     (setq lsp-signature-posframe-params '(:poshandler posframe-poshandler-point-bottom-left-corner-upward :width 60 :border-width 1 :min-width 60))
 
     (setq lsp-idle-delay 0.2)
+    (setq lsp-completion-provider :capf)
 
     ;; auto restart lsp
     (setq lsp-restart 'auto-restart)
@@ -321,9 +321,6 @@
     :commands (compile-dwim-run compile-dwim-compile)
     :init))
 
-(defun zilongshanren-programming/post-init-emacs-lisp ()
-    (remove-hook 'emacs-lisp-mode-hook 'auto-compile-mode))
-
 (defun zilongshanren-programming/post-init-python ()
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   (add-hook 'python-mode-hook #'flycheck-mode)
@@ -332,26 +329,13 @@
   )
 
 (defun zilongshanren-programming/post-init-yasnippet ()
-  (progn
-    (set-face-background 'secondary-selection "gray")
-
+  (with-no-warnings
     (with-eval-after-load 'yasnippet
-      (progn
-        (define-key yas-keymap [(tab)]       (yas-filtered-definition 'yas-next-field))
-        (define-key yas-keymap (kbd "TAB")   (yas-filtered-definition 'yas-next-field))))
+      (define-key yas-keymap [(tab)]       (yas-filtered-definition 'yas-next-field))
+      (define-key yas-keymap (kbd "TAB")   (yas-filtered-definition 'yas-next-field))
 
-    (setq-default yas-prompt-functions '(yas-ido-prompt yas-dropdown-prompt))
-    (mapc #'(lambda (hook) (remove-hook hook 'spacemacs/load-yasnippet)) '(prog-mode-hook
-                                                                      org-mode-hook
-                                                                      markdown-mode-hook))
-
-    (spacemacs/add-to-hooks 'zilongshanren/load-yasnippet '(prog-mode-hook
-                                                            markdown-mode-hook
-                                                            org-mode-hook))
-    (with-no-warnings
-    (with-eval-after-load 'yasnippet
       (defun my-company-yasnippet-disable-inline (fun command &optional arg &rest _ignore)
-        "Enable yasnippet but disable it inline."
+        "Enable yasnippet but disable it after '.' "
         (if (eq command 'prefix)
             (when-let ((prefix (funcall fun 'prefix)))
               (unless (memq (char-before (- (point) (length prefix)))
@@ -366,20 +350,15 @@
                 (put-text-property 0 len 'yas-annotation snip arg)
                 (put-text-property 0 len 'yas-annotation-patch t arg)))
             (funcall fun command arg))))
-      (advice-add #'company-yasnippet :around #'my-company-yasnippet-disable-inline)))
+      (advice-add #'company-yasnippet :around #'my-company-yasnippet-disable-inline))
     ))
-
-(defun zilongshanren-programming/post-init-json-mode ()
-  (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
-  (add-to-list 'auto-mode-alist '("\\.fire\\'" . json-mode))
-  (add-to-list 'auto-mode-alist '("\\.fire.meta\\'" . json-mode)))
 
 (defun zilongshanren-programming/post-init-flycheck ()
   (with-eval-after-load 'flycheck
     (progn
       (setq flycheck-display-errors-delay 0.9)
       (setq flycheck-idle-change-delay 2.0)
-      (setq flycheck-flake8-maximum-complexity 10)
+      (setq flycheck-flake8-maximum-complexity 18)
       (setq flycheck-flake8-maximum-line-length 120)
 
       (flycheck-add-next-checker 'python-flake8 'python-pyright)

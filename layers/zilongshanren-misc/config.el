@@ -11,23 +11,17 @@
                                             ("8in" "∈")
                                             ("8nin" "∉")
                                             ("8inf" "∞")
-                                            ("8luv" "♥")
-                                            ("8smly" "☺")
-                                            ("8en" "@~english")
-                                            ("8zh" "@~chinese")
-                                            ("8sp" "spacemacs")
+                                            ("8lv" "♥")
+                                            ("8sm" "☺")
 
                                             ;; email
                                             ("8me" "lyjdwh@gmail.com")
-
-                                            ;; computing tech
-                                            ("8wp" "Wikipedia")
-                                            ("8ms" "Microsoft")
 
                                             ;; emacs regex
                                             ("8d" "\\([0-9]+?\\)")
                                             ("8str" "\\([^\"]+?\\)\"")))
 
+(setq-default abbrev-mode t)
 
 (setq user-mail-address "lyjdwh@gmail.com")
 

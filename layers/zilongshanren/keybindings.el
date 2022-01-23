@@ -64,7 +64,6 @@
 
 (spacemacs/set-leader-keys "oS" 'zilongshanren/helm-hotspots)
 ;; (spacemacs/set-leader-keys "oc" 'my-auto-update-tags-when-save)
-(spacemacs/set-leader-keys "fR" 'zilongshanren/rename-file-and-buffer)
 (spacemacs/set-leader-keys "bD" 'spacemacs/kill-other-buffers)
 
 ;; emacs bookmark can work in any buffer, but only one bookmark for one buffer
@@ -118,7 +117,6 @@
 ;; deal with BOM
 (spacemacs/set-leader-keys "fl" 'find-file-literally-at-point)
 (spacemacs/set-leader-keys "ri" 'ivy-resume)
-(spacemacs/set-leader-keys "fh" 'ffap-hexl-mode)
 (spacemacs/set-leader-keys "fd" 'projectile-find-file-dwim-other-window)
 (spacemacs/set-leader-keys "nl" 'spacemacs/evil-search-clear-highlight)
 (spacemacs/declare-prefix "ol" "layout")
@@ -504,7 +502,7 @@
 (spacemacs/set-leader-keys "srr" 'inline-or-region-replace)
 
 ;; english teacher
-(spacemacs/set-leader-keys "ott" 'english-teacher-follow-mode)
+(spacemacs/set-leader-keys "otE" 'english-teacher-follow-mode)
 
 ;; counsel etags
 (spacemacs/set-leader-keys
