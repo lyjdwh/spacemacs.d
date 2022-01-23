@@ -610,6 +610,13 @@ dump."
 
 (defun dotspacemacs/user-config ()
 
+  ;; chinese font
+  (spacemacs|do-after-display-system-init
+   (dolist (charset '(kana han cjk-misc bopomofo))
+     (set-fontset-font (frame-parameter nil 'font) charset
+                       (font-spec :family "Source Han Sans CN" :size 16)))
+   )
+
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 
   (setenv "WORKON_HOME" "/home/liuyan/.conda/envs")
