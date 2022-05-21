@@ -337,7 +337,8 @@
     (if (display-graphic-p)
         (progn
           (setq lsp-signature-function 'lsp-signature-posframe)
-          (setq lsp-signature-posframe-params '(:poshandler posframe-poshandler-point-bottom-left-corner-upward :width 60 :border-width 1 :min-width 60))
+          (setq lsp-signature-posframe-params '(:poshandler posframe-poshandler-point-bottom-left-corner-upward
+                                                            :height 10 :width 60 :border-width 1 :min-width 60))
           ))
 
     (setq lsp-idle-delay 0.2)
