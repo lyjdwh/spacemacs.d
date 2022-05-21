@@ -425,8 +425,13 @@
 
     (with-eval-after-load 'org
       (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
-      (add-to-list 'org-file-apps '("\\.xlsx\\'" . eaf-org-open-office-file))
-      (add-to-list 'org-file-apps '("\\.docx\\'" . eaf-org-open-office-file)))
+      ;; (add-to-list 'org-file-apps '("\\.xlsx\\'" . eaf-org-open-office-file))
+      ;; (add-to-list 'org-file-apps '("\\.docx\\'" . eaf-org-open-office-file))
+      (add-to-list 'org-file-apps '("\\.docx\\'" . "wps %s"))
+      (add-to-list 'org-file-apps '("\\.xlsx\\'" . "et %s"))
+      (add-to-list 'org-file-apps '("\\.pptx\\'" . "wpp %s"))
+      )
+
     :custom
     (eaf-evil-leader-keymap  spacemacs-cmds)
     (eaf-evil-leader-key "SPC")
