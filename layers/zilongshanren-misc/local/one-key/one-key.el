@@ -580,9 +580,6 @@ last command when it miss match in key alist."
 (defun one-key-match-keystroke (key match-key)
   "Return `non-nil' if `KEY' match `MATCH-KEY'.
 Otherwise, return nil."
-  (cond ((stringp match-key) (setq match-key (read-kbd-macro match-key)))
-        ((vectorp match-key) nil)
-        (t (signal 'wrong-type-argument (list 'array match-key))))
   (equal key match-key))
 
 (defun one-key-read-keymap (keystroke)

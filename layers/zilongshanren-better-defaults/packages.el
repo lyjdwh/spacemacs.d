@@ -401,7 +401,7 @@
                eaf-open eaf-open-url eaf-open-office eaf-open-mindmap eaf-open-airshare
                eaf-open-bookmark eaf-kill-process eaf-search-it eaf-file-browser-qrcode
                eaf-install-dependencies eaf-install-and-update eaf-open-file-manager eaf-open-in-file-manager
-               eaf-pdf-synctex-forward-view eaf-open-rss-reader)
+               eaf-pdf-synctex-forward-view eaf-open-rss-reader eaf-open-git)
     :diminish eaf-mode
     :init
     (use-package epc :defer t :ensure t)
@@ -414,6 +414,19 @@
     (setq browse-url-browser-function 'eaf-open-browser-other-window)
     (defalias 'browse-web #'eaf-open-browser-other-window)
 
+    ;; use `emacs-application-framework' to open PDF file: link
+    (defun eaf-org-open-file (file &optional link)
+      "An wrapper function on `eaf-open'."
+      (eaf-open file))
+
+    (defun eaf-org-open-office-file (file &optional link)
+      "An wrapper function on `eaf-open-office'."
+      (eaf-open-office file))
+
+    (with-eval-after-load 'org
+      (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
+      (add-to-list 'org-file-apps '("\\.xlsx\\'" . eaf-org-open-office-file))
+      (add-to-list 'org-file-apps '("\\.docx\\'" . eaf-org-open-office-file)))
     :custom
     (eaf-evil-leader-keymap  spacemacs-cmds)
     (eaf-evil-leader-key "SPC")
@@ -431,12 +444,14 @@
     (require 'eaf-file-manager)
     (require 'eaf-camera)
     (require 'eaf-rss-reader)
+    (require 'eaf-git)
 
     (require 'eaf-evil)
     (require 'eaf-all-the-icons)
     (require 'eaf-mail)
 
     (setq eaf-buffer-title-format "EAF/%s")
+    (setq eaf-python-command "/usr/bin/python")
 
     ;; browser
     ;; (setq eaf-proxy-type "socks5")
@@ -460,15 +475,8 @@
 
     ;; org
     (require 'eaf-org)
-    (defun eaf-org-open-file (file &optional link)
-      "An wrapper function on `eaf-open'."
-      (eaf-open file))
-
     (setq eaf-org-override-pdf-links-open t)
     (setq eaf-org-override-pdf-links-store t)
-
-    ;; use `emacs-application-framework' to open PDF file: link
-    (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
 
     ;; key customize
     (eaf-bind-key scroll_up_page "d" eaf-pdf-viewer-keybinding)

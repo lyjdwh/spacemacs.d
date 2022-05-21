@@ -173,6 +173,7 @@
 (spacemacs/set-leader-keys "aep" 'eaf-toggle-proxy)
 (spacemacs/set-leader-keys "aeu" 'eaf-install-and-update)
 (spacemacs/set-leader-keys "aer" 'eaf-open-rss-reader)
+(spacemacs/set-leader-keys "aeg" 'eaf-open-git)
 (spacemacs/set-leader-keys "of" 'eaf-open-in-file-manager)
 
 (spacemacs/set-leader-keys-for-major-mode 'eaf-edit-mode
@@ -328,16 +329,6 @@
 
 ;; evil avy
 (spacemacs/set-leader-keys "jj" 'evil-avy-goto-char-2)
-
-;; langtool
-(spacemacs/set-leader-keys
-  "oen" 'langtool-goto-next-error
-  "oep" 'langtool-goto-previous-error
-  "oec" 'langtool-correct-buffer
-  "oet" 'langtool-check
-  "oeT" 'langtool-check-done
-  "oei" 'langtool-show-message-at-point
-  )
 
 ;; awesome tabs
 (defhydra awesome-fast-switch (:hint nil)
@@ -539,12 +530,6 @@
 
 ;; zeal
 (spacemacs/set-leader-keys "oZ" 'zeal-at-point)
-
-;; helpful
-(spacemacs/set-leader-keys
-  "hdk" #'helpful-key
-  "hdf" #'helpful-callable
-  "hdv" #'helpful-variable)
 
 ;; go-translate
 (spacemacs/set-leader-keys

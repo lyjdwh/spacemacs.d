@@ -22,6 +22,7 @@
                                             ("8str" "\\([^\"]+?\\)\"")))
 
 (setq-default abbrev-mode t)
+(setq save-abbrevs nil)
 
 (setq user-mail-address "lyjdwh@gmail.com")
 

@@ -6,7 +6,6 @@
     org-pomodoro
     (notdeft :location local)
     org-roam
-    (org-transclusion :location (recipe :fetcher github :repo "nobiot/org-transclusion" :files ("*")))
     org-roam-bibtex
     ivy-bibtex
     org-noter
@@ -14,8 +13,10 @@
     org-super-agenda
     (org-clock-watch :location (recipe :fetcher github :repo "wztdream/org-clock-watch" :files ("*")))
     (gkhabit :location (recipe :fetcher github :repo "Kinneyzhang/gkhabit"))
-    (popweb :location (recipe :fetcher github :repo "manateelazycat/popweb" :files ("*.*")))
-    (popweb-latex :location (recipe :fetcher github :repo "manateelazycat/popweb" :files ("extension/latex/*")))
+    (popweb :location (recipe
+                       :fetcher github
+                       :repo "manateelazycat/popweb"
+                       :files ("*.*" "extension/latex/*" "extension/org-roam/*")))
     easy-hugo
     ox-hugo
     iscroll
@@ -25,6 +26,19 @@
     aas
     laas
     org-appear
+    org-modern
+    ))
+
+(defun zilongshanren-org/init-org-modern()
+  (use-package org-modern
+    :hook
+    (org-mode . org-modern-mode)
+    (org-agenda-finalize . org-modern-agenda)
+    :config
+    (setq org-modern-table-vertical 1)
+    (unless (display-graphic-p)
+      (setq org-modern-table nil)
+      )
     ))
 
 (defun zilongshanren-org/init-org-appear()
@@ -299,14 +313,18 @@
 
 (defun zilongshanren-org/init-popweb()
   (use-package popweb
-    :commands popweb-latex-mode
-    ))
-
-(defun zilongshanren-org/init-popweb-latex()
-  (use-package popweb-latex
+    :commands popweb-latex-mode popweb-org-roam-link-show
     :init
     (spacemacs/set-leader-keys "otl" 'popweb-latex-mode)
-    :commands popweb-latex-mode
+    (spacemacs/set-leader-keys "amp" 'popweb-org-roam-link-show)
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode "mp" 'popweb-org-roam-link-show)
+    :config
+    (require 'popweb-latex)
+    (require 'popweb-org-roam-link)
+
+    (setq popweb-python-command "/usr/bin/python")
+    (setq popweb-org-roam-link-popup-window-width-scale 0.4)
+    (setq popweb-org-roam-link-popup-window-height-scale 0.6)
     ))
 
 (defun zilongshanren-org/init-gkhabit ()
@@ -506,6 +524,7 @@ the entry of interest in the bibfile.  but does not check that."
     :custom
     (org-roam-directory deft-dir)
     (org-roam-file-extensions '("org" "md"))
+    (org-roam-database-connector 'sqlite-builtin)
     :config
     (org-roam-db-autosync-mode)
     (add-hook 'org-roam-mode-hook (lambda ()
@@ -514,7 +533,7 @@ the entry of interest in the bibfile.  but does not check that."
     (setq org-roam-mode-sections
           (list #'org-roam-backlinks-section
                 #'org-roam-reflinks-section
-                ;; #'org-roam-unlinked-references-section
+                #'org-roam-unlinked-references-section
                 ))
 
     (setq org-roam-db-gc-threshold most-positive-fixnum)
@@ -548,7 +567,16 @@ the entry of interest in the bibfile.  but does not check that."
          title))
       )
 
-    (setq org-roam-node-display-template "${directories} ${tags:20 } ${hierarchy:*}")
+    (cl-defmethod org-roam-node-backlinkscount ((node org-roam-node))
+      (let* ((count (caar (org-roam-db-query
+                           [:select (funcall count source)
+                                    :from links
+                                    :where (= dest $s1)
+                                    :and (= type "id")]
+                           (org-roam-node-id node)))))
+        (format "[%d]" count)))
+
+    (setq org-roam-node-display-template "${backlinkscount:4} ${directories} ${tags:20 } ${hierarchy:*}")
 
     (setq org-roam-capture-templates
           '(("d" "org-roam" plain "%?"
@@ -563,13 +591,6 @@ the entry of interest in the bibfile.  but does not check that."
       :bindings
       "o" 'link-hint-open-link
       "r" 'org-roam-buffer-refresh)
-    ))
-
-(defun zilongshanren-org/init-org-transclusion()
-  (use-package org-transclusion
-    :commands org-transclusion-mode
-    :init
-    (define-key global-map (kbd "<f3>") #'org-transclusion-mode)
     ))
 
 (defun zilongshanren-org/init-org-roam-ui ()
@@ -698,6 +719,9 @@ the entry of interest in the bibfile.  but does not check that."
 
       ;; after org 9.5.2
       (setq org-adapt-indentation t)
+
+      (setq org-image-actual-width (list 700))
+      ;; (setq org-image-actual-width (/ (display-pixel-width) 3))
 
       (add-to-list 'org-latex-classes '("ctexart" "\\documentclass[11pt]{ctexart}
                                         [NO-DEFAULT-PACKAGES]

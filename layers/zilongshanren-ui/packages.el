@@ -12,6 +12,13 @@
     ivy-rich
     all-the-icons-ivy-rich
     emojify
+    helpful
+    ))
+
+(defun zilongshanren-ui/post-init-helpful()
+  (progn
+    (setq counsel-describe-function-function #'helpful-callable)
+    (setq counsel-describe-variable-function #'helpful-variable)
     ))
 
 (defun zilongshanren-ui/post-init-emojify()

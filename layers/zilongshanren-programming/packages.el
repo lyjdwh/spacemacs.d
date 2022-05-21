@@ -11,6 +11,10 @@
         (eldoc :location built-in)
         lsp-mode
         company-tabnine
+        (copilot :location (recipe
+                            :fetcher github
+                            :repo "zerolfx/copilot.el"
+                            :files ("*.el" "dist")))
         lsp-python-ms
         lsp-pyright
         auctex
@@ -28,7 +32,23 @@
         ob-mermaid
         citre
         blacken
+        lsp-ltex
         ))
+
+(defun zilongshanren-programming/init-lsp-ltex()
+  (use-package lsp-ltex
+    :ensure t
+    ;; :hook (text-mode . (lambda ()
+    ;;                      (require 'lsp-ltex)
+    ;;                      (setq-local lsp-diagnostics-provider :flycheck)
+    ;;                      (lsp))) ; or lsp-deferred
+    :config
+    (defun enable-lang-check()
+      (interactive)
+      (setq-local lsp-diagnostics-provider :flycheck)
+      (lsp))
+    (spacemacs/set-leader-keys "eo" 'enable-lang-check)
+    ))
 
 (defun zilongshanren-programming/post-init-blacken ()
   (setq blacken-skip-string-normalization t))
@@ -36,7 +56,7 @@
 (defun zilongshanren-programming/init-citre()
   (use-package citre
     :config
-    (setq citre-auto-enable-citre-mode-modes '(prog-mode))
+    (setq citre-auto-enable-citre-mode-modes nil)
     (require 'citre-config)
   ))
 
@@ -62,7 +82,7 @@
 
 (defun zilongshanren-programming/init-company-tip ()
   (use-package company-tip
-    :if (not (equal (framep-on-display) t))
+    :if (not (display-graphic-p))
     :after company
     :config
     (company-tip-mode 1)
@@ -178,19 +198,18 @@
           (TeX-toggle-debug-warnings)
           )))
 (defun zilongshanren-programming/post-init-lsp-python-ms ()
-  (progn
+  (with-eval-after-load 'lsp-python-ms
     (setq lsp-python-ms-python-executable-cmd "~/.conda/envs/torch/bin/python")
     ))
 
 (defun zilongshanren-programming/post-init-lsp-pyright ()
-  (progn
+  (with-eval-after-load 'lsp-pyright
     ;; (add-hook 'python-mode-hook (lambda ()
     ;;                               (require 'lsp-pyright)
     ;;                               (lsp)))
     ;; (setq lsp-pyright-diagnostic-mode "workspace")
     (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch")
     (setq lsp-pyright-typechecking-mode "off")
-    (pyvenv-activate  lsp-pyright-venv-path)
     ))
 
 (defun zilongshanren-programming/init-company-tabnine ()
@@ -224,11 +243,12 @@
 
     (defun lsp-after-open-tabnine ()
       "Hook to attach to `lsp-after-open'."
-      (setq-local company-tabnine-max-num-results 4)
-      (add-to-list 'company-transformers 'company//sort-by-tabnine t)
+      ;; (setq-local company-tabnine-max-num-results 4)
+      ;; (add-to-list 'company-transformers 'company//sort-by-tabnine t)
       ;; (add-to-list 'company-backends '(company-capf :with company-tabnine :separate)
-      ;; (add-to-list 'company-backends '(company-tabnine :with company-capf :separate)
-      (add-to-list 'company-backends '(company-capf company-tabnine :with company-yasnippet)))
+      (add-to-list 'company-backends '(company-tabnine :separate company-capf company-yasnippet))
+      ;; (add-to-list 'company-backends '(company-capf company-tabnine :with company-yasnippet))
+      )
 
     (defun company-tabnine-toggle (&optional enable)
       "Enable/Disable TabNine. If ENABLE is non-nil, definitely enable it."
@@ -251,8 +271,31 @@
     :config
     (setq company-tabnine-max-num-results 4)
     (setq company-tabnine-executable-args (list "--no-lsp=true"))
-    (company-tabnine-toggle t)
+    ;; (company-tabnine-toggle t)
   ))
+
+(defun zilongshanren-programming/init-copilot()
+  (use-package copilot
+    :init
+    ;; accept completion from copilot and fallback to company
+    (defun my-tab ()
+      (interactive)
+      (or (copilot-accept-completion)
+          (company-indent-or-complete-common nil)))
+
+    :hook (prog-mode . copilot-mode)
+    :bind (:map evil-insert-state-map
+           ("s-<tab>" . 'copilot-accept-completion)
+           ("C-l" . 'copilot-accept-completion-by-word)
+           ("C-S-l" . 'copilot-accept-completion-by-line)
+           ("C-," . 'copilot-next-completion)
+           ("C-." . 'copilot-previous-completion)
+           :map company-active-map
+           ("<tab>" . 'my-tab)
+           ("TAB" . 'my-tab)
+           ("C-l" . 'copilot-accept-completion-by-word)
+           ("C-S-l" . 'copilot-accept-completion-by-line))
+    ))
 
 (defun zilongshanren-programming/post-init-lsp-mode ()
   (with-eval-after-load 'lsp-mode
@@ -291,8 +334,11 @@
     (setq lsp-enable-links nil)
 
     ;; display parameters doc in overlay instead of minibuffer
-    (setq lsp-signature-function 'lsp-signature-posframe)
-    (setq lsp-signature-posframe-params '(:poshandler posframe-poshandler-point-bottom-left-corner-upward :width 60 :border-width 1 :min-width 60))
+    (if (display-graphic-p)
+        (progn
+          (setq lsp-signature-function 'lsp-signature-posframe)
+          (setq lsp-signature-posframe-params '(:poshandler posframe-poshandler-point-bottom-left-corner-upward :width 60 :border-width 1 :min-width 60))
+          ))
 
     (setq lsp-idle-delay 0.2)
     (setq lsp-completion-provider :capf)
@@ -385,4 +431,9 @@
 
     (setq company-minimum-prefix-length 1
           company-idle-delay 0)
+
+    (with-eval-after-load 'company
+      (define-key company-active-map (kbd "C-n") '(lambda () (interactive) (company-select-next-or-abort 4)))
+      (define-key company-active-map (kbd "C-p") '(lambda () (interactive) (company-select-previous-or-abort 4)))
+      )
     ))

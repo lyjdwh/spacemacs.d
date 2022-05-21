@@ -46,7 +46,6 @@
         evil-snipe
         powerthesaurus
         mw-thesaurus
-        langtool
         (inherit-org :location (recipe :fetcher github :repo "chenyanming/inherit-org"))
         (awesome-tab :location (recipe :fetcher github :repo "manateelazycat/awesome-tab"))
         bm
@@ -71,6 +70,7 @@
         major-mode-hydra
         elfeed
         (shengci :location (recipe :fetcher github :repo "EvanMeek/shengci.el"))
+        (guess-word :location (recipe :fetcher github :repo "Qquanwei/emacs-guess-word-game" :files ("*")))
         evil-matchit
         avy
         telega
@@ -86,13 +86,24 @@
         xref
         blamer
         auto-package-update
+        epkg
+        undo-tree
         ))
+
+(defun zilongshanren-misc/post-init-undo-tree()
+  (setq undo-tree-auto-save-history nil)
+  )
+
+(defun zilongshanren-misc/init-epkg()
+  (use-package epkg
+    :defer t
+    ))
 
 (defun zilongshanren-misc/init-auto-package-update()
   (use-package auto-package-update
     :if (not (daemonp))
     :custom
-    (auto-package-update-interval 7) ;; in days
+    (auto-package-update-interval 60) ;; in days
     (auto-package-update-prompt-before-update t)
     (auto-package-update-delete-old-versions t)
     (auto-package-update-hide-results t)
@@ -119,14 +130,15 @@
     ))
 
 (defun zilongshanren-misc/post-init-forge()
+  (setq forge-add-default-bindings nil)
   (with-eval-after-load 'forge
     (add-to-list 'forge-alist '("github.com.cnpmjs.org" "api.github.com" "github.com.cnpmjs.org" forge-github-repository))
     ))
 
 (defun zilongshanren-misc/init-elisp-demos()
   (use-package elisp-demos
+    :commands elisp-demos-for-helpful elisp-demos-add-demo elisp-demos-find-demo
     :config
-    (advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update)
     (spacemacs/set-leader-keys-for-major-mode 'helpful-mode
       "d" #'elisp-demos-for-helpful
       "a" #'elisp-demos-add-demo)
@@ -139,6 +151,7 @@
     (setq netease-cloud-music-show-lyric 'all)
     (setq netease-cloud-music-repeat-mode "random")
     (require 'netease-cloud-music-ui)
+    (require 'netease-cloud-music-comment)
 
     (set-face-attribute 'netease-cloud-music-artist-face nil
                         :inherit nil
@@ -176,6 +189,10 @@
     (define-key netease-cloud-music-switch-playlist-mode-map (kbd "j") #'evil-next-line)
     (define-key netease-cloud-music-switch-playlist-mode-map (kbd "J") '(lambda () (interactive) (evil-next-line 5)))
     (define-key netease-cloud-music-switch-playlist-mode-map (kbd "K") '(lambda () (interactive) (evil-previous-line 5)))
+
+    (defun liuyan/netease-cloud-music-start-api ()
+      (interactive)
+      (netease-cloud-music-start-api))
     ))
 
 (defun zilongshanren-misc/init-org-media-note()
@@ -386,6 +403,10 @@
     shengci-practice-guess-memorized-word
     ))
 
+(defun zilongshanren-misc/init-guess-word()
+  (use-package guess-word
+    :commands guess-word))
+
 (defun zilongshanren-misc/init-major-mode-hydra ()
   (use-package major-mode-hydra))
 
@@ -572,7 +593,7 @@
       "v" 'evil-visual-char
       )
 
-    (setq elfeed-curl-extra-arguments '("-x" "socks5h://localhost:1080"))
+    ;; (setq elfeed-curl-extra-arguments '("-x" "socks5h://localhost:1080"))
   ))
 
 (defun zilongshanren-misc/init-helm-chrome ()
@@ -935,6 +956,13 @@
 (defun zilongshanren-misc/init-awesome-tab ()
   (use-package awesome-tab
     :config
+    (defun awesome-tab-project-name ()
+      (let ((project-name (nth 2 (project-current))))
+        (message project-name)
+        (if project-name
+            (format "Project: %s" (expand-file-name project-name))
+          awesome-tab-common-group-name)))
+
     (setq awesome-tab-height 140)
     (setq awesome-tab-hide-tab-function 'awesome-tab-hide-tab-tab)
     (awesome-tab-mode t)
@@ -954,16 +982,6 @@
         (kbd "<tab>") 'org-cycle
         (kbd "gj") 'outline-next-visible-heading
         (kbd "gk") 'outline-previous-visible-heading))
-    ))
-
-(defun zilongshanren-misc/init-langtool ()
-  (use-package langtool
-    :config
-    (setq langtool-language-tool-server-jar "~/bin/LanguageTool-4.9/languagetool-server.jar")
-    (setq langtool-server-user-arguments '("-p" "8082"))
-    (setq langtool-default-language "en")
-    ;; (add-hook 'text-mode-hook  (lambda ()
-    ;;                              (add-hook 'after-save-hook 'langtool-check nil 'make-it-local)))
     ))
 
 (defun zilongshanren-misc/init-mw-thesaurus ()
@@ -1382,11 +1400,11 @@
 
 (defun zilongshanren-misc/init-keyfreq ()
   (use-package keyfreq
-    :init
-    (progn
-      (keyfreq-mode 1)
-      (keyfreq-autosave-mode 1)
-      )))
+    :if (display-graphic-p)
+    :config
+    (keyfreq-mode 1)
+    (keyfreq-autosave-mode 1)
+    ))
 
 (defun zilongshanren-misc/post-init-popup ()
   (use-package popup
@@ -2030,13 +2048,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
     (spacemacs/set-leader-keys "pf" 'zilongshanren/open-file-with-projectile-or-counsel-git)
     ))
-
-(defun zilongshanren-misc/init-keyfreq ()
-  (use-package keyfreq
-    :init
-    (progn
-      (keyfreq-mode t)
-      (keyfreq-autosave-mode 1))))
 
 (defun zilongshanren-misc/post-init-swiper ()
   "Initialize my package"

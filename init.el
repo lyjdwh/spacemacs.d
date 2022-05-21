@@ -20,10 +20,10 @@ This function should only modify configuration layer settings."
    ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
    ;; (default 'unused)
-   dotspacemacs-enable-lazy-installation 'unused
+   dotspacemacs-enable-lazy-installation nil
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
-   dotspacemacs-ask-for-lazy-installation t
+   dotspacemacs-ask-for-lazy-installation nil
    ;; If non-nil layers with lazy install support are lazy installed.
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
@@ -52,7 +52,6 @@ This function should only modify configuration layer settings."
      ;; dap
      ;; colors
      ;; prodigy
-     (github :packages (not grip-mode))
      search-engine
      graphviz
      ;;  (haskell :variables haskell-enable-hindent t
@@ -112,13 +111,14 @@ This function should only modify configuration layer settings."
           org-enable-org-journal-support t
           org-enable-notifications t
           org-start-notification-daemon-on-startup t
+          org-enable-transclusion-support t
           org-journal-dir "~/org-notes/journal"
           org-journal-file-format "%Y-%m-%d"
           org-journal-date-prefix "#+TITLE: "
           org-journal-date-format "%A, %B %d %Y"
           org-journal-time-prefix "* "
           org-journal-time-format ""
-          :packages (not org-roam org-appear))
+          :packages (not org-roam org-appear org-superstar org-roam-ui))
      ;; gpu
      yaml
      ;;  react
@@ -130,7 +130,7 @@ This function should only modify configuration layer settings."
              python-sort-imports-on-save nil
              python-lsp-server 'pyright
              python-pipenv-activate  t
-             :packages (not importmagic pydoc sphinx-doc)
+             :packages (not importmagic pydoc sphinx-doc code-cells)
              )
      ;; ipython-notebook
      ;; (ruby :variables ruby-version-manager 'chruby)
@@ -202,7 +202,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages
    '(visual-fill-column emacsql emacsql-sqlite emacsql-sqlite3 doom-themes jeison
                         (e2ansi :location (recipe :fetcher github :repo "Lindydancer/e2ansi"))
-                        websocket simple-httpd f epc ctable)
+                        websocket simple-httpd f epc ctable emacsql-sqlite-builtin)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
