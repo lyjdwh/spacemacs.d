@@ -84,9 +84,11 @@
   (use-package company-tip
     :if (not (display-graphic-p))
     :after company
+    :bind (:map company-active-map
+                ("C-h" . company-tip--manual-begin))
     :config
     (company-tip-mode 1)
-    (setq company-tip-delay 0.2)
+    (setq company-tip-delay nil)
     ))
 
 (defun zilongshanren-programming/init-counsel-etags ()
