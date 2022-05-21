@@ -60,7 +60,6 @@
         (english-teacher :location (recipe :fetcher github :repo "loyalpartner/english-teacher.el"))
         pos-tip
         ;; (maple-header :location (recipe :fetcher github :repo "honmaple/maple-emacs" :files ("site-lisp/maple/maple-header.el")))
-        ace-pinyin
         tmux-pane
         wttrin
         ;; bongo
@@ -374,6 +373,12 @@
 
 (defun zilongshanren-misc/post-init-avy ()
   (progn
+    ;; make avy support pinyin
+    (defun my-avy--regex-candidates (fun regex &optional beg end pred group)
+      (let ((regex (pyim-cregexp-build regex)))
+        (funcall fun regex beg end pred group)))
+    (advice-add 'avy--regex-candidates :around #'my-avy--regex-candidates)
+
     (setq avy-keys (number-sequence ?a ?z))
     (setq avy-orders-alist
           '((avy-goto-char . avy-order-closest)
@@ -671,13 +676,6 @@
     (setq tmux-pane-vertical-percent 30)
     ))
 
-(defun zilongshanren-misc/init-ace-pinyin ()
-  (use-package ace-pinyin
-    :config
-    (ace-pinyin-global-mode 1)
-    (setq ace-pinyin-enable-punctuation-translation nil)
-    ))
-
 (defun zilongshanren-misc/init-maple-header ()
   (use-package maple-header
     :hook (prog-mode . maple-header-mode)
@@ -759,6 +757,8 @@
 
 (defun zilongshanren-misc/init-evil-pinyin ()
   (use-package evil-pinyin
+    :init
+    (setq-default evil-pinyin-with-search-rule 'always)
     :config
     (global-evil-pinyin-mode)
     ))
@@ -777,23 +777,9 @@
   (use-package pyim
     :after ivy
     :config
-    (defun eh-ivy-cregexp (str)
-      (let ((x (ivy--regex-ignore-order str))
-            (case-fold-search nil))
-        (if (listp x)
-            (mapcar (lambda (y)
-                      (if (cdr y)
-                          (list (if (equal (car y) "")
-                                    ""
-                                  (pyim-cregexp-build (car y)))
-                                (cdr y))
-                        (list (pyim-cregexp-build (car y)))))
-                    x)
-          (pyim-cregexp-build x))))
-
+    ;; make ivy support chinese
     (setq ivy-re-builders-alist
-          '((t . eh-ivy-cregexp)
-            (spacemacs/counsel-search . spacemacs/ivy--regex-plus)))
+          '((t . pyim-cregexp-ivy)))
     ))
 
 (defun zilongshanren-misc/init-separedit ()
