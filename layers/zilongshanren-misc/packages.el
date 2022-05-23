@@ -943,8 +943,10 @@
   (use-package awesome-tab
     :config
     (defun awesome-tab-project-name ()
-      (let ((project-name (nth 2 (project-current))))
-        (message project-name)
+      (let ((project-name
+             (if (version< "29.0" emacs-version)
+                 (nth 2 (project-current))
+               (cdr (project-current)))))
         (if project-name
             (format "Project: %s" (expand-file-name project-name))
           awesome-tab-common-group-name)))
