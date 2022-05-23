@@ -308,6 +308,7 @@
     ;; lsp-ui
     (setq lsp-ui-doc-enable nil)
     (setq lsp-ui-doc-position 'at-point)
+    (setq lsp-ui-doc-delay 0)
     (setq lsp-ui-imenu-enable nil)
     (setq lsp-ui-sideline-show-code-actions nil)
     (setq lsp-ui-sideline-show-hover nil)
@@ -363,6 +364,10 @@
     (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
     (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]data\\'")
     (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]*logs*\\'")
+
+    ;; doc
+    ;; lsp-describe-thing-at-point
+    (evil-define-key 'normal 'lsp-mode (kbd "gh") 'lsp-ui-doc-glance)
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()

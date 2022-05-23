@@ -19,6 +19,8 @@
   (progn
     (setq counsel-describe-function-function #'helpful-callable)
     (setq counsel-describe-variable-function #'helpful-variable)
+
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "gh") 'helpful-at-point)
     ))
 
 (defun zilongshanren-ui/post-init-emojify()

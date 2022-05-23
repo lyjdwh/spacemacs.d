@@ -39,11 +39,6 @@
 (define-key evil-visual-state-map (kbd "J") 'my/evil-next-visual-line)
 (define-key evil-visual-state-map (kbd "K") 'my/evil-previous-visual-line)
 
-(evil-define-key 'normal emacs-lisp-mode-map (kbd "gh") 'helpful-at-point)
-(evil-define-key 'normal python-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
-(evil-define-key 'normal c++-mode-map (kbd "gh") 'lsp-describe-thing-at-point)
-(define-key evil-normal-state-map (kbd "gH") 'mouse-hover-tooltip)
-
 (bb/define-key evil-normal-state-map
   "+" 'evil-numbers/inc-at-pt
   "-" 'evil-numbers/dec-at-pt
@@ -246,9 +241,6 @@
 ;; rime，default: ctrl + \
 (spacemacs/set-leader-keys "otr" 'toggle-input-method)
 (define-key rime-mode-map (kbd "M-]") 'rime-force-enable)
-
-;; lsp
-;; (define-key spacemacs-lsp-mode-map (kbd "hg") 'lsp-ui-doc-glance)
 
 ;; helm ag to overhide ivy ag
 (spacemacs/set-leader-keys "sad" 'spacemacs/helm-dir-do-ag)
