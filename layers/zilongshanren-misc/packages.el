@@ -1924,8 +1924,8 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
     (define-key evil-visual-state-map (kbd "y") 'my-evil-yank)
 
-    (evil-define-key '(normal visual) 'global-map (kbd "] f") 'end-of-defun)
-    (evil-define-key '(normal visual) 'global-map (kbd "[ f") 'beginning-of-defun)
+    ;; (evil-define-key '(normal visual) 'global-map (kbd "] f") 'end-of-defun)
+    ;; (evil-define-key '(normal visual) 'global-map (kbd "[ f") 'beginning-of-defun)
     (evil-define-key '(normal visual) 'global-map (kbd "] s") 'forward-sexp)
     (evil-define-key '(normal visual) 'global-map (kbd "[ s") 'backward-sexp)
     (evil-define-key '(normal visual) 'global-map (kbd "[ u") 'backward-up-list)

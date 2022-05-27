@@ -22,6 +22,7 @@
     :config
     (tree-sitter-load 'elisp "elisp")
     (add-to-list 'tree-sitter-major-mode-language-alist '(emacs-lisp-mode . elisp))
+    (add-to-list 'evil-textobj-tree-sitter-major-mode-language-alist '(emacs-lisp-mode . "elisp"))
     ))
 
 (defun zilongshanren-better-defaults/init-grammatical-edit()
@@ -111,6 +112,50 @@
 
     (define-key evil-outer-text-objects-map "L" (evil-textobj-tree-sitter-get-textobj "loop.outer"))
     (define-key evil-inner-text-objects-map "L" (evil-textobj-tree-sitter-get-textobj "loop.inner"))
+
+    (defun meain/goto-and-recenter (group &optional previous end query)
+      (interactive)
+      (evil-textobj-tree-sitter-goto-textobj group previous end query)
+      (recenter 7))
+    (defun tree-sitter-next-parameter () (interactive) (meain/goto-and-recenter "parameter.inner"))
+    (defun tree-sitter-previous-parameter () (interactive) (meain/goto-and-recenter "parameter.inner" t))
+    (defun tree-sitter-next-parameter-end () (interactive) (meain/goto-and-recenter "parameter.inner" nil t))
+    (defun tree-sitter-previous-parameter () (interactive) (meain/goto-and-recenter "parameter.inner" t t))
+
+    (defun tree-sitter-next-condition () (interactive) (meain/goto-and-recenter "conditional.outer"))
+    (defun tree-sitter-previous-condition () (interactive) (meain/goto-and-recenter "conditional.outer" t))
+    (defun tree-sitter-next-condition-end () (interactive) (meain/goto-and-recenter "conditional.outer" nil t))
+    (defun tree-sitter-previous-condition-end () (interactive) (meain/goto-and-recenter "conditional.outer" t t))
+
+    (defun tree-sitter-next-class () (interactive) (meain/goto-and-recenter "class.outer"))
+    (defun tree-sitter-previous-class () (interactive) (meain/goto-and-recenter "class.outer" t))
+    (defun tree-sitter-next-class-end () (interactive) (meain/goto-and-recenter "class.outer" nil t))
+    (defun tree-sitter-previous-class-end () (interactive) (meain/goto-and-recenter "class.outer" t t))
+
+    (defun tree-sitter-next-function () (interactive) (meain/goto-and-recenter "function.outer"))
+    (defun tree-sitter-previous-function () (interactive) (meain/goto-and-recenter "function.outer" t))
+    (defun tree-sitter-next-function-end () (interactive) (meain/goto-and-recenter "function.outer"nil t))
+    (defun tree-sitter-previous-function-end () (interactive) (meain/goto-and-recenter "function.outer" t t))
+
+    (define-key evil-normal-state-map (kbd "]r") 'tree-sitter-next-parameter)
+    (define-key evil-normal-state-map (kbd "[r") 'tree-sitter-previous-parameter)
+    (define-key evil-normal-state-map (kbd "]R") 'tree-sitter-next-parameter-end)
+    (define-key evil-normal-state-map (kbd "[R") 'tree-sitter-previous-parameter)
+    (define-key evil-normal-state-map (kbd "]i") 'tree-sitter-next-condition)
+    (define-key evil-normal-state-map (kbd "[i") 'tree-sitter-previous-condition)
+    (define-key evil-normal-state-map (kbd "]I") 'tree-sitter-next-condition-end)
+    (define-key evil-normal-state-map (kbd "[I") 'tree-sitter-previous-condition-end)
+    (define-key evil-normal-state-map (kbd "]c") 'tree-sitter-next-class)
+    (define-key evil-normal-state-map (kbd "[c") 'tree-sitter-previous-class)
+    (define-key evil-normal-state-map (kbd "]C") 'tree-sitter-next-class-end)
+    (define-key evil-normal-state-map (kbd "[C") 'tree-sitter-previous-class-end)
+    (define-key evil-normal-state-map (kbd "]f") 'tree-sitter-next-function)
+    (define-key evil-normal-state-map (kbd "[f") 'tree-sitter-previous-function)
+    (define-key evil-normal-state-map (kbd "]F") 'tree-sitter-next-function-end)
+    (define-key evil-normal-state-map (kbd "[F") 'tree-sitter-previous-function-end)
+
+    (evil-define-key '(normal visual) 'python-mode (kbd "] f") 'tree-sitter-next-function)
+
     ))
 
 (defun zilongshanren-better-defaults/init-move-to-position-hint ()
