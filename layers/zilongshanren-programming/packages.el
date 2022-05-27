@@ -10,7 +10,7 @@
         company
         (eldoc :location built-in)
         lsp-mode
-        company-tabnine
+        ;; company-tabnine
         (copilot :location (recipe
                             :fetcher github
                             :repo "zerolfx/copilot.el"
@@ -341,10 +341,10 @@
         (progn
           (setq lsp-signature-function 'lsp-signature-posframe)
           (setq lsp-signature-posframe-params '(:poshandler posframe-poshandler-point-bottom-left-corner-upward
-                                                            :height 10 :width 60 :border-width 1 :min-width 60))
+                                                            :width 60 :border-width 1 :min-width 60 :max-height 12))
           ))
 
-    (setq lsp-idle-delay 0.2)
+    (setq lsp-idle-delay 0.5)
     (setq lsp-completion-provider :capf)
 
     ;; auto restart lsp
