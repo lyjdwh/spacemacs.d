@@ -211,7 +211,7 @@
     ;;                               (lsp)))
     ;; (setq lsp-pyright-diagnostic-mode "workspace")
     (setq lsp-pyright-venv-path "/home/liuyan/.conda/envs/torch")
-    (setq lsp-pyright-typechecking-mode "off")
+    (setq lsp-pyright-typechecking-mode "basic") ;; off
     ))
 
 (defun zilongshanren-programming/init-company-tabnine ()
@@ -344,7 +344,7 @@
                                                             :width 60 :border-width 1 :min-width 60 :max-height 12))
           ))
 
-    (setq lsp-idle-delay 0.5)
+    (setq lsp-idle-delay 0.6)
     (setq lsp-completion-provider :capf)
 
     ;; auto restart lsp
@@ -356,10 +356,10 @@
     (require 'dap-python)
     (setq dap-auto-show-output nil)
 
-    (setq lsp-diagnostics-provider :none)
+    (setq lsp-diagnostics-provider :auto)
     (setq lsp-modeline-diagnostics-enable nil)
 
-    (setq lsp-modeline-diagnostics-scope :project)
+    (setq lsp-modeline-diagnostics-scope :workspace)
 
     (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
     (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]data\\'")
@@ -414,6 +414,11 @@
       (setq flycheck-idle-change-delay 2.0)
       (setq flycheck-flake8-maximum-complexity 18)
       (setq flycheck-flake8-maximum-line-length 120)
+
+      ;; Remove newline checks, since they would trigger an immediate check
+      ;; when we want the idle-change-delay to be in effect while editing.
+      (setq flycheck-check-syntax-automatically '(idle-change
+                                                  mode-enabled))
 
       (flycheck-add-next-checker 'python-flake8 'python-pyright)
       (flycheck-remove-next-checker 'python-flake8 'python-pylint)

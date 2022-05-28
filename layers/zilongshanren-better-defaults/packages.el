@@ -373,7 +373,7 @@
   (use-package super-save
     :custom
     (super-save-auto-save-when-idle t)
-    (super-save-idle-duration 1)
+    (super-save-idle-duration 2)
     (auto-save-default nil)
     (make-backup-files nil)
     (save-silently t)

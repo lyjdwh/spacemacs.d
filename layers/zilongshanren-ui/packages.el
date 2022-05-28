@@ -112,8 +112,26 @@
 (defun zilongshanren-ui/post-init-doom-modeline()
   (setq doom-modeline-buffer-file-name-style 'truncate-with-project
         doom-modeline-env-python-executable "python"
+        doom-modeline-checker-simple-format nil
         doom-modeline-unicode-fallback t
         )
+
+  (defun doom-modeline--flycheck-count-errors ()
+    "Count the number of ERRORS, grouped by level.
+
+Return an alist, where each ITEM is a cons cell whose `car' is an
+error level, and whose `cdr' is the number of errors of that
+level."
+    (let ((info 0) (warning 0) (error 0))
+      (mapc
+       (lambda (item)
+         (let ((count (cdr item)))
+           (pcase (flycheck-error-level-severity (car item))
+             (0 (cl-incf info count))
+             (1 (cl-incf warning count))
+             (2 (cl-incf error count)))))
+       (flycheck-count-errors flycheck-current-errors))
+      `((info . ,info) (warning . ,warning) (error . ,error))))
   )
 
 (defun zilongshanren-ui/init-hide-mode-line()
