@@ -1934,7 +1934,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (evil-define-key '(normal visual) 'global-map (kbd "[ p") 'evil-backward-paragraph)
 
     (define-key evil-normal-state-map (kbd "M-y") 'counsel-yank-pop)
-    (define-key evil-normal-state-map (kbd "g f") 'find-file-in-project-at-point)
+    (define-key evil-normal-state-map (kbd "g f") 'evil-find-file-at-point-with-line)
     (define-key evil-normal-state-map (kbd "g F") 'find-file-at-point)
     (define-key evil-normal-state-map (kbd "g r") 'xref-find-references)
     (define-key evil-normal-state-map (kbd "g R") 'lsp-ui-peek-find-references)
