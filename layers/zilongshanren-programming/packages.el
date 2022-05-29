@@ -302,8 +302,8 @@
 (defun zilongshanren-programming/post-init-lsp-mode ()
   (with-eval-after-load 'lsp-mode
     (setq lsp-enable-file-watchers t)
-    (setq lsp-file-watch-threshold 2000)
-    (setq read-process-output-max (* 1024 1024 8)) ;; 8mb
+    (setq lsp-file-watch-threshold 1000)
+    (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
     ;; lsp-ui
     (setq lsp-ui-doc-enable nil)
@@ -442,7 +442,7 @@
     ;; enable dabbrev-expand in company completion https://emacs-china.org/t/topic/6381
     (setq company-dabbrev-char-regexp "[\\.0-9a-z-_'/]")
 
-    (setq company-minimum-prefix-length 1
+    (setq company-minimum-prefix-length 2
           company-idle-delay 0)
 
     (with-eval-after-load 'company

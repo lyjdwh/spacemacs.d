@@ -87,7 +87,17 @@
         auto-package-update
         epkg
         undo-tree
+        gcmh
         ))
+
+(defun zilongshanren-misc/init-gcmh ()
+  (use-package gcmh
+    :config
+    (setq gcmh-idle-delay 'auto  ; default is 15s
+          gcmh-auto-idle-delay-factor 10
+          gcmh-high-cons-threshold (* 32 1024 1024))
+    (gcmh-mode 1)
+    ))
 
 (defun zilongshanren-misc/post-init-undo-tree()
   (setq undo-tree-auto-save-history nil)
