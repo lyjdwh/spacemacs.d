@@ -368,6 +368,8 @@
     ;; doc
     ;; lsp-describe-thing-at-point
     (evil-define-key 'normal 'lsp-mode (kbd "gh") 'lsp-ui-doc-glance)
+
+    (advice-add 'lsp-completion--enable :after (lambda (&rest _args) (setq company-backends '((company-capf :with company-yasnippet)))))
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()

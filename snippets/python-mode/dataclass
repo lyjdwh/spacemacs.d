@@ -4,5 +4,5 @@
 # group: object oriented
 # --
 @dataclass
-class ${1:class}:
+class ${1:Name}($2):
     $0
