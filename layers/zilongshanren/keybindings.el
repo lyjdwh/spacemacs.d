@@ -214,11 +214,6 @@
 (spacemacs/set-leader-keys "srg" 'grep-dired-dwim)
 (spacemacs/set-leader-keys "srG" 'grep-dired)
 
-
-;; take screenshot
-(spacemacs/set-leader-keys "atf" 'screenshot)
-(spacemacs/set-leader-keys "atF" 'screenshot-clip)
-
 ;; highlight todo and similar keywords
 (spacemacs/declare-prefix "oh" "hl-todo/highlight")
 (spacemacs/set-leader-keys "ohp" 'hl-todo-previous)

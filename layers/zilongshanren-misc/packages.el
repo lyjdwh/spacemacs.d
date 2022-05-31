@@ -88,7 +88,15 @@
         epkg
         undo-tree
         gcmh
+        (screenshot :location (recipe :fetcher github :repo "tecosaur/screenshot"))
         ))
+
+(defun zilongshanren-misc/init-screenshot()
+  (use-package screenshot
+    :init
+    (spacemacs/set-leader-keys "atf" 'screenshot)
+    :commands screenshot
+    ))
 
 (defun zilongshanren-misc/init-gcmh ()
   (use-package gcmh
