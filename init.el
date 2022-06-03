@@ -79,7 +79,7 @@ This function should only modify configuration layer settings."
                        version-control-global-margin t
                        )
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
-     (auto-completion :variables auto-completion-enable-sort-by-usage t
+     (auto-completion :variables auto-completion-enable-sort-by-usage nil
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-use-company-box t
@@ -221,7 +221,7 @@ This function should only modify configuration layer settings."
                     helm-flyspell flyspell-correct-helm clean-aindent-mode
                     helm-c-yasnippet ace-jump-helm-line helm-make magithub
                     helm-themes helm-swoop helm-spacemacs-help smeargle
-                    ido-vertical-mode flx-ido helm-purpose
+                    ido-vertical-mode flx-ido helm-purpose fuzzy
                     )
    dotspacemacs-install-packages 'used-only
    dotspacemacs-delete-orphan-packages t))

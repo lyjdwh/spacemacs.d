@@ -33,7 +33,14 @@
         citre
         blacken
         lsp-ltex
+        company-prescient
         ))
+
+(defun zilongshanren-programming/init-company-prescient()
+  ;; Better sorting and filtering
+  (use-package company-prescient
+    :init
+    (company-prescient-mode 1)))
 
 (defun zilongshanren-programming/init-lsp-ltex()
   (use-package lsp-ltex
@@ -369,7 +376,10 @@
     ;; lsp-describe-thing-at-point
     (evil-define-key 'normal 'lsp-mode (kbd "gh") 'lsp-ui-doc-glance)
 
-    (advice-add 'lsp-completion--enable :after (lambda (&rest _args) (setq company-backends '((company-capf :with company-yasnippet)))))
+    (advice-add 'lsp-completion--enable :after (lambda (&rest _args)
+                                                 (setq company-backends '((company-capf :with company-yasnippet)
+                                                                          (company-dabbrev-code company-files)
+                                                                          company-dabbrev))))
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
