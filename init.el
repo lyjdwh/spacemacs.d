@@ -53,7 +53,11 @@ This function should only modify configuration layer settings."
      ;; dap
      ;; colors
      ;; prodigy
-     search-engine
+     (search-engine :variables
+                    search-engine-config-list '((grep-code
+                                                 :name "Grep Code"
+                                                 :url "https://grep.app/search?q=%s"
+                                                 :keywords (:docstring "search code"))))
      graphviz
      ;;  (haskell :variables haskell-enable-hindent t
      ;;           haskell-completion-backend 'intero)
