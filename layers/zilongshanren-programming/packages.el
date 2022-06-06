@@ -40,7 +40,11 @@
   ;; Better sorting and filtering
   (use-package company-prescient
     :init
-    (company-prescient-mode 1)))
+    (company-prescient-mode 1)
+    (prescient-persist-mode 1)
+    :config
+    (setq completion-ignore-case t)
+    ))
 
 (defun zilongshanren-programming/init-lsp-ltex()
   (use-package lsp-ltex
@@ -358,7 +362,6 @@
     (setq lsp-restart 'auto-restart)
     (setq lsp-log-io nil)
     (setq lsp-semantic-tokens-enable nil)
-    (lsp-treemacs-sync-mode 1)
 
     (require 'dap-python)
     (setq dap-auto-show-output nil)
@@ -376,10 +379,12 @@
     ;; lsp-describe-thing-at-point
     (evil-define-key 'normal 'lsp-mode (kbd "gh") 'lsp-ui-doc-glance)
 
-    (advice-add 'lsp-completion--enable :after (lambda (&rest _args)
-                                                 (setq company-backends '((company-capf :with company-yasnippet)
-                                                                          (company-dabbrev-code company-files)
-                                                                          company-dabbrev))))
+    (advice-add 'lsp-completion--enable
+                :after (lambda (&rest _args)
+                         (setq company-backends '((company-files company-capf :with company-dabbrev :with company-yasnippet)))
+                         ;; Remove duplicate candidate.
+                         (add-to-list 'company-transformers #'delete-dups)
+                         ))
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
@@ -450,7 +455,8 @@
 
 (defun zilongshanren-programming/post-init-company ()
   (progn
-    (setq company-dabbrev-code-other-buffers 'all)
+    (setq company-dabbrev-code-other-buffers t)
+    (setq company-dabbrev-other-buffers t)
     ;; enable dabbrev-expand in company completion https://emacs-china.org/t/topic/6381
     (setq company-dabbrev-char-regexp "[\\.0-9a-z-_'/]")
 

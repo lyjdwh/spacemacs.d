@@ -9,7 +9,6 @@
    ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
  '(command-log-mode-window-size 50)
  '(company-dabbrev-minimum-length 3)
- '(company-dabbrev-other-buffers nil)
  '(company-quick-access-modifier 'super)
  '(company-show-numbers t)
  '(company-show-quick-access t)

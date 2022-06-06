@@ -313,6 +313,7 @@
 (spacemacs/set-leader-keys "oem" 'mw-thesaurus-lookup-at-point)
 (spacemacs/set-leader-keys "oed" 'crux-duplicate-current-line-or-region)
 (spacemacs/set-leader-keys "oeD" 'crux-duplicate-and-comment-current-line-or-region)
+(define-key global-map (kbd "C-\=") 'hippie-expand)
 
 ;; evil avy
 (spacemacs/set-leader-keys "jj" 'evil-avy-goto-char-2)
