@@ -345,7 +345,9 @@
   )
 (defun zilongshanren-misc/post-init-vterm()
   (setq vterm-max-scrollback 5000)
-  (add-hook 'vterm-mode-hook 'evil-emacs-state)
+  (add-hook 'vterm-mode-hook 'evil-collection-vterm-toggle-send-escape)
+  (evil-define-key 'insert vterm-mode-map (kbd "C-o") 'vterm--self-insert)
+  (evil-define-key 'insert vterm-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
   )
 
 (defun zilongshanren-misc/init-telega()

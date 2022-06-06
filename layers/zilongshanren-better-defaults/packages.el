@@ -418,6 +418,7 @@
   (use-package snails
     :load-path "/home/liuyan/bin/snails"
     :commands (snails snails-search-point)
+    :hook (snails-mode . evil-insert-state)
     :if (display-graphic-p)
     :custom-face
     (snails-content-buffer-face ((t (:background "#111" :height 130))))
