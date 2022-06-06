@@ -173,6 +173,8 @@
                                         (left-fringe . 3)
                                         (right-fringe . 3)))
     :config
+    (delq 'company-preview-if-just-one-frontend company-frontends)
+
     (with-no-warnings
       ;; Prettify icons
       (defun my-company-box-icons--elisp (candidate)
