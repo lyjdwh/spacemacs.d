@@ -482,7 +482,7 @@
 
     :custom
     (eaf-evil-leader-keymap  spacemacs-cmds)
-    (eaf-evil-leader-key "SPC")
+    ;; (eaf-evil-leader-key "SPC")
     :config
     (require 'eaf-org-previewer)
     (require 'eaf-image-viewer)
@@ -548,7 +548,54 @@
     (eaf-bind-key copy_select "C-c" eaf-pdf-viewer-keybinding)
     (eaf-bind-key kill_text "C-c" eaf-browser-keybinding)
 
+    ;; The following lines create the major-mode leader key emulation map
+    ;; in a similar way as how it was done in the evil-integration example
+    (setq eaf-evil-leader-for-major-keymap (make-sparse-keymap))
+    (define-key eaf-evil-leader-for-major-keymap (kbd "h") 'eaf-open-browser-with-history)
+    (define-key eaf-evil-leader-for-major-keymap (kbd "b") 'eaf-open-bookmark)
+    (define-key eaf-evil-leader-for-major-keymap (kbd "d") 'eaf-py-proxy-toggle_dark_mode)
+    (define-key eaf-evil-leader-for-major-keymap (kbd "s") 'eaf-search-it)
+    (define-key eaf-evil-leader-for-major-keymap (kbd "c") 'eaf-py-proxy-copy_code)
+    (define-key eaf-evil-leader-for-major-keymap (kbd "u") 'eaf-py-proxy-copy_link)
+    (define-key eaf-evil-leader-for-major-keymap (kbd "r") 'eaf-py-proxy-insert_or_switch_to_reader_mode)
+    (define-key eaf-evil-leader-for-major-keymap (kbd "v") 'eaf-py-proxy-select_text)
+    (define-key eaf-evil-leader-for-major-keymap (kbd "e") 'eaf-atomic-edit)
+    (define-key eaf-evil-leader-for-major-keymap (kbd "E") 'eaf-open-external)
+
+    (add-hook 'evil-normal-state-entry-hook
+              (lambda ()
+                (when (and (derived-mode-p 'eaf-mode))
+                  (define-key eaf-mode-map (kbd "C-,") eaf-evil-leader-for-major-keymap))))
+
+    (define-key key-translation-map (kbd ",")
+                (lambda (prompt)
+                  (if (and (derived-mode-p 'eaf-mode)
+                           (string= eaf--buffer-app-name "browser"))
+                      (if (eaf-call-sync "execute_function" eaf--buffer-id "is_focus")
+                          (kbd ",")
+                        (kbd "C-,")
+                        ))))
+
+    (define-key key-translation-map (kbd "SPC")
+                (lambda (prompt)
+                  (if (derived-mode-p 'eaf-mode)
+                      (pcase eaf--buffer-app-name
+                        ((or
+                          (and "browser"
+                               (guard (not (eaf-call-sync "execute_function" eaf--buffer-id "is_focus"))))
+                          "image-viewer"
+                          "pdf-viewer")
+                         (kbd eaf-evil-leader-key))
+                        (_  (kbd "SPC")))
+                    (kbd "SPC"))))
+
     ;; (add-to-list 'eaf-preview-display-function-alist '("browser" . eaf--browser-display))
+
+    (defun eaf-atomic-edit ()
+      (interactive)
+      (call-interactively 'eaf-py-proxy-insert_or_focus_input)
+      (sleep-for 0.1)
+      (call-interactively 'eaf-py-proxy-atomic_edit))
 
     (defun eaf-open-this (file)
       "Open html/pdf/image/video files whenever possible with EAF.
