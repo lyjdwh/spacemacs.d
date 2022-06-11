@@ -174,6 +174,7 @@
     (company-box-doc-frame-parameters '((internal-border-width . 1)
                                         (left-fringe . 3)
                                         (right-fringe . 3)))
+    (company-box-scrollbar 'right)
     :config
     (delq 'company-preview-if-just-one-frontend company-frontends)
 
@@ -190,7 +191,6 @@
                   (t . nil)))))
       (advice-add #'company-box-icons--elisp :override #'my-company-box-icons--elisp)
 
-      ;; Credits to Centaur for these configurations
       ;; Display borders and optimize performance
       (defun my-company-box--display (string on-update)
         "Display the completions."
@@ -214,6 +214,12 @@
           (company-box--maybe-move-number (or company-box--last-start 1))))
       (advice-add #'company-box--display :override #'my-company-box--display)
 
+      (setq company-box-doc-frame-parameters '((vertical-scroll-bars . nil)
+                                               (horizontal-scroll-bars . nil)
+                                               (internal-border-width . 1)
+                                               (left-fringe . 8)
+                                               (right-fringe . 8)))
+
       (defun my-company-box-doc--make-buffer (object)
         (let* ((buffer-list-update-hook nil)
                (inhibit-modification-hooks t)
@@ -228,26 +234,25 @@
 
               ;; Handle hr lines of markdown
               ;; @see `lsp-ui-doc--handle-hr-lines'
-              (with-current-buffer (company-box--get-buffer "doc")
-                (let (bolp next before after)
-                  (goto-char 1)
-                  (while (setq next (next-single-property-change (or next 1) 'markdown-hr))
-                    (when (get-text-property next 'markdown-hr)
-                      (goto-char next)
-                      (setq bolp (bolp)
-                            before (char-before))
-                      (delete-region (point) (save-excursion (forward-visible-line 1) (point)))
-                      (setq after (char-after (1+ (point))))
-                      (insert
-                       (concat
-                        (and bolp (not (equal before ?\n)) (propertize "\n" 'face '(:height 0.5)))
-                        (propertize "\n" 'face '(:height 0.5))
-                        (propertize " "
-                                    'display '(space :height (1))
-                                    'company-box-doc--replace-hr t
-                                    'face `(:background ,(face-foreground 'font-lock-comment-face)))
-                        (propertize " " 'display '(space :height (1)))
-                        (and (not (equal after ?\n)) (propertize " \n" 'face '(:height 0.5)))))))))
+              (let (bolp next before after)
+                (goto-char 1)
+                (while (setq next (next-single-property-change (or next 1) 'markdown-hr))
+                  (when (get-text-property next 'markdown-hr)
+                    (goto-char next)
+                    (setq bolp (bolp)
+                          before (char-before))
+                    (delete-region (point) (save-excursion (forward-visible-line 1) (point)))
+                    (setq after (char-after (1+ (point))))
+                    (insert
+                     (concat
+                      (and bolp (not (equal before ?\n)) (propertize "\n" 'face '(:height 0.5)))
+                      (propertize "\n" 'face '(:height 0.5))
+                      (propertize " "
+                                  'display '(space :height (1))
+                                  'company-box-doc--replace-hr t
+                                  'face `(:background ,(face-foreground 'font-lock-comment-face)))
+                      (propertize " " 'display '(space :height (1)))
+                      (and (not (equal after ?\n)) (propertize " \n" 'face '(:height 0.5))))))))
 
               (setq mode-line-format nil
                     display-line-numbers nil
@@ -335,43 +340,39 @@
                          (t y))))
           (set-frame-position frame (max x 0) (max y 0))
           (set-frame-size frame text-width text-height t)))
-      (advice-add #'company-box-doc--set-frame-position :override #'my-company-box-doc--set-frame-position))
+      (advice-add #'company-box-doc--set-frame-position :override #'my-company-box-doc--set-frame-position)
 
-    (when (require 'all-the-icons nil t)
-      (declare-function all-the-icons-faicon 'all-the-icons)
-      (declare-function all-the-icons-material 'all-the-icons)
-      (declare-function all-the-icons-octicon 'all-the-icons)
-      (setq company-box-icons-all-the-icons
-            `((Unknown . ,(all-the-icons-material "find_in_page" :height 1.0 :v-adjust -0.2))
-                          (Text . ,(all-the-icons-faicon "text-width" :height 1.0 :v-adjust -0.02))
-                          (Method . ,(all-the-icons-faicon "cube" :height 1.0 :v-adjust -0.02 :face 'all-the-icons-purple))
-                          (Function . ,(all-the-icons-faicon "cube" :height 1.0 :v-adjust -0.02 :face 'all-the-icons-purple))
-                          (Constructor . ,(all-the-icons-faicon "cube" :height 1.0 :v-adjust -0.02 :face 'all-the-icons-purple))
-                          (Field . ,(all-the-icons-octicon "tag" :height 1.1 :v-adjust 0 :face 'all-the-icons-lblue))
-                          (Variable . ,(all-the-icons-octicon "tag" :height 1.1 :v-adjust 0 :face 'all-the-icons-lblue))
-                          (Class . ,(all-the-icons-material "settings_input_component" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-orange))
-                          (Interface . ,(all-the-icons-material "share" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-lblue))
-                          (Module . ,(all-the-icons-material "view_module" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-lblue))
-                          (Property . ,(all-the-icons-faicon "wrench" :height 1.0 :v-adjust -0.02))
-                          (Unit . ,(all-the-icons-material "settings_system_daydream" :height 1.0 :v-adjust -0.2))
-                          (Value . ,(all-the-icons-material "format_align_right" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-lblue))
-                          (Enum . ,(all-the-icons-material "storage" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-orange))
-                          (Keyword . ,(all-the-icons-material "filter_center_focus" :height 1.0 :v-adjust -0.2))
-                          (Snippet . ,(all-the-icons-material "format_align_center" :height 1.0 :v-adjust -0.2))
-                          (Color . ,(all-the-icons-material "palette" :height 1.0 :v-adjust -0.2))
-                          (File . ,(all-the-icons-faicon "file-o" :height 1.0 :v-adjust -0.02))
-                          (Reference . ,(all-the-icons-material "collections_bookmark" :height 1.0 :v-adjust -0.2))
-                          (Folder . ,(all-the-icons-faicon "folder-open" :height 1.0 :v-adjust -0.02))
-                          (EnumMember . ,(all-the-icons-material "format_align_right" :height 1.0 :v-adjust -0.2))
-                          (Constant . ,(all-the-icons-faicon "square-o" :height 1.0 :v-adjust -0.1))
-                          (Struct . ,(all-the-icons-material "settings_input_component" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-orange))
-                          (Event . ,(all-the-icons-octicon "zap" :height 1.0 :v-adjust 0 :face 'all-the-icons-orange))
-                          (Operator . ,(all-the-icons-material "control_point" :height 1.0 :v-adjust -0.2))
-                          (TypeParameter . ,(all-the-icons-faicon "arrows" :height 1.0 :v-adjust -0.02))
-                          (Template . ,(all-the-icons-material "format_align_left" :height 1.0 :v-adjust -0.2)))
-            company-box-icons-alist 'company-box-icons-all-the-icons)))
-
-)
+      (when (require 'all-the-icons nil t)
+        (setq company-box-icons-all-the-icons
+              `((Unknown . ,(all-the-icons-material "find_in_page" :height 1.0 :v-adjust -0.2))
+                (Text . ,(all-the-icons-faicon "text-width" :height 1.0 :v-adjust -0.02))
+                (Method . ,(all-the-icons-faicon "cube" :height 1.0 :v-adjust -0.02 :face 'all-the-icons-purple))
+                (Function . ,(all-the-icons-faicon "cube" :height 1.0 :v-adjust -0.02 :face 'all-the-icons-purple))
+                (Constructor . ,(all-the-icons-faicon "cube" :height 1.0 :v-adjust -0.02 :face 'all-the-icons-purple))
+                (Field . ,(all-the-icons-octicon "tag" :height 1.1 :v-adjust 0 :face 'all-the-icons-lblue))
+                (Variable . ,(all-the-icons-octicon "tag" :height 1.1 :v-adjust 0 :face 'all-the-icons-lblue))
+                (Class . ,(all-the-icons-material "settings_input_component" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-orange))
+                (Interface . ,(all-the-icons-material "share" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-lblue))
+                (Module . ,(all-the-icons-material "view_module" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-lblue))
+                (Property . ,(all-the-icons-faicon "wrench" :height 1.0 :v-adjust -0.02))
+                (Unit . ,(all-the-icons-material "settings_system_daydream" :height 1.0 :v-adjust -0.2))
+                (Value . ,(all-the-icons-material "format_align_right" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-lblue))
+                (Enum . ,(all-the-icons-material "storage" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-orange))
+                (Keyword . ,(all-the-icons-material "filter_center_focus" :height 1.0 :v-adjust -0.2))
+                (Snippet . ,(all-the-icons-material "format_align_center" :height 1.0 :v-adjust -0.2))
+                (Color . ,(all-the-icons-material "palette" :height 1.0 :v-adjust -0.2))
+                (File . ,(all-the-icons-faicon "file-o" :height 1.0 :v-adjust -0.02))
+                (Reference . ,(all-the-icons-material "collections_bookmark" :height 1.0 :v-adjust -0.2))
+                (Folder . ,(all-the-icons-faicon "folder-open" :height 1.0 :v-adjust -0.02))
+                (EnumMember . ,(all-the-icons-material "format_align_right" :height 1.0 :v-adjust -0.2))
+                (Constant . ,(all-the-icons-faicon "square-o" :height 1.0 :v-adjust -0.1))
+                (Struct . ,(all-the-icons-material "settings_input_component" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-orange))
+                (Event . ,(all-the-icons-octicon "zap" :height 1.0 :v-adjust 0 :face 'all-the-icons-orange))
+                (Operator . ,(all-the-icons-material "control_point" :height 1.0 :v-adjust -0.2))
+                (TypeParameter . ,(all-the-icons-faicon "arrows" :height 1.0 :v-adjust -0.02))
+                (Template . ,(all-the-icons-material "format_align_left" :height 1.0 :v-adjust -0.2)))
+              company-box-icons-alist 'company-box-icons-all-the-icons)))
+  ))
 
 (defun zilongshanren-better-defaults/init-super-save ()
   (use-package super-save
