@@ -22,6 +22,7 @@
     :config
     (tree-sitter-load 'elisp "elisp")
     (add-to-list 'tree-sitter-major-mode-language-alist '(emacs-lisp-mode . elisp))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(inferior-emacs-lisp-mode . elisp))
     (add-to-list 'evil-textobj-tree-sitter-major-mode-language-alist '(emacs-lisp-mode . "elisp"))
     ))
 
@@ -57,6 +58,7 @@
     (define-key grammatical-edit-mode-map (kbd "}") 'grammatical-edit-close-curly)
     (define-key grammatical-edit-mode-map (kbd "=") 'grammatical-edit-equal)
 
+    (define-key grammatical-edit-mode-map (kbd "%") 'grammatical-edit-match-paren)
     (define-key grammatical-edit-mode-map (kbd "\"") 'grammatical-edit-double-quote)
     (define-key grammatical-edit-mode-map (kbd "'") 'grammatical-edit-single-quote)
 

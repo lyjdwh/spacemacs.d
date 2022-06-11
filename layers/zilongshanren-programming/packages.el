@@ -321,9 +321,12 @@
     (setq lsp-ui-doc-position 'at-point)
     (setq lsp-ui-doc-delay 0)
     (setq lsp-ui-imenu-enable nil)
-    (setq lsp-ui-sideline-show-code-actions nil)
+    (setq lsp-modeline-code-actions-enable nil)
     (setq lsp-ui-sideline-show-hover nil)
     (setq lsp-ui-sideline-update-mode 'line)
+
+    ;; hover
+    (setq lsp-eldoc-enable-hover nil)
 
     ;; lens
     (setq lsp-lens-enable nil)
@@ -340,10 +343,9 @@
     (setq lsp-enable-on-type-formatting nil)
     (setq lsp-enable-indentation nil)
 
-    (setq lsp-headerline-breadcrumb-enable t)
+    (setq lsp-headerline-breadcrumb-enable nil)
 
-    ;;handle yasnippet by myself
-    (setq lsp-enable-snippet nil)
+    (setq lsp-enable-snippet t)
 
     (setq lsp-enable-links nil)
 
@@ -354,8 +356,9 @@
           (setq lsp-signature-posframe-params '(:poshandler posframe-poshandler-point-bottom-left-corner-upward
                                                             :width 60 :border-width 1 :min-width 60 :max-height 12))
           ))
+    (setq lsp-signature-render-documentation nil)
 
-    (setq lsp-idle-delay 0.6)
+    (setq lsp-idle-delay 0.5)
     (setq lsp-completion-provider :capf)
 
     ;; auto restart lsp
@@ -368,7 +371,6 @@
 
     (setq lsp-diagnostics-provider :auto)
     (setq lsp-modeline-diagnostics-enable nil)
-
     (setq lsp-modeline-diagnostics-scope :workspace)
 
     (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
@@ -376,15 +378,18 @@
     (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]*logs*\\'")
 
     ;; doc
-    ;; lsp-describe-thing-at-point
     (evil-define-key 'normal 'lsp-mode (kbd "gh") 'lsp-ui-doc-glance)
+    (evil-define-key 'normal 'lsp-mode (kbd "gH") 'lsp-describe-thing-at-point)
 
     (advice-add 'lsp-completion--enable
                 :after (lambda (&rest _args)
                          (setq company-backends '((company-files company-capf :with company-dabbrev :with company-yasnippet)))
                          ;; Remove duplicate candidate.
                          (add-to-list 'company-transformers #'delete-dups)
-                         ))
+
+                         (if (derived-mode-p 'python-mode)
+                             (setq-local lsp-ui-sideline-show-code-actions nil)
+                           (setq-local lsp-ui-sideline-show-code-actions t))))
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
