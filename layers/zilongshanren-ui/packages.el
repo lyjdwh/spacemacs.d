@@ -171,25 +171,22 @@ level."
       "Open the *dashboard* buffer and jump to the first widget."
       (interactive)
       ;; Check if need to recover layout
-      (if (> (length (window-list-1))
-             ;; exclude `treemacs' window
-             (if (and (fboundp 'treemacs-current-visibility)
-                      (eq (treemacs-current-visibility) 'visible))
-                 2
-               1))
+      (if (length> (window-list-1)
+                   ;; exclude `treemacs' window
+                   (if (and (fboundp 'treemacs-current-visibility)
+                            (eq (treemacs-current-visibility) 'visible))
+                       2
+                     1))
           (setq dashboard-recover-layout-p t))
 
+      ;; Display dashboard in maximized window
       (delete-other-windows)
 
       ;; Refresh dashboard buffer
-      (when (get-buffer dashboard-buffer-name)
-        (kill-buffer dashboard-buffer-name))
-      (dashboard-insert-startupify-lists)
-      (switch-to-buffer dashboard-buffer-name)
+      (dashboard-refresh-buffer)
 
       ;; Jump to the first section
-      (dashboard-goto-recent-files)
-      (evil-force-evilified-state))
+      (dashboard-goto-recent-files))
 
     (defun quit-dashboard ()
       "Quit dashboard window."

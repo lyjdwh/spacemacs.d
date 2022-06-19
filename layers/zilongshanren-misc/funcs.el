@@ -91,13 +91,6 @@
            fill-column)))
     (call-interactively #'fill-paragraph)))
 
-(defun my-git-timemachine ()
-  "Open git snapshot with the selected version.  Based on ivy-mode."
-  (interactive)
-  (unless (featurep 'git-timemachine)
-    (require 'git-timemachine))
-  (git-timemachine--start #'my-git-timemachine-show-selected-revision))
-
 (defun zilongshanren/helm-hotspots ()
   "helm interface to my hotspots, which includes my locations,
 org-files and bookmarks"
@@ -692,6 +685,8 @@ You can use \\&, \\N to refer matched text."
 (defun browse-repo-at-remote ()
   "Browse the current repo with `browse-url'."
   (interactive)
+  (unless (featurep 'browse-at-remote)
+    (require 'browse-at-remote))
   (let* ((remote-ref (browse-at-remote--remote-ref (buffer-file-name)))
          (remote (car remote-ref))
          (target-repo (browse-at-remote--get-url-from-remote remote))
@@ -882,3 +877,16 @@ Error out if this isn't a GitHub repo."
 (defun open-v2raya()
   (interactive)
   (eaf-open-browser "http://127.0.0.1:2017/"))
+
+(defun transient-winner-undo ()
+  "Transient version of `winner-undo'."
+  (interactive)
+  (let ((echo-keystrokes nil))
+    (winner-undo)
+    (message "Winner: [u]ndo [r]edo")
+    (set-transient-map
+     (let ((map (make-sparse-keymap)))
+       (define-key map [?u] #'winner-undo)
+       (define-key map [?r] #'winner-redo)
+       map)
+     t)))

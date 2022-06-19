@@ -50,7 +50,7 @@ The original function deletes trailing whitespace of the current line."
 (defun change-browser-function ()
   "change the browser for emacs"
   (interactive)
-  (if (equal browse-url-browser-function 'eaf-open-browser)
+  (if (memq browse-url-browser-function '(eaf-open-browser eaf-open-browser-other-window))
       (progn
         (setq browse-url-browser-function 'browse-url-default-browser)
         (message "use default browser"))

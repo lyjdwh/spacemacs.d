@@ -509,6 +509,9 @@
     (setq eaf-buffer-title-format "EAF/%s")
     (setq eaf-python-command "/usr/bin/python")
 
+    ;; git
+    (setq eaf-git-layout "V")
+
     ;; browser
     ;; (setq eaf-proxy-type "socks5")
     ;; (setq eaf-proxy-host "127.0.0.1")

@@ -102,11 +102,15 @@
 (spacemacs/set-leader-keys "ep" 'flycheck-previous-error)
 (spacemacs/set-leader-keys "o(" 'ielm)
 
+;; git
 (spacemacs/set-leader-keys "gL" 'magit-log-buffer-file)
 (spacemacs/set-leader-keys "gn" 'smerge-next)
 (spacemacs/set-leader-keys "gp" 'smerge-prev)
-(spacemacs/set-leader-keys "gT" 'my-git-timemachine)
 (spacemacs/set-leader-keys "gO" 'browse-repo-at-remote)
+(evil-define-key 'normal 'global-map (kbd "zg") 'spacemacs/vcs-transient-state/body)
+(evil-define-key '(normal visual) 'global-map (kbd "gmm") 'magit-dispatch)
+(evil-define-key '(normal visual) 'global-map (kbd "gmf") 'magit-file-dispatch)
+(evil-define-key '(normal visual) 'global-map (kbd "gml") 'magit-log-buffer-file)
 
 (spacemacs/set-leader-keys "sj" 'zilongshanren/counsel-imenu)
 ;; deal with BOM
@@ -190,8 +194,8 @@
 (spacemacs/set-leader-keys "iT" 'insert-translated-name-insert-original-translation	)
 (spacemacs/set-leader-keys "ir" 'insert-translated-region-replace)
 
-;; rotate-text
-(spacemacs/set-leader-keys "or" 'rotate-text)
+;; winner transient
+(spacemacs/set-leader-keys "wu" 'transient-winner-undo)
 
 ;; pandoc
 (spacemacs/set-leader-keys "op" 'spacemacs/run-pandoc)
@@ -649,3 +653,11 @@ clock                             ^^^^effort             ^^watcher
 
 ;; v2raya
 (spacemacs/set-leader-keys "ov" 'open-v2raya)
+
+;; drag-stuff transient: spc + x .
+;; drag-stuff up/down
+(global-set-key (kbd "<S-up>") 'drag-stuff-up)
+(global-set-key (kbd "<S-down>") 'drag-stuff-down)
+
+;; open gtd
+(spacemacs/set-leader-keys "feg" 'open-gtd-file)

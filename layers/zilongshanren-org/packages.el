@@ -45,15 +45,11 @@
   (use-package org-appear
     :hook
     (org-mode . org-appear-mode)
-    :init
-    ;; Instant toggle raw format on insert mode, 1 second delay on normal mode.
-    (add-hook 'evil-insert-state-entry-hook (lambda() (setq org-appear-delay 0)))
-    (add-hook 'evil-normal-state-entry-hook (lambda() (setq org-appear-delay 1)))
     :config
-    ;; Hide emphasis makers.
+    ;; Hide org emphasis makers.
     (setq org-hide-emphasis-markers t)
     :custom
-    (org-appear-delay 0)
+    (org-appear-delay 0.5)
     (org-appear-autolinks t)
     (org-appear-autoentities t)
     (org-appear-autokeywords t)
@@ -487,8 +483,14 @@ the entry of interest in the bibfile.  but does not check that."
   (use-package org-roam
     :init
     (progn
+      (defun org-roam-do-rg ()
+        "Search in current directory with `rg'."
+        (interactive)
+        (spacemacs/helm-files-do-rg org-roam-directory))
+
       (spacemacs/declare-prefix "am" "org-roam")
       (spacemacs/set-leader-keys
+        "ams" 'org-roam-do-rg
         "amb" 'org-roam-buffer
         "amt" 'org-roam-buffer-toggle
         "amf" 'org-roam-node-find ;; orb-find-non-ref-file
@@ -597,7 +599,7 @@ the entry of interest in the bibfile.  but does not check that."
   (use-package org-roam-ui
     :init
     (spacemacs/set-leader-keys
-      "ams" 'org-roam-ui-open
+      "amS" 'org-roam-ui-open
       "amz" 'org-roam-ui-node-zoom
       "amL" 'org-roam-ui-node-local)
 

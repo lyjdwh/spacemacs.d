@@ -798,6 +798,7 @@
     :after ivy
     :config
     ;; make ivy support chinese
+    (require 'pyim-cregexp-utils)
     (setq ivy-re-builders-alist
           '((t . pyim-cregexp-ivy)))
     ))
@@ -1676,7 +1677,6 @@
     (define-key evil-normal-state-map (kbd "gF") 'find-file-at-point)
     (define-key evil-normal-state-map (kbd "gr") 'xref-find-references)
     (define-key evil-normal-state-map (kbd "gR") 'lsp-ui-peek-find-references)
-    (define-key evil-normal-state-map (kbd "zg") 'spacemacs/vcs-transient-state/body)
     (define-key evil-normal-state-map (kbd "ze") 'spacemacs/error-transient-state/body)
 
     (spacemacs/set-leader-keys "bi" 'ibuffer-other-window)
@@ -1829,8 +1829,8 @@
   (with-eval-after-load 'magit
 
     ;; speed up magit
-    ;; (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
-    ;; (remove-hook 'magit-status-sections-hook 'magit-insert-status-headers)
+    (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
+    (remove-hook 'magit-status-sections-hook 'magit-insert-status-headers)
     ;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-pushremote)
     ;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
     ;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
