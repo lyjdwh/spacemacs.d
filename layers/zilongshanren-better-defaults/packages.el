@@ -94,6 +94,9 @@
   (use-package evil-textobj-tree-sitter
     :config
     ;; v/y + a/i + f/c/x
+    (setq elisp-defun-query '((emacs-lisp-mode . [(function_definition) @defun])))
+    (define-key evil-inner-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj "defun" elisp-defun-query))
+
     (define-key evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
     (define-key evil-inner-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.inner"))
 
@@ -119,6 +122,7 @@
       (interactive)
       (evil-textobj-tree-sitter-goto-textobj group previous end query)
       (recenter 7))
+
     (defun tree-sitter-next-parameter () (interactive) (meain/goto-and-recenter "parameter.inner"))
     (defun tree-sitter-previous-parameter () (interactive) (meain/goto-and-recenter "parameter.inner" t))
     (defun tree-sitter-next-parameter-end () (interactive) (meain/goto-and-recenter "parameter.inner" nil t))
@@ -133,11 +137,18 @@
     (defun tree-sitter-previous-class () (interactive) (meain/goto-and-recenter "class.outer" t))
     (defun tree-sitter-next-class-end () (interactive) (meain/goto-and-recenter "class.outer" nil t))
     (defun tree-sitter-previous-class-end () (interactive) (meain/goto-and-recenter "class.outer" t t))
-
-    (defun tree-sitter-next-function () (interactive) (meain/goto-and-recenter "function.outer"))
-    (defun tree-sitter-previous-function () (interactive) (meain/goto-and-recenter "function.outer" t))
     (defun tree-sitter-next-function-end () (interactive) (meain/goto-and-recenter "function.outer"nil t))
     (defun tree-sitter-previous-function-end () (interactive) (meain/goto-and-recenter "function.outer" t t))
+
+    (defun tree-sitter-next-function () (interactive) (if (derived-mode-p 'emacs-lisp-mode)
+                                                          (meain/goto-and-recenter "defun" nil nil elisp-defun-query)
+                                                        (meain/goto-and-recenter "function.outer")))
+    (defun tree-sitter-previous-function () (interactive) (if (derived-mode-p 'emacs-lisp-mode)
+                                                              (meain/goto-and-recenter "defun" t nil elisp-defun-query)
+                                                            (meain/goto-and-recenter "function.outer" t)))
+
+    (define-key evil-normal-state-map (kbd "]f") 'tree-sitter-next-function)
+    (define-key evil-normal-state-map (kbd "[f") 'tree-sitter-previous-function)
 
     (define-key evil-normal-state-map (kbd "]r") 'tree-sitter-next-parameter)
     (define-key evil-normal-state-map (kbd "[r") 'tree-sitter-previous-parameter)
@@ -151,13 +162,8 @@
     (define-key evil-normal-state-map (kbd "[c") 'tree-sitter-previous-class)
     (define-key evil-normal-state-map (kbd "]C") 'tree-sitter-next-class-end)
     (define-key evil-normal-state-map (kbd "[C") 'tree-sitter-previous-class-end)
-    (define-key evil-normal-state-map (kbd "]f") 'tree-sitter-next-function)
-    (define-key evil-normal-state-map (kbd "[f") 'tree-sitter-previous-function)
     (define-key evil-normal-state-map (kbd "]F") 'tree-sitter-next-function-end)
     (define-key evil-normal-state-map (kbd "[F") 'tree-sitter-previous-function-end)
-
-    (evil-define-key '(normal visual) 'python-mode (kbd "] f") 'tree-sitter-next-function)
-
     ))
 
 (defun zilongshanren-better-defaults/init-move-to-position-hint ()
