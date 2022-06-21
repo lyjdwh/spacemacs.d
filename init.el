@@ -36,6 +36,7 @@ This function should only modify configuration layer settings."
           )
      better-defaults
      evil-better-jumper
+     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      (tree-sitter :variables tree-sitter-syntax-highlight-enable t
                   :packages (not tree-sitter-langs))
      (spacemacs-editing-visual :packages (not rainbow-delimiters))

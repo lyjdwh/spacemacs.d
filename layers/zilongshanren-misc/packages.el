@@ -43,7 +43,6 @@
         browse-kill-ring
         bbyac
         meow
-        evil-snipe
         powerthesaurus
         mw-thesaurus
         (inherit-org :location (recipe :fetcher github :repo "chenyanming/inherit-org"))
@@ -1006,17 +1005,6 @@
   (use-package powerthesaurus
     :commands (powerthesaurus-lookup-word powerthesaurus-lookup-word-at-point
                                           powerthesaurus-lookup-word-dwim)
-    ))
-
-(defun zilongshanren-misc/init-evil-snipe ()
-  (use-package evil-snipe
-    :config
-    (evil-snipe-mode +1)
-    (evil-snipe-override-mode +1)
-    (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
-    (setq evil-snipe-smart-case t)
-    (setq evil-snipe-scope 'whole-visible)
-    (setq evil-snipe-repeat-scope 'whole-visible)
     ))
 
 (defun zilongshanren-misc/init-meow ()
