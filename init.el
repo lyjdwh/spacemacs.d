@@ -748,6 +748,11 @@ unwanted space when exporting org-mode to hugo markdown."
 
   (pixel-scroll-precision-mode t)
 
+  ;; drag and drop file/files text(in evil-emacs-state)
+  (setq mouse-drag-and-drop-region-cross-program t
+        mouse-drag-and-drop-region t
+        dired-mouse-drag-files t)
+
   (add-hook 'prog-mode-hook 'spacemacs/toggle-centered-point)
   )
 
