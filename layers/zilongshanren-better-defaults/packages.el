@@ -92,6 +92,7 @@
 
 (defun zilongshanren-better-defaults/init-evil-textobj-tree-sitter()
   (use-package evil-textobj-tree-sitter
+    :after tree-sitter
     :config
     ;; v/y + a/i + f/c/x
     (setq elisp-defun-query '((emacs-lisp-mode . [(function_definition) @defun])))

@@ -238,10 +238,6 @@
 ;; google
 (spacemacs/set-leader-keys "ag" 'engine/search-google)
 
-;; rime，default: ctrl + \
-(spacemacs/set-leader-keys "otr" 'toggle-input-method)
-(define-key rime-mode-map (kbd "M-]") 'rime-force-enable)
-
 ;; helm ag to overhide ivy ag
 (spacemacs/set-leader-keys "sad" 'spacemacs/helm-dir-do-ag)
 (spacemacs/set-leader-keys "saD" 'spacemacs/helm-dir-do-ag-region-or-symbol)
@@ -265,7 +261,8 @@
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
   "nc" 'org-noter-sync-current-note
   "nj" 'org-noter-sync-next-note
-  "nk" 'org-noter-sync-prev-note)
+  "nk" 'org-noter-sync-prev-note
+  "t-" 'org-table-insert-hline)
 
 (defalias 'org-insert-src-block 'zilongshanren/org-insert-src-block)
 (defalias 'org-archive-done-tasks 'zilongshanren/org-archive-done-tasks)

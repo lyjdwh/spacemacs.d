@@ -3,7 +3,6 @@
 (setq zilongshanren-misc-packages
       '(
         helm-ag
-        find-file-in-project
         multiple-cursors
         visual-regexp
         visual-regexp-steroids
@@ -31,7 +30,7 @@
         fanyi
         go-translate
         posframe
-        rime
+        ;; rime
         sis
         try
         figlet
@@ -40,9 +39,8 @@
         (one-key :location local)
         (grep-dired :location (recipe :fetcher github :repo "manateelazycat/grep-dired"))
         (delete-block :location (recipe :fetcher github :repo "manateelazycat/delete-block"))
-        browse-kill-ring
         bbyac
-        meow
+        ;; meow
         powerthesaurus
         mw-thesaurus
         (inherit-org :location (recipe :fetcher github :repo "chenyanming/inherit-org"))
@@ -65,7 +63,6 @@
         ;; podcaster
         ;; mingus
         helm-chrome
-        major-mode-hydra
         elfeed
         (shengci :location (recipe :fetcher github :repo "EvanMeek/shengci.el"))
         (guess-word :location (recipe :fetcher github :repo "Qquanwei/emacs-guess-word-game" :files ("*")))
@@ -102,7 +99,7 @@
     :config
     (setq gcmh-idle-delay 'auto  ; default is 15s
           gcmh-auto-idle-delay-factor 10
-          gcmh-high-cons-threshold (* 32 1024 1024))
+          gcmh-high-cons-threshold (* 100 1024 1024))
     (gcmh-mode 1)
     ))
 
@@ -113,6 +110,7 @@
 (defun zilongshanren-misc/init-epkg()
   (use-package epkg
     :defer t
+    :commands epkg-describe-package epkg-find-file
     ))
 
 (defun zilongshanren-misc/init-auto-package-update()
@@ -128,6 +126,7 @@
 
 (defun zilongshanren-misc/init-blamer()
   (use-package blamer
+    :commands global-blamer-mode
     :init
     (spacemacs/set-leader-keys "otg" 'global-blamer-mode)
     :custom
@@ -147,9 +146,7 @@
 
 (defun zilongshanren-misc/post-init-forge()
   (setq forge-add-default-bindings nil)
-  (with-eval-after-load 'forge
-    (add-to-list 'forge-alist '("github.com.cnpmjs.org" "api.github.com" "github.com.cnpmjs.org" forge-github-repository))
-    ))
+  )
 
 (defun zilongshanren-misc/init-elisp-demos()
   (use-package elisp-demos
@@ -163,6 +160,7 @@
 
 (defun zilongshanren-misc/init-netease-cloud-music()
   (use-package netease-cloud-music
+    :commands netease-cloud-music
     :config
     (setq netease-cloud-music-show-lyric 'all)
     (setq netease-cloud-music-repeat-mode "random")
@@ -430,9 +428,6 @@
 (defun zilongshanren-misc/init-guess-word()
   (use-package guess-word
     :commands guess-word))
-
-(defun zilongshanren-misc/init-major-mode-hydra ()
-  (use-package major-mode-hydra))
 
 (defun zilongshanren-misc/post-init-elfeed ()
   (progn
@@ -793,14 +788,11 @@
     ))
 
 (defun zilongshanren-misc/init-pyim ()
-  (use-package pyim
-    :after ivy
-    :config
-    ;; make ivy support chinese
-    (require 'pyim-cregexp-utils)
-    (setq ivy-re-builders-alist
-          '((t . pyim-cregexp-ivy)))
-    ))
+  ;; make ivy support chinese
+  (require 'pyim-cregexp-utils)
+  (setq ivy-re-builders-alist
+        '((t . pyim-cregexp-ivy)))
+  )
 
 (defun zilongshanren-misc/init-separedit ()
   "if there are nested string or code block, just continue to enter a new edit buffer"
@@ -929,6 +921,7 @@
 
 (defun zilongshanren-misc/init-bm ()
   (use-package bm
+    :commands bm-toggle bm-next bm-previous counsel-bm
     :ensure t
     :init
     ;; restore on load (even before you require bm)
@@ -1020,9 +1013,6 @@
   (use-package bbyac
     :commands ( bbyac-expand-symbols bbyac-expand-substring  bbyac-expand-lines)
     ))
-
-(defun zilongshanren-misc/init-browse-kill-ring ()
-  (use-package browse-kill-ring))
 
 (defun zilongshanren-misc/init-delete-block ()
   (use-package delete-block
@@ -1201,12 +1191,12 @@
 
 (defun zilongshanren-misc/init-figlet ()
   (use-package figlet
-    :defer t))
+    :commands figlet figlet-comment
+    ))
 
 (defun zilongshanren-misc/init-try ()
   (use-package try
-    :ensure t
-    :defer t
+    :commands try
     ))
 
 (defun zilongshanren-misc/init-sis ()
@@ -1241,6 +1231,10 @@
 
 (defun zilongshanren-misc/init-rime ()
   (use-package rime
+    :init
+    ;; rime，default: ctrl + \
+    (spacemacs/set-leader-keys "otr" 'toggle-input-method)
+    (define-key rime-mode-map (kbd "M-]") 'rime-force-enable)
     :config
     (setq rime-user-data-dir "~/.local/share/fcitx5/rime")
 
@@ -1304,7 +1298,7 @@
 
 (defun zilongshanren-misc/init-youdao-dictionary ()
   (use-package youdao-dictionary
-    :defer t
+    :commands my-youdao-search-at-point youdao-dictionary-play-voice-at-point youdao-dictionary-play-voice-from-input
     :config
     (progn
       ;; Enable Cache
@@ -1505,7 +1499,10 @@
 ;; copy from spacemacs helm layer
 (defun zilongshanren-misc/init-helm-ag ()
   (use-package helm-ag
-    :defer t
+    :commands (spacemacs/helm-buffers-do-rg spacemacs/helm-buffers-do-rg-region-or-symbol
+               spacemacs/helm-files-do-rg spacemacs/helm-files-do-rg-region-or-symbol
+               spacemacs/helm-dir-do-rg spacemacs/helm-dir-do-rg-region-or-symbol
+               spacemacs/helm-project-do-rg spacemacs/helm-project-do-rg-region-or-symbol)
     :init
     (progn
       (spacemacs/set-leader-keys
@@ -1525,7 +1522,7 @@
     (progn
       (advice-add 'helm-ag--save-results :after 'spacemacs//gne-init-helm-ag)
       (evil-define-key 'normal helm-ag-map "SPC" spacemacs-default-map)
-      (evilified-state-evilify helm-ag-mode helm-ag-mode-map
+      (evilified-state-evilify-map helm-ag-mode-map
         (kbd "RET") 'helm-ag-mode-jump-other-window
         (kbd "gr") 'helm-ag--update-save-results
         (kbd "q") 'quit-window))))
@@ -1602,18 +1599,12 @@
     :commands tiny-expand
     ))
 
-(defun zilongshanren-misc/init-litable ()
-  (use-package litable
-    :init
-    :defer t))
-
 (defun zilongshanren-misc/init-discover-my-major ()
   (use-package discover-my-major
-    :defer t
+    :commands discover-my-major
     :init
     (progn
       (spacemacs/set-leader-keys (kbd "mhm") 'discover-my-major)
-      (evilified-state-evilify makey-key-mode makey-key-mode-get-key-map)
       )))
 
 (defun zilongshanren-misc/post-init-evil ()
@@ -1750,10 +1741,6 @@
 (defun zilongshanren-misc/post-init-evil-escape ()
   (setq evil-escape-delay 0.2))
 
-(defun zilongshanren-misc/init-find-file-in-project ()
-  (use-package find-file-in-project
-    :defer t))
-
 (defun zilongshanren-misc/post-init-projectile ()
   (progn
     (with-eval-after-load 'projectile
@@ -1770,8 +1757,6 @@
   (progn
     (setq ivy-use-virtual-buffers t)
     (setq ivy-display-style 'fancy)
-
-    (evilified-state-evilify ivy-occur-mode ivy-occur-mode-map)
 
     (use-package ivy
       :defer t

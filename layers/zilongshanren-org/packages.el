@@ -6,6 +6,7 @@
     org-pomodoro
     (notdeft :location local)
     org-roam
+    org-roam-ui
     org-roam-bibtex
     ivy-bibtex
     org-noter
@@ -22,7 +23,6 @@
     iscroll
     cdlatex
     xenops
-    org-roam-ui
     aas
     laas
     org-appear
@@ -442,7 +442,7 @@ the entry of interest in the bibfile.  but does not check that."
 
 (defun zilongshanren-org/init-ivy-bibtex ()
   (use-package ivy-bibtex
-    :after org-roam-bibtex
+    :commands ivy-bibtex
     :config
     (setq bibtex-completion-bibliography '("~/Documents/papers/bib/protein_design.bib" "~/Documents/papers/bib/mendeley.bib"))
     (setq bibtex-completion-library-path '("~/Documents/papers"))
@@ -481,6 +481,7 @@ the entry of interest in the bibfile.  but does not check that."
 
 (defun zilongshanren-org/init-org-roam ()
   (use-package org-roam
+    :commands org-roam-do-rg org-roam-node-find
     :init
     (progn
       (defun org-roam-do-rg ()
@@ -616,7 +617,6 @@ the entry of interest in the bibfile.  but does not check that."
 (defun zilongshanren-org/init-org-roam-bibtex ()
   (use-package org-roam-bibtex
     :after org-roam
-    :hook (org-roam-mode . org-roam-bibtex-mode)
     :init
     (spacemacs/set-leader-keys
       "ama" 'orb-note-actions
@@ -627,6 +627,7 @@ the entry of interest in the bibfile.  but does not check that."
       "ml" 'orb-insert-link)
 
     :config
+    (org-roam-bibtex-mode t)
     (setq bibtex-completion-pdf-open-function 'eaf-open)
     (setq orb-note-actions-frontend 'hydra)
     (setq orb-insert-interface 'generic)
