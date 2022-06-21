@@ -1683,7 +1683,7 @@
           evil-motion-state-tag   (propertize "[M]" 'face '((:background "plum3") :foreground "white"))
           evil-visual-state-tag   (propertize "[V]" 'face '((:background "gray" :foreground "black")))
           evil-operator-state-tag (propertize "[O]" 'face '((:background "purple"))))
-    (setq evil-insert-state-cursor '("chartreuse3" box))
+
     (define-key evil-insert-state-map (kbd "C-z") 'evil-emacs-state)
 
     (evil-define-key 'normal 'global-map (kbd "zy") 'thing-copy-symbol)
@@ -1693,6 +1693,23 @@
       (pulse-momentary-highlight-region beg end)
       (apply orig-fn beg end args))
     (advice-add 'evil-yank :around 'evil-yank-advice)
+
+    ;; cursor type
+    (put 'cursor 'evil-emacs-color  (face-foreground 'warning))
+    (put 'cursor 'evil-normal-color (face-background 'cursor))
+
+    (defun evil-default-cursor-fn ()
+      (evil-set-cursor-color (get 'cursor 'evil-normal-color)))
+
+    (defun evil-emacs-cursor-fn ()
+      (evil-set-cursor-color (get 'cursor 'evil-emacs-color)))
+
+    (setq evil-default-cursor 'evil-default-cursor-fn
+          evil-normal-state-cursor 'box
+          evil-emacs-state-cursor  '(box evil-emacs-cursor-fn)
+          evil-insert-state-cursor 'bar
+          evil-visual-state-cursor 'hollow
+          )
     ))
 
 (defun zilongshanren-misc/init-visual-regexp ()
