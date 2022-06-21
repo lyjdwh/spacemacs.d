@@ -227,7 +227,7 @@ This function should only modify configuration layer settings."
                     helm-flyspell flyspell-correct-helm clean-aindent-mode
                     helm-c-yasnippet ace-jump-helm-line helm-make magithub
                     helm-themes helm-swoop helm-spacemacs-help smeargle
-                    ido-vertical-mode flx-ido helm-purpose fuzzy
+                    ido-vertical-mode flx-ido helm-purpose fuzzy undo-tree
                     )
    dotspacemacs-install-packages 'used-only
    dotspacemacs-delete-orphan-packages t))
@@ -747,6 +747,8 @@ unwanted space when exporting org-mode to hugo markdown."
   (setq redisplay-skip-fontification-on-input t)
 
   (pixel-scroll-precision-mode t)
+
+  (add-hook 'prog-mode-hook 'spacemacs/toggle-centered-point)
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))

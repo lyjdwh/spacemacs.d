@@ -82,7 +82,7 @@
         blamer
         auto-package-update
         epkg
-        undo-tree
+        ;; undo-tree
         gcmh
         (screenshot :location (recipe :fetcher github :repo "tecosaur/screenshot"))
         ))

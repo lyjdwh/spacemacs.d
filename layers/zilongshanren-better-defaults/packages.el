@@ -13,6 +13,43 @@
     (grammatical-edit :location (recipe :fetcher github :repo "manateelazycat/grammatical-edit"))
     (find-orphan :location (recipe :fetcher github :repo "manateelazycat/find-orphan"))
     evil-textobj-tree-sitter
+    undo-fu
+    vundo
+    ))
+
+(defun zilongshanren-better-defaults/init-undo-fu()
+  (use-package undo-fu
+    :config
+    ;; Increase undo history limits to reduce likelihood of data loss
+    (setq undo-limit 400000           ; 400kb (default is 160kb)
+          undo-strong-limit 3000000   ; 3mb   (default is 240kb)
+          undo-outer-limit 48000000)  ; 48mb  (default is 24mb)
+
+    (define-minor-mode undo-fu-mode
+      "Enables `undo-fu' for the current session."
+      :keymap (let ((map (make-sparse-keymap)))
+                (define-key map [remap undo] #'undo-fu-only-undo)
+                (define-key map [remap redo] #'undo-fu-only-redo)
+                (define-key map (kbd "C-_")     #'undo-fu-only-undo)
+                (define-key map (kbd "M-_")     #'undo-fu-only-redo)
+                (define-key map (kbd "C-M-_")   #'undo-fu-only-redo-all)
+                (define-key map (kbd "C-x r u") #'undo-fu-session-save)
+                (define-key map (kbd "C-x r U") #'undo-fu-session-recover)
+                map)
+      :init-value nil
+      :global t)
+
+    (undo-fu-mode)
+
+    (with-eval-after-load 'evil
+      (evil-set-undo-system 'undo-fu))
+    ))
+
+(defun zilongshanren-better-defaults/init-vundo()
+  (use-package vundo
+    :commands vundo
+    :init
+    (evil-define-key 'normal 'global-map (kbd "zu") 'vundo)
     ))
 
 (defun zilongshanren-better-defaults/init-tree-sitter-langs()
