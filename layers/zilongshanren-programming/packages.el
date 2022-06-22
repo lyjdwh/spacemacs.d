@@ -407,9 +407,6 @@
 (defun zilongshanren-programming/post-init-yasnippet ()
   (with-no-warnings
     (with-eval-after-load 'yasnippet
-      (define-key yas-keymap [(tab)]       (yas-filtered-definition 'yas-next-field))
-      (define-key yas-keymap (kbd "TAB")   (yas-filtered-definition 'yas-next-field))
-
       (defun my-company-yasnippet-disable-inline (fun command &optional arg &rest _ignore)
         "Enable yasnippet but disable it after '.' "
         (if (eq command 'prefix)
@@ -426,7 +423,21 @@
                 (put-text-property 0 len 'yas-annotation snip arg)
                 (put-text-property 0 len 'yas-annotation-patch t arg)))
             (funcall fun command arg))))
-      (advice-add #'company-yasnippet :around #'my-company-yasnippet-disable-inline))
+      (advice-add #'company-yasnippet :around #'my-company-yasnippet-disable-inline)
+
+      (defun smarter-yas-expand-next-field ()
+        "Try to `yas-expand' then `yas-next-field' at current cursor position."
+        (interactive)
+        (let ((old-point (point))
+              (old-tick (buffer-chars-modified-tick)))
+          (yas-expand)
+          (when (and (eq old-point (point))
+                     (eq old-tick (buffer-chars-modified-tick)))
+            (ignore-errors (yas-next-field)))))
+
+      (define-key yas-keymap [(tab)] 'smarter-yas-expand-next-field)
+      (define-key yas-keymap (kbd "TAB") 'smarter-yas-expand-next-field)
+      )
     ))
 
 (defun zilongshanren-programming/post-init-flycheck ()
