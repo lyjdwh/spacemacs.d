@@ -218,7 +218,10 @@
     ))
 
 (defun zilongshanren-better-defaults/init-move-to-position-hint ()
-  (use-package move-to-position-hint))
+  (use-package move-to-position-hint
+    :config
+    (move-to-position-hint-mode)
+    ))
 
 (defun zilongshanren-better-defaults/post-init-company-box ()
   (use-package company-box

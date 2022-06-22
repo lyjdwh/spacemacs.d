@@ -5,6 +5,18 @@
   '((t (:foreground "red")))
   "Position hint")
 
+(defcustom move-to-position-hint-disabled-modes
+  '(org-agenda-mode magit-mode git-rebase-mode elfeed-show-mode
+                    elfeed-search-mode ranger-mode magit-repolist-mode
+                    undo-tree-visualizer-mode tabulated-list-mode
+                    Info-mode calc-mode treemacs-mode ibuffer-mode dired-mode
+                    ;; `mu4e'
+                    mu4e-main-mode mu4e-view-mode mu4e-headers-mode mu4e~update-mail-mode
+                    ;; `notmuch'
+                    notmuch-tree-mode notmuch-hello-mode notmuch-search-mode notmuch-show-mode)
+  "A list of major modes where move-to-position-hint should not activate."
+  :type  '(list symbol))
+
 (defvar position-hint-move-function nil)
 
 (defun move-to-position-hint (n)
@@ -120,9 +132,41 @@
   (call-interactively #'evil-backward-word-end)
   (highlight-position-hint #'evil-backward-word-end))
 
-(evil-define-key '(normal visual) 'global-map (kbd "w") 'my-forward-word)
-(evil-define-key '(normal visual) 'global-map (kbd "b") 'my-backward-word)
-(evil-define-key '(normal visual) 'global-map (kbd "e") 'my-forward-word-end)
-(evil-define-key '(normal visual) 'global-map (kbd "ge") 'my-backward-word-end)
+(defvar move-to-position-hint-local-mode-map
+  (let ((map (make-sparse-keymap)))
+    (evil-define-key* 'motion map
+      "w" #'my-forward-word
+      "b" #'my-backward-word
+      "e" #'my-forward-word-end)
+    map))
+
+;;;###autoload
+(defun turn-on-move-to-position-hint-mode ()
+  "Enable move-to-position-hint-mode in the current buffer."
+  (unless (apply #'derived-mode-p move-to-position-hint-disabled-modes)
+    (move-to-position-hint-local-mode +1)))
+
+;;;###autoload
+(defun turn-off-move-to-position-hint-mode ()
+  "Disable `move-to-position-hint-local-mode' in the current buffer."
+  (move-to-position-hint-local-mode -1))
+
+
+(defvar move-to-position-hint--keymaps-init nil)
+(defun move-to-position-hint--normalize-keymaps ()
+  (unless move-to-position-hint--keymaps-init
+    (set (make-local-variable 'move-to-position-hint--keymaps-init)
+         (and (evil-normalize-keymaps) t))))
+
+;;;###autoload
+(define-minor-mode move-to-position-hint-local-mode
+  "Enable `move-to-position-hint' in the current buffer."
+  :lighter " snipe"
+  :group 'move-to-position-hint
+  (if move-to-position-hint-local-mode (move-to-position-hint--normalize-keymaps)))
+
+;;;###autoload
+(define-globalized-minor-mode move-to-position-hint-mode
+  move-to-position-hint-local-mode turn-on-move-to-position-hint-mode)
 
 (provide 'move-to-position-hint)
