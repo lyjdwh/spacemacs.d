@@ -15,7 +15,20 @@
     evil-textobj-tree-sitter
     undo-fu
     vundo
+    dired
+    diredfl
     ))
+
+(defun zilongshanren-better-defaults/post-init-dired()
+  (setq dired-recursive-copies  'always
+        dired-recursive-deletes 'top
+        dired-create-destination-dirs 'ask)
+
+  (define-key ranger-mode-map (kbd "ze") 'wdired-change-to-wdired-mode))
+
+(defun zilongshanren-better-defaults/init-diredfl()
+  (use-package diredfl
+    :hook (dired-mode . diredfl-mode)))
 
 (defun zilongshanren-better-defaults/init-undo-fu()
   (use-package undo-fu
