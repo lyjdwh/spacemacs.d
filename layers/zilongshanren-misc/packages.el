@@ -338,14 +338,15 @@
      :entries
      ((pascal "\\(-\\)[a-z]" "[A-Z]")
       (snake "[a-z]")))
-    )
-  )
+    ))
+
 (defun zilongshanren-misc/post-init-vterm()
-  (setq vterm-max-scrollback 5000)
-  (add-hook 'vterm-mode-hook 'evil-collection-vterm-toggle-send-escape)
-  (evil-define-key 'insert vterm-mode-map (kbd "C-o") 'vterm--self-insert)
-  (evil-define-key 'insert vterm-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
-  )
+  (with-eval-after-load 'vterm
+    (setq vterm-max-scrollback 5000)
+    (add-hook 'vterm-mode-hook 'evil-collection-vterm-toggle-send-escape)
+    (evil-define-key 'insert vterm-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
+    (evil-define-key 'insert vterm-mode-map (kbd "C-o") 'vterm--self-insert)
+    ))
 
 (defun zilongshanren-misc/init-telega()
   (use-package telega
