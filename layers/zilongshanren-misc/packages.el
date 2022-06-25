@@ -18,7 +18,7 @@
         hydra
         ranger
         golden-ratio
-        (highlight-global :location local)
+        (highlight-global :location (recipe :fetcher github :repo "glen-dai/highlight-global"))
         symbol-overlay
         popup
         keyfreq
@@ -36,7 +36,7 @@
         figlet
         (thing-edit :location (recipe :fetcher github :repo "lyjdwh/thing-edit"))
         (avy-thing-edit :location (recipe :fetcher github :repo "lyjdwh/avy-thing-edit"))
-        (one-key :location local)
+        (one-key :location (recipe :fetcher github :repo "manateelazycat/one-key"))
         (grep-dired :location (recipe :fetcher github :repo "manateelazycat/grep-dired"))
         (delete-block :location (recipe :fetcher github :repo "manateelazycat/delete-block"))
         bbyac
@@ -1442,13 +1442,14 @@
 
 (defun zilongshanren-misc/init-highlight-global ()
   (use-package highlight-global
-    :init
-    (progn
-      (setq-default highlight-faces
-        '(('hi-red-b . 0)
-          ('hi-yellow . 0)
-          ('hi-pink . 0)
-          ('hi-blue-b . 0))))))
+    :commands highlight-frame-toggle
+    :config
+    (setq-default highlight-faces
+                  '(('hi-red-b . 0)
+                    ('hi-yellow . 0)
+                    ('hi-pink . 0)
+                    ('hi-blue-b . 0)))
+    ))
 
 (defun zilongshanren-misc/post-init-symbol-overlay ()
   (with-eval-after-load 'symbol-overlay
@@ -1686,8 +1687,6 @@
           evil-operator-state-tag (propertize "[O]" 'face '((:background "purple"))))
 
     (define-key evil-insert-state-map (kbd "C-z") 'evil-emacs-state)
-
-    (evil-define-key 'normal 'global-map (kbd "zy") 'thing-copy-symbol)
 
     ;; add pulse highlight on yank
     (defun evil-yank-advice (orig-fn beg end &rest args)
