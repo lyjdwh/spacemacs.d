@@ -351,9 +351,10 @@
 (defun zilongshanren-misc/init-telega()
   (use-package telega
     :commands telega
+    :bind-keymap*
+    ("C-c t" . telega-prefix-map)
     :hook
     ('telega-chat-mode . #'company-mode)
-    ('telega-chat-mode . #'yas-minor-mode-on)
     ('telega-chat-mode . (lambda ()
                            (make-local-variable 'company-backends)
                            (dolist (it (append '(telega-company-emoji
@@ -363,17 +364,18 @@
                                                  '(telega-company-botcmd))))
                              (push it company-backends))
                            ))
+    :init
+    (unless (display-graphic-p) (setq telega-use-images nil))
     :config
-    (defconst telega-tdlib-min-version "1.7.0")
-
-    (setq telega-proxies '((:server "localhost" :port 1080
-                                    :enable t :type (:@type "proxyTypeSocks5")))
-          telega-sticker-set-download t)
+    (setq telega-emoji-company-backend 'telega-company-telegram-emoji)
+    (setq telega-sticker-set-download t)
 
     (evil-set-initial-state 'telega-root-mode 'emacs)
     (evil-set-initial-state 'telega-chat-mode 'emacs)
 
     (define-key telega-msg-button-map (kbd "k") 'nil)
+    (define-key telega-msg-button-map (kbd "SPC") 'nil)
+    (define-key telega-chat-mode-map (kbd "C-c C-t") #'telega-chatbuf-attach-sticker)
 
     (with-eval-after-load 'all-the-icons
       (add-to-list 'all-the-icons-mode-icon-alist
