@@ -660,3 +660,5 @@ clock                             ^^^^effort             ^^watcher
 
 ;; open gtd
 (spacemacs/set-leader-keys "feg" 'open-gtd-file)
+
+(spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)

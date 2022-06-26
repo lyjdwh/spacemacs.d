@@ -599,8 +599,6 @@ dump."
                   ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                   ("nongnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")))
 
-  (setq term-char-mode-point-at-process-mark nil)
-
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
   ;; (setq tramp-mode nil)
   (setq tramp-ssh-controlmaster-options
@@ -635,38 +633,8 @@ dump."
 
   ;; force horizontal split window
   (setq split-width-threshold 120)
-  ;; (linum-relative-on)
-
-  (spacemacs|add-company-backends :modes text-mode)
-
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
   (global-hungry-delete-mode t)
-
-  (evilified-state-evilify-map special-mode-map :mode special-mode)
-
-  (add-to-list 'auto-mode-alist
-               '("Capstanfile\\'" . yaml-mode))
-
-  (global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
-  (defun un-indent-by-removing-4-spaces ()
-    "remove 4 spaces from beginning of of line"
-    (interactive)
-    (save-excursion
-      (save-match-data
-        (beginning-of-line)
-        ;; get rid of tabs at beginning of line
-        (when (looking-at "^\\s-+")
-          (untabify (match-beginning 0) (match-end 0)))
-        (when (looking-at (concat "^" (make-string tab-width ?\ )))
-          (replace-match "")))))
-
-  (defun zilongshanren/toggle-major-mode ()
-    (interactive)
-    (if (eq major-mode 'fundamental-mode)
-        (set-auto-mode)
-      (fundamental-mode)))
-  (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
 
   (setq inhibit-compacting-font-caches t)
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -677,25 +645,6 @@ dump."
       (kill-region (region-beginning) (region-end))))
 
   (advice-add 'counsel-yank-pop :before #'moon-override-yank-pop)
-  (setq ivy-more-chars-alist '((counsel-ag . 2)
-                               (counsel-grep .2)
-                               (t . 3)))
-
-  (add-hook 'org-mode-hook 'emojify-mode)
-  (add-hook 'org-mode-hook 'auto-fill-mode)
-
-  ;; https://emacs-china.org/t/ox-hugo-auto-fill-mode-markdown/9547/4
-  (defadvice org-hugo-paragraph (before org-hugo-paragraph-advice
-                                        (paragraph contents info) activate)
-    "Join consecutive Chinese lines into a single long line without
-unwanted space when exporting org-mode to hugo markdown."
-    (let* ((origin-contents (ad-get-arg 1))
-           (fix-regexp "[[:multibyte:]]")
-           (fixed-contents
-            (replace-regexp-in-string
-             (concat
-              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
-      (ad-set-arg 1 fixed-contents)))
 
   ;; fix for the magit popup doesn't have a q keybindings
   (with-eval-after-load 'transient

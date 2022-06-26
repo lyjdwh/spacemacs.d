@@ -890,3 +890,9 @@ Error out if this isn't a GitHub repo."
        (define-key map [?r] #'winner-redo)
        map)
      t)))
+
+(defun zilongshanren/toggle-major-mode ()
+  (interactive)
+  (if (eq major-mode 'fundamental-mode)
+      (set-auto-mode)
+    (fundamental-mode)))
