@@ -369,6 +369,7 @@
     :config
     (setq telega-emoji-company-backend 'telega-company-telegram-emoji)
     (setq telega-sticker-set-download t)
+    (setf (alist-get 2 telega-avatar-factors-alist ) '(0.5 . 0.1))
 
     (evil-set-initial-state 'telega-root-mode 'emacs)
     (evil-set-initial-state 'telega-chat-mode 'emacs)
