@@ -383,7 +383,7 @@
 
     (advice-add 'lsp-completion--enable
                 :after (lambda (&rest _args)
-                         (setq company-backends '((company-files company-capf :with company-dabbrev :with company-yasnippet)))
+                         (setq company-backends '((company-files company-capf :with company-dabbrev company-yasnippet)))
                          ;; Remove duplicate candidate.
                          (add-to-list 'company-transformers #'delete-dups)
 
@@ -407,23 +407,7 @@
 (defun zilongshanren-programming/post-init-yasnippet ()
   (with-no-warnings
     (with-eval-after-load 'yasnippet
-      (defun my-company-yasnippet-disable-inline (fun command &optional arg &rest _ignore)
-        "Enable yasnippet but disable it after '.' "
-        (if (eq command 'prefix)
-            (when-let ((prefix (funcall fun 'prefix)))
-              (unless (memq (char-before (- (point) (length prefix)))
-                            '(?. ?< ?> ?\( ?\) ?\[ ?{ ?} ?\" ?' ?`))
-                prefix))
-          (progn
-            (when (and (bound-and-true-p lsp-mode)
-                       arg (not (get-text-property 0 'yas-annotation-patch arg)))
-              (let* ((name (get-text-property 0 'yas-annotation arg))
-                     (snip (format "%s (Snippet)" name))
-                     (len (length arg)))
-                (put-text-property 0 len 'yas-annotation snip arg)
-                (put-text-property 0 len 'yas-annotation-patch t arg)))
-            (funcall fun command arg))))
-      (advice-add #'company-yasnippet :around #'my-company-yasnippet-disable-inline)
+      (advice-add #'company-yasnippet :around #'my-company-disable-inline)
 
       (defun smarter-yas-expand-next-field ()
         "Try to `yas-expand' then `yas-next-field' at current cursor position."
@@ -473,8 +457,11 @@
   (progn
     (setq company-dabbrev-code-other-buffers t)
     (setq company-dabbrev-other-buffers t)
+    (setq company-dabbrev-char-regexp "[0-9a-z-_'/]")
+    (advice-add #'company-dabbrev :around #'my-company-disable-inline)
+
     ;; enable dabbrev-expand in company completion https://emacs-china.org/t/topic/6381
-    (setq company-dabbrev-char-regexp "[\\.0-9a-z-_'/]")
+    ;; (setq company-dabbrev-char-regexp "[\\.0-9a-z-_'/]")
 
     (setq company-minimum-prefix-length 2
           company-idle-delay 0)
