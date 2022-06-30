@@ -1765,10 +1765,11 @@
 (defun zilongshanren-misc/post-init-projectile ()
   (progn
     (with-eval-after-load 'projectile
-      (progn
-        (setq projectile-completion-system 'ivy)
-        (add-to-list 'projectile-other-file-alist '("html" "js"))
-        (add-to-list 'projectile-other-file-alist '("js" "html"))))
+      (setq projectile-completion-system 'ivy)
+      (setq projectile-project-configure-cmd "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -S . -B build")
+
+      (add-to-list 'projectile-other-file-alist '("html" "js"))
+      (add-to-list 'projectile-other-file-alist '("js" "html")))
 
     (spacemacs/set-leader-keys "pf" 'zilongshanren/open-file-with-projectile-or-counsel-git)
     ))

@@ -172,12 +172,20 @@ This function should only modify configuration layer settings."
      ;;  (clojure :variables clojure-enable-fancify-symbols t)
      ;;  racket
      (c-c++ :variables
+            c-c++-adopt-subprojects t
             c-c++-default-mode-for-headers 'c++-mode
-            c-c++-backend 'lsp-ccls
-            c-c++-lsp-executable (file-truename "/usr/bin/ccls"))
+            c-c++-backend 'lsp-clangd
+            lsp-clients-clangd-args '("-j=4"
+                                      "-background-index"
+                                      "--header-insertion=never"
+                                      "--header-insertion-decorators=0"
+                                      "--clang-tidy"
+                                      "--clang-tidy-checks=performance-*,bugprone-*,portability-*,modernize-*"))
      (cmake :variables
             cmake-backend 'lsp
-            cmake-enable-cmake-ide-support t)
+            cmake-enable-cmake-ide-support t
+            cmake-ide-build-dir "build"
+            cmake-ide-cmake-opts "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON")
      zilongshanren
      fasd
      dash
