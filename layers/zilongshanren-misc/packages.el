@@ -574,7 +574,7 @@
                                                 ("d" nil))
                                                "Status"
                                                (("wu" "+unread")
-                                                ("m" "+latter"))
+                                                ("m" "+later"))
                                                "Feed"
                                                (("f TAB" :complete-feed "Choose"))
                                                "Tags"
@@ -589,8 +589,8 @@
       (eaf-open-browser (format "https://translate.google.com/translate?tl=zh-CN&sl=en&u=%s" url)))
 
     (require 'elfeed-lib)
-    (defalias 'elfeed-toggle-latter
-      (elfeed-expose #'elfeed-search-toggle-all 'latter))
+    (defalias 'elfeed-toggle-later
+      (elfeed-expose #'elfeed-search-toggle-all 'later))
 
     (evilified-state-evilify-map elfeed-search-mode-map
       :mode elfeed-search-mode
@@ -600,7 +600,7 @@
       "t"  'my/elfeed-translate
       "J" '(lambda () (interactive) (evil-next-line 5))
       "K" '(lambda () (interactive) (evil-previous-line 5))
-      "m" 'elfeed-toggle-latter
+      "m" 'elfeed-toggle-later
       )
 
     (evilified-state-evilify-map elfeed-show-mode-map
