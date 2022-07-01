@@ -174,6 +174,7 @@ This function should only modify configuration layer settings."
      (c-c++ :variables
             c-c++-adopt-subprojects t
             c-c++-default-mode-for-headers 'c++-mode
+            c-c++-dap-adapters '(dap-lldb dap-cpptools)
             c-c++-backend 'lsp-ccls
             ;; lsp-clients-clangd-args '("-j=4"
             ;;                           "-background-index"

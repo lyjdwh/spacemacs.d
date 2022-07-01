@@ -367,6 +367,7 @@
     (setq lsp-semantic-tokens-enable nil)
 
     (require 'dap-python)
+    (require 'dap-gdb-lldb)
     (setq dap-auto-show-output nil)
 
     (setq lsp-diagnostics-provider :auto)

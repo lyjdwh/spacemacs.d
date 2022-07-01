@@ -439,6 +439,7 @@ e.g. Sunday, September 17, 2000."
      (string-prefix-p "*mu4e" name)
      (string-prefix-p "*wttr" name)
      (string-prefix-p "*Netease" name)
+     (string-prefix-p "*dap-ui" name)
 
      ;; Is not magit buffer.
      (and (string-prefix-p "magit" name)
