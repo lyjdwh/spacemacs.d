@@ -37,38 +37,12 @@
   (interactive)
   (message pyvenv-virtual-env-name))
 
-(defun company-dabbrev (command &optional arg &rest ignored)
-  "dabbrev-like `company-mode' completion backend."
-  (interactive (list 'interactive))
-  (cl-case command
-    (interactive (company-begin-backend 'company-dabbrev))
-    (prefix (company-dabbrev--prefix))
-    (annotation
-     (company-capf--annotation arg))
-    (candidates
-     (let* ((case-fold-search company-dabbrev-ignore-case)
-            (words (company-dabbrev--search (company-dabbrev--make-regexp)
-                                            company-dabbrev-time-limit
-                                            (pcase company-dabbrev-other-buffers
-                                              (`t (list major-mode))
-                                              (`all `all))))
-            (downcase-p (if (eq company-dabbrev-downcase 'case-replace)
-                            case-replace
-                          company-dabbrev-downcase)))
-       (setq words (company-dabbrev--filter arg words))
-       (if downcase-p
-           (mapcar 'downcase words)
-         words)))
-    (kind 'text)
-    (ignore-case company-dabbrev-ignore-case)
-    (duplicates t)))
-
 (defun my-company-disable-inline (fun command &optional arg &rest _ignore)
   "Enable yasnippet but disable it after '.' "
   (if (eq command 'prefix)
       (when-let ((prefix (funcall fun 'prefix)))
         (unless (memq (char-before (- (point) (length prefix)))
-                      '(?. ?< ?> ?\( ?\) ?\[ ?{ ?} ?\" ?' ?`))
+                      '(?. ?< ?> ?\( ?\) ?\[ ?{ ?} ?\" ?' ?` ?:))
           prefix))
     (progn
       (when (and (bound-and-true-p lsp-mode)

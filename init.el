@@ -174,13 +174,14 @@ This function should only modify configuration layer settings."
      (c-c++ :variables
             c-c++-adopt-subprojects t
             c-c++-default-mode-for-headers 'c++-mode
-            c-c++-backend 'lsp-clangd
-            lsp-clients-clangd-args '("-j=4"
-                                      "-background-index"
-                                      "--header-insertion=never"
-                                      "--header-insertion-decorators=0"
-                                      "--clang-tidy"
-                                      "--clang-tidy-checks=performance-*,bugprone-*,portability-*,modernize-*"))
+            c-c++-backend 'lsp-ccls
+            ;; lsp-clients-clangd-args '("-j=4"
+            ;;                           "-background-index"
+            ;;                           "--header-insertion=never"
+            ;;                           "--header-insertion-decorators=0"
+            ;;                           "--clang-tidy"
+            ;;                           "--clang-tidy-checks=performance-*,bugprone-*,portability-*,modernize-*")
+            )
      (cmake :variables
             cmake-backend 'lsp
             cmake-enable-cmake-ide-support t
