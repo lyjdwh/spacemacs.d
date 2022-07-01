@@ -142,7 +142,7 @@
 
 ;; highlight
 (spacemacs/set-leader-keys "hh" 'zilongshanren/highlight-dwim)
-(spacemacs/set-leader-keys "hc" 'zilongshanren/clearn-highlight)
+(spacemacs/set-leader-keys "hc" 'zilongshanren/clear-highlight)
 
 ;; emacs daemon
 (spacemacs/set-leader-keys "qD" 'spacemacs/restart-emacs-debug-init)
@@ -227,7 +227,7 @@
 (spacemacs/set-leader-keys "ohi" 'hl-todo-insert)
 (spacemacs/set-leader-keys "ohl" 'ivy-magit-todos)
 (spacemacs/set-leader-keys "ohh" 'zilongshanren/highlight-dwim)
-(spacemacs/set-leader-keys "ohc" 'zilongshanren/clearn-highlight)
+(spacemacs/set-leader-keys "ohc" 'zilongshanren/clear-highlight)
 
 ;; proxy
 (spacemacs/set-leader-keys

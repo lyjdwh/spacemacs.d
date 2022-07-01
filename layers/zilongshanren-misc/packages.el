@@ -1446,7 +1446,7 @@
 
 (defun zilongshanren-misc/init-highlight-global ()
   (use-package highlight-global
-    :commands highlight-frame-toggle
+    :commands highlight-frame-toggle clear-highlight-frame
     :config
     (setq-default highlight-faces
                   '(('hi-red-b . 0)

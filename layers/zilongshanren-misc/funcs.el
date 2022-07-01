@@ -21,7 +21,7 @@
         (deactivate-mark))
     (spacemacs/symbol-overlay)))
 
-(defun zilongshanren/clearn-highlight ()
+(defun zilongshanren/clear-highlight ()
     (interactive)
   (clear-highlight-frame)
   (symbol-overlay-remove-all))
