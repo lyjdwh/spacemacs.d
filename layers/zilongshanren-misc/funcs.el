@@ -422,7 +422,6 @@ e.g. Sunday, September 17, 2000."
      (string-prefix-p "*helm" name)
      (string-prefix-p "*Compile-Log*" name)
      (string-prefix-p "*lsp" name)
-     (string-prefix-p "*flycheck" name)
      (string-prefix-p "*Messages" name)
      (string-prefix-p "*spacemacs" name)
      (string-prefix-p "*dashboard" name)
@@ -440,6 +439,7 @@ e.g. Sunday, September 17, 2000."
      (string-prefix-p "*wttr" name)
      (string-prefix-p "*Netease" name)
      (string-prefix-p "*dap-ui" name)
+     (string-prefix-p "*quickrun*" name)
 
      ;; Is not magit buffer.
      (and (string-prefix-p "magit" name)

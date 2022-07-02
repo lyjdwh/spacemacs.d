@@ -57,7 +57,7 @@
     (defun enable-lang-check()
       (interactive)
       (setq-local lsp-diagnostics-provider :flycheck)
-      (lsp))
+      (lsp-deferred))
     (spacemacs/set-leader-keys "eo" 'enable-lang-check)
     ))
 
@@ -392,7 +392,11 @@
 
                          (if (derived-mode-p 'python-mode)
                              (setq-local lsp-ui-sideline-show-code-actions nil)
-                           (setq-local lsp-ui-sideline-show-code-actions t))))
+                           (setq-local lsp-ui-sideline-show-code-actions t))
+
+                         (if (derived-mode-p 'c++-mode)
+                             (setq-local lsp-diagnostics-provider :none))
+                         ))
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
