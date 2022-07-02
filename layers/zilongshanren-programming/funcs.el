@@ -53,3 +53,54 @@
           (put-text-property 0 len 'yas-annotation snip arg)
           (put-text-property 0 len 'yas-annotation-patch t arg)))
       (funcall fun command arg))))
+
+(defun my-company-dabbrev-disable-inline (fun command &optional arg &rest _ignore)
+  "Enable yasnippet but disable it after '.' "
+  (if (eq command 'prefix)
+      (when-let ((prefix (funcall fun 'prefix)))
+        (unless (memq (char-before (- (point) (length prefix)))
+                      '(?. ?< ?> ?\( ?\) ?\[ ?{ ?} ?` ?:))
+          prefix))
+    (progn
+      (when (and (bound-and-true-p lsp-mode)
+                 arg (not (get-text-property 0 'yas-annotation-patch arg)))
+        (let* ((name (get-text-property 0 'yas-annotation arg))
+               (snip (format "%s (Snippet)" name))
+               (len (length arg)))
+          (put-text-property 0 len 'yas-annotation snip arg)
+          (put-text-property 0 len 'yas-annotation-patch t arg)))
+      (funcall fun command arg))))
+
+(defun company-transformer//capf-dabbrev (candidates)
+  "Return different CANDIDATES depending on the point position.
+  | point at/after | company-capf | company-dabbrev |
+  |:---------------|:------------:|:---------------:|
+  | trigger-char   |      ✅      |       ❌        |
+  | string         |      ❌      |       ✅        |
+  | other          |      ✅      |       ✅        |
+Inspired by @yyjjl's [company//sort-by-tabnine](https://emacs-china.org/t/tabnine/9988/40)"
+  (if-let* ((not-string-p (not (nth 3 (syntax-ppss))))
+            (trigger-chars (->> (lsp--server-capabilities)
+                                (lsp:server-capabilities-completion-provider?)
+                                (lsp:completion-options-trigger-characters?))))
+      (let ((candidates-table (make-hash-table :test #'equal))
+            (trigger-char-p
+             (save-excursion
+               (goto-char (or (car (bounds-of-thing-at-point 'symbol)) (point)))
+               (and (lsp-completion--looking-back-trigger-characterp trigger-chars) t)))
+            candidates-1
+            candidates-2
+            (print-count 0))
+        (dolist (candidate candidates)
+          (when (< print-count 10)
+            (cl-incf print-count 1))
+          (if (get-text-property 0 'lsp-completion-item candidate)
+              (unless (gethash candidate candidates-table)
+                (push (string-trim-left candidate) candidates-1))
+            (unless trigger-char-p
+              (push candidate candidates-2)
+              (puthash candidate t candidates-table))))
+        (setq candidates-1 (nreverse candidates-1))
+        (setq candidates-2 (nreverse candidates-2))
+        (nconc candidates-1 (unless trigger-char-p candidates-2)))
+    candidates))

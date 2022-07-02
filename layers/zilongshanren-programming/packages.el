@@ -384,9 +384,11 @@
 
     (advice-add 'lsp-completion--enable
                 :after (lambda (&rest _args)
-                         (setq company-backends '((company-files company-capf :with company-dabbrev-code company-yasnippet)))
+                         ;; (setq company-backends '((company-files company-capf :with company-dabbrev-code company-yasnippet)))
+                         (setq company-backends '((company-files company-capf :with company-dabbrev-code company-yasnippet :separate)))
                          ;; Remove duplicate candidate.
                          (add-to-list 'company-transformers #'delete-dups)
+                         (add-to-list 'company-transformers #'company-transformer//capf-dabbrev)
 
                          (if (derived-mode-p 'python-mode)
                              (setq-local lsp-ui-sideline-show-code-actions nil)
@@ -457,8 +459,9 @@
 (defun zilongshanren-programming/post-init-company ()
   (progn
     (setq company-dabbrev-code-other-buffers t)
+    (setq company-dabbrev-code-everywhere t)
     (setq company-dabbrev-other-buffers t)
-    (advice-add #'company-dabbrev-code :around #'my-company-disable-inline)
+    ;; (advice-add #'company-dabbrev-code :around #'my-company-dabbrev-disable-inline)
 
     ;; enable dabbrev-expand in company completion https://emacs-china.org/t/topic/6381
     ;; (setq company-dabbrev-char-regexp "[\\.0-9a-z-_'/]")

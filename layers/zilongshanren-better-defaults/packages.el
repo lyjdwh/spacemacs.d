@@ -404,7 +404,7 @@
 
       (when (require 'all-the-icons nil t)
         (setq company-box-icons-all-the-icons
-              `((Unknown . ,(all-the-icons-material "find_in_page" :height 1.0 :v-adjust -0.2))
+              `((Unknown . ,(all-the-icons-material "format_align_center" :height 1.0 :v-adjust -0.2))
                 (Text . ,(all-the-icons-faicon "text-width" :height 1.0 :v-adjust -0.02))
                 (Method . ,(all-the-icons-faicon "cube" :height 1.0 :v-adjust -0.02 :face 'all-the-icons-purple))
                 (Function . ,(all-the-icons-faicon "cube" :height 1.0 :v-adjust -0.02 :face 'all-the-icons-purple))
