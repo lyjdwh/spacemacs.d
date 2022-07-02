@@ -178,11 +178,13 @@ This function should only modify configuration layer settings."
             c-c++-backend 'lsp-clangd
             lsp-clients-clangd-args '("-j=4"
                                       "-background-index"
-                                      "--header-insertion=never"
+                                      "--all-scopes-completion"
+                                      "--completion-style=detailed"
+                                      "--header-insertion=iwyu"
                                       "--header-insertion-decorators=0"
                                       "--clang-tidy"
-                                      "--clang-tidy-checks=performance-*,bugprone-*,portability-*,modernize-*")
-            )
+                                      "--clang-tidy-checks=performance-*,bugprone-*,portability-*,modernize-*"
+                                      "--pch-storage=memory"))
      (cmake :variables
             cmake-backend 'lsp
             cmake-enable-cmake-ide-support t
