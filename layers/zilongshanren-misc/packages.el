@@ -133,10 +133,33 @@
   (use-package blamer
     :commands global-blamer-mode
     :init
+    (defun blamer-callback-show-commit-diff (commit-info)
+      (interactive)
+      (let ((commit-hash (plist-get commit-info :commit-hash)))
+        (when commit-hash
+          (magit-show-commit commit-hash))))
+
+    (defun blamer-callback-magit-log-file (commit-info)
+      (interactive)
+      (magit-log-buffer-file)
+      (let ((commit-hash (plist-get commit-info :commit-hash)))
+        (when commit-hash
+          (run-with-idle-timer 1 nil (lambda (commit-hash)
+                                       (goto-char (point-min))
+                                       (search-forward (substring commit-hash 0 7))
+                                       (set-mark (point-at-bol))
+                                       (goto-char (point-at-eol)))
+                               commit-hash))))
+
     (spacemacs/set-leader-keys "otg" 'global-blamer-mode)
+    (spacemacs/set-leader-keys "gb" 'global-blamer-mode)
+    (spacemacs/set-leader-keys "gB" 'spacemacs/git-blame-transient-state)
     :custom
     (blamer-idle-time 0.3)
     (blamer-min-offset 70)
+
+    (setq blamer-bindings '(("<mouse-3>" . blamer-callback-magit-log-file)
+                            ("<mouse-1>" . blamer-callback-show-commit-diff)))
     ))
 
 (defun zilongshanren-misc/post-init-xref()
