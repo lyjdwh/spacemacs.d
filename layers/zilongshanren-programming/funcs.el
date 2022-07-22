@@ -73,30 +73,33 @@
 
 (defun company-transformer//capf-dabbrev (candidates)
   "Return different CANDIDATES depending on the point position.
-  | point at/after | company-capf | company-dabbrev |
-  |:---------------|:------------:|:---------------:|
-  | trigger-char   |      ✅      |       ❌        |
-  | string         |      ❌      |       ✅        |
-  | other          |      ✅      |       ✅        |
-Inspired by @yyjjl's [company//sort-by-tabnine](https://emacs-china.org/t/tabnine/9988/40)"
-  (if-let* ((not-string-p (not (nth 3 (syntax-ppss))))
-            (trigger-chars (->> (lsp--server-capabilities)
+  | point at | company-capf | company-dabbrev |
+  |:---------|:------------:|:---------------:|
+  | foo.|    |      ✅      |       ❌        |
+  | \"foo|\" |      ❌      |       ✅        |
+  | foo|     |      ✅      |       ✅        |
+Inspired by @yyjjl's [company//sort-by-tabnine](https://emacs-china.org/t/tabnine/9988/40)
+Last-Updated 2022-07-04 11:31:28 +0800"
+  (if-let* ((trigger-chars (->> (lsp--server-capabilities)
                                 (lsp:server-capabilities-completion-provider?)
                                 (lsp:completion-options-trigger-characters?))))
       (let ((candidates-table (make-hash-table :test #'equal))
             (trigger-char-p
-             (save-excursion
-               (goto-char (or (car (bounds-of-thing-at-point 'symbol)) (point)))
-               (and (lsp-completion--looking-back-trigger-characterp trigger-chars) t)))
+             (when (not (nth 3 (syntax-ppss)))
+               (save-excursion
+                 (goto-char (or (car (bounds-of-thing-at-point 'symbol)) (point)))
+                 (and (lsp-completion--looking-back-trigger-characterp trigger-chars) t))))
             candidates-1
             candidates-2
             (print-count 0))
         (dolist (candidate candidates)
           (when (< print-count 10)
             (cl-incf print-count 1))
+          ;; Candidates from capf
           (if (get-text-property 0 'lsp-completion-item candidate)
               (unless (gethash candidate candidates-table)
                 (push (string-trim-left candidate) candidates-1))
+            ;; Candidates from dabbrev
             (unless trigger-char-p
               (push candidate candidates-2)
               (puthash candidate t candidates-table))))

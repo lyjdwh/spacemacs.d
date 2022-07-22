@@ -85,12 +85,7 @@
         ;; undo-tree
         gcmh
         (screenshot :location (recipe :fetcher github :repo "tecosaur/screenshot"))
-        popwin
         ))
-
-(defun zilongshanren-misc/post-init-popwin ()
-  (push '("*Flycheck errors*"  :dedicated t :position bottom :stick t :noselect t   :height 0.3) popwin:special-display-config)
-  )
 
 (defun zilongshanren-misc/init-screenshot()
   (use-package screenshot

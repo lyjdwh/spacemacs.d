@@ -312,8 +312,12 @@
 
 (defun zilongshanren-programming/post-init-lsp-mode ()
   (with-eval-after-load 'lsp-mode
-    (setq lsp-enable-file-watchers t)
+    ;; file-watch
+    (setq lsp-enable-file-watchers nil)
     (setq lsp-file-watch-threshold 1000)
+    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]data\\'")
+    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]*logs*\\'")
+
     (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
     ;; lsp-ui
@@ -375,8 +379,6 @@
     (setq lsp-modeline-diagnostics-scope :workspace)
 
     (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
-    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]data\\'")
-    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]*logs*\\'")
 
     ;; doc
     (evil-define-key 'normal 'lsp-mode (kbd "gh") 'lsp-ui-doc-glance)
@@ -393,9 +395,6 @@
                          (if (derived-mode-p 'python-mode)
                              (setq-local lsp-ui-sideline-show-code-actions nil)
                            (setq-local lsp-ui-sideline-show-code-actions t))
-
-                         (if (derived-mode-p 'c++-mode)
-                             (setq-local lsp-diagnostics-provider :none))
                          ))
     ))
 
@@ -458,6 +457,9 @@
     (setq c-basic-offset 4)
     (c-set-offset 'substatement-open 0)
     (add-hook 'c++-mode-hook 'flycheck-mode)
+
+    (spacemacs/set-leader-keys-for-major-mode 'c++-mode "==" 'lsp-format-buffer)
+    (spacemacs/set-leader-keys-for-major-mode 'c-mode "==" 'lsp-format-buffer)
     ))
 
 (defun zilongshanren-programming/post-init-company ()
