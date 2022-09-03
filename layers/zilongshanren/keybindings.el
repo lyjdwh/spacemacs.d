@@ -3,7 +3,6 @@
 (define-key global-map [(shift return)] 'zilongshanren/smart-open-line)
 
 (define-key global-map (kbd "<f9>") 'org-capture)
-(define-key global-map (kbd "<f8>") 'zilongshanren/show-current-buffer-major-mode)
 (define-key global-map (kbd "<f5>") 'zilongshanren/run-current-file)
 (define-key global-map (kbd "<f1>") 'zilongshanren/helm-hotspots)
 
@@ -662,3 +661,7 @@ clock                             ^^^^effort             ^^watcher
 (spacemacs/set-leader-keys "feg" 'open-gtd-file)
 
 (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
+
+;; 对另一个窗口进行上下翻页
+(global-set-key (kbd "C-0") 'scroll-other-window)
+(global-set-key (kbd "C-9") 'scroll-other-window-down)

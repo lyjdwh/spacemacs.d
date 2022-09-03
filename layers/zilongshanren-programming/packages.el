@@ -11,10 +11,10 @@
         (eldoc :location built-in)
         lsp-mode
         ;; company-tabnine
-        (copilot :location (recipe
-                            :fetcher github
-                            :repo "zerolfx/copilot.el"
-                            :files ("*.el" "dist")))
+        ;; (copilot :location (recipe
+        ;;                     :fetcher github
+        ;;                     :repo "zerolfx/copilot.el"
+        ;;                     :files ("*.el" "dist")))
         lsp-python-ms
         lsp-pyright
         auctex

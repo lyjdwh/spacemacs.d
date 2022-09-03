@@ -227,7 +227,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-excluded-packages
    '(org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
                     evil-args evil-ediff evil-exchange evil-unimpaired
-                    volatile-highlights smartparens
+                    volatile-highlights smartparens page-break-lines
                     spaceline holy-mode skewer-mode
                     highlight-indentation vi-tilde-fringe eyebrowse ws-butler
                     smooth-scrolling org-repo-todo org-download org-timer
@@ -425,7 +425,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; The leader key accessible in `emacs state' and `insert state'
    ;; (default "M-m")
-   dotspacemacs-emacs-leader-key "M-m"
+   dotspacemacs-emacs-leader-key "M-`"
 
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")

@@ -481,7 +481,7 @@ the entry of interest in the bibfile.  but does not check that."
 
 (defun zilongshanren-org/init-org-roam ()
   (use-package org-roam
-    :commands org-roam-do-rg org-roam-node-find
+    :commands org-roam-do-rg org-roam-node-find org-roam-buffer-toggle
     :init
     (progn
       (defun org-roam-do-rg ()

@@ -897,3 +897,7 @@ Error out if this isn't a GitHub repo."
   (if (eq major-mode 'fundamental-mode)
       (set-auto-mode)
     (fundamental-mode)))
+
+(defun liuyan/native-compile-async ()
+  (interactive)
+  (native-compile-async "~/spacemacs/elpa/29.0/develop" 12 t))

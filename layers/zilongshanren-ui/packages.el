@@ -11,7 +11,6 @@
     snow
     ivy-rich
     all-the-icons-ivy-rich
-    emojify
     helpful
     ))
 
@@ -22,10 +21,6 @@
 
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "gh") 'helpful-at-point)
     ))
-
-(defun zilongshanren-ui/post-init-emojify()
-  (global-emojify-mode)
-  )
 
 (defun zilongshanren-ui/init-ivy-rich()
   (use-package ivy-rich

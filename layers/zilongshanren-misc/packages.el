@@ -85,7 +85,31 @@
         ;; undo-tree
         gcmh
         (screenshot :location (recipe :fetcher github :repo "tecosaur/screenshot"))
+        gif-screencast
+        (python-google-docstring :location (recipe :fetcher github :repo "lyjdwh/python-google-docstring" :files ("*")))
+        topsy
         ))
+
+(defun zilongshanren-misc/init-topsy()
+  (use-package topsy
+    :hook (prog-mode . topsy-mode)
+    ))
+
+(defun zilongshanren-misc/init-python-google-docstring()
+  (use-package python-google-docstring
+    :commands python-google-docstring
+    :init
+    (spacemacs/set-leader-keys-for-major-mode 'python-mode
+      "D" 'python-google-docstring)
+    ))
+
+(defun zilongshanren-misc/init-gif-screencast()
+  (use-package gif-screencast
+    :commands (gif-screencast-start-or-stop gif-screencast-toggle-pause)
+    :init
+    (define-key global-map (kbd "<f7>") 'gif-screencast-start-or-stop)
+    (define-key global-map (kbd "<f8>") 'gif-screencast-toggle-pause)
+    ))
 
 (defun zilongshanren-misc/init-screenshot()
   (use-package screenshot
@@ -378,6 +402,7 @@
     ("C-c t" . telega-prefix-map)
     :hook
     ('telega-chat-mode . #'company-mode)
+    ('telega-chat-mode . #'emojify-mode)
     ('telega-chat-mode . (lambda ()
                            (make-local-variable 'company-backends)
                            (dolist (it (append '(telega-company-emoji
@@ -1047,8 +1072,8 @@
     :commands (delete-block-forward delete-block-backward)
     :init
     ;; bind-key* ensure the keybinding not be overrided by other minor modes
-    (bind-key* "M-m" 'delete-block-forward)
-    (bind-key* "M-n" 'delete-block-backward)
+    (bind-key "M-m" 'delete-block-forward)
+    (bind-key "M-n" 'delete-block-backward)
     ))
 
 (defun zilongshanren-misc/init-grep-dired ()

@@ -17,6 +17,14 @@
     vundo
     dired
     diredfl
+    vlf
+    ))
+
+(defun zilongshanren-better-defaults/init-vlf()
+  (use-package vlf-setup
+    :config
+    (eval-after-load "vlf"
+      '(define-key vlf-prefix-map "\C-cv" vlf-mode-map))
     ))
 
 (defun zilongshanren-better-defaults/post-init-dired()
