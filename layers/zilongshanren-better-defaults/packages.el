@@ -9,6 +9,7 @@
     super-save
     company-box
     (move-to-position-hint :location local)
+    tree-sitter
     (tree-sitter-langs :location local)
     (grammatical-edit :location (recipe :fetcher github :repo "manateelazycat/grammatical-edit"))
     (find-orphan :location (recipe :fetcher github :repo "manateelazycat/find-orphan"))
@@ -72,6 +73,59 @@
     :init
     (evil-define-key 'normal 'global-map (kbd "zu") 'vundo)
     ))
+
+(defun zilongshanren-better-defaults/post-init-tree-sitter()
+  (setq tree-sitter-debug-jump-buttons t)
+
+  ;; show current class/function name in modeline
+  (setq meain/tree-sitter-calss-like '((python-mode . (class_definition))))
+  (setq meain/tree-sitter-function-like '((python-mode . (function_definition))))
+
+  (defun meain/tree-sitter-thing-name (kind)
+    "Get name of tree-sitter THING-KIND."
+    (if tree-sitter-mode
+        (let* ((node-types-list (pcase kind
+                                  ('class-like meain/tree-sitter-calss-like)
+                                  ('function-like meain/tree-sitter-function-like)))
+               (node-types (alist-get major-mode node-types-list)))
+          (if node-types
+              (let ((node-at-point (car (remove-if (lambda (x) (eq nil x))
+                                                   (seq-map (lambda (x) (tree-sitter-node-at-point x))
+                                                            node-types)))))
+                (if node-at-point
+                    (let ((node-name-node-at-point (tsc-get-child-by-field node-at-point ':name)))
+                      (if node-name-node-at-point
+                          (tsc-node-text node-name-node-at-point)))))))))
+
+  (add-hook 'python-mode-hook (lambda ()
+      (setq-local header-line-format
+          (list
+           '(:eval (mode-line-idle 0.3
+               '(:propertize
+                 (:eval (let ((thing-name (meain/tree-sitter-thing-name 'class-like)))
+                          (if thing-name
+                              (format "%s" thing-name))))
+                 face
+                 font-lock-constant-face)
+               ""))
+           '(:eval (mode-line-idle 0.3
+               '(:propertize
+                 (:eval (let ((thing-name (meain/tree-sitter-thing-name 'function-like)))
+                          (if thing-name
+                              (format ":%s" thing-name))))
+                 face
+                 font-lock-constant-face)
+               ""))
+           ))))
+
+  ;; (setq which-func-functions
+  ;;       (list
+  ;;        (lambda ()
+  ;;          (concat (meain/tree-sitter-thing-name 'class-like)
+  ;;                  ":"
+  ;;                  (meain/tree-sitter-thing-name 'function-like)))
+  ;;        ))
+  )
 
 (defun zilongshanren-better-defaults/init-tree-sitter-langs()
   (use-package tree-sitter-langs
