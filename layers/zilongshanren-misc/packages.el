@@ -88,6 +88,19 @@
         gif-screencast
         (python-google-docstring :location (recipe :fetcher github :repo "lyjdwh/python-google-docstring" :files ("*")))
         topsy
+        fancy-narrow
+        ))
+
+(defun zilongshanren-misc/init-fancy-narrow()
+  (use-package fancy-narrow
+    :commands (meain/fancy-narrow-to-thing)
+    :config
+    (defun meain/fancy-narrow-to-thing (thing)
+      (interactive)
+      (if (buffer-narrowed-p) (fancy-widen))
+      (let ((range (evil-textobj-tree-sitter--range 1 (list (intern thing)))))
+        (fancy-narrow-to-region (car range) (cdr range))))
+
         ))
 
 (defun zilongshanren-misc/init-topsy()

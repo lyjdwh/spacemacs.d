@@ -665,3 +665,12 @@ clock                             ^^^^effort             ^^watcher
 ;; 对另一个窗口进行上下翻页
 (global-set-key (kbd "C-0") 'scroll-other-window)
 (global-set-key (kbd "C-9") 'scroll-other-window-down)
+
+;; treesitter fancy-narrow
+(spacemacs/set-leader-keys "nn" (lambda () (interactive) (fancy-widen)))
+(spacemacs/set-leader-keys "nf" (lambda () (interactive) (meain/fancy-narrow-to-thing "function.outer")))
+(spacemacs/set-leader-keys "nc" (lambda () (interactive) (meain/fancy-narrow-to-thing "class.outer")))
+(spacemacs/set-leader-keys "nC" (lambda () (interactive) (meain/fancy-narrow-to-thing "comment.outer")))
+(spacemacs/set-leader-keys "no" (lambda () (interactive) (meain/fancy-narrow-to-thing "loop.outer")))
+(spacemacs/set-leader-keys "ni" (lambda () (interactive) (meain/fancy-narrow-to-thing "conditional.outer")))
+(spacemacs/set-leader-keys "na" (lambda () (interactive) (meain/fancy-narrow-to-thing "parameter.outer")))
